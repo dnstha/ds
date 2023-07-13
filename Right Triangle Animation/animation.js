@@ -84,7 +84,7 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.lineTo(this.x3, this.y3);
         c.lineTo(this.x1, this.y1);
         c.closePath();
-        c.fillStyle = 'grey';
+        c.fillStyle = 'black';
         c.lineWidth = 1.9;
         c.strokeStyle = 'aqua';
         c.fill();
@@ -112,7 +112,7 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.font = 'bold 20px monospace';
         c.fillStyle = 'red';
         c.fillText("Click anywhere on the screen to play/pause the animation.", this.x1 + 20, this.y2 + 120);
-        c.font = 'bold 24px sans'; // styling the text
+        c.font = 'bold 24px times'; // styling the text
     }
 }
 let t1,  AB, BC, CA, ABC, BCA, CAB;
