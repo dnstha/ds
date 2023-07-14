@@ -11,7 +11,7 @@ window.addEventListener('resize', function() {
 });
 
 
-addEventListener('click', function(){
+addEventListener('click', function(event){
     pp = !(pp);
 });
 
@@ -23,6 +23,10 @@ getDist = (x1, y1, x2, y2) => {
 
 deg = (x) =>{
     return x*180/Math.PI;
+}
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /*
@@ -51,7 +55,7 @@ function Triangle(x1, y1, x2, y2, x3, y3){
     this.y1 = y1;
     this.y2 = y2;
     this.y3 = y3;
-    this.dx = 0.998;
+    this.dx = 3.992 * (Math.random() - 0.5);
 
     this.update = function(){
         if (pp){
@@ -62,9 +66,9 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         }
         
 
-        AB = Math.round(getDist(this.x1,this.y1, this.x2,this.y2));
-        BC = Math.round(getDist(this.x2,this.y2, this.x3,this.y3) * 1000) / 1000;
-        CA = Math.round(getDist(this.x1,this.y1, this.x3,this.y3)  * 1000) / 1000;
+        AB = Math.round(getDist(this.x1,this.y1, this.x2,this.y2) * 15/19);
+        BC = Math.round(getDist(this.x2,this.y2, this.x3,this.y3) * 15000 / 19) / 1000;
+        CA = Math.round(getDist(this.x1,this.y1, this.x3,this.y3)  * 15000 / 19) / 1000;
 
         ABC = 90;
         BCA = Math.round(deg(Math.atan(AB/BC)) * 100) / 100;
@@ -90,7 +94,18 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.fill();
         c.lineJoin = "bevel"; // makes the corners smoother
         c.stroke();
-
+        
+        if(this.x3 - this.x2 > 18) {
+            c.beginPath();
+            c.moveTo(this.x2, this.y2 - 16);
+            c.lineTo(this.x2 + 16, this.y2 - 16);
+            c.lineTo(this.x2 + 16, this.y2);
+            c.lineWidth = 2;
+            c.strokeStyle = 'aqua';
+            c.lineJoin = "bevel"; // makes the corners smoother
+            c.stroke();
+        }
+        
         c.fillStyle = 'gold'; // Resetting fillStyle for the text
 
         // c.fillText("The text", x coordinate, y coordinate) for inserting text to the canvas
@@ -123,7 +138,7 @@ init = () =>{
     y1 = 70;
     x2 = x1;
     y2 = 450;
-    x3 = (1 + Math.random()) * 100;
+    x3 = randomInt(x2, canvas.width - x2);
     y3 = y2;    
     t1 = new Triangle(x1,y1, x2,y2, x3,y3);
     pp = true;
