@@ -52,6 +52,7 @@ connect = (x1, y1, x2, y2) => {
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
     c.strokeStyle = 'lavender';
+    c.lineWidth = 2;
     c.stroke();
 }
 
