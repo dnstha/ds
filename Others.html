@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OTHERS</title>
+    <meta charset = 'utf-8'>
+	<meta name= 'viewport' content='width=device-width, initial-scale=1.0'>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- <meta name = "Description" content="This is description"> -->
+	<meta name = "robots" content="INDEX, FOLLOW">
+
+
+	<link rel = "icon" href = "Logo.svg">
+	<style>
+		/* This is the comment in CSS. */
+		body{
+			background-color: #CFFFEE;
+		}
+		font{
+			font-family:courier;
+			color:lavender;
+			background:linear-gradient(90deg,black,red,gold);	
+		}
+		*{
+			margin:0;
+			padding:0;
+			box-sizing: border-box;
+			font-family: monospace, 'Courier New', Courier;
+		}
+		.center{
+			display:flex;
+			justify-content:center;
+			align-items:flex-start;
+		}
+		.main{
+			height:100vh;
+			position: relative;
+		}
+		.box{
+			width:550px;
+			height:max-content;
+			background:#000000;
+			border-radius:30px;
+			box-shadow:0 10px 15px rgba(0,0,0,0.363);
+		}
+		li{
+			width:400px;
+			padding:20px;
+			color:#fff;
+			background:#121826;
+			list-style:none;
+			margin:12px;
+			cursor:pointer;
+			transition:all .4s;
+			position:relative;
+		}
+		li:hover{
+			transform: translate(-10px,-10px);
+		}
+
+		li::before, li::after{
+			content:"";
+			position:absolute;
+			background:#121826;
+			transition:all 0.4s;
+		}
+
+		li::before{
+			width:20px;
+			height:100%;
+			top:0;
+			left: -30px;
+		}
+
+		li::after{
+			width:100%;
+			height:2px;
+			bottom:0; 
+			left:0;
+		}
+
+		li:hover::before, li:hover::after{
+			background:aqua;
+			box-shadow:0 0 50px aqua;
+		}
+		a{
+			text-decoration:none;
+			font-size: larger;
+		}
+	</style>
+</head>
+<body link="lavender" vlink="cyan" alink="gold">
+<center>
+	<!-- This is a comment in HTML.-->
+	<marquee behavior="alternate" scrollamount="15">
+	<h2><font size="20">Howdy Folks!</font></h2>
+	</marquee>
+	<div class="main center">
+		<div class="box center">
+			<ul>
+				<li><a href = "./Calendar/calendar.html">CALENDAR</a></li>
+				<li><a href = "./Animation/animation.html">ANIMATION</a></li>	
+				<li><a href = "./Interactive Circles/Circles.html">INTERACTIVE CIRCLES</a></li>
+				<li><a href = "./Rectangles/Rect.html">RECTANGLES</a></li>
+				<li><a href = "./Gravity/Bounce.html">BOUNCING CIRCLES</a></li>
+				<li><a href = "./Collision/Collision.html">COLLISION</a></li>
+				<li><a href = "./Circular Motion/Circular.html">CIRCULAR MOTION</a></li>
+				<li><a href = "./Fireworks/Fireworks.html">FIREWORKS</a></li>
+                <li><a href = "./Pxl/image1.html">PIXEL EFFECT</a></li>
+			</ul>
+		</div>
+	</div>
+</center>
+</body>
+</html>

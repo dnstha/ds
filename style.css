@@ -1,0 +1,209 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    border: border-box; /* This helps in including the border in the content width and height. */
+}
+
+body {
+    background-color: #CFFFEE;
+    width: 100%;
+}
+
+.navbar {
+    height: 100px;
+    background-color: #121826;
+    color: lavenderblush;
+    display: flex;
+    font-size: 1.8rem;
+}
+.nav-logo {
+    width: 100px;
+    height: 80px;
+}
+
+.brdr {
+    border: 1.5px solid transparent;
+    transition-duration: 0.15s;
+}
+
+.hdt {
+    transition-duration: 0.15s;
+    border: none;
+}
+
+.brdr:hover{
+    border: 1.5px solid white;
+    transform: scale(1.06);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hdt:hover {
+    transform: scale(1.1);
+    text-shadow: 10px 8px 8px rgba(255, 255, 255, 0.8);
+}
+
+/* .watchText{
+} */
+.mainTxt {
+    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 550;
+    font-size: 3rem;
+    top: 8rem;
+    left: 8%;
+}
+.watch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 45%;
+}
+
+.projects{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 17%;
+}
+
+.plist {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+}
+
+.pitem {
+    width: 10em;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: max-content;
+    background-color: rgba(33, 1, 43, 0.9);
+    transition-duration: 0.2s;
+    font-size: 1.5rem;
+    text-shadow: none;
+}
+
+.pitem:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 2px 2px 2px #00D2EE;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer{
+    height: 50px;
+    width: 100%;
+    background-color:  #060a1a;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: lavenderblush;
+}
+/* This is the comment in CSS. */
+/*
+Colors list:
+#121826
+#21012B
+#00D2EE
+#0A0061
+
+light:
+#CFFFEE
+*/
+
+/* *{
+    margin: 0;
+    padding: 0;
+}
+.bg-gray {
+    background-color: #121826;
+}
+#logo{
+    margin: 0;
+    padding: 10px 0 0 0;
+}
+header{
+    top: 0;
+}
+.text-light {
+    color: lavenderblush;
+}
+h2 {
+    color: #0A0061;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.center{
+    text-align: center;
+}
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: #CFFFEE;
+    font-family:'Times New Roman', Times, serif;
+    width: 100%;
+}
+main {
+    height:80vh;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 25px;
+}
+footer{
+    height: 50px;
+    width: 100%;
+    background-color:  #060a1a;
+    bottom: 0;
+    position: static;
+}
+a {
+    text-decoration: none;
+}
+#Watch, #Projects {
+    font-size: larger;
+    height: 50px;
+    margin-left: 35%;
+}
+li {
+    list-style-type: none;
+    min-width: fit-content;
+    height: 80px;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.lk {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+#l1, #l2 {
+    height: 60px;
+    width: 145px;
+    position: relative;
+    top: 10px;
+    border: 1px solid red;
+}
+@media (max-width: 600px) {
+    main{
+        background-color: red;
+    }
+    header{
+        flex-direction:column;
+    }
+} */
+
+/*
+vertical alignment => align-items
+horizontal alighnment => justify-content
+ */
