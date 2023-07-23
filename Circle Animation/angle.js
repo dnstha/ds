@@ -169,20 +169,23 @@ init = () =>{
     };
     radius = 200;
     for(let i = 0; i<2; i++) {
-        fixed.push(new locus(Math.PI * (Math.random() + Math.PI/180)));
+        fixed.push(new locus(Math.PI * (Math.random() + Math.PI/1800)));
+        while(fixed[0].x - centre.x - radius > -3) {
+            fixed[0] = new locus(Math.PI * (Math.random() + Math.PI/1800));
+        }
         if(i !== 0) {
             for(let j = 0; j<1; j++){
-                if(fixed[0].x > fixed[1].x || getDist(fixed[0].x, fixed[0].y, fixed[1].x, fixed[1].y) < 20){
-                    fixed[1] = new locus(Math.PI * (Math.random() + Math.PI/180));
+                if(fixed[0].x > fixed[1].x || getDist(fixed[0].x, fixed[0].y, fixed[1].x, fixed[1].y) < 5){ // The reload problem was solved when the OR operator was replaced with AND
+                    fixed[1] = new locus(Math.PI * (Math.random() + Math.PI/1800));
                     j = -1;
                 }
             }
         }
     }
-    p = new locus(2 * Math.PI * (Math.random() + Math.PI/180));
+    p = new locus(2 * Math.PI * (Math.random()));
     if(((p.x > fixed[0].x && p.x < fixed[1].x) && (p.y > fixed[0].y || p.y > fixed[1].y)) || (getDist(p.x, p.y, fixed[0].x, fixed[0].y) < 5 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) < 5)) {
         for(let i = 0; i<1; i++) {
-            p = new locus(2 * Math.PI * (Math.random() + Math.PI/180));
+            p = new locus(2 * Math.PI * (Math.random() + Math.PI/1800));
             if(((p.x > fixed[0].x && p.x < fixed[1].x) && (p.y > fixed[0].y || p.y > fixed[1].y)) || (getDist(p.x, p.y, fixed[0].x, fixed[0].y) < 5 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) < 5)){
                 i = -1;
             }
