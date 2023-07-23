@@ -127,8 +127,8 @@ function Circle (centre, radius){
         c.fillText("\u2220APB = " + APB + "\xB0", centre.x - 80, centre.y + this.radius + 75); 
         c.fillText("2 \xD7 \u2220APB = \u2220AOB", centre.x - 80, centre.y + this.radius + 105);
         c.fillStyle = 'yellow';
-        c.font = 'bold 25px monospace';
-        c.fillText("Click on the screen to Play/Pause the animation", centre.x - this.radius - 20, centre.y - this.radius - 50);
+        c.font = 'normal 25px Georgia';
+        c.fillText("Click on the screen to Play/Pause the animation", centre.x - this.radius - 80, centre.y - this.radius - 50);
     }
 
     this.drawPoint = () =>{
