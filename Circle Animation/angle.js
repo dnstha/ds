@@ -170,6 +170,11 @@ init = () =>{
     radius = 200;
     for(let i = 0; i<2; i++) {
         fixed.push(new locus(Math.PI * (Math.random() + Math.PI/1800)));
+        /*
+        The bug was due to x position of first point on extreme right side which 
+        didn't allow the point B to spawn. This problem is solved by restricting
+        the position of point A which is done by the following while loop.
+        */
         while(fixed[0].x - centre.x - radius > -3) {
             fixed[0] = new locus(Math.PI * (Math.random() + Math.PI/1800));
         }
