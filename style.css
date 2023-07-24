@@ -42,15 +42,16 @@ body {
     text-shadow: 10px 8px 8px rgba(255, 255, 255, 0.8);
 }
 
-/* .watchText{
+/* main {
+    max-width: fit-content;
 } */
 .mainTxt {
-    position: relative;
+    position: absolute;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 550;
     font-size: 3rem;
-    top: 8rem;
-    left: 8%;
+    top: 18rem;
+    left: 2rem;
 }
 .watch {
     display: flex;
@@ -74,7 +75,7 @@ body {
 }
 
 .pitem {
-    width: 10em;
+    width: 8em;
     border: 1px solid black;
     border-radius: 3px;
     height: max-content;
@@ -94,7 +95,7 @@ a {
 }
 
 footer{
-    height: 50px;
+    height: 60px;
     width: 100%;
     background-color:  #060a1a;
     position: absolute;
@@ -102,6 +103,58 @@ footer{
     text-align: center;
     color: lavenderblush;
 }
+
+footer a{
+    height:fit-content;
+    width: fit-content;
+    position: absolute;
+    font-size: 1.6rem;
+    transition: all 0.4s;
+}
+
+footer a:hover {
+    transform: scale(1.2);
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+
+
+@media (max-width: 952px) {
+    .nav-logo {
+        transform: scale(0.8);
+    }
+
+    .hdi {
+        font-size: 1.1rem;
+        position: fixed;
+        margin-top: 1.5rem;
+        left: 2.1rem;
+    }
+}
+
+/* @media (max-width: 700px) {
+    .hdi {
+        display: none;
+    }
+    .checkbtn {
+        display: block;
+    }
+    
+} */
+
 /* This is the comment in CSS. */
 /*
 Colors list:
