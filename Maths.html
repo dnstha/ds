@@ -16,18 +16,13 @@
 		font{
 			font-family:courier;
 			color:lavender;
-			background:linear-gradient(90deg,black,red,gold);	
+			background:linear-gradient(90deg,black, violet);	
 		}
 		*{
 			margin:0;
 			padding:0;
 			box-sizing: border-box;
 			font-family: monospace, 'Courier New', Courier;
-		}
-		.center{
-			display:flex;
-			justify-content:center;
-			align-items:flex-start;
 		}
 		.main{
 			height:100vh;
@@ -39,46 +34,50 @@
 			background:#000000;
 			border-radius:30px;
 			box-shadow:0 10px 15px rgba(0,0,0,0.363);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 		}
-		li{
+		a{
 			width:400px;
 			padding:20px;
-			color:#fff;
+			color:#CFFFEE;
 			background:#121826;
-			list-style:none;
 			margin:12px;
 			cursor:pointer;
-			transition:all .4s;
+			transition:all .3s;
 			position:relative;
 		}
-		li:hover{
+		a:hover{
 			transform: translate(-10px,-10px);
+			border: 2px solid aqua;
 		}
 
-		li::before, li::after{
+		a::before, li::after{
 			content:"";
 			position:absolute;
 			background:#121826;
 			transition:all 0.4s;
 		}
 
-		li::before{
+		a::before{
 			width:20px;
 			height:100%;
 			top:0;
 			left: -30px;
 		}
 
-		li::after{
+		a::after{
 			width:100%;
 			height:2px;
 			bottom:0; 
 			left:0;
 		}
 
-		li:hover::before, li:hover::after{
+		a:hover::before, a:hover::after{
 			background:aqua;
-			box-shadow:0 0 50px aqua;
+			box-shadow:0 0 50px 5px aqua; /* x y blur-radius spread-radius*/
 		}
 		a{
 			text-decoration:none;
@@ -92,12 +91,10 @@
 	<marquee behavior="alternate" scrollamount="15">
 	<h2><font size="20">Howdy Folks!</font></h2>
 	</marquee>
-	<div class="main center">
-		<div class="box center">
-			<ul>
-				<li><a href = "./Right Triangle Animation/Right Triangle.html">RIGHT TRIANGLE ANIMATION</a></li>
-				<li><a href = "./Circle Animation/circle.html">CIRCLE ANIMATION</a></li>
-			</ul>
+	<div class="main">
+		<div class="box">
+			<a href = "./Right Triangle Animation/Right Triangle.html">RIGHT TRIANGLE ANIMATION</a>
+			<a href = "./Circle Animation/circle.html">CIRCLE ANIMATION</a>
 		</div>
 	</div>
 </center>

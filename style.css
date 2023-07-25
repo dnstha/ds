@@ -114,12 +114,14 @@ footer a{
     height:fit-content;
     width: fit-content;
     position: absolute;
+    left: 46%;
     font-size: 1.6rem;
     transition: all 0.4s;
 }
 
 footer a:hover {
     transform: scale(1.2);
+    color: #CFFFEE;
 }
 
 .checkbtn {
