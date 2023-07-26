@@ -9,15 +9,11 @@ function Bob(x, y, radius) {
     this.radius = radius;
     this.angle = Math.random() * Math.PI * 2;
     this.velocity = (Math.random() - 0.5)/10;
-    this.amplitude = 10;
 
     this.update = function() {
-        if(this.x - p.x == this.amplitude || p.x - this.x < this.amplitude) {
-            this.velocity = -this.velocity;
-        }
         this.angle += this.velocity;
-        this.x = p.x + Math.cos(this.angle) * 100;
-        this.y = p.y + Math.sin(this.angle) * 100;
+        this.x = p.x + Math.cos(this.angle) * 10;
+        this.y = p.y + Math.sin(this.angle) * 200;
         this.draw();
     }
 
@@ -27,6 +23,7 @@ function Bob(x, y, radius) {
         c.stroke();
         c.closePath();
     }
+
 }
 
 function Point(x, y) {
@@ -38,7 +35,7 @@ let radius, angle;
 let b = [];
 function init() {
     b = [];
-    p = new Point(canvas.width/2, canvas.height * 0.7)
+    p = new Point(canvas.width/2, canvas.height * 0.5)
     b.push(new Bob(p.x, p.y, 10));
 }
 
