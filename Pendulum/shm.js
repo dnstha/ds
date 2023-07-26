@@ -3,13 +3,6 @@ const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let rect = canvas.getBoundingClientRect();
-canvas.width = rect.width * devicePixelRatio;
-canvas.height = rect.height * devicePixelRatio;
-c.scale(devicePixelRatio, devicePixelRatio);
-canvas.style.width = rect.width + "px";
-canvas.style.height = rect.height + "px";
-
 /*
 Making the canvas more clear
 let rect = canvas.getBoundingClientRect();
@@ -19,18 +12,29 @@ c.scale(devicePixelRatio, devicePixelRatio);
 canvas.style.width = rect.width + "px";
 canvas.style.height = rect.height + "px";
 */
-function Bob(x, y, radius) {
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function Bob(x, y, length, radius) {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.angle = Math.random() * Math.PI * 2;
-    this.velocity = (Math.random() - 0.5)/10;
+    this.length = length;
+    this.amplitude = 100;
+    this.angle = Math.PI * 0.5;
+    this.velocity = Math.pow(-1, randomInt(1,2)) * (Math.random() + 0.006) * 0.02;
 
     this.update = function() {
+        if(this.x > this.amplitude + p.x || this.x < p.x - this.amplitude) {
+            this.velocity = -this.velocity;
+        }
         this.angle += this.velocity;
-        this.x = p.x + Math.cos(this.angle) * 80;
-        //this.y = p.y + Math.sin(this.angle) * 200;
+        this.x = centre.x + Math.cos(this.angle) * this.length;
+        this.y = centre.y + Math.sin(this.angle) * this.length;
         this.draw();
+        console.log(this.length);
     }
 
     this.draw = function() {
@@ -38,7 +42,7 @@ function Bob(x, y, radius) {
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         c.fill();
         c.closePath();
-        drawLine(this.x, this.y, avg(p1.x, p2.x), avg(p1.y, p2.y));
+        drawLine(this.x, this.y, centre.x, centre.y);
     }
 
 }
@@ -57,12 +61,6 @@ function Point(x, y) {
 window.addEventListener('resize', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
-    c.scale(devicePixelRatio, devicePixelRatio);
-    canvas.style.width = rect.width + "px";
-    canvas.style.height = rect.height + "px";
     init();
 });
 
@@ -82,14 +80,16 @@ drawLine = (x1, y1, x2, y2) => {
     c.stroke();
 }
 
-let radius, angle, p1, p2, p;
+let radius, angle, p1, p2, p, l, centre;
 let b = [];
 function init() {
     p1 = new Point(canvas.width * 0.25, canvas.height/10);
     p2 = new Point(canvas.width * 0.75, p1.y);
     b = [];
-    p = new Point(canvas.width/2, canvas.height * 0.9)
-    b.push(new Bob(p.x, p.y, 20));
+    p = new Point(canvas.width/2, canvas.height * 0.9);
+    centre = new Point(avg(p1.x, p2.x), p1.y);
+    l = getDist(centre.x, centre.y, p.x, p.y);
+    b.push(new Bob(p.x, p.y, l, 20));
 }
 
 function animate() {
