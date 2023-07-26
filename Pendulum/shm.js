@@ -3,6 +3,13 @@ const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let rect = canvas.getBoundingClientRect();
+canvas.width = rect.width * devicePixelRatio;
+canvas.height = rect.height * devicePixelRatio;
+c.scale(devicePixelRatio, devicePixelRatio);
+canvas.style.width = rect.width + "px";
+canvas.style.height = rect.height + "px";
+
 function Bob(x, y, radius) {
     this.x = x;
     this.y = y;
@@ -12,7 +19,7 @@ function Bob(x, y, radius) {
 
     this.update = function() {
         this.angle += this.velocity;
-        this.x = p.x + Math.cos(this.angle) * 100;
+        this.x = p.x + Math.cos(this.angle) * 80;
         //this.y = p.y + Math.sin(this.angle) * 200;
         this.draw();
     }
