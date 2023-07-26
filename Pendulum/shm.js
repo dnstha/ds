@@ -3,12 +3,12 @@ const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let rect = canvas.getBoundingClientRect();
-canvas.width = rect.width * devicePixelRatio;
-canvas.height = rect.height * devicePixelRatio;
-c.scale(devicePixelRatio, devicePixelRatio);
-canvas.style.width = rect.width + "px";
-canvas.style.height = rect.height + "px";
+// let rect = canvas.getBoundingClientRect();
+// canvas.width = rect.width * devicePixelRatio;
+// canvas.height = rect.height * devicePixelRatio;
+// c.scale(devicePixelRatio, devicePixelRatio);
+// canvas.style.width = rect.width + "px";
+// canvas.style.height = rect.height + "px";
 
 function Bob(x, y, radius) {
     this.x = x;
@@ -44,6 +44,12 @@ function Point(x, y) {
     this.x = x;
     this.y = y;
 }
+
+window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
 
 function avg() {
     let x = 0;
