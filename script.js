@@ -4,12 +4,12 @@ canvas.height = window.innerHeight;
 
 let c = canvas.getContext('2d');
 
-// let rect = canvas.getBoundingClientRect();
-// canvas.width = rect.width * devicePixelRatio;
-// canvas.height = rect.height * devicePixelRatio;
-// c.scale(devicePixelRatio, devicePixelRatio);
-// canvas.style.width = rect.width + "px";
-// canvas.style.height = rect.height + "px";
+let rect = canvas.getBoundingClientRect();
+canvas.width = rect.width * devicePixelRatio;
+canvas.height = rect.height * devicePixelRatio;
+c.scale(devicePixelRatio, devicePixelRatio);
+canvas.style.width = rect.width + "px";
+canvas.style.height = rect.height + "px";
 
 var mouse = {
     x: undefined,
@@ -32,6 +32,12 @@ var colorArray = [
 window.addEventListener('resize', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    c.scale(devicePixelRatio, devicePixelRatio);
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
     init();
 });
 
