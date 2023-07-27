@@ -25,6 +25,10 @@ deg = (x) =>{
     return x*180/Math.PI;
 }
 
+rad = (x) => {
+    return x*Math.PI/180;
+}
+
 dotProduct = (a1,b1, a2,b2) => {
     return a1*a2 + b1*b2;
 }
@@ -78,10 +82,21 @@ point = (x, y, col) => {
     c.closePath();
 }
 
+slope = (V1) => {
+    let A = Math.acos(dotProduct(V1.x, V1.y, 1, 0)/getDist(p.x, p.y, fixed[1].x, fixed[1].y));
+    if(V1.y <= 0) {
+        A = Math.PI * 2 - A;
+    }
+    return A;
+}
+
 function Circle (centre, radius){
     this.centre = centre;
     this.radius = radius;
     this.radian = p.angle;
+    this.centralAngleR = 50;
+    this.inscribedAngleR = 40;
+    this.angleR = this.inscribedAngleR;
     this.velocity = Math.pow(-1, randomInt(2,3)) * (Math.random() + 0.006) * 0.02;
 
     this.update = () =>{
@@ -94,9 +109,11 @@ function Circle (centre, radius){
                 this.velocity = -this.velocity;
             }
 
-            // if((p.x >= fixed[0].x && p.x <= fixed[1].x) && (p.y >= fixed[0].y || p.y >= fixed[1].y)) {
-            //     this.velocity = -this.velocity;
-            // }
+            if(getDist(p.x, p.y, fixed[0].x, fixed[0].y) <= this.inscribedAngleR + 1 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) <= this.inscribedAngleR + 1){
+                this.angleR = 2;
+            }else{
+                this.angleR = this.inscribedAngleR;
+            }
         }
         VPA.x = vctr(p.x, fixed[0].x);
         VPA.y = vctr(p.y, fixed[0].y);
@@ -129,6 +146,16 @@ function Circle (centre, radius){
         c.fillStyle = 'yellow';
         c.font = 'normal 25px Georgia';
         c.fillText("Click on the screen to Play/Pause the animation", centre.x - this.radius - 80, centre.y - this.radius - 50);
+
+
+        c.strokeStyle = 'yellow';
+        c.beginPath();
+        c.arc(centre.x, centre.y, this.centralAngleR, fixed[1].angle, fixed[0].angle);
+        c.stroke();
+        
+        c.beginPath();
+        c.arc(p.x, p.y, this.angleR, slope(VPB), slope(VPB) + rad(APB));
+        c.stroke();
     }
 
     this.drawPoint = () =>{

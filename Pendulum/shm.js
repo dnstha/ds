@@ -24,7 +24,7 @@ function Bob(x, y, length, radius) {
     this.length = length;
     this.amplitude = 100;
     this.angle = Math.PI * 0.5;
-    this.velocity = Math.pow(-1, randomInt(1,2)) * (Math.random() + 0.006) * 0.02;
+    this.velocity = Math.pow(-1, randomInt(1,2)) * (Math.random() + 0.001) * 0.01;
 
     this.update = function() {
         if(this.x > this.amplitude + p.x || this.x < p.x - this.amplitude) {
