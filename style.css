@@ -29,7 +29,7 @@ canvas {
 
 .brdr {
     border: 1.5px solid transparent;
-    transition-duration: 0.15s;
+    transition-duration: 0.05s;
 }
 
 .hdt {
@@ -86,7 +86,7 @@ canvas {
     border-radius: 3px;
     height: max-content;
     background-color: rgba(33, 1, 43, 0.9);
-    transition-duration: 0.2s;
+    transition-duration: 0.06s;
     font-size: 1.5rem;
     text-shadow: none;
 }
@@ -116,7 +116,7 @@ footer a{
     position: absolute;
     left: 46%;
     font-size: 1.6rem;
-    transition: all 0.4s;
+    transition-duration: 0.06s;
 }
 
 footer a:hover {
