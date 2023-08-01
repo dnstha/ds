@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Linear Equations Solver</title>
+        <style>
+            body{
+                margin: 0;
+                background: #cfffee;
+            }
+            input {
+                text-align: center;
+                margin: 0 2px 0 5px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                width: 4rem;
+                height: 4rem;
+                border: 2px solid gold;
+                border-radius: 5px;
+                font-size: 2rem;
+            }
+            /* Chromium and Safari */
+            input[type = "number"]::-webkit-inner-spin-button {
+                display: none;
+            }
+            /* Firefox
+            input[type = number] {
+                -moz-appearance: textfield;
+            } */
+            form {
+                margin-left: 5rem;
+                font-size: 2rem;
+            }
+            button {
+                margin-top: 3rem;
+                margin-left: 1rem;
+                border: 2px inset red;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 2rem;
+                width: 9rem;
+                height: 3rem;
+                border-radius: 10px;
+                transition-duration: 60ms;
+            }
+            button:active {
+                transform: scale(0.95);
+
+            }
+            div {
+                margin-left: 10px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            p {
+                margin-top: 1rem;
+                height: 0.6rem;
+                text-decoration: underline;
+            }
+            .output input {
+                margin: 10px 2px 0 5px;
+                border: 3px solid deepskyblue;
+                background-color: cornsilk;
+                width: 15rem;
+            }
+            span {
+                color: red;
+            }
+            h1 {
+                margin-left: 1rem;
+                margin-top: 0;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Solve any quadratic equation</h1>
+        <form>
+            <div class="l">
+                <input id = "a" type = "number" inputmode = "numeric" placeholder="a" required>x<sup>2</sup> +
+                <input id = "b" type = "number" inputmode = "numeric" placeholder="b" required>x +
+                <input id = "c" type = "number" inputmode = "numeric" placeholder="c" required> = 0
+            </div>
+            <button type = "button" id = "MyBtn">Solve</button>
+            <div class="output">
+                x<sub>1</sub> = <input id="x1" READONLY><br/>
+                x<sub>2</sub> = <input id="x2" READONLY>
+            </div>
+            <span id = "ambiguous">
+            </span>
+        </form>    
+
+        <script src="solver.js">
+
+        </script>
+    </body>
+</html>
