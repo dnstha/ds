@@ -20,18 +20,34 @@ document.querySelector('button').onclick = () => {
     C = (x1 * y2) - (x2 * y1);
     if (C != 0) {
         x = Dx/C;
-        y = Dy/C;
-        document.getElementById("x").value = x;
-        document.getElementById("y").value = y;        
+        y = Dy/C;        
     }else{
+        x = "";
+        y = "";
         if(x1/x2 == y1/y2 && y1/y2 == c1/c2) {
             s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
         }
         else if(x1/x2 == y1/y2 && y1/y2 != c1/c2) {
             s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
         }
+        else if (x1 == 0 && x2 == 0 && y1 != 0 && y2 != 0) {
+            if(c1/y1 == c2/y2) {
+                s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
+            }else{
+                s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
+            }
+        }
+        else if (y1 == 0 && y2 == 0 && x1 != 0 && x2 != 0) {
+            if(c1/x1 == c2/x2) {
+                s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
+            }else{
+                s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
+            }
+        }
         else{
             alert("Enter all the cofficients!");
         }
     }
+    document.getElementById("x").value = x;
+    document.getElementById("y").value = y;
 };
