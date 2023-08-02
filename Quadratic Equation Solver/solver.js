@@ -1,13 +1,3 @@
-// let Name = window.prompt("What's your name?");
-
-// document.write("Your name is " + Name);
-
-// c2.addEventListener("keyup", (e) => {
-//     if(e.key === "Enter") {
-//         result.innerText = ("x = " + x + "\ny= " + y);
-//     }
-// });
-
 let x1, x2, a, b, c, discriminant, denominator, s, x, y;
 
 document.querySelector('button').onclick = () => {

@@ -31,23 +31,24 @@ document.querySelector('button').onclick = () => {
             s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
         }
         else if (x1 == 0 && x2 == 0 && y1 != 0 && y2 != 0) {
-            if(c1/y1 == c2/y2) {
-                s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
-            }else{
-                s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
-            }
+            lpta(y1, c1, y2, c2);
         }
         else if (y1 == 0 && y2 == 0 && x1 != 0 && x2 != 0) {
-            if(c1/x1 == c2/x2) {
-                s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
-            }else{
-                s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
-            }
+            lpta(x1, c1, x2, c2);
         }
         else{
-            alert("Enter all the cofficients!");
+            alert("Enter cofficient of x or y in each equation!");
         }
     }
     document.getElementById("x").value = x;
     document.getElementById("y").value = y;
 };
+
+// If the line is parallel to either of axes
+lpta = (x1, c1, x2, c2) => {
+    if(c1/x1 == c2/x2) {
+        s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
+    }else{
+        s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
+    }
+}
