@@ -84,7 +84,7 @@ var ball;
 var ballArray;
 function init(){
     ballArray = [];
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 80; i++) {
         var radius = randomInt(10, 60);
         var x = randomInt(radius, canvas.width - radius);
         var y = randomInt(0, canvas.height-radius);
@@ -98,6 +98,9 @@ function init(){
 function animate(){
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
+    c.fillStyle = 'red';
+    c.font = 'normal 25px Georgia';
+    c.fillText("Click on the screen to Restart the animation!", canvas.width * 0.15, canvas.height * 0.2);
     for (var i = 0; i<ballArray.length; i++) {
         ballArray[i].update();
     }

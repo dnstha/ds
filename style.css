@@ -86,7 +86,7 @@ canvas {
     border-radius: 3px;
     height: max-content;
     background-color: rgba(33, 1, 43, 0.9);
-    transition-duration: 0.06s;
+    transition-duration: 0.1s;
     font-size: 1.5rem;
     text-shadow: none;
 }
