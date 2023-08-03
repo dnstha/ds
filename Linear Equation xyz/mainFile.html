@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Linear Equations Solver</title>
+
+        <link rel = "icon" href = "../Logo.svg">
+
+        <style>
+            body{
+                margin: 0;
+                background: #cfffee;
+            }
+            input {
+                text-align: center;
+                margin: 0 2px 0 5px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                width: 4rem;
+                height: 4rem;
+                border: 2px solid gold;
+                border-radius: 5px;
+                font-size: 2rem;
+            }
+            /* Chromium and Safari */
+            input[type = "number"]::-webkit-inner-spin-button {
+                display: none;
+            }
+            /* Firefox
+            input[type = number] {
+                -moz-appearance: textfield;
+            } */
+            form {
+                margin-left: 5rem;
+                font-size: 2rem;
+            }
+            button {
+                margin-top: 2rem;
+                margin-left: 1rem;
+                border: 2px inset red;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 2rem;
+                width: 9rem;
+                height: 3rem;
+                border-radius: 10px;
+                transition-duration: 60ms;
+            }
+            button:active {
+                transform: scale(0.97);
+
+            }
+            div {
+                margin-left: 10px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            p {
+                margin-top: 0.5rem;
+                height: 0.6rem;
+                text-decoration: underline;
+            }
+            .output input {
+                margin: 10px 2px 0 5px;
+                border: 3px solid deepskyblue;
+                background-color: cornsilk;
+                width: 15rem;
+            }
+            span {
+                color: red;
+            }
+            h1 {
+                margin-left: 1rem;
+                margin-top: 0;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Solve any system of linear equations with 3 variables.</h1>
+        <form>
+            <div class="l">
+                <p>Equation 1</p>
+                <input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>x +
+                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>y +
+                <input id = "z1" type = "number" inputmode = "numeric" placeholder="z1" required>z =
+                <input id = "c1" type = "number" inputmode = "numeric" placeholder="c1" required>
+            </div>
+            <div class="l">
+                <p>Equation 2</p>
+                <input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>x +
+                <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>y +
+                <input id = "z2" type = "number" inputmode = "numeric" placeholder="z2" required>z =
+                <input id = "c2" type = "number" inputmode = "numeric" placeholder="c2" required>
+            </div>
+            <div class="l">
+                <p>Equation 3</p>
+                <input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>x +
+                <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>y +
+                <input id = "z3" type = "number" inputmode = "numeric" placeholder="z3" required>z =
+                <input id = "c3" type = "number" inputmode = "numeric" placeholder="c3" required>
+            </div>
+            <button type = "button" id = "MyBtn">Solve</button>
+            <div class="output">
+                x = <input id="x" READONLY><br/>
+                y = <input id="y" READONLY><br/>
+                z = <input id="z" readonly>
+            </div>
+            <span id = "ambiguous">
+            </span>
+        </form>    
+
+        <script src="xyz_solver.js">
+
+        </script>
+    </body>
+</html>
