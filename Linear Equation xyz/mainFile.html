@@ -14,11 +14,11 @@
                 text-align: center;
                 margin: 0 2px 0 5px;
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                width: 4rem;
-                height: 4rem;
+                width: 3.2rem;
+                height: 3.2rem;
                 border: 2px solid gold;
                 border-radius: 5px;
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
             /* Chromium and Safari */
             input[type = "number"]::-webkit-inner-spin-button {
@@ -30,17 +30,18 @@
             } */
             form {
                 margin-left: 5rem;
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
             button {
-                margin-top: 2rem;
+                margin-top: 1.6rem;
                 margin-left: 1rem;
+                margin-right: 1rem;
                 border: 2px inset red;
                 font-family: Georgia, 'Times New Roman', Times, serif;
-                font-size: 2rem;
-                width: 9rem;
-                height: 3rem;
-                border-radius: 10px;
+                font-size: 1.6rem;
+                width: 6.8rem;
+                height: 2.3rem;
+                border-radius: 8px;
                 transition-duration: 60ms;
             }
             button:active {
@@ -52,7 +53,7 @@
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             }
             p {
-                margin-top: 0.5rem;
+                margin-top: 0.2rem;
                 height: 0.6rem;
                 text-decoration: underline;
             }
@@ -67,6 +68,7 @@
             }
             h1 {
                 margin-left: 1rem;
+                margin-bottom: 0;
                 margin-top: 0;
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             }
@@ -77,26 +79,27 @@
         <form>
             <div class="l">
                 <p>Equation 1</p>
-                <input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>x +
-                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>y +
-                <input id = "z1" type = "number" inputmode = "numeric" placeholder="z1" required>z =
-                <input id = "c1" type = "number" inputmode = "numeric" placeholder="c1" required>
+                <input id = "x1" type = "number" inputmode = "numeric" placeholder="a1" required>x +
+                <input id = "y1" type = "number" inputmode = "numeric" placeholder="b1" required>y +
+                <input id = "z1" type = "number" inputmode = "numeric" placeholder="c1" required>z =
+                <input id = "c1" type = "number" inputmode = "numeric" placeholder="d1" required>
             </div>
             <div class="l">
                 <p>Equation 2</p>
-                <input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>x +
-                <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>y +
-                <input id = "z2" type = "number" inputmode = "numeric" placeholder="z2" required>z =
-                <input id = "c2" type = "number" inputmode = "numeric" placeholder="c2" required>
+                <input id = "x2" type = "number" inputmode = "numeric" placeholder="a2" required>x +
+                <input id = "y2" type = "number" inputmode = "numeric" placeholder="b2" required>y +
+                <input id = "z2" type = "number" inputmode = "numeric" placeholder="c2" required>z =
+                <input id = "c2" type = "number" inputmode = "numeric" placeholder="d2" required>
             </div>
             <div class="l">
                 <p>Equation 3</p>
-                <input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>x +
-                <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>y +
-                <input id = "z3" type = "number" inputmode = "numeric" placeholder="z3" required>z =
-                <input id = "c3" type = "number" inputmode = "numeric" placeholder="c3" required>
+                <input id = "x3" type = "number" inputmode = "numeric" placeholder="a3" required>x +
+                <input id = "y3" type = "number" inputmode = "numeric" placeholder="b3" required>y +
+                <input id = "z3" type = "number" inputmode = "numeric" placeholder="c3" required>z =
+                <input id = "c3" type = "number" inputmode = "numeric" placeholder="d3" required>
             </div>
             <button type = "button" id = "MyBtn">Solve</button>
+            <button type = "reset">Clear</button>
             <div class="output">
                 x = <input id="x" READONLY><br/>
                 y = <input id="y" READONLY><br/>
