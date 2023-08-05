@@ -75,7 +75,7 @@ document.querySelector('button').onclick = () => {
                 s.innerHTML = "*The system has no solution! Planes 1 and 3 are parallel to the each other!";
             }
             else {
-                s.innerHTML = "*The system has no specific solution but a straight line! Try again!";
+                s.innerHTML = "*The given planes do not intersect at a single point!";
             }
             // When any of the two planes coincide and the third plane intersects both of them: Solution is an equation of line
             // else if (x1 == 0 && x2 == 0 && y1 != 0 && y2 != 0) {
