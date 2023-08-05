@@ -3,6 +3,8 @@
     <head>
         <title>Right Triangle Animation</title>
         <link rel = "icon" href = "../Logo.svg">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="../buttons.css">
         <style>
             body{
                 margin: 0;
@@ -10,9 +12,16 @@
             canvas{
                 background: linear-gradient(30deg, black, black, black, aqua);
             }
+            button {
+                transition-duration: 40ms;
+            }
         </style>
     </head>
     <body>
+        <div class="btns">
+            <button id = "reset"><i class="fa-solid fa-rotate-right"></i></button>
+            <button id = "plps"><i class="fa-solid fa-play"></i></button>
+        </div>
         <canvas>
             <script src="animation.js">
             </script>

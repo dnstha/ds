@@ -11,8 +11,16 @@ window.addEventListener('resize', function() {
 });
 
 
-addEventListener('click', function(event){ // instead you can write window.eventListener
+// addEventListener('click', function(event){ // instead you can write window.eventListener
+//     pp = !(pp);
+// });
+
+document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
     pp = !(pp);
+});
+
+document.getElementById("reset").addEventListener('click', function(){ // instead you can write window.eventListener
+    init();
 });
 
 getDist = (x1, y1, x2, y2) => {
@@ -143,10 +151,6 @@ function Circle (centre, radius){
         c.fillText("\u2220AOB = " + AOB + "\xB0", centre.x - 80, centre.y + this.radius + 45);
         c.fillText("\u2220APB = " + APB + "\xB0", centre.x - 80, centre.y + this.radius + 75); 
         c.fillText("2 \xD7 \u2220APB = \u2220AOB", centre.x - 80, centre.y + this.radius + 105);
-        c.fillStyle = 'yellow';
-        c.font = 'normal 25px Georgia';
-        c.fillText("Click on the screen to Play/Pause the animation", centre.x - this.radius - 80, centre.y - this.radius - 50);
-
 
         c.strokeStyle = 'yellow';
         c.beginPath();

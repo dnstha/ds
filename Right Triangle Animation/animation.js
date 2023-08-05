@@ -11,8 +11,16 @@ window.addEventListener('resize', function() {
 });
 
 
-addEventListener('click', function(event){
+// addEventListener('click', function(event){
+//     pp = !(pp);
+// });
+
+document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
     pp = !(pp);
+});
+
+document.getElementById("reset").addEventListener('click', function(){ // instead you can write window.eventListener
+    init();
 });
 
 getDist = (x1, y1, x2, y2) => {
@@ -106,13 +114,13 @@ function Triangle(x1, y1, x2, y2, x3, y3){
             c.stroke();
         }
         
+        c.font = 'bold 24px times'; // styling the text
         c.fillStyle = 'gold'; // Resetting fillStyle for the text
 
         // c.fillText("The text", x coordinate, y coordinate) for inserting text to the canvas
         c.fillText("A", this.x1 - 4, this.y1 - 5);
         c.fillText("B", this.x2 - 4, this.y2 + 20);
         c.fillText("C", this.x3 - 4, this.y3 + 20);
-
         
         c.fillStyle = 'limegreen';
         c.fillText("AB = " + AB + ",  BC = " + BC, this.x1 - 4, this.y2 + 50);
@@ -124,10 +132,9 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.fillText("\u2220A = "+ CAB + "\xB0", this.x1 + 110, this.y2 + 80);
         c.fillText("\u2220C = " + BCA + "\xB0", this.x1 + 250, this.y2 + 80);
         
-        c.font = 'bold 20px monospace';
-        c.fillStyle = 'red';
-        c.fillText("Click anywhere on the screen to Play/Pause the animation.", this.x1 + 20, this.y2 + 120);
-        c.font = 'bold 24px times'; // styling the text
+        // c.font = 'bold 20px monospace';
+        // c.fillStyle = 'red';
+        // c.fillText("Click anywhere on the screen to Play/Pause the animation.", this.x1 + 20, this.y2 + 120);
     }
 }
 let t1,  AB, BC, CA, ABC, BCA, CAB;
