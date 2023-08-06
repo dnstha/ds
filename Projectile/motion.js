@@ -62,7 +62,7 @@ function Particle(x, y, radius, dx, dy){
             }
         }
         if(this.y + this.radius + this.dy > canvas.height || this.y + this.dy< this.radius) {
-            this.dy *= -0.8;
+            this.dy *= -0.8; // Multiplied by the restitution cofficient
         }else{
             this.dy += gravity;
         }
