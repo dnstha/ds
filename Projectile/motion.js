@@ -56,16 +56,13 @@ function Particle(x, y, radius, dx, dy){
 
     this.update = () => { //modern method of writing a function
         if(this.x + this.radius + this.dx > canvas.width || this.x + this.dx < this.radius) {
-            this.dx *= -0.05;
+            this.dx *= -0.1;
             if(this.radius > 0.001) {
                 this.radius *= 0.2;
             }
         }
         if(this.y + this.radius + this.dy > canvas.height || this.y + this.dy< this.radius) {
             this.dy *= -0.8;
-            // if(this.radius > 0.001) {
-            //     this.radius *= 0.99;
-            // }
         }else{
             this.dy += gravity;
         }
@@ -99,8 +96,12 @@ function init(){
 function animate(){
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
-    particles.forEach(p => {
-        p.update();
+    particles.forEach((p, i) => {
+        if(p.radius > 1) {
+            p.update();
+        }else{
+            particles.splice(i, 1);
+        }
         // if(p.radius < 1) {
         //     //remove it from array
         // }

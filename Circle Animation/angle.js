@@ -45,7 +45,6 @@ vctr = (x1, x2) => {
     return x2-x1;
 }
 
-
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -102,8 +101,8 @@ function Circle (centre, radius){
     this.centre = centre;
     this.radius = radius;
     this.radian = p.angle;
-    this.centralAngleR = 50;
-    this.inscribedAngleR = 40;
+    this.centralAngleR = 50; // Radius of central angle symbol
+    this.inscribedAngleR = 40; // Radius of inscribed angle symbol
     this.angleR = this.inscribedAngleR;
     this.velocity = Math.pow(-1, randomInt(2,3)) * (Math.random() + 0.006) * 0.02;
 
@@ -190,6 +189,8 @@ let centre, radius, p;
 let fixed = [];
 let VOA, VOB, VPA, VPB; // Vectors
 let AOB, APB; // Central angle and inscribed angle
+let optAngle = Number(document.getElementById("Angles").value);
+let varAngle;
 
 init = () =>{
     circleArray = [];
@@ -199,22 +200,34 @@ init = () =>{
         y: canvas.height/2
     };
     radius = 200;
-    for(let i = 0; i<2; i++) {
-        fixed.push(new locus(Math.PI * (Math.random() + Math.PI/1800)));
-        /*
-        The bug was due to x position of first point on extreme right side which 
-        didn't allow the point B to spawn. This problem is solved by restricting
-        the position of point A which is done by the following while loop.
-        */
-        while(fixed[0].x - centre.x - radius > -3) {
-            fixed[0] = new locus(Math.PI * (Math.random() + Math.PI/1800));
-        }
-        if(i !== 0) {
-            for(let j = 0; j<1; j++){
-                if(fixed[0].x > fixed[1].x || getDist(fixed[0].x, fixed[0].y, fixed[1].x, fixed[1].y) < 5){ // The reload problem was solved when the OR operator was replaced with AND
-                    fixed[1] = new locus(Math.PI * (Math.random() + Math.PI/1800));
-                    j = -1;
+    if(optAngle === 0) {
+        for(let i = 0; i<2; i++) {
+            fixed.push(new locus(Math.PI * (Math.random() + Math.PI/1800)));
+            /*
+            The bug was due to x position of first point on extreme right side which 
+            didn't allow the point B to spawn. This problem is solved by restricting
+            the position of point A which is done by the following while loop.
+            */
+            while(fixed[0].x - centre.x - radius > -3) {
+                fixed[0] = new locus(Math.PI * Math.random());
+            }
+            if(i !== 0) {
+                for(let j = 0; j<1; j++){
+                    if(fixed[0].x > fixed[1].x || getDist(fixed[0].x, fixed[0].y, fixed[1].x, fixed[1].y) < 5){ // The reload problem was solved when the OR operator was replaced with AND
+                        fixed[1] = new locus(Math.PI * Math.random());
+                        j = -1;
+                    }
                 }
+            }
+        }
+    }else{
+        for(let i = 0; i<2; i++) {
+            if(i == 0) {
+                varAngle =  rad(randomInt(optAngle, 180));
+                fixed.push(new locus(varAngle));
+            }
+            else{
+                fixed.push(new locus(varAngle - rad(optAngle)));
             }
         }
     }
@@ -243,5 +256,10 @@ function animate(){
     circleArray[0].update();
 }
 
+
+document.querySelector('select').addEventListener('change', () => {
+    optAngle = Number(document.getElementById("Angles").value);
+    init();
+});
 init();
 animate();
