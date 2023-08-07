@@ -1,6 +1,6 @@
 let x1, x2, a, b, c, discriminant, denominator, s, x, y;
 
-document.querySelector('button').onclick = () => {
+solve = () => {
     a = Number(document.getElementById("a").value);
     b = Number(document.getElementById("b").value);
     c = Number(document.getElementById("c").value);
@@ -35,26 +35,11 @@ document.querySelector('button').onclick = () => {
     else {
         alert("Enter the cofficient of x^2");
     }
-    console.log(typeof a, a);
+}
 
-    // Dx = (y2 * c1) - (y1 * c2);
-    // Dy = (x1 * c2) - (x2 * c1);
-    // C = (x1 * y2) - (x2 * y1);
-    // if (C != 0) {
-    //     x = Dx/C;
-    //     y = Dy/C;
-    //     document.getElementById("x").value = x;
-    //     document.getElementById("y").value = y;        
-    // }else{
-    //     s = document.getElementById("ambiguous");
-    //     if(x1/x2 == y1/y2 && y1/y2 == c1/c2) {
-    //         s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
-    //     }
-    //     else if(x1/x2 == y1/y2 && y1/y2 != c1/c2) {
-    //         s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
-    //     }
-    //     else{
-    //         alert("Enter all the cofficients!");
-    //     }
-    // }
-};
+document.querySelector('button').onclick = solve;
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));

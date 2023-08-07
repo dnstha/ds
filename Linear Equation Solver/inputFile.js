@@ -5,7 +5,7 @@
 // });
 let x1, y1, c1, x2, y2, c2, x, y, Dx, Dy, C, s;
 
-document.querySelector('button').onclick = () => {
+solve = () => {
     x1 = Number(document.getElementById("x1").value);
     y1 = Number(document.getElementById("y1").value);
     c1 = Number(document.getElementById("c1").value);
@@ -43,6 +43,13 @@ document.querySelector('button').onclick = () => {
     document.getElementById("x").value = x;
     document.getElementById("y").value = y;
 };
+
+document.querySelector('button').onclick = solve;
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
 
 // If the line is parallel to either of axes
 lpta = (x1, c1, x2, c2) => {

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DETERMINANT</title>
+
+        <link rel = "icon" href = "../Logo.svg">
+
+        <style>
+            *{
+                border: border-box;
+            }
+            body{
+                margin: 0;
+                background: #cfffee;
+            }
+            input {
+                text-align: center;
+                margin: 0 2px 0 5px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                width: 3.2rem;
+                height: 3.2rem;
+                border: 2px solid gold;
+                background-color: #cfffe0;
+                border-radius: 5px;
+                font-size: 1.6rem;
+            }
+            /* Chromium and Safari */
+            input[type = "number"]::-webkit-inner-spin-button {
+                display: none;
+            }
+            /* Firefox
+            input[type = number] {
+                -moz-appearance: textfield;
+            } */
+            form {
+                margin-left: 5rem;
+                font-size: 1.6rem;
+            }
+            button {
+                margin-top: 1.6rem;
+                margin-left: 1rem;
+                border: 2px inset red;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 1.6rem;
+                width: 6.8rem;
+                height: 2.3rem;
+                border-radius: 8px;
+                transition-duration: 60ms;
+            }
+            button:active {
+                transform: scale(0.97);
+
+            }
+            div {
+                margin-left: 10px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            p {
+                margin-top: 0.2rem;
+                width: 13rem;
+                text-align: center;
+                height: 0.6rem;
+                text-decoration: underline;
+            }
+            .output input {
+                margin: 10px 2px 0 5px;
+                border: 3px solid deepskyblue;
+                background-color: cornsilk;
+                width: 15rem;
+            }
+            span {
+                color: red;
+            }
+            h1 {
+                margin-left: 1rem;
+                margin-bottom: 0;
+                margin-top: 0;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            .matrix {
+                border-left: 2px solid black;
+                border-right: 2px solid black;
+                display: flex;
+                height: 12rem;
+                width: 12rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .matrix input {
+                margin-left: 0.05rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Find determinant of any 3x3 matrix</h1>
+        <form>
+            <p>Matrix</p>
+            <div class="matrix">
+                <input id = "a1" class = "ipts" type = "number" inputmode = "numeric" placeholder="a1" required>
+                <input id = "b1" class = "ipts" type = "number" inputmode = "numeric" placeholder="b1" required>
+                <input id = "c1" class = "ipts" type = "number" inputmode = "numeric" placeholder="c1" required>
+                <input id = "a2" class = "ipts" type = "number" inputmode = "numeric" placeholder="a2" required>
+                <input id = "b2" class = "ipts" type = "number" inputmode = "numeric" placeholder="b2" required>
+                <input id = "c2" class = "ipts" type = "number" inputmode = "numeric" placeholder="c2" required>
+                <input id = "a3" class = "ipts" type = "number" inputmode = "numeric" placeholder="a3" required>
+                <input id = "b3" class = "ipts" type = "number" inputmode = "numeric" placeholder="b3" required>
+                <input id = "c3" class = "ipts" type = "number" inputmode = "numeric" placeholder="c3" required>
+            </div>
+            <button type = "button" id = "MyBtn">Solve</button>
+            <button type = "reset">Clear</button>
+            <div class="output">
+                Determinant = <input id="D" READONLY><br/>
+            </div>
+        </form>    
+
+        <script src="detScript.js"></script>
+    </body>
+</html>

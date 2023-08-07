@@ -12,8 +12,7 @@ det3 = (a,b,c, d,e,f, g,h,i) => {
     return (a*det2(e,f,h,i) - b*det2(d,f,g,i) + c*det2(d,e,g,h));
 }
 
-
-document.querySelector('button').onclick = () => {
+solve = () => {
     x1 = Number(document.getElementById("x1").value);
     y1 = Number(document.getElementById("y1").value);
     z1 = Number(document.getElementById("z1").value);
@@ -92,7 +91,14 @@ document.querySelector('button').onclick = () => {
     document.getElementById("x").value = x;
     document.getElementById("y").value = y;
     document.getElementById("z").value = z;
-};
+}
+
+document.querySelector('button').onclick = solve;
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
 
 // Equal Ratio
 eqRto = (a1,b1, a2,b2) => {
@@ -130,13 +136,4 @@ function isAnyZero() {
         }
     }
     return result;
-}
-
-// If the line is parallel to either of axes
-lpta = (x1, c1, x2, c2) => {
-    if(c1/x1 == c2/x2) {
-        s.innerHTML = "*The lines coincide and the system has infinitely many solutions!";
-    }else{
-        s.innerHTML = "*The lines are parallel to each other and the system has no solution!";
-    }
 }
