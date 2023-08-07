@@ -4,6 +4,16 @@ getDist = (x1, y1, x2, y2) => {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 }
 
+//Determinant of 2x2 matrix
+det2 = (a,b, c,d) => {
+    return a*d - b*c;
+}
+
+//Determinant of 3x3 matrix
+det3 = (a,b,c, d,e,f, g,h,i) => {
+    return (a*det2(e,f,h,i) - b*det2(d,f,g,i) + c*det2(d,e,g,h));
+}
+
 deg = (x) =>{
     return x*180/Math.PI;
 }
@@ -43,4 +53,42 @@ slope = (V1) => {
         A = Math.PI * 2 - A;
     }
     return A;
+}
+
+// Equal Ratio to check if two given ratios are equal a1/b1 and a2/b2
+eqRto = (a1,b1, a2,b2) => {
+    if(a1*b2 == a2*b1) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+// To check given set of numbers is all zero
+function isAllZero() {
+    let sum = 0;
+    for(let i=0; i<arguments.length; i++) {
+        if(Number(arguments[i]) < 0) {
+            Number(arguments[i]) *= -1;
+        }
+        sum += Number(arguments[i]);
+    }
+    if(sum == 0) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//To check if there is any zero in the set
+function isAnyZero() {
+    let result = 1;
+    for(let i=0; i<arguments.length; i++) {
+        if(arguments[i] == 0) {
+            result *= 1;
+        }else{
+            result *= 0;
+        }
+    }
+    return result;
 }
