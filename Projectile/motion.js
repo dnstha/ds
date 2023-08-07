@@ -45,24 +45,27 @@ function distance(x1, y1, x2, y2) {
 }
 
 const gravity = 1;
+let x, y, radius, color;
+let particles = [];
+let miniParticles = [];
 
-function Particle(x, y, radius, dx, dy){
+function Particle(x, y, radius, color){
     this.x = x;
     this.y = y;
-    this.dx = dx;
-    this.dy = dy;
+    this.dx = Math.random() * 15 + 20;
+    this.dy = - Math.random() * 15 - 20;
     this.radius = radius;
-    this.color = randomColor(colors);
+    this.color = color;
 
     this.update = () => { //modern method of writing a function
         if(this.x + this.radius + this.dx > canvas.width || this.x + this.dx < this.radius) {
-            this.dx *= -0.1;
-            if(this.radius > 0.001) {
-                this.radius *= 0.2;
-            }
+            this.dx *= -0.8;
+            this.shatter();
+
         }
         if(this.y + this.radius + this.dy > canvas.height || this.y + this.dy< this.radius) {
             this.dy *= -0.8; // Multiplied by the restitution cofficient
+            this.shatter();
         }else{
             this.dy += gravity;
         }
@@ -80,31 +83,68 @@ function Particle(x, y, radius, dx, dy){
         c.stroke();
         c.closePath();
     };
+
+    this.shatter = function () {
+        this.radius *= 0.7;
+        for (let i = 0; i < 10; i++) {
+            miniParticles.push(new MiniParticle(this.x, this.y, 2, this.color));
+        }
+    }
 }
 
-let x, y, radius, color, dx, dy;
-let particles = [];
+function MiniParticle(x, y, radius, color) {
+    Particle.call(this, x, y, radius, color);
+    this.dx = (Math.random() - 0.5) * 2;
+    this.dy = (Math.random() - 0.5) * 2;
+    this.ttl = 200;
+    this.update = () => { //modern method of writing a function
+        if(this.x + this.radius + this.dx > canvas.width || this.x + this.dx < this.radius) {
+            this.dx *= -0.8;
+        }
+        if(this.y + this.radius + this.dy > canvas.height || this.y + this.dy< this.radius) {
+            this.dy *= -0.8; // Multiplied by the restitution cofficient
+        }else{
+            this.dy += gravity;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        this.ttl -= 1;
+        this.draw();
+    };
+
+    this.draw = () => {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color;
+        c.fill();
+        c.strokeStyle = 'black';
+        c.stroke();
+        c.closePath();
+    };
+}
+
 
 function init(){
+    // miniParticles = [];
     radius = Math.random() * 20 + 10;
     x = randomInt(1, radius) + radius;
     y = canvas.height - radius - 1;
-    dx = Math.random() * 15 + 20;
-    dy = - Math.random() * 15 - 20;
-    particles.push(new Particle(x, y, radius, dx, dy));
+    particles.push(new Particle(x, y, radius, randomColor(colors)));
 }
 function animate(){
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
     particles.forEach((p, i) => {
-        if(p.radius > 1) {
-            p.update();
-        }else{
+        p.update();
+        if(p.radius < 2) {
             particles.splice(i, 1);
         }
-        // if(p.radius < 1) {
-        //     //remove it from array
-        // }
+    });
+    miniParticles.forEach((miniParticle, i) => {
+        miniParticle.update();
+        if(miniParticle.ttl == 0) {
+            miniParticles.splice(i, 1);
+        }
     });
 }
 init();
