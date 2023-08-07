@@ -99,10 +99,10 @@ function MiniParticle(x, y, radius, color) {
     this.ttl = 200;
     this.update = () => { //modern method of writing a function
         if(this.x + this.radius + this.dx > canvas.width || this.x + this.dx < this.radius) {
-            this.dx *= -0.8;
+            this.dx *= -0.9;
         }
         if(this.y + this.radius + this.dy > canvas.height || this.y + this.dy< this.radius) {
-            this.dy *= -0.8; // Multiplied by the restitution cofficient
+            this.dy *= -0.9; // Multiplied by the restitution cofficient
         }else{
             this.dy += gravity;
         }
