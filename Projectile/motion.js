@@ -21,6 +21,7 @@ const darkColors = [
     '#a28089',
     '#015958',
     '#7A577A',
+    '#182028',
     '#400036'
 ];
 
@@ -35,6 +36,12 @@ addEventListener('resize', function() {
 addEventListener('click', () => {
     init();
 });
+
+// addEventListener('keydown', (event) => {
+//     if(event.key == ' ') { //spacebar
+//         init();
+//     }
+// });
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -98,7 +105,7 @@ function Particle(x, y, radius, color){
     };
 
     this.shatter = function () {
-        this.radius *= 0.75;
+        this.radius *= 0.8;
 
         for (let i = 0; i < this.mass; i++) {
             miniParticles.push(new MiniParticle(this.x, this.y, Math.random() * 3, this.color));
@@ -114,10 +121,10 @@ function MiniParticle(x, y, radius, color) {
     this.opacity = 1;
     this.update = () => { //modern method of writing a function
         if(this.x + this.radius + this.dx > canvas.width || this.x + this.dx < this.radius) {
-            this.dx *= -0.9;
+            this.dx *= -0.95;
         }
         if(this.y + this.radius + this.dy > canvas.height - groundLevel || this.y + this.dy< this.radius) {
-            this.dy *= -0.9; // Multiplied by the restitution cofficient
+            this.dy *= -0.95; // Multiplied by the restitution cofficient
         }else{
             this.dy += gravity;
         }
