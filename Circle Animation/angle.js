@@ -17,6 +17,11 @@ window.addEventListener('resize', function() {
 
 document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
     pp = !(pp);
+    if(pp == false) {
+        document.getElementById("plps").style.color = colors[2];
+    }else{
+        document.getElementById("plps").style.color = '#cfffee';
+    }
 });
 
 document.getElementById("reset").addEventListener('click', function(){ // instead you can write window.eventListener
@@ -202,7 +207,7 @@ init = () =>{
     radius = 200;
     if(optAngle === 0) {
         for(let i = 0; i<2; i++) {
-            fixed.push(new locus(Math.PI * (Math.random() + Math.PI/1800)));
+            fixed.push(new locus(Math.PI * Math.random()));
             /*
             The bug was due to x position of first point on extreme right side which 
             didn't allow the point B to spawn. This problem is solved by restricting
@@ -231,10 +236,10 @@ init = () =>{
             }
         }
     }
-    p = new locus(2 * Math.PI * (Math.random()));
+    p = new locus(2 * Math.PI * Math.random());
     if(((p.x > fixed[0].x && p.x < fixed[1].x) && (p.y > fixed[0].y || p.y > fixed[1].y)) || (getDist(p.x, p.y, fixed[0].x, fixed[0].y) < 5 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) < 5)) {
         for(let i = 0; i<1; i++) {
-            p = new locus(2 * Math.PI * (Math.random() + Math.PI/1800));
+            p = new locus(2 * Math.PI * Math.random());
             if(((p.x > fixed[0].x && p.x < fixed[1].x) && (p.y > fixed[0].y || p.y > fixed[1].y)) || (getDist(p.x, p.y, fixed[0].x, fixed[0].y) < 5 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) < 5)){
                 i = -1;
             }
@@ -248,6 +253,7 @@ init = () =>{
     AOB = deg(Math.acos(dotProduct(VOA.x, VOA.y, VOB.x, VOB.y)/(radius*radius)));
     AOB = Math.round(AOB * 10000)/10000;
     pp = true;
+    document.getElementById("plps").style.color = "#cfffee";
 }
 
 function animate(){
