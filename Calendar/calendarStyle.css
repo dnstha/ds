@@ -1,0 +1,132 @@
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background: linear-gradient(180deg, black,black,black,silver);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+table{
+    margin-bottom: 25px;
+    text-align: center;
+    border-radius: 0 0 100px 0;
+    border-style: inset;
+    border-color: aqua;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(20px);
+}
+.sat{
+    background: black;
+    color:lime;
+}
+td{
+    height: 95px;
+    width: 95px;
+    font-size: 40px;
+    font-family: Times New Roman;
+    vertical-align: top;
+    text-align: left;
+    color:black;
+}
+caption{
+    color: lightblue;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: 700;
+    background: black;
+    border-radius: 40px 0 0 0;
+    border-right: 3px solid aqua;
+    border-left: 2px solid rgba(192, 192, 192, 0.507);
+    border-top:2px solid rgba(192, 192, 192, 0.432);
+}
+sub{
+    color: aqua;
+    font-size: 18px;
+    font-weight: bold;
+}
+body::before{
+    content:'';
+    position: absolute;
+    width:1400px;
+    height:1400px;
+    background: linear-gradient(orange,gold,pink,red);
+    border-radius: 50%;  
+    transform: translate(-450px, -120px);    
+}
+.days{
+    background: rgba(170, 245, 255, 0.267);
+    font-family: monospace;
+    font-size: larger;
+}
+.event{
+    color:aqua;
+    font-size: 25px;
+    width: 400px;
+}
+.e{
+    background-color:khaki;
+}
+.eh{
+    background:linear-gradient(120deg,rgb(17, 16, 16),black,black,silver);
+    color: lime;
+}
+.d{
+    background: linear-gradient(red,red,orange,yellow);
+}
+.t{
+    background: linear-gradient(90deg,silver,orange,lime,blue,yellow,pink,red);
+}
+#h{ /*holi*/
+    background: linear-gradient(120deg,yellow, red, orange,blue,silver);
+
+}
+.ev{
+    background: yellow;
+    font-family: Times new roman;
+}
+#head{
+    text-align: left;
+    border-radius: 500px 0;
+    border-style: inset;
+    border-color: aqua;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(35px);
+    color:black;
+}
+h1{
+    font-family: Times new roman;
+    color: aqua;
+    margin: 0 0;
+    padding: 0 0;
+    background: black;
+    width: max-content;
+    border:whitesmoke;
+    border-radius:10px 0;
+}
+.s{
+    text-align: left;
+    font-family: cursive;
+}
+#jerry{
+        margin: 0 0 0 400px;
+        padding:0 0;
+        position: inherit;
+        min-height: 30%;
+        min-width: 30%;
+        align-self: center;
+    }
+address{
+    font-size: 55px;
+    font-weight: bold;
+    color: red;
+}
+a{
+    text-decoration:none;
+}
+.ti{
+    text-decoration: none;
+    color:lime;
+}

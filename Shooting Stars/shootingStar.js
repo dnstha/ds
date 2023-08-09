@@ -90,8 +90,8 @@ function MiniStar(x, y, radius, color) {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.fillStyle = this.color;
-        c.shadowColor = this.color;
-        c.shadowBlur = 5; // glow effect => Amazing but makes the animation slow
+        // c.shadowColor = this.color;
+        // c.shadowBlur = 5; // glow effect => Amazing but makes the animation slow
         c.globalAlpha = this.opacity;
         c.fill();
         c.closePath();
@@ -141,9 +141,9 @@ function animate(){
     backgroundStars.forEach(backgroundStar => {
         backgroundStar.draw();
     });
-    createMountainRange(1, canvas.height * 0.95 - groundLevel, '#0f0f0f');
-    createMountainRange(2.5, canvas.height * 0.8 - groundLevel, '#090909');
-    createMountainRange(3, canvas.height * 0.65 - groundLevel, '#00010e');
+    createMountainRange(1, canvas.height * 0.95 - groundLevel, '#121212');
+    createMountainRange(2.5, canvas.height * 0.8 - groundLevel, '#0b0b0b');
+    createMountainRange(2, canvas.height * 0.65 - groundLevel, '#11121a');
     createMountainRange(0.6, canvas.height * 0.8 - groundLevel, '#000000');
     
 
@@ -166,7 +166,7 @@ function animate(){
         const radius = Math.random() * 10 + 5;
         const x = randomInt(radius, canvas.width-radius);
         stars.push(new Star(x, randomInt(-10, -200), radius, randomColor(lightColors)));
-        spawnRate = randomInt(80,250);
+        spawnRate = randomInt(60,250);
         timer = 1;
     }
 }

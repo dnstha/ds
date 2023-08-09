@@ -1,139 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>ACADEMIC CALENDAR</title>
+        <meta charset="utf-8">
         <link rel = "icon" href = "../Logo.svg">
-        <style>
-            body{
-                background: linear-gradient(180deg, black,black,black,silver);
-                background-size: 100%;
-                background-attachment: fixed;
-                background-repeat: no-repeat;
-            }
-            table{
-                margin-bottom: 25px;
-                text-align: center;
-                border-radius: 0 0 100px 0;
-                border-style: inset;
-                border-color: aqua;
-                overflow: hidden;
-                background: rgba(255, 255, 255, 0.288);
-                backdrop-filter: blur(20px);
-            }
-            #sat{
-                background: black;
-                color:lime;
-            }
-            td{
-                height: 95px;
-                width: 95px;
-                font-size: 40px;
-                font-family: Times New Roman;
-                vertical-align: top;
-                text-align: left;
-                color:black;
-            }
-            caption{
-                color: lightblue;
-                font-family: 'Courier New', Courier, monospace;
-                font-size: 25px;
-                font-weight: 700;
-                background: black;
-                border-radius: 40px 0 0 0;
-                border-right: 3px solid aqua;
-                border-left: 2px solid rgba(192, 192, 192, 0.507);
-                border-top:2px solid rgba(192, 192, 192, 0.432);
-            }
-            sub{
-                color: aqua;
-                font-size: 18px;
-                font-weight: bold;
-            }
-            body::before{
-                content:'';
-                position: absolute;
-                width:1400px;
-                height:1400px;
-                background: linear-gradient(orange,gold,pink,red);
-                border-radius: 50%;  
-                transform: translate(-450px, -120px);    
-            }
-        #days{
-            background: rgba(170, 245, 255, 0.267);
-            font-family: monospace;
-            font-size: larger;
-        }
-        #event{
-            color:aqua;
-            font-size: 25px;
-            width: 400px;
-        }
-        #e{
-            background-color:khaki;
-        }
-        #eh{
-            background:linear-gradient(120deg,rgb(17, 16, 16),black,black,silver);
-            color: lime;
-        }
-        #d{
-            background: linear-gradient(red,red,orange,yellow);
-        }
-        #t{
-            background: linear-gradient(90deg,silver,orange,lime,blue,yellow,pink,red);
-        }
-        #h{
-            background: linear-gradient(120deg,yellow, red, orange,blue,silver);
-
-        }
-        #ev{
-            background: yellow;
-            font-family: Times new roman;
-        }
-        #head{
-            text-align: left;
-            border-radius: 500px 0;
-            border-style: inset;
-            border-color: aqua;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.288);
-            backdrop-filter: blur(35px);
-            color:black;
-        }
-        h1{
-            font-family: Times new roman;
-            color: aqua;
-            margin: 0 0;
-            padding: 0 0;
-            background: black;
-            width: max-content;
-            border:whitesmoke;
-            border-radius:10px 0;
-        }
-        .s{
-            text-align: left;
-            font-family: cursive;
-        }
-        #jerry{
-                margin: 0 0 0 400px;
-                padding:0 0;
-                position: inherit;
-                min-height: 30%;
-                min-width: 30%;
-                align-self: center;
-            }
-        address{
-            font-size: 55px;
-            font-weight: bold;
-            color: red;
-        }
-        a{
-            text-decoration:none;
-        }
-        #ti{
-            text-decoration: none;
-            color:lime;
-        }
-        </style>
+        <link rel="stylesheet" href="calendarStyle.css">
     </head>
     <body link="black" alink="blue" vlink="red">
         <center>
@@ -184,8 +55,8 @@
 
 
                 </caption>
-                <caption id="1"><a id="ti" href="#head">June, 2021(जेष्ठ/आषाढ, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="1"><a class ="ti" href="#head">June, 2021(जेष्ठ/आषाढ, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -193,64 +64,64 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue">1<sub>१८ </sub></td>
-                    <td id="wed">2<sub>१९</sub></td>
-                    <td id="thu">3<sub>२०</sub></td>
-                    <td id="fri">4<sub>२१</sub></td>
-                    <td id="sat">5<sub>२२</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue">1<sub>१८ </sub></td>
+                    <td class ="wed">2<sub>१९</sub></td>
+                    <td class ="thu">3<sub>२०</sub></td>
+                    <td class ="fri">4<sub>२१</sub></td>
+                    <td class ="sat">5<sub>२२</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>26 Class Days</li>
-                            <li>5th(World Environment Day)</li>
+                            <li>5<sup>th</sup> (World Environment Day)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">6<sub>२३</sub></td>
-                    <td id="mon">7<sub>२४</sub></td>
-                    <td id="tue">8<sub>२५</sub></td>
-                    <td id="wed">9<sub>२६</sub></td>
-                    <td id="thu">10<sub>२७</sub></td>
-                    <td id="fri">11<sub>२८</sub></td>
-                    <td id="sat">12<sub>२९</sub></td>
+                    <td class ="sun">6<sub>२३</sub></td>
+                    <td class ="mon">7<sub>२४</sub></td>
+                    <td class ="tue">8<sub>२५</sub></td>
+                    <td class ="wed">9<sub>२६</sub></td>
+                    <td class ="thu">10<sub>२७</sub></td>
+                    <td class ="fri">11<sub>२८</sub></td>
+                    <td class ="sat">12<sub>२९</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">13<sub>३०</sub></td>
-                    <td id="mon">14<sub>३१</sub></td>
-                    <td id="tue">15<sub>आषाढ १</sub></td>
-                    <td id="wed">16<sub>२</sub></td>
-                    <td id="thu">17<sub>३</sub></td>
-                    <td id="fri">18<sub>४</sub></td>
-                    <td id="sat">19<sub>५</sub></td>
+                    <td class ="sun">13<sub>३०</sub></td>
+                    <td class ="mon">14<sub>३१</sub></td>
+                    <td class ="tue">15<sub>आषाढ १</sub></td>
+                    <td class ="wed">16<sub>२</sub></td>
+                    <td class ="thu">17<sub>३</sub></td>
+                    <td class ="fri">18<sub>४</sub></td>
+                    <td class ="sat">19<sub>५</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">20<sub>६</sub></td>
-                    <td id="mon">21<sub>७</sub></td>
-                    <td id="tue">22<sub>८</sub></td>
-                    <td id="wed">23<sub>९</sub></td>
-                    <td id="thu">24<sub>१०</sub></td>
-                    <td id="fri">25<sub>११</sub></td>
-                    <td id="sat">26<sub>१२</sub></td>
+                    <td class ="sun">20<sub>६</sub></td>
+                    <td class ="mon">21<sub>७</sub></td>
+                    <td class ="tue">22<sub>८</sub></td>
+                    <td class ="wed">23<sub>९</sub></td>
+                    <td class ="thu">24<sub>१०</sub></td>
+                    <td class ="fri">25<sub>११</sub></td>
+                    <td class ="sat">26<sub>१२</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">27<sub>१३</sub></td>
-                    <td id="mon">28<sub>१४</sub></td>
-                    <td id="tue">29<sub>१५</sub></td>
-                    <td id="wed">30<sub>१६</sub></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">27<sub>१३</sub></td>
+                    <td class ="mon">28<sub>१४</sub></td>
+                    <td class ="tue">29<sub>१५</sub></td>
+                    <td class ="wed">30<sub>१६</sub></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table> 
 
             <table border="1.5">
-                <caption id="2"><a id="ti" href="#head">July, 2021(आषाढ/श्रावण, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="2"><a class ="ti" href="#head">July, 2021(आषाढ/श्रावण, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -258,69 +129,69 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed"></td>
-                    <td id="thu">1<sub>१७</sub></td>
-                    <td id="fri">2<sub>१८</sub></td>
-                    <td id="sat">3<sub>१९</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed"></td>
+                    <td class ="thu">1<sub>१७</sub></td>
+                    <td class ="fri">2<sub>१८</sub></td>
+                    <td class ="sat">3<sub>१९</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>26 Class Days</li>
-                            <li>15th (SXC Foundation Day) </li>
-                            <li>18th (Grade 12 2021 Session Begins)</li>
-                            <li>22nd (Ignatius Week Begins, Ignatius Week Program Begin-MAGIS)</li>
-                            <li>24th (Guru Purnima)</li>
-                            <li>30th (Ignatius Day Program-MAGIS)</li>
-                            <li>31st (St. Ignatius Day)</li>
+                            <li>15<sup>th</sup> (SXC Foundation Day) </li>
+                            <li>18<sup>th</sup> (Grade 12 2021 Session Begins)</li>
+                            <li>22<sup>nd</sup> (Ignatius Week Begins, Ignatius Week Program Begin-MAGIS)</li>
+                            <li>24<sup>th</sup> (Guru Purnima)</li>
+                            <li>30<sup>th</sup> (Ignatius Day Program-MAGIS)</li>
+                            <li>31<sup>st</sup> (St. Ignatius Day)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">4<sub>२०</sub></td>
-                    <td id="mon">5<sub>२१</sub></td>
-                    <td id="tue">6<sub>२२</sub></td>
-                    <td id="wed">7<sub>२३</sub></td>
-                    <td id="thu">8<sub>२४</sub></td>
-                    <td id="fri">9<sub>२५</sub></td>
-                    <td id="sat">10<sub>२६</sub></td>
+                    <td class ="sun">4<sub>२०</sub></td>
+                    <td class ="mon">5<sub>२१</sub></td>
+                    <td class ="tue">6<sub>२२</sub></td>
+                    <td class ="wed">7<sub>२३</sub></td>
+                    <td class ="thu">8<sub>२४</sub></td>
+                    <td class ="fri">9<sub>२५</sub></td>
+                    <td class ="sat">10<sub>२६</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">11<sub>२७</sub></td>
-                    <td id="mon">12<sub>२८</sub></td>
-                    <td id="tue">13<sub>२९</sub></td>
-                    <td id="wed">14<sub>३०</sub></td>
-                    <td id="e">15<sub>३१</sub></td>
-                    <td id="fri">16<sub>श्रावण १</td>
-                    <td id="sat">17<sub>२</sub></td>
+                    <td class ="sun">11<sub>२७</sub></td>
+                    <td class ="mon">12<sub>२८</sub></td>
+                    <td class ="tue">13<sub>२९</sub></td>
+                    <td class ="wed">14<sub>३०</sub></td>
+                    <td class ="e">15<sub>३१</sub></td>
+                    <td class ="fri">16<sub>श्रावण १</td>
+                    <td class ="sat">17<sub>२</sub></td>
                 </tr>
                 <tr>
-                    <td id="e">18<sub>३</sub></td>
-                    <td id="mon">19<sub>४</sub></td>
-                    <td id="tue">20<sub>५</sub></td>
-                    <td id="wed">21<sub>६</sub></td>
-                    <td id="e">22<sub>७</sub></td>
-                    <td id="fri">23<sub>८</sub></td>
-                    <td id="sat">24<sub>९</sub></td>
+                    <td class ="e">18<sub>३</sub></td>
+                    <td class ="mon">19<sub>४</sub></td>
+                    <td class ="tue">20<sub>५</sub></td>
+                    <td class ="wed">21<sub>६</sub></td>
+                    <td class ="e">22<sub>७</sub></td>
+                    <td class ="fri">23<sub>८</sub></td>
+                    <td class ="sat">24<sub>९</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">25<sub>१०</sub></td>
-                    <td id="mon">26<sub>११</sub></td>
-                    <td id="tue">27<sub>१२</sub></td>
-                    <td id="wed">28<sub>१३</sub></td>
-                    <td id="thu">29<sub>१४</sub></td>
-                    <td id="e">30<sub>१५</sub></td>
-                    <td id="sat">31<sub>१६</sub></td>
+                    <td class ="sun">25<sub>१०</sub></td>
+                    <td class ="mon">26<sub>११</sub></td>
+                    <td class ="tue">27<sub>१२</sub></td>
+                    <td class ="wed">28<sub>१३</sub></td>
+                    <td class ="thu">29<sub>१४</sub></td>
+                    <td class ="e">30<sub>१५</sub></td>
+                    <td class ="sat">31<sub>१६</sub></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="3"><a id="ti" href="#head">August, 2021(श्रावण/भाद्र, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="3"><a class ="ti" href="#head">August, 2021(श्रावण/भाद्र, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -328,67 +199,67 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun">1<sub>१७</sub></td>
-                    <td id="mon">2<sub>१८</sub></td>
-                    <td id="tue">3<sub>१९</sub></td>
-                    <td id="wed">4<sub>२०</sub></td>
-                    <td id="thu">5<sub>२१</sub></td>
-                    <td id="e">6<sub>२२</sub></td>
-                    <td id="sat">7<sub>२३</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun">1<sub>१७</sub></td>
+                    <td class ="mon">2<sub>१८</sub></td>
+                    <td class ="tue">3<sub>१९</sub></td>
+                    <td class ="wed">4<sub>२०</sub></td>
+                    <td class ="thu">5<sub>२१</sub></td>
+                    <td class ="e">6<sub>२२</sub></td>
+                    <td class ="sat">7<sub>२३</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>26 Class Days</li>
-                            <li>6th (Mini Conference-Chemistry Club))</li>
-                            <li>22nd (Janai Purnima)</li>
-                            <li>23rd (Gaijatra)</li>
-                            <li>30th (Krishna Astami)</li>
+                            <li>6<sup>th</sup> (Mini Conference-Chemistry Club))</li>
+                            <li>22<sup>nd</sup> (Janai Purnima)</li>
+                            <li>23<sup>rd</sup> (Gaijatra)</li>
+                            <li>30<sup>th</sup> (Krishna Astami)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">8<sub>२४</sub></td>
-                    <td id="mon">9<sub>२५</sub></td>
-                    <td id="tue">10<sub>२६</sub></td>
-                    <td id="wed">11<sub>२७</sub></td>
-                    <td id="thu">12<sub>२८</sub></td>
-                    <td id="fri">13<sub>२९</sub></td>
-                    <td id="sat">14<sub>३०</sub></td>
+                    <td class ="sun">8<sub>२४</sub></td>
+                    <td class ="mon">9<sub>२५</sub></td>
+                    <td class ="tue">10<sub>२६</sub></td>
+                    <td class ="wed">11<sub>२७</sub></td>
+                    <td class ="thu">12<sub>२८</sub></td>
+                    <td class ="fri">13<sub>२९</sub></td>
+                    <td class ="sat">14<sub>३०</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">15<sub>३१</sub></td>
-                    <td id="mon">16<sub>३२</sub></td>
-                    <td id="tue">17<sub>भाद्र १</sub></td>
-                    <td id="wed">18<sub>२</sub></td>
-                    <td id="thu">19<sub>३</sub></td>
-                    <td id="fri">20<sub>४</sub></td>
-                    <td id="sat">21<sub>५</sub></td>
+                    <td class ="sun">15<sub>३१</sub></td>
+                    <td class ="mon">16<sub>३२</sub></td>
+                    <td class ="tue">17<sub>भाद्र १</sub></td>
+                    <td class ="wed">18<sub>२</sub></td>
+                    <td class ="thu">19<sub>३</sub></td>
+                    <td class ="fri">20<sub>४</sub></td>
+                    <td class ="sat">21<sub>५</sub></td>
                 </tr>
                 <tr>
-                    <td id="eh">22<sub>६</sub></td>
-                    <td id="e">23<sub>७</sub></td>
-                    <td id="tue">24<sub>८</sub></td>
-                    <td id="wed">25<sub>९</sub></td>
-                    <td id="thu">26<sub>१०</sub></td>
-                    <td id="fri">27<sub>११</sub></td>
-                    <td id="sat">28<sub>१२</sub></td>
+                    <td class ="eh">22<sub>६</sub></td>
+                    <td class ="e">23<sub>७</sub></td>
+                    <td class ="tue">24<sub>८</sub></td>
+                    <td class ="wed">25<sub>९</sub></td>
+                    <td class ="thu">26<sub>१०</sub></td>
+                    <td class ="fri">27<sub>११</sub></td>
+                    <td class ="sat">28<sub>१२</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">29<sub>१३</sub></td>
-                    <td id="e">30<sub>१४</sub></td>
-                    <td id="tue">31<sub>१५</sub></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">29<sub>१३</sub></td>
+                    <td class ="e">30<sub>१४</sub></td>
+                    <td class ="tue">31<sub>१५</sub></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
             
             <table border="1.5">
-                <caption id="4"><a id="ti" href="#head">September, 2021(भाद्र/आश्विन, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="4"><a class ="ti" href="#head">September, 2021(भाद्र/आश्विन, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -396,70 +267,70 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed">1<sub>१६</sub></td>
-                    <td id="thu">2<sub>१७</sub></td>
-                    <td id="fri">3<sub>१८</sub></td>
-                    <td id="sat">4<sub>१९</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed">1<sub>१६</sub></td>
+                    <td class ="thu">2<sub>१७</sub></td>
+                    <td class ="fri">3<sub>१८</sub></td>
+                    <td class ="sat">4<sub>१९</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>24 Class Days</li>
-                            <li>9th (Teej Holiday)</li>
-                            <li>10th (First Term Exam for Grade 12 Begins)</li>
-                            <li>11th (Rishi Panchami)</li>
-                            <li>17th (National Science Day)</li>
-                            <li>19th (Constitution Day and Indra Jatra)</li>
-                            <li>24th (Social and Cultural Experiment-Magis)</li>
-                            <li>27th (Talk Program-SXC Eco Club)</li>
+                            <li>9<sup>th</sup> (Teej Holiday)</li>
+                            <li>10<sup>th</sup> (First Term Exam for Grade 12 Begins)</li>
+                            <li>11<sup>th</sup> (Rishi Panchami)</li>
+                            <li>17<sup>th</sup> (National Science Day)</li>
+                            <li>19<sup>th</sup> (Constitution Day and Indra Jatra)</li>
+                            <li>24<sup>th</sup> (Social and Cultural Experiment-Magis)</li>
+                            <li>27<sup>th</sup> (Talk Program-SXC Eco Club)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">5<sub>२०</sub></td>
-                    <td id="mon">6<sub>२१</sub></td>
-                    <td id="tue">7<sub>२२</sub></td>
-                    <td id="wed">8<sub>२३</sub></td>
-                    <td id="eh">9<sub>२४</sub></td>
-                    <td id="e">10<sub>२५</sub></td>
-                    <td id="sat">11<sub>२६</sub></td>
+                    <td class ="sun">5<sub>२०</sub></td>
+                    <td class ="mon">6<sub>२१</sub></td>
+                    <td class ="tue">7<sub>२२</sub></td>
+                    <td class ="wed">8<sub>२३</sub></td>
+                    <td class ="eh">9<sub>२४</sub></td>
+                    <td class ="e">10<sub>२५</sub></td>
+                    <td class ="sat">11<sub>२६</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">12<sub>२७</sub></td>
-                    <td id="mon">13<sub>२८</sub></td>
-                    <td id="tue">14<sub>२९</sub></td>
-                    <td id="wed">15<sub>३०</sub></td>
-                    <td id="thu">16<sub>३१</sub></td>
-                    <td id="e">17<sub>आश्विन १</sub></td>
-                    <td id="sat">18<sub>२</sub></td>
+                    <td class ="sun">12<sub>२७</sub></td>
+                    <td class ="mon">13<sub>२८</sub></td>
+                    <td class ="tue">14<sub>२९</sub></td>
+                    <td class ="wed">15<sub>३०</sub></td>
+                    <td class ="thu">16<sub>३१</sub></td>
+                    <td class ="e">17<sub>आश्विन १</sub></td>
+                    <td class ="sat">18<sub>२</sub></td>
                 </tr>
                 <tr>
-                    <td id="eh">19<sub>३</sub></td>
-                    <td id="mon">20<sub>४</sub></td>
-                    <td id="tue">21<sub>५</sub></td>
-                    <td id="wed">22<sub>६</sub></td>
-                    <td id="thu">23<sub>७</sub></td>
-                    <td id="e">24<sub>८</sub></td>
-                    <td id="sat">25<sub>९</sub></td>
+                    <td class ="eh">19<sub>३</sub></td>
+                    <td class ="mon">20<sub>४</sub></td>
+                    <td class ="tue">21<sub>५</sub></td>
+                    <td class ="wed">22<sub>६</sub></td>
+                    <td class ="thu">23<sub>७</sub></td>
+                    <td class ="e">24<sub>८</sub></td>
+                    <td class ="sat">25<sub>९</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">26<sub>१०</sub></td>
-                    <td id="e">27<sub>११</sub></td>
-                    <td id="tue">28<sub>१२</sub></td>
-                    <td id="wed">29<sub>१३</sub></td>
-                    <td id="thu">30<sub>१४</sub></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">26<sub>१०</sub></td>
+                    <td class ="e">27<sub>११</sub></td>
+                    <td class ="tue">28<sub>१२</sub></td>
+                    <td class ="wed">29<sub>१३</sub></td>
+                    <td class ="thu">30<sub>१४</sub></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="5"><a id="ti" href="#head">October, 2021(आश्विन/कार्तिक, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="5"><a class ="ti" href="#head">October, 2021(आश्विन/कार्तिक, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -467,69 +338,69 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun">31<sub>१४</sub></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri">1<sub>१५</sub></td>
-                    <td id="sat">2<sub>१६</sub></td>
-                    <td rowspan="6" id="event">
+                    <td class ="sun">31<sub>१४</sub></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri">1<sub>१५</sub></td>
+                    <td class ="sat">2<sub>१६</sub></td>
+                    <td rowspan="6" class ="event">
                         <ul>
                             <li>15 Class Days</li>
-                            <li>7th (घटस्थापना)</li>
-                            <li>11th (Dashain Holidays Begin)</li>
-                            <li>12th (फूलपाती)</li>
-                            <li>15th (बिजया दशमी)</li>
-                            <li>20th (पुर्णिमा )</li>
-                            <li>22nd (College Re-opens after Dashain Vacation)</li>
+                            <li>7<sup>th</sup> (घटस्थापना)</li>
+                            <li>11<sup>th</sup> (Dashain Holidays Begin)</li>
+                            <li>12<sup>th</sup> (फूलपाती)</li>
+                            <li>15<sup>th</sup> (बिजया दशमी)</li>
+                            <li>20<sup>th</sup> (पुर्णिमा )</li>
+                            <li>22<sup>nd</sup> (College Re-opens after Dashain Vacation)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">3<sub>१७</sub></td>
-                    <td id="mon">4<sub>१८</sub></td>
-                    <td id="tue">5<sub>१९</sub></td>
-                    <td id="wed">6<sub>२०</sub></td>
-                    <td id="d">7<sub>२१</sub></td>
-                    <td id="fri">8<sub>२२</sub></td>
-                    <td id="sat">9<sub>२३</sub></td>
+                    <td class ="sun">3<sub>१७</sub></td>
+                    <td class ="mon">4<sub>१८</sub></td>
+                    <td class ="tue">5<sub>१९</sub></td>
+                    <td class ="wed">6<sub>२०</sub></td>
+                    <td class ="d">7<sub>२१</sub></td>
+                    <td class ="fri">8<sub>२२</sub></td>
+                    <td class ="sat">9<sub>२३</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">10<sub>२४</sub></td>
-                    <td id="d">11<sub>२५</sub></td>
-                    <td id="d">12<sub>२६</sub></td>
-                    <td id="d">13<sub>२७</sub></td>
-                    <td id="d">14<sub>२८</sub></td>
-                    <td id="d">15<sub>२९</sub></td>
-                    <td id="d">16<sub>३०</sub></td>
+                    <td class ="sun">10<sub>२४</sub></td>
+                    <td class ="d">11<sub>२५</sub></td>
+                    <td class ="d">12<sub>२६</sub></td>
+                    <td class ="d">13<sub>२७</sub></td>
+                    <td class ="d">14<sub>२८</sub></td>
+                    <td class ="d">15<sub>२९</sub></td>
+                    <td class ="d">16<sub>३०</sub></td>
                 </tr>
                 <tr>
-                    <td id="d">17<sub>३१</sub></td>
-                    <td id="d">18<sub>कार्तिक १</sub></td>
-                    <td id="d">19<sub>२</sub></td>
-                    <td id="d">20<sub>३</sub></td>
-                    <td id="d">21<sub>४</sub></td>
-                    <td id="e">22<sub>५</sub></td>
-                    <td id="sat">23<sub>६</sub></td>
+                    <td class ="d">17<sub>३१</sub></td>
+                    <td class ="d">18<sub>कार्तिक १</sub></td>
+                    <td class ="d">19<sub>२</sub></td>
+                    <td class ="d">20<sub>३</sub></td>
+                    <td class ="d">21<sub>४</sub></td>
+                    <td class ="e">22<sub>५</sub></td>
+                    <td class ="sat">23<sub>६</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">24<sub>७</sub></td>
-                    <td id="mon">25<sub>८</sub></td>
-                    <td id="tue">26<sub>९</sub></td>
-                    <td id="wed">27<sub>१०</sub></td>
-                    <td id="thu">28<sub>११</sub></td>
-                    <td id="fri">29<sub>१२</sub></td>
-                    <td id="sat">30<sub>१३</sub></td>
+                    <td class ="sun">24<sub>७</sub></td>
+                    <td class ="mon">25<sub>८</sub></td>
+                    <td class ="tue">26<sub>९</sub></td>
+                    <td class ="wed">27<sub>१०</sub></td>
+                    <td class ="thu">28<sub>११</sub></td>
+                    <td class ="fri">29<sub>१२</sub></td>
+                    <td class ="sat">30<sub>१३</sub></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="6"><a id="ti" href="#head">November, 2021(कार्तिक/मङ्सिर, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="6"><a class ="ti" href="#head">November, 2021(कार्तिक/मङ्सिर, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -537,73 +408,73 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon">1<sub>१५</sub></td>
-                    <td id="tue">2<sub>१६</sub></td>
-                    <td id="t">3<sub>१७</sub></td>
-                    <td id="t">4<sub>१८</sub></td>
-                    <td id="t">5<sub>१९</sub></td>
-                    <td id="t">6<sub>२०</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon">1<sub>१५</sub></td>
+                    <td class ="tue">2<sub>१६</sub></td>
+                    <td class ="t">3<sub>१७</sub></td>
+                    <td class ="t">4<sub>१८</sub></td>
+                    <td class ="t">5<sub>१९</sub></td>
+                    <td class ="t">6<sub>२०</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>21 Class Days</li>
-                            <li>3rd (Tihar Holidays Begin)</li>
-                            <li>4th (लक्ष्मी पूजा)</li>
-                            <li>5th (गोभर्दन पूजा)</li>
-                            <li>6th (भाइटिका)</li>
-                            <li>8th (College Re-opens after Tihar)</li>
-                            <li>10th (Chhath)</li>
-                            <li>12th (LDW- 12 F and 12 G)</li>
-                            <li>19th (LDW- 12 A, 12 B, 12 C, 12 H and 12 I)</li>
-                            <li>26th (Dance Competition; LDW 12 D and 12 E; Book Donation)</li>
-                            <li>27th (Maths Mela)</li>
+                            <li>3<sup>rd</sup> (Tihar Holidays Begin)</li>
+                            <li>4<sup>th</sup> (लक्ष्मी पूजा)</li>
+                            <li>5<sup>th</sup> (गोभर्दन पूजा)</li>
+                            <li>6<sup>th</sup> (भाइटिका)</li>
+                            <li>8<sup>th</sup> (College Re-opens after Tihar)</li>
+                            <li>10<sup>th</sup> (Chhath)</li>
+                            <li>12<sup>th</sup> (LDW- 12 F and 12 G)</li>
+                            <li>19<sup>th</sup> (LDW- 12 A, 12 B, 12 C, 12 H and 12 I)</li>
+                            <li>26<sup>th</sup> (Dance Competition; LDW 12 D and 12 E; Book Donation)</li>
+                            <li>27<sup>th</sup> (Maths Mela)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="t">7<sub>२१</sub></td>
-                    <td id="e">8<sub>२२</sub></td>
-                    <td id="tue">9<sub>२३</sub></td>
-                    <td id="eh">10<sub>२४</sub></td>
-                    <td id="thu">11<sub>२५</sub></td>
-                    <td id="e">12<sub>२६</sub></td>
-                    <td id="sat">13<sub>२७</sub></td>
+                    <td class ="t">7<sub>२१</sub></td>
+                    <td class ="e">8<sub>२२</sub></td>
+                    <td class ="tue">9<sub>२३</sub></td>
+                    <td class ="eh">10<sub>२४</sub></td>
+                    <td class ="thu">11<sub>२५</sub></td>
+                    <td class ="e">12<sub>२६</sub></td>
+                    <td class ="sat">13<sub>२७</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">14<sub>२८</sub></td>
-                    <td id="mon">15<sub>२९</sub></td>
-                    <td id="tue">16<sub>३०</sub></td>
-                    <td id="wed">17<sub>मङ्सिर १</sub></td>
-                    <td id="thu">18<sub>२</sub></td>
-                    <td id="e">19<sub>३</sub></td>
-                    <td id="sat">20<sub>४</sub></td>
+                    <td class ="sun">14<sub>२८</sub></td>
+                    <td class ="mon">15<sub>२९</sub></td>
+                    <td class ="tue">16<sub>३०</sub></td>
+                    <td class ="wed">17<sub>मङ्सिर १</sub></td>
+                    <td class ="thu">18<sub>२</sub></td>
+                    <td class ="e">19<sub>३</sub></td>
+                    <td class ="sat">20<sub>४</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">21<sub>५</sub></td>
-                    <td id="mon">22<sub>६</sub></td>
-                    <td id="tue">23<sub>७</sub></td>
-                    <td id="wed">24<sub>८</sub></td>
-                    <td id="thu">25<sub>९</sub></td>
-                    <td id="e">26<sub>१०</sub></td>
-                    <td id="sat">27<sub>११</sub></td>
+                    <td class ="sun">21<sub>५</sub></td>
+                    <td class ="mon">22<sub>६</sub></td>
+                    <td class ="tue">23<sub>७</sub></td>
+                    <td class ="wed">24<sub>८</sub></td>
+                    <td class ="thu">25<sub>९</sub></td>
+                    <td class ="e">26<sub>१०</sub></td>
+                    <td class ="sat">27<sub>११</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">28<sub>१२</sub></td>
-                    <td id="mon">29<sub>१३</sub></td>
-                    <td id="tue">30<sub>१४</sub></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">28<sub>१२</sub></td>
+                    <td class ="mon">29<sub>१३</sub></td>
+                    <td class ="tue">30<sub>१४</sub></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="7"><a id="ti" href="#head">December, 2021(मङ्सिर/पौष, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="7"><a class ="ti" href="#head">December, 2021(मङ्सिर/पौष, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -611,73 +482,73 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed">1<sub>१५</sub></td>
-                    <td id="thu">2<sub>१६</sub></td>
-                    <td id="e">3<sub>१७</sub></td>
-                    <td id="sat">4<sub>१८</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed">1<sub>१५</sub></td>
+                    <td class ="thu">2<sub>१६</sub></td>
+                    <td class ="e">3<sub>१७</sub></td>
+                    <td class ="sat">4<sub>१८</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>27 Class Days</li>
-                            <li>3rd (Xavier's Day and College Day Celebrations)</li>
-                            <li>10th (Graduation Day +2 (2019); LDW 12 F and 12 G)</li>
-                            <li>15th (Study Leave for +2)</li>
-                            <li>16th (Term Exam for Grade 12 begins)</li>
-                            <li>17th (Term Exam for Grade 11 begins)</li>
-                            <li>18th (Alumnae Day)</li>
-                            <li>24th (Christmas Day Celebrations; Term break for +2)</li>
-                            <li>25th (CHRISTMAS; SXC Mini-Marathon)</li>
-                            <li>30th (Drama Presentation)</li>
-                            <li>31st (LDW- 12 A, 12 B, 12 C, 12 D and 12 E)</li>
+                            <li>3<sup>rd</sup> (Xavier's Day and College Day Celebrations)</li>
+                            <li>10<sup>th</sup> (Graduation Day +2 (2019); LDW 12 F and 12 G)</li>
+                            <li>15<sup>th</sup> (Study Leave for +2)</li>
+                            <li>16<sup>th</sup> (Term Exam for Grade 12 begins)</li>
+                            <li>17<sup>th</sup> (Term Exam for Grade 11 begins)</li>
+                            <li>18<sup>th</sup> (Alumnae Day)</li>
+                            <li>24<sup>th</sup> (Christmas Day Celebrations; Term break for +2)</li>
+                            <li>25<sup>th</sup> (CHRISTMAS; SXC Mini-Marathon)</li>
+                            <li>30<sup>th</sup> (Drama Presentation)</li>
+                            <li>31<sup>st</sup> (LDW- 12 A, 12 B, 12 C, 12 D and 12 E)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">5<sub>१९</sub></td>
-                    <td id="mon">6<sub>२०</sub></td>
-                    <td id="tue">7<sub>२१</sub></td>
-                    <td id="wed">8<sub>२२</sub></td>
-                    <td id="thu">9<sub>२३</sub></td>
-                    <td id="e">10<sub>२४</sub></td>
-                    <td id="sat">11<sub>२५</sub></td>
+                    <td class ="sun">5<sub>१९</sub></td>
+                    <td class ="mon">6<sub>२०</sub></td>
+                    <td class ="tue">7<sub>२१</sub></td>
+                    <td class ="wed">8<sub>२२</sub></td>
+                    <td class ="thu">9<sub>२३</sub></td>
+                    <td class ="e">10<sub>२४</sub></td>
+                    <td class ="sat">11<sub>२५</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">12<sub>२६</sub></td>
-                    <td id="mon">13<sub>२७</sub></td>
-                    <td id="tue">14<sub>२८</sub></td>
-                    <td id="eh">15<sub>२९</sub></td>
-                    <td id="e">16<sub>पौष १</sub></td>
-                    <td id="e">17<sub>२</sub></td>
-                    <td id="sat">18<sub>३</sub></td>
+                    <td class ="sun">12<sub>२६</sub></td>
+                    <td class ="mon">13<sub>२७</sub></td>
+                    <td class ="tue">14<sub>२८</sub></td>
+                    <td class ="eh">15<sub>२९</sub></td>
+                    <td class ="e">16<sub>पौष १</sub></td>
+                    <td class ="e">17<sub>२</sub></td>
+                    <td class ="sat">18<sub>३</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">19<sub>४</sub></td>
-                    <td id="mon">20<sub>५</sub></td>
-                    <td id="tue">21<sub>६</sub></td>
-                    <td id="wed">22<sub>७</sub></td>
-                    <td id="thu">23<sub>८</sub></td>
-                    <td id="e">24<sub>९</sub></td>
-                    <td id="sat">25<sub>१०</sub></td>
+                    <td class ="sun">19<sub>४</sub></td>
+                    <td class ="mon">20<sub>५</sub></td>
+                    <td class ="tue">21<sub>६</sub></td>
+                    <td class ="wed">22<sub>७</sub></td>
+                    <td class ="thu">23<sub>८</sub></td>
+                    <td class ="e">24<sub>९</sub></td>
+                    <td class ="sat">25<sub>१०</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">26<sub>११</sub></td>
-                    <td id="mon">27<sub>१२</sub></td>
-                    <td id="tue">28<sub>१३</sub></td>
-                    <td id="wed">29<sub>१४</sub></td>
-                    <td id="e">30<sub>१५</sub></td>
-                    <td id="e">31<sub>१६</sub></td>
-                    <td id="sat"></td>
+                    <td class ="sun">26<sub>११</sub></td>
+                    <td class ="mon">27<sub>१२</sub></td>
+                    <td class ="tue">28<sub>१३</sub></td>
+                    <td class ="wed">29<sub>१४</sub></td>
+                    <td class ="e">30<sub>१५</sub></td>
+                    <td class ="e">31<sub>१६</sub></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="8"><a id="ti" href="#head">January, 2022(पौष/माघ, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="8"><a class ="ti" href="#head">January, 2022(पौष/माघ, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -685,68 +556,68 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="e">30<sub>१६</sub></td>
-                    <td id="mon">31<sub>१७</sub></td>
-                    <td id="tue"></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat">1<sub>१७</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="e">30<sub>१६</sub></td>
+                    <td class ="mon">31<sub>१७</sub></td>
+                    <td class ="tue"></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat">1<sub>१७</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>26 Class Days</li>
-                            <li>7th (LDW- 12 F and 12 G)</li>
-                            <li>14th (LDW- 12 H and 12 I)</li>
-                            <li>21st (Prawah Kavi Gosthi; LDW- 12 A, 12 B and 12 C)</li>
-                            <li>28th (Chemistry/Physics Olympiad; Spiritual Experiment-MAGIS; LDW- 12 D and 12 E)</li>
-                            <li>30th (Martyr's Day)</li>
+                            <li>7<sup>th</sup> (LDW- 12 F and 12 G)</li>
+                            <li>14<sup>th</sup> (LDW- 12 H and 12 I)</li>
+                            <li>21<sup>st</sup> (Prawah Kavi Gosthi; LDW- 12 A, 12 B and 12 C)</li>
+                            <li>28<sup>th</sup> (Chemistry/Physics Olympiad; Spiritual Experiment-MAGIS; LDW- 12 D and 12 E)</li>
+                            <li>30<sup>th</sup> (Martyr's Day)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">2<sub>१८</sub></td>
-                    <td id="mon">3<sub>१९</sub></td>
-                    <td id="tue">4<sub>२०</sub></td>
-                    <td id="wed">5<sub>२१</sub></td>
-                    <td id="thu">6<sub>२२</sub></td>
-                    <td id="e">7<sub>२३</sub></td>
-                    <td id="sat">8<sub>२४</sub></td>
+                    <td class ="sun">2<sub>१८</sub></td>
+                    <td class ="mon">3<sub>१९</sub></td>
+                    <td class ="tue">4<sub>२०</sub></td>
+                    <td class ="wed">5<sub>२१</sub></td>
+                    <td class ="thu">6<sub>२२</sub></td>
+                    <td class ="e">7<sub>२३</sub></td>
+                    <td class ="sat">8<sub>२४</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">9<sub>२५</sub></td>
-                    <td id="mon">10<sub>२६</sub></td>
-                    <td id="tue">11<sub>२७</sub></td>
-                    <td id="wed">12<sub>२८</sub></td>
-                    <td id="thu">13<sub>२९</sub></td>
-                    <td id="e">14<sub>३०</sub></td>
-                    <td id="sat">15<sub>माघ १</sub></td>
+                    <td class ="sun">9<sub>२५</sub></td>
+                    <td class ="mon">10<sub>२६</sub></td>
+                    <td class ="tue">11<sub>२७</sub></td>
+                    <td class ="wed">12<sub>२८</sub></td>
+                    <td class ="thu">13<sub>२९</sub></td>
+                    <td class ="e">14<sub>३०</sub></td>
+                    <td class ="sat">15<sub>माघ १</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">16<sub>२</sub></td>
-                    <td id="mon">17<sub>३</sub></td>
-                    <td id="tue">18<sub>४</sub></td>
-                    <td id="wed">19<sub>५</sub></td>
-                    <td id="thu">20<sub>६</sub></td>
-                    <td id="e">21<sub>७</sub></td>
-                    <td id="sat">22<sub>८</sub></td>
+                    <td class ="sun">16<sub>२</sub></td>
+                    <td class ="mon">17<sub>३</sub></td>
+                    <td class ="tue">18<sub>४</sub></td>
+                    <td class ="wed">19<sub>५</sub></td>
+                    <td class ="thu">20<sub>६</sub></td>
+                    <td class ="e">21<sub>७</sub></td>
+                    <td class ="sat">22<sub>८</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">23<sub>९</sub></td>
-                    <td id="mon">24<sub>१०</sub></td>
-                    <td id="tue">25<sub>११</sub></td>
-                    <td id="wed">26<sub>१२</sub></td>
-                    <td id="thu">27<sub>१३</sub></td>
-                    <td id="e">28<sub>१४</sub></td>
-                    <td id="sat">29<sub>१५</sub></td>
+                    <td class ="sun">23<sub>९</sub></td>
+                    <td class ="mon">24<sub>१०</sub></td>
+                    <td class ="tue">25<sub>११</sub></td>
+                    <td class ="wed">26<sub>१२</sub></td>
+                    <td class ="thu">27<sub>१३</sub></td>
+                    <td class ="e">28<sub>१४</sub></td>
+                    <td class ="sat">29<sub>१५</sub></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="9"><a id="ti" href="#head">February,2022(माघ/फाल्गुन, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="9"><a class ="ti" href="#head">February,2022(माघ/फाल्गुन, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -754,68 +625,68 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue">1<sub>१८</sub></td>
-                    <td id="wed">2<sub>१९</sub></td>
-                    <td id="thu">3<sub>२०</sub></td>
-                    <td id="e">4<sub>२१</sub></td>
-                    <td id="sat">5<sub>२२</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue">1<sub>१८</sub></td>
+                    <td class ="wed">2<sub>१९</sub></td>
+                    <td class ="thu">3<sub>२०</sub></td>
+                    <td class ="e">4<sub>२१</sub></td>
+                    <td class ="sat">5<sub>२२</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>24 Class Days</li>
-                            <li>4th (Computer Club Event; LDW- 12 H and 12 I)</li>
-                            <li>5th (SXC Cycle Rally 2021)</li>
-                            <li>11th ((SET)Social, Environment and Technology Exhibition)</li>
-                            <li>19th (Democracy Day)</li>
-                            <li>28th (Grade 12 Session Ends)</li>
+                            <li>4<sup>th</sup> (Computer Club Event; LDW- 12 H and 12 I)</li>
+                            <li>5<sup>th</sup> (SXC Cycle Rally 2021)</li>
+                            <li>11<sup>th</sup> ((SET)Social, Environment and Technology Exhibition)</li>
+                            <li>19<sup>th</sup> (Democracy Day)</li>
+                            <li>28<sup>th</sup> (Grade 12 Session Ends)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">6<sub>२३</sub></td>
-                    <td id="mon">7<sub>२४</sub></td>
-                    <td id="tue">8<sub>२५</sub></td>
-                    <td id="wed">9<sub>२६</sub></td>
-                    <td id="thu">10<sub>२७</sub></td>
-                    <td id="e">11<sub>२८</sub></td>
-                    <td id="sat">12<sub>२९</sub></td>
+                    <td class ="sun">6<sub>२३</sub></td>
+                    <td class ="mon">7<sub>२४</sub></td>
+                    <td class ="tue">8<sub>२५</sub></td>
+                    <td class ="wed">9<sub>२६</sub></td>
+                    <td class ="thu">10<sub>२७</sub></td>
+                    <td class ="e">11<sub>२८</sub></td>
+                    <td class ="sat">12<sub>२९</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">13<sub>फाल्गुन १</sub></td>
-                    <td id="mon">14<sub>२</sub></td>
-                    <td id="tue">15<sub>३</sub></td>
-                    <td id="wed">16<sub>४</sub></td>
-                    <td id="thu">17<sub>५</sub></td>
-                    <td id="fri">18<sub>६</sub></td>
-                    <td id="sat">19<sub>७</sub></td>
+                    <td class ="sun">13<sub>फाल्गुन १</sub></td>
+                    <td class ="mon">14<sub>२</sub></td>
+                    <td class ="tue">15<sub>३</sub></td>
+                    <td class ="wed">16<sub>४</sub></td>
+                    <td class ="thu">17<sub>५</sub></td>
+                    <td class ="fri">18<sub>६</sub></td>
+                    <td class ="sat">19<sub>७</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">20<sub>८</sub></td>
-                    <td id="mon">21<sub>९</sub></td>
-                    <td id="tue">22<sub>१०</sub></td>
-                    <td id="wed">23<sub>११</sub></td>
-                    <td id="thu">24<sub>१२</sub></td>
-                    <td id="fri">25<sub>१३</sub></td>
-                    <td id="sat">26<sub>१४</sub></td>
+                    <td class ="sun">20<sub>८</sub></td>
+                    <td class ="mon">21<sub>९</sub></td>
+                    <td class ="tue">22<sub>१०</sub></td>
+                    <td class ="wed">23<sub>११</sub></td>
+                    <td class ="thu">24<sub>१२</sub></td>
+                    <td class ="fri">25<sub>१३</sub></td>
+                    <td class ="sat">26<sub>१४</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">27<sub>१५</sub></td>
-                    <td id="e">28<sub>१६</sub></td>
-                    <td id="tue"></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">27<sub>१५</sub></td>
+                    <td class ="e">28<sub>१६</sub></td>
+                    <td class ="tue"></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="10"><a id="ti" href="#head">March,2022(फाल्गुन/चैत्र, २०७८)</a></caption>
-                <tr id="days">
+                <caption id="10"><a class ="ti" href="#head">March,2022(फाल्गुन/चैत्र, २०७८)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -823,71 +694,71 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="eh">1<sub>१७</sub></td>
-                    <td id="wed">2<sub>१८</sub></td>
-                    <td id="thu">3<sub>१९</sub></td>
-                    <td id="e">4<sub>२०</sub></td>
-                    <td id="sat">5<sub>२१</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="eh">1<sub>१७</sub></td>
+                    <td class ="wed">2<sub>१८</sub></td>
+                    <td class ="thu">3<sub>१९</sub></td>
+                    <td class ="e">4<sub>२०</sub></td>
+                    <td class ="sat">5<sub>२१</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>25 Class Days</li>
-                            <li>1st (Maha Shivaratri)</li>
-                            <li>4th (Grade 12 Commencement ceremony)</li>
-                            <li>6th (Grade 12 Send up Exams Begin)</li>
-                            <li>8th (International Women's Day)</li>
-                            <li>17th (Holi Purnima)</li>
-                            <li>18th (Grade 12 NEB Practical Exams Begin)</li>
-                            <li>25th (Grade 11 2021 Session Ends)</li>
-                            <li>30th (Grade 11 2021 Send up Exams Begin)</li>
+                            <li>1<sup>st</sup> (Maha Shivaratri)</li>
+                            <li>4<sup>th</sup> (Grade 12 Commencement ceremony)</li>
+                            <li>6<sup>th</sup> (Grade 12 Send up Exams Begin)</li>
+                            <li>8<sup>th</sup> (International Women's Day)</li>
+                            <li>17<sup>th</sup> (Holi Purnima)</li>
+                            <li>18<sup>th</sup> (Grade 12 NEB Practical Exams Begin)</li>
+                            <li>25<sup>th</sup> (Grade 11 2021 Session Ends)</li>
+                            <li>30<sup>th</sup> (Grade 11 2021 Send up Exams Begin)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="e">6<sub>२२</sub></td>
-                    <td id="mon">7<sub>२३</sub></td>
-                    <td id="e">8<sub>२४</sub></td>
-                    <td id="wed">9<sub>२५</sub></td>
-                    <td id="thu">10<sub>२६</sub></td>
-                    <td id="fri">11<sub>२७</sub></td>
-                    <td id="sat">12<sub>२८</sub></td>
+                    <td class ="e">6<sub>२२</sub></td>
+                    <td class ="mon">7<sub>२३</sub></td>
+                    <td class ="e">8<sub>२४</sub></td>
+                    <td class ="wed">9<sub>२५</sub></td>
+                    <td class ="thu">10<sub>२६</sub></td>
+                    <td class ="fri">11<sub>२७</sub></td>
+                    <td class ="sat">12<sub>२८</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">13<sub>२९</sub></td>
-                    <td id="mon">14<sub>३०</sub></td>
-                    <td id="tue">15<sub>चैत्र १</sub></td>
-                    <td id="wed">16<sub>२</sub></td>
+                    <td class ="sun">13<sub>२९</sub></td>
+                    <td class ="mon">14<sub>३०</sub></td>
+                    <td class ="tue">15<sub>चैत्र १</sub></td>
+                    <td class ="wed">16<sub>२</sub></td>
                     <td id="h">17<sub>३</sub></td>
-                    <td id="e">18<sub>४</sub></td>
-                    <td id="sat">19<sub>५</sub></td>
+                    <td class ="e">18<sub>४</sub></td>
+                    <td class ="sat">19<sub>५</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">20<sub>६</sub></td>
-                    <td id="mon">21<sub>७</sub></td>
-                    <td id="tue">22<sub>८</sub></td>
-                    <td id="wed">23<sub>९</sub></td>
-                    <td id="thu">24<sub>१०</sub></td>
-                    <td id="e">25<sub>११</sub></td>
-                    <td id="sat">26<sub>१२</sub></td>
+                    <td class ="sun">20<sub>६</sub></td>
+                    <td class ="mon">21<sub>७</sub></td>
+                    <td class ="tue">22<sub>८</sub></td>
+                    <td class ="wed">23<sub>९</sub></td>
+                    <td class ="thu">24<sub>१०</sub></td>
+                    <td class ="e">25<sub>११</sub></td>
+                    <td class ="sat">26<sub>१२</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">27<sub>१३</sub></td>
-                    <td id="mon">28<sub>१४</sub></td>
-                    <td id="tue">29<sub>१५</sub></td>
-                    <td id="e">30<sub>१६</sub></td>
-                    <td id="thu">31<sub>१७</sub></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">27<sub>१३</sub></td>
+                    <td class ="mon">28<sub>१४</sub></td>
+                    <td class ="tue">29<sub>१५</sub></td>
+                    <td class ="e">30<sub>१६</sub></td>
+                    <td class ="thu">31<sub>१७</sub></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="11"><a id="ti" href="#head">April, 2022(चैत्र/बैशाख, २०७८/७९)</a></caption>
-                <tr id="days">
+                <caption id="11"><a class ="ti" href="#head">April, 2022(चैत्र/बैशाख, २०७८/७९)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -895,67 +766,67 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri">1<sub>१८</sub></td>
-                    <td id="sat">2<sub>१९</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri">1<sub>१८</sub></td>
+                    <td class ="sat">2<sub>१९</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>22 Class Days</li>
-                            <li>10th (Grade 11 2021 Final Practical Exams Begin)</li>
-                            <li>14th (New Year 2079 B.S.)</li>
-                            <li>15th (Good Friday(Holiday))</li>
-                            <li>17th (Easter Sunday(Holiday))</li>
+                            <li>10<sup>th</sup> (Grade 11 2021 Final Practical Exams Begin)</li>
+                            <li>14<sup>th</sup> (New Year 2079 B.S.)</li>
+                            <li>15<sup>th</sup> (Good Friday(Holiday))</li>
+                            <li>17<sup>th</sup> (Easter Sunday(Holiday))</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">3<sub>२०</sub></td>
-                    <td id="mon">4<sub>२१</sub></td>
-                    <td id="tue">5<sub>२२</sub></td>
-                    <td id="wed">6<sub>२३</sub></td>
-                    <td id="thu">7<sub>२४</sub></td>
-                    <td id="fri">8<sub>२५</sub></td>
-                    <td id="sat">9<sub>२६</sub></td>
+                    <td class ="sun">3<sub>२०</sub></td>
+                    <td class ="mon">4<sub>२१</sub></td>
+                    <td class ="tue">5<sub>२२</sub></td>
+                    <td class ="wed">6<sub>२३</sub></td>
+                    <td class ="thu">7<sub>२४</sub></td>
+                    <td class ="fri">8<sub>२५</sub></td>
+                    <td class ="sat">9<sub>२६</sub></td>
                 </tr>
                 <tr>
-                    <td id="e">10<sub>२७</sub></td>
-                    <td id="mon">11<sub>२८</sub></td>
-                    <td id="tue">12<sub>२९</sub></td>
-                    <td id="wed">13<sub>३०</sub></td>
-                    <td id="eh">14<sub>बैशाख १</sub></td>
-                    <td id="eh">15<sub>२</sub></td>
-                    <td id="sat">16<sub>३</sub></td>
+                    <td class ="e">10<sub>२७</sub></td>
+                    <td class ="mon">11<sub>२८</sub></td>
+                    <td class ="tue">12<sub>२९</sub></td>
+                    <td class ="wed">13<sub>३०</sub></td>
+                    <td class ="eh">14<sub>बैशाख १</sub></td>
+                    <td class ="eh">15<sub>२</sub></td>
+                    <td class ="sat">16<sub>३</sub></td>
                 </tr>
                 <tr>
-                    <td id="eh">17<sub>४</sub></td>
-                    <td id="mon">18<sub>५</sub></td>
-                    <td id="tue">19<sub>६</sub></td>
-                    <td id="wed">20<sub>७</sub></td>
-                    <td id="thu">21<sub>८</sub></td>
-                    <td id="fri">22<sub>९</sub></td>
-                    <td id="sat">23<sub>१०</sub></td>
+                    <td class ="eh">17<sub>४</sub></td>
+                    <td class ="mon">18<sub>५</sub></td>
+                    <td class ="tue">19<sub>६</sub></td>
+                    <td class ="wed">20<sub>७</sub></td>
+                    <td class ="thu">21<sub>८</sub></td>
+                    <td class ="fri">22<sub>९</sub></td>
+                    <td class ="sat">23<sub>१०</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">24<sub>११</sub></td>
-                    <td id="mon">25<sub>१२</sub></td>
-                    <td id="tue">26<sub>१३</sub></td>
-                    <td id="wed">27<sub>१४</sub></td>
-                    <td id="thu">28<sub>१५</sub></td>
-                    <td id="fri">29<sub>१६</sub></td>
-                    <td id="sat">30<sub>१७</sub></td>
+                    <td class ="sun">24<sub>११</sub></td>
+                    <td class ="mon">25<sub>१२</sub></td>
+                    <td class ="tue">26<sub>१३</sub></td>
+                    <td class ="wed">27<sub>१४</sub></td>
+                    <td class ="thu">28<sub>१५</sub></td>
+                    <td class ="fri">29<sub>१६</sub></td>
+                    <td class ="sat">30<sub>१७</sub></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="12"><a id="ti" href="#head">May, 2022(बैशाख/जेष्ठ, २०७९)</a></caption>
-                <tr id="days">
+                <caption id="12"><a class ="ti" href="#head">May, 2022(बैशाख/जेष्ठ, २०७९)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -963,67 +834,67 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="eh">1<sub>१८</sub></td>
-                    <td id="mon">2<sub>१९</sub></td>
-                    <td id="tue">3<sub>२०</sub></td>
-                    <td id="wed">4<sub>२१</sub></td>
-                    <td id="thu">5<sub>२२</sub></td>
-                    <td id="fri">6<sub>२३</sub></td>
-                    <td id="sat">7<sub>२४</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="eh">1<sub>१८</sub></td>
+                    <td class ="mon">2<sub>१९</sub></td>
+                    <td class ="tue">3<sub>२०</sub></td>
+                    <td class ="wed">4<sub>२१</sub></td>
+                    <td class ="thu">5<sub>२२</sub></td>
+                    <td class ="fri">6<sub>२३</sub></td>
+                    <td class ="sat">7<sub>२४</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>24 Class Days</li>
-                            <li>1st (Labour Day)</li>
-                            <li>16th (Buddha Jayanti)</li>
-                            <li>23rd (Grade 11 2021 Final Exams Begin)</li>
-                            <li>29th (Republic Day)</li>
+                            <li>1<sup>st</sup> (Labour Day)</li>
+                            <li>16<sup>th</sup> (Buddha Jayanti)</li>
+                            <li>23<sup>rd</sup> (Grade 11 2021 Final Exams Begin)</li>
+                            <li>29<sup>th</sup> (Republic Day)</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">8<sub>२५</sub></td>
-                    <td id="mon">9<sub>२६</sub></td>
-                    <td id="tue">10<sub>२७</sub></td>
-                    <td id="wed">11<sub>२८</sub></td>
-                    <td id="thu">12<sub>२९</sub></td>
-                    <td id="fri">13<sub>३०</sub></td>
-                    <td id="sat">14<sub>३१</sub></td>
+                    <td class ="sun">8<sub>२५</sub></td>
+                    <td class ="mon">9<sub>२६</sub></td>
+                    <td class ="tue">10<sub>२७</sub></td>
+                    <td class ="wed">11<sub>२८</sub></td>
+                    <td class ="thu">12<sub>२९</sub></td>
+                    <td class ="fri">13<sub>३०</sub></td>
+                    <td class ="sat">14<sub>३१</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">15<sub>जेष्ठ १</sub></td>
-                    <td id="eh">16<sub>२</sub></td>
-                    <td id="tue">17<sub>३</sub></td>
-                    <td id="wed">18<sub>४</sub></td>
-                    <td id="thu">19<sub>५</sub></td>
-                    <td id="fri">20<sub>६</sub></td>
-                    <td id="sat">21<sub>७</sub></td>
+                    <td class ="sun">15<sub>जेष्ठ १</sub></td>
+                    <td class ="eh">16<sub>२</sub></td>
+                    <td class ="tue">17<sub>३</sub></td>
+                    <td class ="wed">18<sub>४</sub></td>
+                    <td class ="thu">19<sub>५</sub></td>
+                    <td class ="fri">20<sub>६</sub></td>
+                    <td class ="sat">21<sub>७</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">22<sub>८</sub></td>
-                    <td id="e">23<sub>९</sub></td>
-                    <td id="tue">24<sub>१०</sub></td>
-                    <td id="wed">25<sub>११</sub></td>
-                    <td id="thu">26<sub>१२</sub></td>
-                    <td id="fri">27<sub>१३</sub></td>
-                    <td id="sat">28<sub>१४</sub></td>
+                    <td class ="sun">22<sub>८</sub></td>
+                    <td class ="e">23<sub>९</sub></td>
+                    <td class ="tue">24<sub>१०</sub></td>
+                    <td class ="wed">25<sub>११</sub></td>
+                    <td class ="thu">26<sub>१२</sub></td>
+                    <td class ="fri">27<sub>१३</sub></td>
+                    <td class ="sat">28<sub>१४</sub></td>
                 </tr>
                 <tr>
-                    <td id="eh">29<sub>१५</sub></td>
-                    <td id="mon">30<sub>१६</sub></td>
-                    <td id="tue">31<sub>१७</sub></td>
-                    <td id="wed"></td>
-                    <td id="thu"></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="eh">29<sub>१५</sub></td>
+                    <td class ="mon">30<sub>१६</sub></td>
+                    <td class ="tue">31<sub>१७</sub></td>
+                    <td class ="wed"></td>
+                    <td class ="thu"></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
 
             <table border="1.5">
-                <caption id="13"><a id="ti" href="#head">June, 2022(जेष्ठ/आषाढ, २०७९)</a></caption>
-                <tr id="days">
+                <caption id="13"><a class ="ti" href="#head">June, 2022(जेष्ठ/आषाढ, २०७९)</a></caption>
+                <tr class ="days">
                     <th>Sun</th>
                     <th>Mon</th>
                     <th>Tue</th>
@@ -1031,57 +902,57 @@
                     <th>Thu</th>
                     <th>Fri</th>
                     <th>Sat</th>
-                    <th id="ev">Events</th>
+                    <th class ="ev">Events</th>
                 </tr>
                 <tr>
-                    <td id="sun"></td>
-                    <td id="mon"></td>
-                    <td id="tue"></td>
-                    <td id="wed">1<sub>१८</sub></td>
-                    <td id="thu">2<sub>१९</sub></td>
-                    <td id="fri">3<sub>२०</sub></td>
-                    <td id="sat">4<sub>२१</sub></td>
-                    <td rowspan="5" id="event">
+                    <td class ="sun"></td>
+                    <td class ="mon"></td>
+                    <td class ="tue"></td>
+                    <td class ="wed">1<sub>१८</sub></td>
+                    <td class ="thu">2<sub>१९</sub></td>
+                    <td class ="fri">3<sub>२०</sub></td>
+                    <td class ="sat">4<sub>२१</sub></td>
+                    <td rowspan="5" class ="event">
                         <ul>
                             <li>26 Class Days</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td id="sun">5<sub>२२</sub></td>
-                    <td id="mon">6<sub>२३</sub></td>
-                    <td id="tue">7<sub>२४</sub></td>
-                    <td id="wed">8<sub>२५</sub></td>
-                    <td id="thu">9<sub>२६</sub></td>
-                    <td id="fri">10<sub>२७</sub></td>
-                    <td id="sat">11<sub>२८</sub></td>
+                    <td class ="sun">5<sub>२२</sub></td>
+                    <td class ="mon">6<sub>२३</sub></td>
+                    <td class ="tue">7<sub>२४</sub></td>
+                    <td class ="wed">8<sub>२५</sub></td>
+                    <td class ="thu">9<sub>२६</sub></td>
+                    <td class ="fri">10<sub>२७</sub></td>
+                    <td class ="sat">11<sub>२८</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">12<sub>२९</sub></td>
-                    <td id="mon">13<sub>३०</sub></td>
-                    <td id="tue">14<sub>३१</sub></td>
-                    <td id="wed">15<sub>आषाढ १</sub></td>
-                    <td id="thu">16<sub>२</sub></td>
-                    <td id="fri">17<sub>३</sub></td>
-                    <td id="sat">18<sub>४</sub></td>
+                    <td class ="sun">12<sub>२९</sub></td>
+                    <td class ="mon">13<sub>३०</sub></td>
+                    <td class ="tue">14<sub>३१</sub></td>
+                    <td class ="wed">15<sub>आषाढ १</sub></td>
+                    <td class ="thu">16<sub>२</sub></td>
+                    <td class ="fri">17<sub>३</sub></td>
+                    <td class ="sat">18<sub>४</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">19<sub>५</sub></td>
-                    <td id="mon">20<sub>६</sub></td>
-                    <td id="tue">21<sub>७</sub></td>
-                    <td id="wed">22<sub>८</sub></td>
-                    <td id="thu">23<sub>९</sub></td>
-                    <td id="fri">24<sub>१०</sub></td>
-                    <td id="sat">25<sub>११</sub></td>
+                    <td class ="sun">19<sub>५</sub></td>
+                    <td class ="mon">20<sub>६</sub></td>
+                    <td class ="tue">21<sub>७</sub></td>
+                    <td class ="wed">22<sub>८</sub></td>
+                    <td class ="thu">23<sub>९</sub></td>
+                    <td class ="fri">24<sub>१०</sub></td>
+                    <td class ="sat">25<sub>११</sub></td>
                 </tr>
                 <tr>
-                    <td id="sun">26<sub>१२</sub></td>
-                    <td id="mon">27<sub>१३</sub></td>
-                    <td id="tue">28<sub>१४</sub></td>
-                    <td id="wed">29<sub>१५</sub></td>
-                    <td id="thu">30<sub>१६</sub></td>
-                    <td id="fri"></td>
-                    <td id="sat"></td>
+                    <td class ="sun">26<sub>१२</sub></td>
+                    <td class ="mon">27<sub>१३</sub></td>
+                    <td class ="tue">28<sub>१४</sub></td>
+                    <td class ="wed">29<sub>१५</sub></td>
+                    <td class ="thu">30<sub>१६</sub></td>
+                    <td class ="fri"></td>
+                    <td class ="sat"></td>
                 </tr>
             </table>
         </center>
