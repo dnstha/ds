@@ -32,7 +32,7 @@ document.getElementById("increase").addEventListener('click', function(){ // ins
         t1.y2 += 10 * 19/15;
         t1.y3 = t1.y2;
         factor = getDist(previousx2,previousy, previousx3, previousy)/getDist(t1.x1,t1.y1, previousx2,previousy);
-        // If statement checks if the new point goes out of the canvas
+        // To check if the new point goes out of the canvas
         if(factor * getDist(t1.x1,t1.y1, t1.x2,t1.y2) + previousx2 < canvas.width) {
             t1.x3 = factor * getDist(t1.x1,t1.y1, t1.x2,t1.y2) + previousx2;
         }
@@ -40,7 +40,7 @@ document.getElementById("increase").addEventListener('click', function(){ // ins
 });
 
 document.getElementById("decrease").addEventListener('click', function(){ // instead you can write window.eventListener
-    if(t1.y2 - t1.y1 > 60) {
+    if(t1.y2 - t1.y1 > 50) {
         previousy = t1.y2;
         previousx2 = t1.x2;
         previousx3 = t1.x3; 
@@ -55,20 +55,6 @@ document.getElementById("reset").addEventListener('click', function(){ // instea
     init();
 });
 
-getDist = (x1, y1, x2, y2) => {
-    let x = x2 - x1;
-    let y = y2 - y1;
-    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-}
-
-deg = (x) =>{
-    return x*180/Math.PI;
-}
-
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 /*
 dotProduct = (a1,b1, a2,b2) => {
     return a1*a2 + b1*b2;
@@ -78,15 +64,6 @@ vector = (x1, y1, x2, y2) => {
 
 }
 */
-
-function average() {
-    let avg = 0;
-    let n = arguments.length;
-    for(let i = 0; i<n; i++) {
-        avg += arguments[i];
-    }
-    return avg/n;
-}
 
 function Triangle(x1, y1, x2, y2, x3, y3){
     this.x1 = x1;
@@ -165,10 +142,15 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.fillText("\u2220A = "+ CAB + "\xB0", this.x1 + 110, this.y2 + 80);
         c.fillText("\u2220C = " + BCA + "\xB0", this.x1 + 250, this.y2 + 80);
         
+        c.strokeStyle = lightColors[1];
+        c.beginPath();
+        c.arc(this.x1, this.y1, AB * 0.1 + 10, rad(BCA), Math.PI/2);
+        c.stroke();
+
         c.fillStyle = lightColors[1];
-        c.fillText("sinC = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(AB/CA * 1000)/1000, canvas.width - 450, 30);
-        c.fillText("cosC = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(BC/CA * 1000)/1000, canvas.width - 450, 55);
-        c.fillText("tanC = AB/BC \u2248 " + AB +"/" + BC + " \u2248 " + Math.round(AB/BC * 1000)/1000, canvas.width - 450, 80);
+        c.fillText("sinA = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(EBC/ECA * 1000)/1000, canvas.width - 440, this.y2 + 40);
+        c.fillText("cosA = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(EAB/ECA * 1000)/1000, canvas.width - 440, this.y2 + 65);
+        c.fillText("tanA = BC/AB \u2248 " + BC +"/" + AB + " \u2248 " + Math.round(EBC/EAB * 1000)/1000, canvas.width - 440, this.y2 + 90);
     }
 }
 let t1,  AB, BC, CA, ABC, BCA, CAB;
