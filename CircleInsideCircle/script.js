@@ -104,14 +104,11 @@ init = () =>{
     particleArray = [];
     circleArray = [];
     fixed = [];
-    centre = {
-        x: canvas.width/2,
-        y: canvas.height/2
-    };
+    centre = new P(canvas.width/2, canvas.height/2);
     radius = 200;
     circleArray.push(new Circle(centre, radius));
-    for(let i = 0; i<2; i++) {
-        particleArray.push(new Particle(centre.x, centre.y, i*Math.PI));
+    for(let i = 0; i<4; i++) {
+        particleArray.push(new Particle(centre.x, centre.y, i*Math.PI/2));
     }
     pp = true;
     document.getElementById("plps").style.color = "#cfffee";
@@ -124,13 +121,10 @@ function animate(){
     particleArray.forEach((p, i) => {
         if(i%2 == 0) {
             p.updateCos();
-        }else{
+        }        else{
             p.updateSin();
         }
     });
-    if(modulus(particleArray[0].x - particleArray[1].x) < 1) {
-        console.log("yeah");
-    }
 }
 
 init();
