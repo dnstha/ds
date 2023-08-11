@@ -29,3 +29,20 @@ addEventListener('resize', function() {
 function randomColor(colors) {
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
+connect = (x1, y1, x2, y2) => {
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x2, y2);
+    c.strokeStyle = 'lavender';
+    c.lineWidth = 2;
+    c.stroke();
+}
+
+point = (x, y, color) => {
+    c.beginPath();
+    c.arc(x, y, 3, 0, Math.PI * 2, true);
+    c.fillStyle = color;
+    c.fill();
+    c.closePath();
+}

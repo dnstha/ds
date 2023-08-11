@@ -24,6 +24,10 @@ document.getElementById("plps").addEventListener('click', function(){
     }
 });
 
+document.getElementById("reverse").addEventListener('click', function(){
+    t1.dx *= -1;
+});
+
 document.getElementById("increase").addEventListener('click', function(){ // instead you can write window.eventListener
     if(canvas.height - t1.y2 > 100) {
         previousy = t1.y2;
@@ -73,7 +77,7 @@ function Triangle(x1, y1, x2, y2, x3, y3){
     this.y2 = y2;
     this.y3 = y3;
     this.dx = 4 * (Math.random() - 0.5);
-    this.dy = (Math.random() - 5) * 4;
+    // this.dy = (Math.random() - 0.5) * 4;
     this.update = function(){
         if (pp){
             if(this.x3 + this.dx > innerWidth || this.x3  + this.dx < this.x1){
@@ -81,6 +85,12 @@ function Triangle(x1, y1, x2, y2, x3, y3){
             }
             this.x3 += this.dx;
         }
+        // if (ppy){
+        //     if(canvas.height - this.y2 < 100 || this.y2 - this.y1 < 50) {
+        //         this.dy = -this.dy;
+        //     }
+        //     this.y2 += this.dy;
+        // }
         EAB = getDist(this.x1,this.y1, this.x2,this.y2);
         EBC = getDist(this.x2,this.y2, this.x3,this.y3);
         ECA = getDist(this.x1,this.y1, this.x3,this.y3);
@@ -148,9 +158,9 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.stroke();
 
         c.fillStyle = lightColors[1];
-        c.fillText("sinA = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(EBC/ECA * 1000)/1000, canvas.width - 440, this.y2 + 40);
-        c.fillText("cosA = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(EAB/ECA * 1000)/1000, canvas.width - 440, this.y2 + 65);
-        c.fillText("tanA = BC/AB \u2248 " + BC +"/" + AB + " \u2248 " + Math.round(EBC/EAB * 1000)/1000, canvas.width - 440, this.y2 + 90);
+        c.fillText("sinA = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(EBC/ECA * 1000)/1000, canvas.width - 460, this.y2 + 40);
+        c.fillText("cosA = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(EAB/ECA * 1000)/1000, canvas.width - 460, this.y2 + 65);
+        c.fillText("tanA = BC/AB \u2248 " + BC +"/" + AB + " \u2248 " + Math.round(EBC/EAB * 1000)/1000, canvas.width - 460, this.y2 + 90);
     }
 }
 let t1,  AB, BC, CA, ABC, BCA, CAB;
