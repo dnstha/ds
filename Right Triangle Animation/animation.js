@@ -157,10 +157,11 @@ function Triangle(x1, y1, x2, y2, x3, y3){
         c.arc(this.x1, this.y1, AB * 0.1 + 10, rad(BCA), Math.PI/2);
         c.stroke();
 
+        c.font = 'bold 22px times';
         c.fillStyle = lightColors[1];
-        c.fillText("sinA = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(EBC/ECA * 1000)/1000, canvas.width - 460, this.y2 + 40);
-        c.fillText("cosA = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(EAB/ECA * 1000)/1000, canvas.width - 460, this.y2 + 65);
-        c.fillText("tanA = BC/AB \u2248 " + BC +"/" + AB + " \u2248 " + Math.round(EBC/EAB * 1000)/1000, canvas.width - 460, this.y2 + 90);
+        c.fillText("sinA = BC/CA \u2248 " + BC +"/" + CA + " \u2248 " + Math.round(EBC/ECA * 1000)/1000, canvas.width - 470, this.y2 + 40);
+        c.fillText("cosA = AB/CA \u2248 " + AB +"/" + CA + " \u2248 " + Math.round(EAB/ECA * 1000)/1000, canvas.width - 470, this.y2 + 65);
+        c.fillText("tanA = BC/AB \u2248 " + BC +"/" + AB + " \u2248 " + Math.round(EBC/EAB * 1000)/1000, canvas.width - 470, this.y2 + 90);
     }
 }
 let t1,  AB, BC, CA, ABC, BCA, CAB;
