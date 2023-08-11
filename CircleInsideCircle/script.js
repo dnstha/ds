@@ -4,6 +4,26 @@ canvas.width = window.innerWidth;
 let c = canvas.getContext("2d");
 console.log(canvas);
 
+let rect = canvas.getBoundingClientRect();
+canvas.width = rect.width * devicePixelRatio;
+canvas.height = rect.height * devicePixelRatio;
+c.scale(devicePixelRatio, devicePixelRatio);
+canvas.style.width = rect.width + "px";
+canvas.style.height = rect.height + "px";
+
+
+addEventListener('resize', function() {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    c.scale(devicePixelRatio, devicePixelRatio);
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+});
+
 document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
     pp = !(pp);
     if(pp == false) {
