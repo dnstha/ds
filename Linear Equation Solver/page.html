@@ -11,9 +11,14 @@
                 background: transparent;
                 position: absolute;
             }
-            canvas {
+            #GraphPage {
                 position: absolute;
                 background: #cfffee;
+                z-index: -2;
+            }
+            #line {
+                position: absolute;
+                background: transparent;
                 z-index: -1;
             }
             input {
@@ -85,7 +90,8 @@
         </style>
     </head>
     <body>
-        <canvas></canvas>
+        <canvas id = "GraphPage"></canvas>
+        <canvas id = "line"></canvas>
         <h1>Solve any system of linear equations with 2 variables.</h1>
         <form>
             <div class="l">
@@ -109,7 +115,7 @@
             <span id = "ambiguous">
             </span>
         </form>    
-
+        <script src="../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
         <script src="../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
         <script src="../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
         <script src="inputFile.js"></script>

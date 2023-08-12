@@ -29,8 +29,9 @@ solve = () => {
     if (C != 0) {
         x = Dx/C;
         y = Dy/C;
-        px = Origin.x + det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2) * scale;
-        py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
+        px = Origin.x + x * scale;
+        py = Origin.y - y * scale;
+        c.font = "bold 24px times"
         c.fillText("("+ Math.round(x*1000)/1000 +", " + Math.round(y*1000)/1000 + ")", px, py-5);     
     }else{
         x = "";

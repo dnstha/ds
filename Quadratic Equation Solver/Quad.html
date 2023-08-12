@@ -7,7 +7,13 @@
         <style>
             body{
                 margin: 0;
+                background: transparent;
+                position: absolute;
+            }
+            canvas {
+                position: absolute;
                 background: #cfffee;
+                z-index: -1;
             }
             input {
                 text-align: center;
@@ -72,6 +78,7 @@
         </style>
     </head>
     <body>
+        <canvas></canvas>
         <h1>Solve any quadratic equation</h1>
         <form>
             <div class="l">
@@ -80,17 +87,18 @@
                 <input id = "c" type = "number" inputmode = "numeric" placeholder="c" required> = 0
             </div>
             <button type = "button" id = "MyBtn">Solve</button>
-            <button type = "reset">Clear</button>
+            <button type = "reset" id = "clear">Clear</button>
             <div class="output">
                 x<sub>1</sub> = <input id="x1" READONLY><br/>
                 x<sub>2</sub> = <input id="x2" READONLY>
             </div>
             <span id = "ambiguous">
             </span>
-        </form>    
+        </form>
 
-        <script src="solver.js">
-
-        </script>
+        <script src="../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
+        <script src="../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+        <script src="solver.js"></script>
+        <script src="graph.js"></script>
     </body>
 </html>
