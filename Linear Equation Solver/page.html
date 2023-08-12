@@ -8,7 +8,13 @@
         <style>
             body{
                 margin: 0;
+                background: transparent;
+                position: absolute;
+            }
+            canvas {
+                position: absolute;
                 background: #cfffee;
+                z-index: -1;
             }
             input {
                 text-align: center;
@@ -33,7 +39,7 @@
                 font-size: 2rem;
             }
             button {
-                margin-top: 3rem;
+                margin-top: 2rem;
                 margin-left: 1rem;
                 border: 2px inset red;
                 font-family: Georgia, 'Times New Roman', Times, serif;
@@ -52,7 +58,7 @@
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             }
             p {
-                margin-top: 1rem;
+                margin-top: 0.2rem;
                 height: 0.6rem;
                 text-decoration: underline;
             }
@@ -67,28 +73,35 @@
             }
             h1 {
                 margin-left: 1rem;
-                margin-top: 0;
+                margin-top: 1.5rem;
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            #l1 {
+                color:#df00bb;
+            }
+            #l2 {
+                color:#0004ff;
             }
         </style>
     </head>
     <body>
+        <canvas></canvas>
         <h1>Solve any system of linear equations with 2 variables.</h1>
         <form>
             <div class="l">
-                <p>Line 1</p>
+                <p  id = "l1">Line 1</p>
                 <input id = "x1" type = "number" inputmode = "numeric" placeholder="a1" required>x +
                 <input id = "y1" type = "number" inputmode = "numeric" placeholder="b1" required>y =
                 <input id = "c1" type = "number" inputmode = "numeric" placeholder="c1" required>
             </div>
             <div class="l">
-                <p>Line 2</p>
+                <p id = "l2">Line 2</p>
                 <input id = "x2" type = "number" inputmode = "numeric" placeholder="a2" required>x +
                 <input id = "y2" type = "number" inputmode = "numeric" placeholder="b2" required>y =
                 <input id = "c2" type = "number" inputmode = "numeric" placeholder="c2" required>
             </div>
             <button type = "button" id = "MyBtn">Solve</button>
-            <button type = "reset">Clear</button>
+            <button type = "reset" id = "clear">Clear</button>
             <div class="output">
                 x = <input id="x" READONLY><br/>
                 y = <input id="y" READONLY>
@@ -97,8 +110,8 @@
             </span>
         </form>    
 
-        <script src="inputFile.js">
-
-        </script>
+        <script src="../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
+        <script src="inputFile.js"></script>
+        <script src="graph.js"></script>
     </body>
 </html>

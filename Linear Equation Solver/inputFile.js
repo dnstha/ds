@@ -5,6 +5,11 @@
 // });
 let x1, y1, c1, x2, y2, c2, x, y, Dx, Dy, C, s;
 
+clearSpan = () => {
+    s = document.getElementById("ambiguous");
+    s.innerHTML = "";
+}
+
 solve = () => {
     x1 = Number(document.getElementById("x1").value);
     y1 = Number(document.getElementById("y1").value);
@@ -12,8 +17,7 @@ solve = () => {
     x2 = Number(document.getElementById("x2").value);
     y2 = Number(document.getElementById("y2").value);
     c2 = Number(document.getElementById("c2").value);
-    s = document.getElementById("ambiguous");
-    s.innerHTML = "";
+    clearSpan();
 
     Dx = (y2 * c1) - (y1 * c2);
     Dy = (x1 * c2) - (x2 * c1);
