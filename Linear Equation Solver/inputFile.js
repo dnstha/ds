@@ -49,6 +49,7 @@ solve = () => {
     }
     document.getElementById("x").value = x;
     document.getElementById("y").value = y;
+    graph();
     px = Origin.x + det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2) * scale;
     py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
     c.fillText("("+ Math.round(x*1000)/1000 +", " + Math.round(y*1000)/1000 + ")", px, py-5);

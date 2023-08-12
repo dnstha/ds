@@ -104,8 +104,7 @@ function init(){
 
 init();
 
-
-document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", () => {
+graph = () => {
     init();
     getCoeff();
     color1 = '#df00bb';
@@ -137,7 +136,9 @@ document.querySelectorAll("input").forEach(element => element.addEventListener("
         let py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
         point(px, py, 'red');
     }
-}));
+}
+
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", graph));
 
 
 document.getElementById("clear").onclick = init;
