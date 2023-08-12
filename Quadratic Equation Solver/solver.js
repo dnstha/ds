@@ -1,6 +1,5 @@
-let x1, x2, A, B, C, discriminant, denominator, s, vertex;
+let x1, x2, A, B, C, discriminant, denominator, s, vertex, swap;
 let x, y; // For complex numbers
-
 
 function Point(x, y) {
     this.x = x;
@@ -21,15 +20,27 @@ getCoeff = () => {
 solve = () => {
     getCoeff();
     clearSpan();
-    x1 = "";
-    x2 = "";
     discriminant = B*B - 4*A*C;
     denominator = 2*A;
-
+    x1 = "";
+    x2 = "";
+    graph();
     if(A!=0) {
         if(discriminant > 0) {
             x1 = (-B + Math.sqrt(discriminant)) / denominator;
             x2 = (-B - Math.sqrt(discriminant)) / denominator;
+            if(x1>x2) {
+                swap = x1;
+                x1 = x2;
+                x2 = swap;
+            }
+            c.font = "bold 24px times"
+            c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", Origin.x + scale*x1 - 110, Origin.y-5);
+            c.fillText("("+ Math.round(x2*1000)/1000 +", " + "0)", Origin.x + scale*x2 + 3, Origin.y-5);
+            if(vertex.y > 0 && A<0 || vertex.y < 0 && A>0) {
+                point(Origin.x + scale*x1, Origin.y, '#ff0f0f');
+                point(Origin.x + scale*x2, Origin.y, '#ff0f0f');
+            }
         }
         else if(discriminant == 0) {
             x1 = -B / denominator;
@@ -42,7 +53,7 @@ solve = () => {
             y += "i";
             x1 = x.toString() + " + " + y;
             x2 = x.toString() + " - " + y;
-            s.innerHTML = "*The given equation does not have any real solution!";
+            s.innerHTML = "*The given equation does not have any real solution!<br> Here, i<sup>2</sup> = -1";
         }
         document.getElementById("x1").value = x1;
         document.getElementById("x2").value = x2;
@@ -52,7 +63,7 @@ solve = () => {
     }
 }
 
-document.querySelector('button').onclick = solve;
+document.getElementById('MyBtn').onclick = solve;
 document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
     if(event.key === "Enter") {
         solve();

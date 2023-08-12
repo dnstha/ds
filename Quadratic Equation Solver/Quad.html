@@ -10,9 +10,14 @@
                 background: transparent;
                 position: absolute;
             }
-            canvas {
+            #GraphPage {
                 position: absolute;
                 background: #cfffee;
+                z-index: -2;
+            }
+            #line {
+                position: absolute;
+                background: transparent;
                 z-index: -1;
             }
             input {
@@ -38,7 +43,7 @@
                 font-size: 2rem;
             }
             button {
-                margin-top: 3rem;
+                margin-top: 2rem;
                 margin-left: 1rem;
                 border: 2px inset red;
                 font-family: Georgia, 'Times New Roman', Times, serif;
@@ -72,13 +77,15 @@
             }
             h1 {
                 margin-left: 1rem;
-                margin-top: 0;
+                margin-top: 1rem;
+                color: blue;
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             }
         </style>
     </head>
     <body>
-        <canvas></canvas>
+        <canvas id = "GraphPage"></canvas>
+        <canvas id = "line"></canvas>
         <h1>Solve any quadratic equation</h1>
         <form>
             <div class="l">
@@ -96,6 +103,7 @@
             </span>
         </form>
 
+        <script src="../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
         <script src="../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
         <script src="../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
         <script src="solver.js"></script>
