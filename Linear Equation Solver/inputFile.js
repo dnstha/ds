@@ -10,15 +10,18 @@ clearSpan = () => {
     s.innerHTML = "";
 }
 
-solve = () => {
+getCoeff = () => {
     x1 = Number(document.getElementById("x1").value);
     y1 = Number(document.getElementById("y1").value);
     c1 = Number(document.getElementById("c1").value);
     x2 = Number(document.getElementById("x2").value);
     y2 = Number(document.getElementById("y2").value);
     c2 = Number(document.getElementById("c2").value);
-    clearSpan();
+}
 
+solve = () => {
+    getCoeff();
+    clearSpan();
     Dx = (y2 * c1) - (y1 * c2);
     Dy = (x1 * c2) - (x2 * c1);
     C = (x1 * y2) - (x2 * y1);
@@ -46,6 +49,9 @@ solve = () => {
     }
     document.getElementById("x").value = x;
     document.getElementById("y").value = y;
+    px = Origin.x + det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2) * scale;
+    py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
+    c.fillText("("+ Math.round(x*1000)/1000 +", " + Math.round(y*1000)/1000 + ")", px, py-5);
 };
 
 document.querySelector('button').onclick = solve;

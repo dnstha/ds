@@ -7,6 +7,7 @@ console.log(canvas);
 let c = canvas.getContext('2d');
 let m1,m2, b1,b2; // Slopes and y-intercepts of the lines
 let color1,color2;
+let p; // Intersection point
 let scale = 25;
 const Origin = {
     x: canvas.width/2,
@@ -106,12 +107,7 @@ init();
 
 document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", () => {
     init();
-    x1 = Number(document.getElementById("x1").value);
-    y1 = Number(document.getElementById("y1").value);
-    c1 = Number(document.getElementById("c1").value);
-    x2 = Number(document.getElementById("x2").value);
-    y2 = Number(document.getElementById("y2").value);
-    c2 = Number(document.getElementById("c2").value);
+    getCoeff();
     color1 = '#df00bb';
     color2 = '#0004ff';
     m1 = -x1/y1;
@@ -136,6 +132,11 @@ document.querySelectorAll("input").forEach(element => element.addEventListener("
     }
     line(m1, b1, color1);
     line(m2, b2, color2);
+    if(m1 != m2) {
+        let px = Origin.x + det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2) * scale;
+        let py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
+        point(px, py, 'red');
+    }
 }));
 
 
