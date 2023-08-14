@@ -9,22 +9,19 @@ let p1, p2; // Intersection point on X_axis
 let scale = 25;
 vertex = new Point(Origin.x, Origin.y);
 
-curve = (a, vertex_X, Vertex_Y, color) => {
-    vertex_X *= scale;
-    Vertex_Y *= scale;
+curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
+    c.strokeStyle = color;
     c.beginPath();
     for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x+i+vertex_X, Origin.y-i*i*a-Vertex_Y);
+        c.lineTo(PlotX(vertex_X)+i, PlotY(vertex_Y)-i*i*a);
     }
-    c.strokeStyle = color;
     c.stroke();
     c.beginPath();
     for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x-i+vertex_X, Origin.y-i*i*a-Vertex_Y);
+        c.lineTo(PlotX(vertex_X)-i, PlotY(vertex_Y)-i*i*a);
     }
     c.lineWidth = 2;
-    c.strokeStyle = color;
     c.stroke();
 }
 
@@ -44,7 +41,7 @@ graph = () => {
     if(A != 0) {
         curve(A, vertex.x, vertex.y, color);
         // Vertex
-        point(Origin.x + scale*vertex.x, Origin.y - scale*vertex.y, 'black');
+        point(PlotX(vertex.x), PlotY(vertex.y), 'black');
     }
 }
 

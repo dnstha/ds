@@ -11,6 +11,18 @@ const Origin = {
     y: GRAPH.height/2
 };
 
+scalePoint = (x) => {
+    return x*graphScale;
+}
+
+// These two functions plot the given coordinates with reference to the scale and position of the graph
+PlotX = (x) => {
+    return Origin.x + scalePoint(x);
+}
+PlotY = (y) => {
+    return Origin.y - scalePoint(y);
+}
+
 xAxis = (color) => {
     G.lineWidth = 2;
     G.beginPath();
@@ -67,17 +79,16 @@ yGrids = () => {
 }
 
 line = (slope, yIntercept, color) => {
-    yIntercept *= graphScale;
     G.lineWidth = 2;
     G.strokeStyle = color;
     G.beginPath();
     for(let i=0; i<GRAPH.width/2;i++){
-        G.lineTo(Origin.x+i, Origin.y-i*slope-yIntercept);
+        G.lineTo(PlotX(i), Origin.y-i*slope-scalePoint(yIntercept));
     }
     G.stroke();
     G.beginPath();
     for(let i=0; i<GRAPH.width/2;i++){
-        G.lineTo(Origin.x-i, Origin.y+i*slope-yIntercept);        
+        G.lineTo(PlotY(-i), Origin.y+i*slope-scalePoint(yIntercept));        
     }
     G.stroke();
 }
