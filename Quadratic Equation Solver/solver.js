@@ -35,16 +35,22 @@ solve = () => {
                 x2 = swap;
             }
             c.font = "bold 24px times"
-            c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", Origin.x + scale*x1 - 110, Origin.y-5);
-            c.fillText("("+ Math.round(x2*1000)/1000 +", " + "0)", Origin.x + scale*x2 + 3, Origin.y-5);
+            c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1) - 110, Origin.y-5);
+            c.fillText("("+ Math.round(x2*1000)/1000 +", " + "0)", PlotX(x2) + 3, Origin.y-5);
             if(vertex.y > 0 && A<0 || vertex.y < 0 && A>0) {
-                point(Origin.x + scale*x1, Origin.y, '#ff0f0f');
-                point(Origin.x + scale*x2, Origin.y, '#ff0f0f');
+                point(PlotX(x1), Origin.y, '#ff0f0f');
+                point(PlotX(x2), Origin.y, '#ff0f0f');
             }
         }
         else if(discriminant == 0) {
             x1 = -B / denominator;
             x2 = x1;
+            c.font = "bold 24px times"
+            if(A>0) {
+                c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1), Origin.y+22);
+            }else if (A<0){
+                c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1), Origin.y-5);
+            }
         }
         else if(discriminant < 0) {
             x = -B / denominator;
