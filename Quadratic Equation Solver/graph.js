@@ -12,6 +12,7 @@ vertex = new Point(Origin.x, Origin.y);
 curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
     c.strokeStyle = color;
+    c.lineWidth = 2;
     c.beginPath();
     for(let i=0; i<canvas.width/2;i++){
         c.lineTo(PlotX(vertex_X)+i, PlotY(vertex_Y)-i*i*a);
@@ -21,7 +22,6 @@ curve = (a, vertex_X, vertex_Y, color) => {
     for(let i=0; i<canvas.width/2;i++){
         c.lineTo(PlotX(vertex_X)-i, PlotY(vertex_Y)-i*i*a);
     }
-    c.lineWidth = 2;
     c.stroke();
 }
 
