@@ -1,8 +1,8 @@
-let canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let c = canvas.getContext('2d');
+const c = canvas.getContext('2d');
 
 let rect = canvas.getBoundingClientRect();
 canvas.width = rect.width * devicePixelRatio;
@@ -11,21 +11,21 @@ c.scale(devicePixelRatio, devicePixelRatio);
 canvas.style.width = rect.width + "px";
 canvas.style.height = rect.height + "px";
 
-var mouse = {
+let mouse = {
     x: undefined,
     y: undefined
 }
 
-var maxRadius = 40;
-var minRadius = 3;
+const maxRadius = 50;
+let minRadius = 3;
 
-var colorArray = [
-    'red',
+let colorArray = [
+    'maroon',
     'black',
-    'blue',
+    'skyblue',
     'lavender',
     'pink',
-    'green',
+    'limegreen',
     'white'
 ];
 
@@ -88,26 +88,26 @@ function Circle(x, y, dx, dy, radius) {
     }
 }
 
-var circleArray = []; //creating an array to store the circles
+let circleArray = []; //creating an array to store the circles
 
 function init() {
     circleArray = [];
 
-    for(var i = 0; i < 1000; i++) {
-        var radius = Math.random() * 3 + 1;
-        var x = Math.random() * (innerWidth - 2*radius) + radius;
-        var y = Math.random() * (innerHeight - 2*radius) + radius;
-        var dx = (Math.random() - 0.5);
-        var dy = (Math.random() - 0.5);
+    for(let i = 0; i < 900; i++) {
+        let radius = Math.random() * 3 + 1;
+        let x = Math.random() * (innerWidth - 2*radius) + radius;
+        let y = Math.random() * (innerHeight - 2*radius) + radius;
+        let dx = (Math.random() - 0.5);
+        let dy = (Math.random() - 0.5);
         circleArray.push(new Circle(x, y, dx, dy, radius));
     }
 }
 
 function animation() {
     requestAnimationFrame(animation);
-    c.clearRect(0,0,innerWidth,innerHeight); // Clearing the canvas so the circles don't overlap
+    c.clearRect(0, 0, innerWidth, innerHeight); // Clearing the canvas so the circles don't overlap
 
-    for (var i = 0; i < circleArray.length; i++) {
+    for (let i = 0; i < circleArray.length; i++) {
         circleArray[i].update();
     }
 }

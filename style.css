@@ -47,10 +47,6 @@ canvas {
     transform: scale(1.1);
     text-shadow: 10px 8px 8px rgba(255, 255, 255, 0.8);
 }
-
-/* main {
-    max-width: fit-content;
-} */
 .mainTxt {
     position: absolute;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
