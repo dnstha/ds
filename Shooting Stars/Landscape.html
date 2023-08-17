@@ -13,12 +13,18 @@
             position: absolute;
             /* display: block; */
         }
+        #BG {
+            z-index: -1;
+        }
     </style>
     <body>
-        <canvas>
+        <canvas id = "BG">
+        </canvas>
+        <canvas id="stars">
         </canvas>
         <script src = "../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
         <script src = "../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+        <script src="background.js"></script>
         <script src="shootingStar.js"></script>
     </body>
 </html>
