@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel = "icon" href = "../Logo.svg">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>GRAVITY SIMULATION</title>
+</head>
+<body>
+    <div class="controls">
+        <button id="reset">Restart</button>
+        <select id="values">
+            <option value="1" selected>Earth</option>
+            <option value="0.1654">Moon</option>
+            <option value="0.383">Mercury</option>
+            <option value="0.904">Venus</option>
+            <option value="0.38">Mars</option>
+            <option value="2.528">Jupiter</option>
+            <option value="1.065">Saturn</option>
+            <option value="0.886">Uranus</option>
+            <option value="1.14">Neptune</option>
+            <option value="0.08333">Pluto</option>
+            <option value="27.9">Sun</option>
+        </select>
+    </div>
+    <div class="container">
+        <div class="ball" id="ball"></div>
+    </div>
+    <script type="application/javascript" src="script.js"></script>
+</body>
+</html>
