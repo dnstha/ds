@@ -18,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     width: 500px;
-    height: 500px;
+    height: 90vh;
     border: 5px solid #afafaf;
     z-index: -1;
 }
