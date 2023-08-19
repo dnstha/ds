@@ -39,6 +39,16 @@ connect = (x1, y1, x2, y2) => {
     c.stroke();
 }
 
+// Connect given pionts with the given color
+connectColor = (x1, y1, x2, y2, color) => {
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x2, y2);
+    c.strokeStyle = color;
+    c.lineWidth = 2;
+    c.stroke();
+}
+
 point = (x, y, color) => {
     c.beginPath();
     c.arc(x, y, 3, 0, Math.PI * 2, true);

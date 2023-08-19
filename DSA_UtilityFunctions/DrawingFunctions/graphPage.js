@@ -1,15 +1,17 @@
-let GRAPH = document.getElementById('GraphPage');
+const GRAPH = document.getElementById('GraphPage');
 GRAPH.width = window.innerWidth;
 GRAPH.height = window.innerHeight;
 console.log(GRAPH);
 
-let G = GRAPH.getContext('2d');
+const G = GRAPH.getContext('2d');
 
 let graphScale = 25;
 const Origin = {
     x: GRAPH.width/2,
     y: GRAPH.height/2
 };
+let graphColor ='black';
+
 
 scalePoint = (x) => {
     return x*graphScale;
@@ -42,8 +44,12 @@ yAxis = (color) => {
     G.stroke();
 }
 
-xGrids = () => {
-    G.strokeStyle = 'rgba(0,0,0, 0.2)';
+xGrids = (color) => {
+    if(color == 'black') {
+        G.strokeStyle = 'rgba(0,0,0, 0.2)';
+    }else{
+        G.strokeStyle = 'rgba(200,200,200, 0.2)';
+    }
     for(let j = 1; j < Math.floor(GRAPH.height/graphScale); j++) {
         G.beginPath();
         for (let i = 0; i < GRAPH.width; i++) {
@@ -60,8 +66,12 @@ xGrids = () => {
     }
 }
 
-yGrids = () => {
-    G.strokeStyle = 'rgba(0,0,0, 0.2)';
+yGrids = (color) => {
+    if(color == 'black') {
+        G.strokeStyle = 'rgba(0,0,0, 0.2)';
+    }else{
+        G.strokeStyle = 'rgba(200,200,200, 0.2)';
+    }
     for(let j = 1; j < Math.floor(GRAPH.width/graphScale); j++) {
         G.beginPath();
         for (let i = 0; i < GRAPH.height; i++) {
@@ -97,16 +107,16 @@ drawGraph = () => {
     G.clearRect(0,0,GRAPH.width, GRAPH.height);
     Origin.x = GRAPH.width/2;
     Origin.y = GRAPH.height/2;
-    G.fillStyle = "black";
+    G.fillStyle = graphColor;
     G.font = "bold 24px times";
     G.fillText("O", Origin.x - 22, Origin.y + 20);
     G.fillText("X", GRAPH.width - 24, Origin.y + 20);
     G.fillText("Y", Origin.x - 22, 20);
 
-    xGrids();
-    yGrids();
-    xAxis('black');
-    yAxis('black');
+    xGrids(graphColor);
+    yGrids(graphColor);
+    xAxis(graphColor);
+    yAxis(graphColor);
 }
 
 drawGraph();
