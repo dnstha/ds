@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Linear Equations Solver</title>
+        <title>UNIT CIRCLE ANIMATION</title>
         <meta charset="utf-8">
         <link rel = "icon" href = "../Logo.svg">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" type = "text/css" href="style.css">
     </head>
     <body>
+        <div class="btns">
+            <div>
+                <label for="Angles">Initial &ang;XOP:</label>
+            </div>
+            <select id = "Angles">
+                <option value="choose" selected>Select</option>
+                <option value="15">15&deg;</option>
+                <option value="30">30&deg;</option>
+                <option value="45">45&deg;</option>
+                <option value="60">60&deg;</option>
+                <option value="90">90&deg;</option>
+                <option value="120">120&deg;</option>
+                <option value="135">135&deg;</option>
+                <option value="150">150&deg;</option>
+                <option value="180">180&deg;</option>
+                <option value="210">210&deg;</option>
+                <option value="225">225&deg;</option>
+                <option value="240">240&deg;</option>
+                <option value="270">270&deg;</option>
+                <option value="300">300&deg;</option>
+                <option value="330">330&deg;</option>
+                <option value="345">345&deg;</option>
+           </select>
+            <button id = "reset"><i class="fa-solid fa-rotate-right"></i></button>
+            <button id = "plps"><i class="fa-solid fa-play"></i></button>
+        </div>
         <canvas id = "GraphPage"></canvas>
         <canvas id = "circle"></canvas>
         <canvas id="animate"></canvas>
