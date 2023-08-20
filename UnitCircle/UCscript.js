@@ -35,10 +35,12 @@ movePoints = () => {
     }
     OA = Math.round((movingPoint.x - Origin.x)/scale * 100000)/100000;
     AP = Math.round((Origin.y - movingPoint.y)/scale * 100000)/100000;
-    c.strokeStyle = lightColors[1];
-    c.beginPath();
-    c.arc(Origin.x, Origin.y, 40, 0, -angle, true);
-    c.stroke();
+    if(angle > 0) {
+        c.strokeStyle = lightColors[1];
+        c.beginPath();
+        c.arc(Origin.x, Origin.y, 40, 0, -angle, true);
+        c.stroke();    
+    }
     connectColor(UnitCircle.x, UnitCircle.y, movingPoint.x, movingPoint.y, 'skyblue'); // OP
     connectColor(UnitCircle.x, UnitCircle.y, movingPoint.x, Origin.y, 'magenta'); // OA
     if(getDist(movingPoint.x, movingPoint.y, movingPoint.x, Origin.y) > 1) {
@@ -55,16 +57,17 @@ movePoints = () => {
     c.font = 'bold 25px times';
 
     c.fillStyle = lightColors[1];
-    c.fillText("\u2022 \u2220XOP" + " = " + Math.round(deg(angle)*1000)/1000 + "\xB0", 10, 30);
+    c.fillText("\u2022 \u2220XOP" + " = " + Math.round(deg(angle)*1000)/1000 + "\xB0", 15, 30);
 
     c.fillStyle = 'skyblue';
-    c.fillText("\u2022 OP = 1 Unit", 10, 55);
+    c.fillText("\u2022 OP = 1 Unit", 15, 55);
 
     c.fillStyle = 'magenta';
-    c.fillText("\u2022 cos\u2220XOP" + " = OA = " + OA, 10, 80);
+    c.fillText("\u2022 cos\u2220XOP" + " = OA = " + OA, 15, 80);
 
     c.fillStyle = 'yellow';
-    c.fillText("\u2022 sin\u2220XOP" + " = AP = " + AP, 10, 105);
+    c.fillText("\u2022 sin\u2220XOP" + " = AP = " + AP, 15, 105);
+    console.log(angle);
 }
 
 optAngle = 0;
@@ -85,6 +88,10 @@ function animate() {
 init();
 animate();
 
+document.getElementById("reverse").addEventListener('click', function(){
+    increment *= -1;
+});
+
 document.querySelector('select').addEventListener('change', () => {
     if(document.getElementById("Angles").value == 'choose') {
         optAngle = rad(0.5);
@@ -93,4 +100,5 @@ document.querySelector('select').addEventListener('change', () => {
     }
     init();
     pp = false;
+    document.getElementById("plps").style.color = lightColors[1];
 });
