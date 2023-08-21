@@ -42,6 +42,6 @@ addEventListener('resize', function() {
     circlePage.height = window.innerHeight;
     drawCircle();
     ctx.font = 'bold 25px times';
-    writeText(ctx, 'Scale: 10 boxes = 1 Unit', 15, ellipsePage.height - 50, '#cfffee');
+    writeText(ctx, 'Scale: 10 boxes = 1 Unit', 15, circlePage.height - 50, '#cfffee');
 });
 drawCircle();
