@@ -45,6 +45,7 @@ button {
     height: 3rem;
     border-radius: 10px;
     transition-duration: 60ms;
+    cursor: pointer;
 }
 button:active {
     transform: scale(0.97);

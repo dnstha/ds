@@ -67,7 +67,6 @@ movePoints = () => {
 
     c.fillStyle = 'yellow';
     c.fillText("\u2022 sin\u2220XOP" + " = AP = " + AP, 15, 105);
-    console.log(angle);
 }
 
 optAngle = 0;
