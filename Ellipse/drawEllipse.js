@@ -38,7 +38,7 @@ function drawEllipse(){
     ctx.clearRect(0, 0, ellipsePage.width, ellipsePage.height);
     Origin.x = ellipsePage.width/2;
     Origin.y = ellipsePage.height/2;
-    majorAxis = scale * randomInt(5, 10);
+    majorAxis = scale * randomInt(5, 15);
     minorAxis = scale * randomInt(2, 9);
     while(minorAxis >= majorAxis) {
         minorAxis = scale * randomInt(2, 9);
@@ -46,7 +46,12 @@ function drawEllipse(){
     ellipse = new Ellipse(Origin.x, Origin.y, majorAxis, minorAxis);
     f1 = new Plot(Origin.x - ellipse.focalLength, Origin.y);
     f2 = new Plot(Origin.x + ellipse.focalLength, Origin.y);
+    connectColorCtx(ctx, Origin.x, Origin.y - minorAxis, Origin.x, Origin.y + minorAxis, 'yellow');
+    connectColorCtx(ctx, Origin.x - majorAxis, Origin.y, Origin.x + majorAxis, Origin.y, 'blue');
     ellipse.draw();
+
+    ctx.font = 'bold 25px times';
+    writeText(ctx, 'Scale: 1 box = 1 Unit', 15, ellipsePage.height - 50, '#cfffee');
 }
 
 addEventListener('resize', function() {

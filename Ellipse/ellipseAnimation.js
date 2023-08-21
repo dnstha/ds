@@ -48,8 +48,8 @@ movePoints = () => {
     c.fillText("B", f2.x - 7, Origin.y + 17);
 
     c.font = 'bold 25px times';
-    AP = (Math.round(getDist(f1.x,f1.y, movingPoint.x, movingPoint.y) * 1000)/(1000 * graphScale));
-    BP = (Math.round(getDist(f2.x,f2.y, movingPoint.x, movingPoint.y) * 1000)/(1000 * graphScale));
+    AP = (Math.round(getDist(f1.x,f1.y, movingPoint.x, movingPoint.y)/graphScale * 100000)/100000);
+    BP = (Math.round(getDist(f2.x,f2.y, movingPoint.x, movingPoint.y)/graphScale * 100000)/100000);
     c.fillStyle = 'skyblue';
     c.fillText("\u2022 AP = " + AP, 15, 30);
 
@@ -58,8 +58,13 @@ movePoints = () => {
 
     c.fillStyle = 'lime';
     c.fillText("\u2022 AP + BP = " + (AP + BP), 15, 80);
-    c.fillText(`\u2022 A = (${Math.round((f1.x - Origin.x)*1000)/(graphScale*1000)}, 0)` , 15, 105);
-    c.fillText(`\u2022 B = (${Math.round((f2.x - Origin.x)*1000)/(graphScale*1000)}, 0)`, 15, 130);
+    c.fillText(`\u2022 A = (${Math.round((f1.x - Origin.x)/graphScale *100000)/100000}, 0)` , 15, 105);
+    c.fillText(`\u2022 B = (${Math.round((f2.x - Origin.x)/graphScale *100000)/100000}, 0)`, 15, 130);
+
+    c.fillStyle = 'blue';
+    c.fillText(`\u2022 Major Axis = ${majorAxis/scale*2}`, 15, 155);
+    c.fillStyle = 'yellow';
+    c.fillText(`\u2022 Minor Axis = ${minorAxis/scale*2}`, 15, 180);
 }
 
 function init() {

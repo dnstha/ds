@@ -49,10 +49,24 @@ connectColor = (x1, y1, x2, y2, color) => {
     c.stroke();
 }
 
+connectColorCtx = (c, x1, y1, x2, y2, color) => {
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x2, y2);
+    c.strokeStyle = color;
+    c.lineWidth = 2;
+    c.stroke();
+}
+
 point = (x, y, color) => {
     c.beginPath();
     c.arc(x, y, 3, 0, Math.PI * 2, true);
     c.fillStyle = color;
     c.fill();
     c.closePath();
+}
+
+writeText = (c, text, x, y, color) => {
+    c.fillStyle = color;
+    c.fillText(text, x, y);
 }
