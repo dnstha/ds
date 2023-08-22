@@ -47,7 +47,7 @@ function drawEllipse(){
     f1 = new Plot(Origin.x - ellipse.focalLength, Origin.y);
     f2 = new Plot(Origin.x + ellipse.focalLength, Origin.y);
     connectColorCtx(ctx, Origin.x, Origin.y - minorAxis, Origin.x, Origin.y + minorAxis, 'yellow');
-    connectColorCtx(ctx, Origin.x - majorAxis, Origin.y, Origin.x + majorAxis, Origin.y, 'blue');
+    connectColorCtx(ctx, Origin.x - majorAxis, Origin.y, Origin.x + majorAxis, Origin.y, 'cyan');
     ellipse.draw();
 
     ctx.font = 'bold 25px times';

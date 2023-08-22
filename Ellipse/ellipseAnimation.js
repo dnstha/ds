@@ -61,7 +61,7 @@ movePoints = () => {
     c.fillText(`\u2022 A = (${Math.round((f1.x - Origin.x)/graphScale *100000)/100000}, 0)` , 15, 105);
     c.fillText(`\u2022 B = (${Math.round((f2.x - Origin.x)/graphScale *100000)/100000}, 0)`, 15, 130);
 
-    c.fillStyle = 'blue';
+    c.fillStyle = 'cyan';
     c.fillText(`\u2022 Major Axis = ${majorAxis/scale*2}`, 15, 155);
     c.fillStyle = 'yellow';
     c.fillText(`\u2022 Minor Axis = ${minorAxis/scale*2}`, 15, 180);

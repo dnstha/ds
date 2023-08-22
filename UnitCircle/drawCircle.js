@@ -31,17 +31,19 @@ function Circle(x, y, radius) {
 function drawCircle(){
     graphColor = 'white';
     drawGraph();
+    xUnitGrids(ctx, 'white');
+    yUnitGrids(ctx, 'white');
     Origin.x = circlePage.width/2;
     Origin.y = circlePage.height/2;
     UnitCircle = new Circle(Origin.x, Origin.y, 250);
     UnitCircle.draw();
+    ctx.font = 'bold 25px times';
+    writeText(ctx, 'Scale: 10 boxes = 1 Unit', 15, circlePage.height - 50, '#cfffee');
 }
 
 addEventListener('resize', function() {
     circlePage.width = window.innerWidth;
     circlePage.height = window.innerHeight;
     drawCircle();
-    ctx.font = 'bold 25px times';
-    writeText(ctx, 'Scale: 10 boxes = 1 Unit', 15, circlePage.height - 50, '#cfffee');
 });
 drawCircle();

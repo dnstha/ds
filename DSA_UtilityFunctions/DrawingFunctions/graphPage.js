@@ -88,6 +88,50 @@ yGrids = (color) => {
     }
 }
 
+xUnitGrids = (G, color) => {
+    if(color == 'black') {
+        G.strokeStyle = 'rgba(0,0,0, 0.5)';
+    }else{
+        G.strokeStyle = 'rgba(255,255,255, 0.5)';
+    }
+    for(let j = 1; j < Math.floor(GRAPH.height/250); j++) {
+        G.beginPath();
+        for (let i = 0; i < GRAPH.width; i++) {
+            G.lineTo(i, Origin.y - 250*j);
+        }
+        G.stroke();
+    }
+    for(let j = 1; j < Math.floor(GRAPH.height/250); j++) {
+        G.beginPath();
+        for (let i = 0; i < GRAPH.width; i++) {
+            G.lineTo(i, Origin.y + 250*j);
+        }
+        G.stroke();
+    }
+}
+
+yUnitGrids = (G, color) => {
+    if(color == 'black') {
+        G.strokeStyle = 'rgba(0,0,0, 0.5)';
+    }else{
+        G.strokeStyle = 'rgba(255,255,255, 0.5)';
+    }
+    for(let j = 1; j < Math.floor(GRAPH.width/250); j++) {
+        G.beginPath();
+        for (let i = 0; i < GRAPH.height; i++) {
+            G.lineTo(Origin.x - 250*j, i);
+        }
+        G.stroke();
+    }
+    for(let j = 1; j < Math.floor(GRAPH.width/250); j++) {
+        G.beginPath();
+        for (let i = 0; i < GRAPH.height; i++) {
+            G.lineTo(Origin.x + 250*j, i);
+        }
+        G.stroke();
+    }
+}
+
 line = (slope, yIntercept, color) => {
     G.lineWidth = 2;
     G.strokeStyle = color;
