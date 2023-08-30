@@ -11,7 +11,8 @@ const Origin = {
     y: GRAPH.height/2
 };
 let graphColor ='black';
-
+let xAxisName = "X";
+let yAxisName = "Y";
 
 scalePoint = (x) => {
     return x*graphScale;
@@ -23,6 +24,11 @@ PlotX = (x) => {
 }
 PlotY = (y) => {
     return Origin.y - scalePoint(y);
+}
+
+axesNames = (X, Y) => {
+    G.fillText(X, GRAPH.width - 20 - 10*X.length, Origin.y + 20);
+    G.fillText(Y, Origin.x + 5, 20);
 }
 
 xAxis = (color) => {
@@ -44,6 +50,18 @@ yAxis = (color) => {
     G.stroke();
 }
 
+drawGrids = (O, range, j) => {
+    G.beginPath();
+    for (let i = 0; i < range; i++) {
+        if(O == Origin.x) {
+            G.lineTo(O + graphScale*j, i);
+        }else if(O == Origin.y){
+            G.lineTo(i, O + graphScale*j);
+        }
+    }
+    G.stroke();
+}
+
 xGrids = (color) => {
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.2)';
@@ -51,18 +69,8 @@ xGrids = (color) => {
         G.strokeStyle = 'rgba(200,200,200, 0.2)';
     }
     for(let j = 1; j < Math.floor(GRAPH.height/graphScale); j++) {
-        G.beginPath();
-        for (let i = 0; i < GRAPH.width; i++) {
-            G.lineTo(i, Origin.y - graphScale*j);
-        }
-        G.stroke();
-    }
-    for(let j = 1; j < Math.floor(GRAPH.height/graphScale); j++) {
-        G.beginPath();
-        for (let i = 0; i < GRAPH.width; i++) {
-            G.lineTo(i, Origin.y + graphScale*j);
-        }
-        G.stroke();
+        drawGrids(Origin.y, GRAPH.width, -j);
+        drawGrids(Origin.y, GRAPH.width, j);
     }
 }
 
@@ -73,22 +81,12 @@ yGrids = (color) => {
         G.strokeStyle = 'rgba(200,200,200, 0.2)';
     }
     for(let j = 1; j < Math.floor(GRAPH.width/graphScale); j++) {
-        G.beginPath();
-        for (let i = 0; i < GRAPH.height; i++) {
-            G.lineTo(Origin.x - graphScale*j, i);
-        }
-        G.stroke();
-    }
-    for(let j = 1; j < Math.floor(GRAPH.width/graphScale); j++) {
-        G.beginPath();
-        for (let i = 0; i < GRAPH.height; i++) {
-            G.lineTo(Origin.x + graphScale*j, i);
-        }
-        G.stroke();
+        drawGrids(Origin.x, GRAPH.height, -j);
+        drawGrids(Origin.x, GRAPH.height, j);
     }
 }
 
-xUnitGrids = (G, color) => {
+xUnitGrids = (color) => {
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.5)';
     }else{
@@ -110,7 +108,7 @@ xUnitGrids = (G, color) => {
     }
 }
 
-yUnitGrids = (G, color) => {
+yUnitGrids = (color) => {
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.5)';
     }else{
@@ -130,6 +128,10 @@ yUnitGrids = (G, color) => {
         }
         G.stroke();
     }
+}
+
+labels = () => {
+    
 }
 
 line = (slope, yIntercept, color) => {
@@ -154,8 +156,7 @@ drawGraph = () => {
     G.fillStyle = graphColor;
     G.font = "bold 24px times";
     G.fillText("O", Origin.x - 22, Origin.y + 20);
-    G.fillText("X", GRAPH.width - 24, Origin.y + 20);
-    G.fillText("Y", Origin.x - 22, 20);
+    axesNames(xAxisName, yAxisName);
 
     xGrids(graphColor);
     yGrids(graphColor);
