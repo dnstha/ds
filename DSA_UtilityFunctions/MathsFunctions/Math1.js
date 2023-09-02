@@ -101,3 +101,14 @@ modulus = (x) => {
         return x;
     }
 }
+
+// Inverse cos having range from 0 to 2PI
+invCos = (value, y) => {
+    if(y>=0) {
+        return Math.acos(value);
+    }else if(y<0){
+        return Math.acos(value) + Math.PI;
+    }else{
+        return 0;
+    }
+}

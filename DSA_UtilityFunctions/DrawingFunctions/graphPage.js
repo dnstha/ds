@@ -26,6 +26,15 @@ PlotY = (y) => {
     return Origin.y - scalePoint(y);
 }
 
+// These two functions change the given point of the page in terms of x-y plane coordinate
+toX = (x) => {
+    (x - Origin.x)/graphScale;
+}
+
+toY = (y) => {
+    (Origin.y - y)/graphScale;
+}
+
 axesNames = (X, Y) => {
     G.fillText(X, GRAPH.width - 20 - 10*X.length, Origin.y + 20);
     G.fillText(Y, Origin.x + 5, 20);
