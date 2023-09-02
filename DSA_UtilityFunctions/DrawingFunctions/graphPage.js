@@ -28,11 +28,11 @@ PlotY = (y) => {
 
 // These two functions change the given point of the page in terms of x-y plane coordinate
 toX = (x) => {
-    (x - Origin.x)/graphScale;
+    return (x - Origin.x)/graphScale;
 }
 
 toY = (y) => {
-    (Origin.y - y)/graphScale;
+    return (Origin.y - y)/graphScale;
 }
 
 axesNames = (X, Y) => {

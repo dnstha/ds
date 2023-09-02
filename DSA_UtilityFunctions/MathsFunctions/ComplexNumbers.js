@@ -4,6 +4,20 @@ function Complex(x, y) {
     this.y = y;
     this.r = Math.sqrt(this.x*this.x + this.y*this.y);
     this.arg = invCos(this.x/this.r, this.y);
+
+    this.translate = function(a, b) {
+        this.x += a;
+        this.y -= b;
+    }
+
+    // this.rotate = function(angle) {
+    //     cmplxMul(this, );
+    // }
+
+    this.enlarge = function(k, a, b) {
+        this.x = (this.x - a) * k + a;
+        this.y = (this.y - b) * k + b;
+    }
 }
 
 
@@ -35,3 +49,9 @@ cmplxDiv = (c1, c2) => {
     let y = det2(c1.x, -c1.y, c2.x, c2.y)/d;
     return new Complex(x,y);
 }
+
+// rotate using one complex number as a function
+// rotatePoint = (C, a, b) => {
+//     let D = new Complex(a, b);
+//     return cmplxMul(C, D);
+// }
