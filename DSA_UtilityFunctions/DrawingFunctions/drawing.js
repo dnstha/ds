@@ -58,6 +58,18 @@ connectColorCtx = (c, x1, y1, x2, y2, color) => {
     c.stroke();
 }
 
+connectColorFade = (x1,y1,x2,y2, alpha) => {
+    c.save();
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x2, y2);
+    c.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
+    c.lineWidth = 2;
+    c.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
+    c.stroke();
+    c.restore();
+}
+
 point = (x, y, color) => {
     c.beginPath();
     c.arc(x, y, 3, 0, Math.PI * 2, true);
