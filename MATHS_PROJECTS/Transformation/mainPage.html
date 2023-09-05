@@ -8,38 +8,37 @@
         <link rel="stylesheet" type = "text/css" href="style.css">
     </head>
     <body>
-        <!-- <div class="btns">
-            <div>
-                <label for="Angles">Initial &ang;POZ:</label>
-            </div>
-            <select id = "Angles">
-                <option value="choose" selected>0</option>
-                <option value="15">&pi;/12</option>
-                <option value="30">&pi;/6</option>
-                <option value="45">&pi;/4;</option>
-                <option value="60">&pi;/3;</option>
-                <option value="90">&pi;/2</option>
-                <option value="120">2&pi;/3</option>
-                <option value="135">3&pi;/4</option>
-                <option value="150">5&pi;/6</option>
-                <option value="180">&pi;</option>
-                <option value="210">7&pi;/6</option>
-                <option value="225">5&pi;/4</option>
-                <option value="240">4&pi;/3</option>
-                <option value="270">3&pi;/2</option>
-                <option value="300">5&pi;/3</option>
-                <option value="330">11&pi;/6</option>
-                <option value="345">23&pi;/12</option>
-                <option value="360">2&pi;</option>
-           </select>
-            <button id = "reset"><i class="fa-solid fa-rotate-right"></i></button>
-            <button id="reverse"><i class="fa-solid fa-left-right"></i></button>
-            <button id = "plps"><i class="fa-solid fa-play"></i></button>
-        </div> -->
         <canvas id = "GraphPage"></canvas>
         <canvas id = "shape"></canvas>
-        <!-- <canvas id="animate"></canvas> -->
-          
+        <form>
+            <h2>Enter your own coordinates:</h2>
+            <div class="point" id = 'A'>
+                <label for="x1">A</label>
+                (<input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>,
+                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>)
+            </div>
+            <div class="point" id = 'B'>
+                <label for="x2">B</label>
+                (<input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>,
+                <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>)
+            </div>
+            <div class="point" id = 'C'>
+                <label for="x3">C</label>
+                (<input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>,
+                <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>)
+            </div>
+            <div class="point" id = 'R'>
+                <label for="Rx">R</label>
+                (<input id = "Rx" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "Ry" type = "number" inputmode = "numeric" placeholder="y" required>)
+            </div>
+            <div class="point">
+                <label for="rotAngle">Angle =</label>
+                <input id = "rotAngle" type = "number" inputmode = "numeric" placeholder="&theta;&deg;" required>
+            </div>
+            <button type = "button" id = "MyBtn">Rotate</button>
+            <button type = "reset" id = "clear">Reset</button>
+        </form>
         <script type = "application/javascript" src="../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
         <script type = "application/javascript" src="../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
         <script type = "application/javascript" src="../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>

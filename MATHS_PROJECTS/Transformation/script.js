@@ -14,6 +14,46 @@ function Plot(x, y) {
 let rotAngle, angle, totAngle;
 let rotPoint;
 let nPoints; // number of points
+
+getCoeff = () => {
+    points[0].x = PlotX(Number(document.getElementById("x1").value));
+    points[0].y = PlotY(Number(document.getElementById("y1").value));
+    points[1].x = PlotX(Number(document.getElementById("x2").value));
+    points[1].y = PlotY(Number(document.getElementById("y2").value));
+    points[2].x = PlotX(Number(document.getElementById("x3").value));
+    points[2].y = PlotY(Number(document.getElementById("y3").value));
+    for(let i = 0; i<points.length; i++) {
+        initialPoints[i].x = points[i].x;
+        initialPoints[i].y = points[i].y;
+    }
+    rotPoint.x = Number(document.getElementById("Rx").value);
+    rotPoint.y = Number(document.getElementById("Ry").value);
+    rotAngle = Number(document.getElementById("rotAngle").value);
+    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
+}
+
+emptyCheck = () => {
+    let result = 1;
+    document.querySelectorAll("input").forEach(element => {
+        if(element.value == '' || element.value == 'null') {
+            result *= 0;
+        }else{
+            result *= 1;
+        }
+    });
+    return result;
+}
+
+solve = () => {
+    if(emptyCheck()){
+        init();
+        getCoeff();
+        // c.clearRect(0,0,canvas.width, canvas.height);
+    }else{
+        alert('Enter all the inputs!');
+    }
+};
+
 function init(){
     Origin.x = canvas.width/2;
     Origin.y = canvas.height/2;
@@ -152,9 +192,12 @@ function animate() {
 init();
 animate();
 
-addEventListener('click', function(event) {
-    // x = event.clientX;
-    // y = event.clientY;
-    // console.log(toX(x), toY(y));
-    init();
-});
+
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
+document.getElementById('MyBtn').onclick = solve;
+
+document.getElementById("clear").onclick = init;

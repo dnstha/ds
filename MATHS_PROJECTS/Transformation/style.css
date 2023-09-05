@@ -1,9 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     margin: 0;
     width: 100%;
     height: 100%;
     background: transparent;
     position: absolute;
+    color: #cfffee;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 #GraphPage {
     position: absolute;
@@ -20,6 +27,11 @@ body{
     background: transparent;
     z-index: 0;
 }
+form {
+    position: absolute;
+    top: 1rem;
+    right: 0.5rem;
+}
 .btns {
     position: absolute;
     display: flex;
@@ -31,14 +43,15 @@ body{
     z-index: 1;
 }
 button {
-    color: darkcyan;
-    background-color: #dfdfdf;
+    color: cyan;
+    background-color: black;
     margin-left: 1rem;
-    border: 2px solid black;
-    font-size: 3rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 50%;
+    margin-top: 0.4rem;
+    border: 2px solid #cfffee;
+    font-size: 2rem;
+    width: 7rem;
+    height: 2.6rem;
+    border-radius: 10px;
     transition-duration: 50ms;
 }
 button:active {
@@ -46,25 +59,27 @@ button:active {
     border-color: black;
     background-color: #cfffee;
     color: black;
-    box-shadow: 0 0 25px black;
+    box-shadow: 0 0 25px cyan;
 }
-#plps {
-    margin-right: 3rem;
-}
-select {
-    width: max-content;
-    height: 2rem;
-    font-size: 1rem;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: salmon;
-    color:#010050;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-label {
+.point {
     width: max-content;
     margin-right: 0.2rem;
     height: 2rem;
-    font-size: 1.2rem;
-    color: #0f0f0f;
+    font-size: 1.8rem;
+}
+input{
+    width: 4rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: aquamarine;
+    font-size: 1.5rem;
+}
+input[type = "number"]::-webkit-inner-spin-button {
+    display: none;
+}
+::placeholder{
+    color: #cfffee;
+    opacity: 0.55;
 }
