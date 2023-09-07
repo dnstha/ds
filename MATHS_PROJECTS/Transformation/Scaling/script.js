@@ -4,6 +4,7 @@ canvas.height = window.innerHeight;
 
 const c = canvas.getContext('2d');
 let initialPoints = [];
+let finalPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
@@ -11,25 +12,46 @@ function Plot(x, y) {
     this.x = x;
     this.y = y;
 }
-let rotAngle, angle, totAngle;
-let rotPoint;
+
+function Vertex(x, y, final_X, final_Y) {
+    this.x = x;
+    this.y = y;
+    this.final_X = final_X;
+    this.final_Y = final_Y;
+    this.dx = (this.final_X - this.x)/100;
+    this.dy = (this.final_Y - this.y)/100;
+
+    this.update = () => {
+        if(Math.round(this.x*1000)/1000 != Math.round(this.final_X*1000)/1000) {
+            this.x += this.dx;
+        }
+        if(Math.round(this.y*1000)/1000 != Math.round(this.final_Y*1000)/1000) {
+            this.y += this.dy;
+        }
+    }
+}
+
+let factor;
+let P;
 let nPoints; // number of points
 
 getCoeff = () => {
-    points[0].x = PlotX(Number(document.getElementById("x1").value));
-    points[0].y = PlotY(Number(document.getElementById("y1").value));
-    points[1].x = PlotX(Number(document.getElementById("x2").value));
-    points[1].y = PlotY(Number(document.getElementById("y2").value));
-    points[2].x = PlotX(Number(document.getElementById("x3").value));
-    points[2].y = PlotY(Number(document.getElementById("y3").value));
-    for(let i = 0; i<points.length; i++) {
-        initialPoints[i].x = points[i].x;
-        initialPoints[i].y = points[i].y;
+    initialPoints[0].x = PlotX(Number(document.getElementById("x1").value));
+    initialPoints[0].y = PlotY(Number(document.getElementById("y1").value));
+    initialPoints[1].x = PlotX(Number(document.getElementById("x2").value));
+    initialPoints[1].y = PlotY(Number(document.getElementById("y2").value));
+    initialPoints[2].x = PlotX(Number(document.getElementById("x3").value));
+    initialPoints[2].y = PlotY(Number(document.getElementById("y3").value));
+    P.x = Number(document.getElementById("Px").value);
+    P.y = Number(document.getElementById("Py").value);
+    factor = Number(document.getElementById("k").value);
+    finalPoints = [];
+    points = [];
+    for(let i = 0; i< initialPoints.length; i++) {
+        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+        finalPoints[i].scale(factor, P.x, P.y);
+        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
     }
-    rotPoint.x = Number(document.getElementById("Rx").value);
-    rotPoint.y = Number(document.getElementById("Ry").value);
-    rotAngle = Number(document.getElementById("rotAngle").value);
-    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
 }
 
 emptyCheck = () => {
@@ -48,7 +70,7 @@ solve = () => {
     if(emptyCheck()){
         init();
         getCoeff();
-        // c.clearRect(0,0,canvas.width, canvas.height);
+        //c.clearRect(0,0,canvas.width, canvas.height);
     }else{
         alert('Enter all the inputs!');
     }
@@ -61,20 +83,23 @@ function init(){
     drawGraph();
 
     initialPoints = [];
+    finalPoints = [];
     points = [];
     nPoints = 3;
-    rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
-    rotAngle = randomInt(-360,360);
-    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
-    totAngle = 0;
+    // if(!emptyCheck()) {
+    P = new Plot(randomInt(0,10), randomInt(0,10)); // Center of scaling
+    factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
+    // angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
     for(let i = 0; i<nPoints; i++) {
-        points.push(new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+        initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
         if(i>0) {
-            while(points[i-1].x == points[i].x && points[i-1].y == points[i].y) {
-                points[i] = new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+            while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
+                initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
             }
         }
-        initialPoints.push(new Plot(points[i].x, points[i].y));
+        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+        finalPoints[i].scale(factor, P.x, P.y);
+        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
     }
     c.lineJoin = "bevel"; // makes the corners smoother
 
@@ -82,21 +107,6 @@ function init(){
     //     p.scale(2, 0, 0);
     //     p.translate(0,0);
     //     p.rotate(270, 0, 0);
-    // });
-    // c.beginPath();
-    // c.lineWidth = 1.5;
-    // c.strokeStyle = 'darkblue';
-    // c.fillStyle = 'rgba(150,200,250, 0.6)';
-    // c.moveTo(points[0].x, points[0].y);
-    // for(let i = 0; i < points.length;i++){
-    //     c.lineTo(points[i].x, points[i].y);
-    // }
-    // c.closePath();
-    // c.fill();
-    // c.stroke();
-    
-    // points.forEach((p,i) => {
-    //     point(p.x, p.y, lightColors[i+1]);
     // });
 }
 
@@ -128,27 +138,25 @@ function animate() {
     c.fill();
     c.stroke();
 
-    for(let n = 0; n<points.length; n++) {
-        connectColorFade(PlotX(rotPoint.x), PlotY(rotPoint.y), initialPoints[n].x, initialPoints[n].y, 0.4);
+    for(let n = 0; n<initialPoints.length; n++) {
+        connectColorFade(PlotX(P.x), PlotY(P.y), initialPoints[n].x, initialPoints[n].y, 0.4);
     }
     initialPoints.forEach((p,i) => {
         point(p.x, p.y, lightColors[i+1]);
     });
 
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(PlotX(rotPoint.x), PlotY(rotPoint.y), points[n].x, points[n].y, 0.4);
+        connectColorFade(PlotX(P.x), PlotY(P.y), points[n].x, points[n].y, 0.4);
     }
     points.forEach((p,i) => {
         point(p.x, p.y, lightColors[i+1]);
-        if(Math.round(totAngle*1000)/1000 != Math.round(rotAngle*1000)/1000) {
-            p.rotate(angle, rotPoint.x, rotPoint.y);
-        }else{
-            angle = 0;
-        }
+        p.update();
+        // if(Math.round(totAngle*1000)/1000 != Math.round(rotAngle*1000)/1000) {
+        //     p.rotate(angle, P.x, P.y);
+        // }else{
+        //     angle = 0;
+        // }
     });
-
-    // Increasing the total angle each time this function is called
-    totAngle += angle;
 
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
@@ -169,12 +177,12 @@ function animate() {
     c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
 
     c.fillStyle = 'aqua';
-    c.fillText(`\u2022 Center of Rotation = R(${rotPoint.x}, ${rotPoint.y})`, 15, 125)
-    c.fillText(`\u2022 Rotation = ${Math.round(totAngle*1000)/1000}\xB0`, 15, 150)
+    c.fillText(`\u2022 Center = P(${P.x}, ${P.y})`, 15, 125)
+    c.fillText(`\u2022 Scale factor = ${factor}`, 15, 150)
 
 
     c.fillStyle = 'yellow';
-    c.fillText(`Rotated Points`, 15, 175);
+    c.fillText(`Scaled Points`, 15, 175);
     c.fillStyle = lightColors[1];
     c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 200);
     c.fillStyle = lightColors[2];
@@ -182,22 +190,14 @@ function animate() {
     c.fillStyle = lightColors[3];
     c.fillText(`\u2022 C(${Math.round(toX(points[2].x)*1000)/1000}, ${Math.round(toY(points[2].y)*1000)/1000})`, 15, 250);
     
-    // Connects to the centroid of the triangle
-    // connectColor(PlotX(rotPoint.x), PlotY(rotPoint.y), average(points[0].x, points[1].x, points[2].x), average(points[0].y, points[1].y, points[2].y), 'magenta');
     
-    point(PlotX(rotPoint.x), PlotY(rotPoint.y), 'aqua');
-    c.fillText('R', PlotX(rotPoint.x) + 5, PlotY(rotPoint.y) + 7); // labelling rotating Point
+    point(PlotX(P.x), PlotY(P.y), 'aqua');
+    c.fillText('P', PlotX(P.x) + 5, PlotY(P.y) + 7); // labelling rotating Point
 }
 
 init();
 animate();
 
-
-// document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
-//     if(event.key === "Enter") {
-//         solve();
-//     }
-// }));
 document.getElementById('MyBtn').onclick = solve;
 
 document.getElementById("clear").onclick = init;

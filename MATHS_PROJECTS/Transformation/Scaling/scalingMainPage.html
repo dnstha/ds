@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>ROTATION ANIMATION</title>
+        <title>ENLARGEMENT AND REDUCTION</title>
         <meta charset="utf-8">
         <link rel = "icon" href = "../../../Logo.svg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" type = "text/css" href="style.css">
+        <link rel="stylesheet" type = "text/css" href="../../../stylesForMathAnimations/tranformationStyles.css">
     </head>
     <body>
         <canvas id = "GraphPage"></canvas>
@@ -28,15 +28,15 @@
                 <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>)
             </div>
             <div class="point" id = 'R'>
-                <label for="Rx">R</label>
-                (<input id = "Rx" type = "number" inputmode = "numeric" placeholder="x" required>,
-                <input id = "Ry" type = "number" inputmode = "numeric" placeholder="y" required>)
+                <label for="Px">Center = P</label>
+                (<input id = "Px" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "Py" type = "number" inputmode = "numeric" placeholder="y" required>)
             </div>
             <div class="point">
-                <label for="rotAngle">Angle =</label>
-                <input id = "rotAngle" type = "number" inputmode = "numeric" placeholder="&theta;&deg;" required>
+                <label for="k">Scale Factor =</label>
+                <input id = "k" type = "number" inputmode = "numeric" placeholder="k" required>
             </div>
-            <button type = "button" id = "MyBtn">Rotate</button>
+            <button type = "button" id = "MyBtn">Scale</button>
             <button type = "reset" id = "clear">Reset</button>
         </form>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
