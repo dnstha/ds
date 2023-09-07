@@ -193,11 +193,11 @@ init();
 animate();
 
 
-document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
-    if(event.key === "Enter") {
-        solve();
-    }
-}));
+// document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+//     if(event.key === "Enter") {
+//         solve();
+//     }
+// }));
 document.getElementById('MyBtn').onclick = solve;
 
 document.getElementById("clear").onclick = init;
