@@ -87,7 +87,7 @@ function init(){
     points = [];
     nPoints = 3;
     // if(!emptyCheck()) {
-    P = new Plot(randomInt(0,10), randomInt(0,10)); // Center of scaling
+    P = new Plot(randomInt(-10,10), randomInt(-10,10)); // Center of scaling
     factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
     // angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
     for(let i = 0; i<nPoints; i++) {
