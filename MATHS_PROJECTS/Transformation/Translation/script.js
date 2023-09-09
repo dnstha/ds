@@ -24,6 +24,8 @@ addEventListener("resize", () => {
         // Call the init function here
         init();
     }
+    alert(widthChange);
+    alert(heightChange);
 });
 
 function Plot(x, y) {
