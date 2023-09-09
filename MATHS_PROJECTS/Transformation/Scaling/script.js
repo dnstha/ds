@@ -9,9 +9,24 @@ let points = []; // Moving point
 let scale = graphScale;
 
 addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
+    // Check if the window size has significantly changed
+    const widthChange = Math.abs(canvas.width - window.innerWidth);
+    const heightChange = Math.abs(canvas.height - window.innerHeight);
+
+    // Define a threshold for changes (you can adjust this)
+    const threshold = 0.01; // Adjust as needed
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Call the init function here
+        init();
+    }else{
+        graphColor = 'white';
+        drawGraph();
+    }
 });
 
 function Plot(x, y) {

@@ -14,7 +14,7 @@ addEventListener("resize", () => {
     const heightChange = Math.abs(canvas.height - window.innerHeight);
 
     // Define a threshold for changes (you can adjust this)
-    const threshold = 5; // Adjust as needed
+    const threshold = 0.01; // Adjust as needed
 
     if (widthChange > threshold || heightChange > threshold) {
         // Update the previous dimensions
@@ -23,9 +23,10 @@ addEventListener("resize", () => {
 
         // Call the init function here
         init();
+    }else{
+        graphColor = 'white';
+        drawGraph();
     }
-    alert(widthChange);
-    alert(heightChange);
 });
 
 function Plot(x, y) {
