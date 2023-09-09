@@ -70,6 +70,12 @@ solve = () => {
 };
 
 function init(){
+    const inputs = document.querySelectorAll('input');
+    for (let i = 0; i < inputs.length; i++) {
+        if (document.activeElement === inputs[i]) {
+            return; // Skip initialization if an input is focused
+        }
+    }
     Origin.x = canvas.width/2;
     Origin.y = canvas.height/2;
     graphColor = 'white';
