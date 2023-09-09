@@ -9,6 +9,11 @@ addEventListener('click', () => {
     init();
 });
 
+addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
 
 let gravity = 1/6;
 const groundLevel = canvas.height * 0.1;

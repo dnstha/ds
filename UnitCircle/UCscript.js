@@ -7,6 +7,11 @@ let OA, AP;
 let pp;
 let increment;
 
+addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
 
 document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
     pp = !(pp);

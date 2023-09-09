@@ -11,6 +11,12 @@ const Origin = {
     y: canvas.height/2
 };
 
+addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
 xAxis = (color) => {
     c.beginPath();
     for (let i = 0; i < canvas.width; i++) {

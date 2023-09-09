@@ -7,6 +7,12 @@ let initialPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
+addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
 function Plot(x, y) {
     this.x = x;
     this.y = y;
@@ -16,20 +22,22 @@ let rotPoint;
 let nPoints; // number of points
 
 getCoeff = () => {
-    points[0].x = PlotX(Number(document.getElementById("x1").value));
-    points[0].y = PlotY(Number(document.getElementById("y1").value));
-    points[1].x = PlotX(Number(document.getElementById("x2").value));
-    points[1].y = PlotY(Number(document.getElementById("y2").value));
-    points[2].x = PlotX(Number(document.getElementById("x3").value));
-    points[2].y = PlotY(Number(document.getElementById("y3").value));
-    for(let i = 0; i<points.length; i++) {
-        initialPoints[i].x = points[i].x;
-        initialPoints[i].y = points[i].y;
-    }
-    rotPoint.x = Number(document.getElementById("Rx").value);
-    rotPoint.y = Number(document.getElementById("Ry").value);
+    rotPoint = new Plot(Number(document.getElementById("Rx").value), Number(document.getElementById("Ry").value));
+    // points[0].x = PlotX(Number(document.getElementById("x1").value));
+    // points[0].y = PlotY(Number(document.getElementById("y1").value));
+    // points[1].x = PlotX(Number(document.getElementById("x2").value));
+    // points[1].y = PlotY(Number(document.getElementById("y2").value));
+    // points[2].x = PlotX(Number(document.getElementById("x3").value));
+    // points[2].y = PlotY(Number(document.getElementById("y3").value));
+    // for(let i = 0; i<points.length; i++) {
+    //     initialPoints[i].x = points[i].x;
+    //     initialPoints[i].y = points[i].y;
+    // }
     rotAngle = Number(document.getElementById("rotAngle").value);
-    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
+    for(let i = 0; i< nPoints; i++) {
+        initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
+        points.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+    }
 }
 
 emptyCheck = () => {
@@ -47,8 +55,6 @@ emptyCheck = () => {
 solve = () => {
     if(emptyCheck()){
         init();
-        getCoeff();
-        // c.clearRect(0,0,canvas.width, canvas.height);
     }else{
         alert('Enter all the inputs!');
     }
@@ -63,19 +69,24 @@ function init(){
     initialPoints = [];
     points = [];
     nPoints = 3;
-    rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
-    rotAngle = randomInt(-360,360);
-    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
-    totAngle = 0;
-    for(let i = 0; i<nPoints; i++) {
-        points.push(new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
-        if(i>0) {
-            while(points[i-1].x == points[i].x && points[i-1].y == points[i].y) {
-                points[i] = new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+    if(!emptyCheck()) {
+        rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
+        rotAngle = randomInt(-360,360);
+        for(let i = 0; i<nPoints; i++) {
+            points.push(new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+            if(i>0) {
+                while(points[i-1].x == points[i].x && points[i-1].y == points[i].y) {
+                    points[i] = new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+                }
             }
+            initialPoints.push(new Plot(points[i].x, points[i].y));
         }
-        initialPoints.push(new Plot(points[i].x, points[i].y));
+    }else{
+        getCoeff();
     }
+    totAngle = 0;
+    angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
+
     c.lineJoin = "bevel"; // makes the corners smoother
 
     // points.forEach(p => {

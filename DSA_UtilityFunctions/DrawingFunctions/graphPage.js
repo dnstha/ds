@@ -139,9 +139,9 @@ yUnitGrids = (color) => {
     }
 }
 
-labels = () => {
+// labels = () => {
     
-}
+// }
 
 line = (slope, yIntercept, color) => {
     G.lineWidth = 2;

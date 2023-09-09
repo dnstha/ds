@@ -18,13 +18,16 @@ const darkColors = [
     '#400036'
 ];
 
-
+/*
+Removed from the drawing.js file to avoid bugs like in transformation files
 addEventListener('resize', function() {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
 
     init(); 
 });
+*/
+
 
 function randomColor(colors) {
     return colors[Math.floor(Math.random() * colors.length)];

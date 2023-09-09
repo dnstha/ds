@@ -10,6 +10,12 @@ let p; // Intersection point
 let scale = 25;
 
 
+addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
 line = (slope, yIntercept, color) => {
     yIntercept *= scale;
     c.lineWidth = 2;

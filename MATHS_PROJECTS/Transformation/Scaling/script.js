@@ -8,6 +8,12 @@ let finalPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
+addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
 function Plot(x, y) {
     this.x = x;
     this.y = y;

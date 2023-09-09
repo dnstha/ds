@@ -8,6 +8,24 @@ let finalPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
+addEventListener("resize", () => {
+    // Check if the window size has significantly changed
+    const widthChange = Math.abs(canvas.width - window.innerWidth);
+    const heightChange = Math.abs(canvas.height - window.innerHeight);
+
+    // Define a threshold for changes (you can adjust this)
+    const threshold = 5; // Adjust as needed
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Call the init function here
+        init();
+    }
+});
+
 function Plot(x, y) {
     this.x = x;
     this.y = y;
@@ -70,12 +88,12 @@ solve = () => {
 };
 
 function init(){
-    const inputs = document.querySelectorAll('input');
-    for (let i = 0; i < inputs.length; i++) {
-        if (document.activeElement === inputs[i]) {
-            return; // Skip initialization if an input is focused
-        }
-    }
+    // const inputs = document.querySelectorAll('input');
+    // for (let i = 0; i < inputs.length; i++) {
+    //     if (document.activeElement === inputs[i]) {
+    //         return; // Skip initialization if an input is focused
+    //     }
+    // }
     Origin.x = canvas.width/2;
     Origin.y = canvas.height/2;
     graphColor = 'white';
@@ -194,6 +212,36 @@ document.getElementById('MyBtn').onclick = solve;
 
 document.getElementById("clear").onclick = init;
 
+/*
+The root cause of the bug is resize eventListener. Each time the input box is called, the resize event is fired and as a result the graph goes crazy
+
 addEventListener('resize', function() {
     alert("Called!");
 })
+
+
+This can be used to solve it
+
+let prevWidth = window.innerWidth;
+let prevHeight = window.innerHeight;
+
+// Add a resize event listener
+window.addEventListener("resize", () => {
+    // Check if the window size has significantly changed
+    const widthChange = Math.abs(prevWidth - window.innerWidth);
+    const heightChange = Math.abs(prevHeight - window.innerHeight);
+
+    // Define a threshold for changes (you can adjust this)
+    const threshold = 50; // Adjust as needed
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        prevWidth = window.innerWidth;
+        prevHeight = window.innerHeight;
+
+        // Call the init function here
+        init();
+    }
+});
+
+*/
