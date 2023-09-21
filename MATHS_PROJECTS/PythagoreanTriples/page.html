@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pythagorean Triplets</title>
+    <title>Pythagorean Triples</title>
     <style>
         *{
             padding: 0;
@@ -12,29 +12,90 @@
         body{
             background-color: #cfffee;
             background-attachment: fixed;
-            background-size: 100% 100%;
             background-repeat: no-repeat;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        main{
+            text-align: center;
+            align-content: center;
+        }
+        #fig{
+            z-index: -1;
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            background: linear-gradient(100deg, gold, cyan);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);   
+            width: 70%;
+            height: 50vh;
+
+        }
+        #heading{
+            font-size: 2.5rem;
+            color: skyblue;
+            background-color: #121826;
+        }
+        #prompt{
+            font-size: 1.8rem;
         }
         input[type = "number"]::-webkit-inner-spin-button {
             display: none;
+        }
+        input {
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            width:4rem;
+            height: 2rem;
+            border: 2px solid gold;
+            border-radius: 7px;
+            font-size: 1rem;
+        }
+        button {
+            border: 3px inset deepskyblue;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1rem;
+            width: 4rem;
+            height: 2rem;
+            background-color: cornsilk;
+            border-radius: 10px;
+            transition-duration: 60ms;
+        }
+        button:active {
+            transform: scale(0.97);
+            background-color: black;
+            color: #cfffee;
         }
         div{
             margin-top: 2rem;
             margin-left: 2rem;
         }
         li{
-            margin-left: 3rem;
+            margin-left: 40%;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <div>
-        <input id = "n" type="number" inputmode = "numeric" placeholder="No. of triples" required>
-        <button id = "myBtn">Get Triples</button>
-    </div>
-    <ol id="lst" type = "i">
+    <main>
+        <p id = 'heading'>
+            Pythagorean Triples
+        </p>
+        <div>
+            <p id = 'prompt'>How many Pythagorean Triples do you want?</p>
+            <input id = "n" type="number" inputmode = "numeric" placeholder="Enter" required>
+            <br>
+            <button id = "myBtn">Get</button>
+        </div>
+        <div id="fig">
 
+        </div>
+    </main>
+    <ol id="lst" type = "1">
     </ol>
+    <script type = "application/javascript" src="../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+    <script type = "application/javascript" src="../../DSA_UtilityFunctions/MathsFunctions/ComplexNumbers.js"></script>
     <script type = "application/javascript" src="script.js"></script>
     
 </body>
