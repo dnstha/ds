@@ -21,6 +21,13 @@ let corrCoeff = 0; // correlation coefficient
 
 const table = document.querySelector('table');
 const results = document.querySelector('#results');
+
+plotPoints = true;
+document.querySelector("#plot").style.textDecoration = "none";
+document.querySelector("#plot").style.color = 'aqua';
+
+
+
 function init() {
     X = [];
     Y = [];
@@ -36,20 +43,69 @@ function init() {
         <th>y</th>
     </tr>
     `;
-    plotPoints = true;
-    document.querySelector("#plot").style.color = 'aqua';
     results.innerHTML = "";
     M = 1;
 }
 
 init();
 
+function output() {
+    avgX = averageArr(X);
+    avgY = averageArr(Y);
+    const newListItem = document.createElement('tr');
+    let numerator = 0;
+    const denominator = {
+        x: 0,
+        y: 0
+    };
+
+    for (let i = 0; i < X.length; i++) {
+        dx = X[i] - avgX;
+        dy = Y[i] - avgY;
+        numerator += dx * dy;
+        denominator.x += dx * dx;
+        denominator.y += dy * dy;
+    }
+
+    corrCoeff = numerator / Math.sqrt(denominator.x * denominator.y)
+    Byx = corrCoeff * Math.sqrt(denominator.y / denominator.x);
+    let yInt = avgY - Byx*avgX;
+
+    if(plotPoints == true) {
+        newListItem.innerHTML = `<td>${toX(x)}</td><td>${toY(y)}</td>`
+    }else{
+        newListItem.innerHTML = `<td>${x}</td><td>${y}</td>`
+    }
+    table.append(newListItem);
+    if(modulus(corrCoeff) <= 1) {
+        if(yInt < 0) {
+            results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
+        <br>y = ${roundUp(Byx, 1000)}x - ${modulus(roundUp(yInt, 1000))}
+        `;
+        }else{
+            results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
+        <br>y = ${roundUp(Byx, 1000)}x + ${roundUp(yInt, 1000)}
+        `;
+        }
+    }else{
+        results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= `;
+    }
+    if(typeof Byx == "number") {
+        L.clearRect(0,0, canvas.width, canvas.height);
+        line(L, Byx, yInt, lineColor);
+    }
+}
+
 document.querySelector("#plot").addEventListener('click', function() {
     plotPoints = !(plotPoints);
     if(plotPoints == true) {
         document.querySelector("#plot").style.color = 'aqua';
+        document.querySelector("#plot").style.textDecoration = "none";
+        document.querySelector("#values").style.display = 'none';
     }else{
-        document.querySelector("#plot").style.color = '#cfffee';
+        document.querySelector("#plot").style.color = 'red';
+        document.querySelector("#plot").style.textDecoration = "line-through";
+        document.querySelector("#values").style.display = 'inline';
     }
     M = 0;
 });
@@ -57,6 +113,16 @@ document.querySelector("#plot").addEventListener('click', function() {
 document.querySelector("#reset").addEventListener('click', function() {
     init();
     M = 0;
+});
+
+document.querySelector("#add").addEventListener('click', function() {
+    M = 0;
+    x = Number(document.querySelector("#x").value);
+    y = Number(document.querySelector("#y").value);
+    point(PlotX(x), PlotY(y), 'aqua');
+    X.push(x);
+    Y.push(y);
+    output();
 });
 
 addEventListener('resize', function() {
@@ -86,11 +152,9 @@ addEventListener('click', event => {
         y = event.clientY;
         if(M!=0){
             point(x, y, 'aqua');
-            const newListItem = document.createElement('tr');
             X.push(toX(x));
             Y.push(toY(y));
-            avgX = averageArr(X);
-            avgY = averageArr(Y);
+            output();
             // dx = X.map((value) => {
             //     return (value - avgX);
             // });
@@ -108,44 +172,6 @@ addEventListener('click', event => {
             //     xy.push(dx[i]*dy[i]);
             // }
             // corrCoeff = summationArr(xy) / (Math.sqrt(summationArr(dxsq)) * Math.sqrt(summationArr(dysq)));
-
-            let numerator = 0;
-            const denominator = {
-                x: 0,
-                y: 0
-            };
-
-            for (let i = 0; i < X.length; i++) {
-                dx = X[i] - avgX;
-                dy = Y[i] - avgY;
-                numerator += dx * dy;
-                denominator.x += dx * dx;
-                denominator.y += dy * dy;
-            }
-
-            corrCoeff = numerator / Math.sqrt(denominator.x * denominator.y)
-            Byx = corrCoeff * Math.sqrt(denominator.y / denominator.x);
-            let yInt = avgY - Byx*avgX;
-
-            newListItem.innerHTML = `<td>${toX(x)}</td><td>${toY(y)}</td>`
-            table.append(newListItem);
-            if(modulus(corrCoeff) <= 1) {
-                if(yInt < 0) {
-                    results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
-                <br>y = ${roundUp(Byx, 1000)}x - ${modulus(roundUp(yInt, 1000))}
-                `;
-                }else{
-                    results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
-                <br>y = ${roundUp(Byx, 1000)}x + ${roundUp(yInt, 1000)}
-                `;
-                }
-            }else{
-                results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= `;
-            }
-            if(typeof Byx == "number") {
-                L.clearRect(0,0, canvas.width, canvas.height);
-                line(L, Byx, yInt, lineColor);
-            }
         }
         M++;
     }

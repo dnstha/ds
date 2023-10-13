@@ -8,6 +8,14 @@
         <link rel="stylesheet" type = "text/css" href="style.css">
     </head>
     <body>
+        <form id = "values">
+            <h2>Enter your own values:</h2>
+            <div>
+                (<input id = "x" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" type = "number" inputmode = "numeric" placeholder="y" required>)
+                <button type = "reset" id = "add">Add</button>
+            </div>
+        </form>
         <div class="btns">
             <button id = "reset"><i class="fa-solid fa-rotate-right"></i></button>
             <button id="plot">Plot</button>
@@ -15,8 +23,10 @@
         <span id = "results">
             
         </span>
+
         <table>
         </table>
+
         <canvas id = "GraphPage"></canvas>
         <canvas id = "points"></canvas>
         <canvas id="line"></canvas>

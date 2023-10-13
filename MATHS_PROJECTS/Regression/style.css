@@ -4,7 +4,7 @@ body{
     height: 100%;
     background: transparent;
     position: absolute;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 table{
     min-width: 8rem;
@@ -69,7 +69,7 @@ button:active {
     box-shadow: 0 0 25px aqua;
 }
 #plot {
-    font-size: 2rem;
+    font-size: 3rem;
     width: fit-content;
     height: max-content;
     border-radius: 1rem;
@@ -84,9 +84,41 @@ button:active {
     color:#cfffee;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 } */
-#results {
+span {
+    font-size: 1.5rem;
     position: fixed;
     color:#cfffee;
     top: 2%;
     right: 4%;
+}
+
+#add {
+    font-size: 2rem;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1rem;
+}
+form {
+    font-size: 1rem;
+    position: fixed;
+    color:#cfffee;
+    bottom: 20%;
+    right: 1%;
+    display: none;
+}
+input{
+    width: 4rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: aquamarine;
+    font-size: 1.5rem;
+}
+input[type = "number"]::-webkit-inner-spin-button {
+    display: none;
+}
+::placeholder{
+    color: #cfffee;
+    opacity: 0.55;
 }
