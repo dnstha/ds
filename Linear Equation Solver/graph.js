@@ -11,9 +11,24 @@ let scale = 25;
 
 
 addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
+    // Check if the window size has significantly changed
+    const widthChange = Math.abs(canvas.width - window.innerWidth);
+    const heightChange = Math.abs(canvas.height - window.innerHeight);
+
+    // Define a threshold for changes (you can adjust this)
+    const threshold = 0.01; // Adjust as needed
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Call the init function here
+        init();
+        graph();
+    }else{
+        graph();
+    }
 });
 
 line = (slope, yIntercept, color) => {
@@ -74,13 +89,6 @@ graph = () => {
         point(px, py, 'red');
     }
 }
-
-addEventListener("resize", function(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
-    graph();
-});
 
 document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", graph));
 
