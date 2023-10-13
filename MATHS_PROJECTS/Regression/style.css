@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+table{
+    min-width: 8rem;
+    border: 3px inset #cfffee;
+    border-collapse: collapse;
+    /* border-spacing: 0.5px; */
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+
+}
+td{
+    padding-left: 1rem;
+    color:aliceblue;
+    border: 1px inset gold;
+}
+th {
+    color: #cfffee;
+    border: 2px inset aquamarine;
+}
+#GraphPage {
+    position: fixed;
+    background: black;
+    z-index: -3;
+}
+#points {
+    position: fixed;
+    background: transparent;
+    z-index: -1;
+}
+#line{
+    position: fixed;
+    background: transparent;
+    z-index: -2;
+}
+.btns {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: end;
+    align-items: center;
+    bottom: 5%;
+    right: 1%;
+    z-index: 1;
+}
+button {
+    color:#cfffee;
+    background-color: #010100;
+    margin-left: 1rem;
+    border: 2px solid cyan;
+    font-size: 3rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    transition-duration: 50ms;
+}
+button:active {
+    transform: scale(0.96);
+    border-color: #cfffee;
+    color: aqua;
+    box-shadow: 0 0 25px aqua;
+}
+#plot {
+    font-size: 2rem;
+    width: fit-content;
+    height: max-content;
+    border-radius: 1rem;
+}
+/* select {
+    width: max-content;
+    height: 2rem;
+    font-size: 1rem;
+    border: 1px solid cyan;
+    border-radius: 5px;
+    background-color: #101010;
+    color:#cfffee;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+} */
+#results {
+    position: fixed;
+    color:#cfffee;
+    top: 2%;
+    right: 4%;
+}

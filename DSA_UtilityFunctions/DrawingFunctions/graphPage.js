@@ -143,19 +143,20 @@ yUnitGrids = (color) => {
     
 // }
 
-line = (slope, yIntercept, color) => {
-    G.lineWidth = 2;
-    G.strokeStyle = color;
-    G.beginPath();
+line = (context, slope, yIntercept, color) => {
+    yIntercept = scalePoint(yIntercept);
+    context.lineWidth = 2;
+    context.strokeStyle = color;
+    context.beginPath();
     for(let i=0; i<GRAPH.width/2;i++){
-        G.lineTo(PlotX(i), Origin.y-i*slope-scalePoint(yIntercept));
+        context.lineTo(Origin.x + i, Origin.y-i*slope-yIntercept);
     }
-    G.stroke();
-    G.beginPath();
+    context.stroke();
+    context.beginPath();
     for(let i=0; i<GRAPH.width/2;i++){
-        G.lineTo(PlotY(-i), Origin.y+i*slope-scalePoint(yIntercept));        
+        context.lineTo(Origin.x - i, Origin.y+i*slope-yIntercept);
     }
-    G.stroke();
+    context.stroke();
 }
 
 drawGraph = () => {

@@ -43,6 +43,27 @@ function average() {
     return avg/n;
 }
 
+function averageArr(Array) {
+    let avg = 0;
+    let n = Array.length;
+    for(let i = 0; i<n; i++) {
+        avg += Array[i];
+    }
+    return avg/n;
+}
+
+function summationArr(Array) {
+    let sum = 0;
+    for(let i = 0; i<Array.length; i++) {
+        sum += Array[i];
+    }
+    return sum;
+}
+
+roundUp = (number, place) => {
+    return Math.round(number * place)/place;
+}
+
 randomSign = () => {
     return Math.pow(-1, randomInt(2,3));
 }
