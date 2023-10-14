@@ -26,7 +26,6 @@ addEventListener('resize', function() {
         // Call the init function here
         init();
         graph();
-		alert(widthChange, heightChange);
     }else{
         graph();
     }
@@ -85,9 +84,15 @@ graph = () => {
     line(m1, b1, color1);
     line(m2, b2, color2);
     if(m1 != m2) {
-        let px = Origin.x + det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2) * scale;
-        let py = Origin.y - det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2) * scale;
+        let x = det2(c1,y1,c2,y2)/det2(x1,y1,x2,y2);
+        let y = det2(x1,c1,x2,c2)/det2(x1,y1,x2,y2);
+        let px = Origin.x + x * scale;
+        let py = Origin.y - y * scale;
         point(px, py, 'red');
+        if(document.querySelector("#x").value == x && document.querySelector("#y").value == y) {
+            c.font = "bold 24px times"
+            c.fillText("("+ roundUp(x, 1000) +", " + roundUp(y, 1000) + ")", px, py-5);
+        }
     }
 }
 
