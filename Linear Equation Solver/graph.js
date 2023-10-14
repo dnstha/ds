@@ -26,6 +26,7 @@ addEventListener('resize', function() {
         // Call the init function here
         init();
         graph();
+		alert(widthChange, heightChange);
     }else{
         graph();
     }
