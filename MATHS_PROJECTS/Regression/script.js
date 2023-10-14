@@ -4,7 +4,6 @@ canvas.width = Line.width = window.innerWidth;
 canvas.height = Line.height = window.innerHeight;
 const L = Line.getContext('2d');
 const c = canvas.getContext('2d');
-// const btn = document.querySelector('#reset').getBoundingClientRect();
 
 let plotPoints, M;
 let x, y, avgX, avgY;
@@ -48,6 +47,18 @@ function init() {
 }
 
 init();
+
+emptyCheck = () => {
+    let result = 1;
+    document.querySelectorAll("input").forEach(element => {
+        if(element.value == '' || element.value == 'null') {
+            result *= 0;
+        }else{
+            result *= 1;
+        }
+    });
+    return result;
+}
 
 function output() {
     avgX = averageArr(X);
@@ -117,13 +128,31 @@ document.querySelector("#reset").addEventListener('click', function() {
 
 document.querySelector("#add").addEventListener('click', function() {
     M = 0;
-    x = Number(document.querySelector("#x").value);
-    y = Number(document.querySelector("#y").value);
-    point(PlotX(x), PlotY(y), 'aqua');
-    X.push(x);
-    Y.push(y);
-    output();
+    if(emptyCheck()){
+        x = Number(document.querySelector("#x").value);
+        y = Number(document.querySelector("#y").value);
+        point(PlotX(x), PlotY(y), 'aqua');
+        X.push(x);
+        Y.push(y);
+        output();
+        document.querySelector("#x").focus();
+    }
 });
+
+document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter" && emptyCheck()) {
+        M = 0;
+        x = Number(document.querySelector("#x").value);
+        y = Number(document.querySelector("#y").value);
+        point(PlotX(x), PlotY(y), 'aqua');
+        X.push(x);
+        Y.push(y);
+        output();
+        document.querySelector("#x").value = "";
+        document.querySelector("#y").value = "";
+        document.querySelector("#x").focus();
+    }
+}));
 
 addEventListener('resize', function() {
     // Check if the window size has significantly changed

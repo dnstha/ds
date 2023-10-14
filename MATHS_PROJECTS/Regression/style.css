@@ -74,16 +74,7 @@ button:active {
     height: max-content;
     border-radius: 1rem;
 }
-/* select {
-    width: max-content;
-    height: 2rem;
-    font-size: 1rem;
-    border: 1px solid cyan;
-    border-radius: 5px;
-    background-color: #101010;
-    color:#cfffee;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-} */
+
 span {
     font-size: 1.5rem;
     position: fixed;
