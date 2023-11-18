@@ -94,7 +94,7 @@ window.onload = function() {
     function init() {
         circleArray = [];
 
-        for(let i = 0; i < 900; i++) {
+        for(let i = 0; i < 800; i++) {
             let radius = Math.random() * 3 + 1;
             let x = Math.random() * (innerWidth - 2*radius) + radius;
             let y = Math.random() * (innerHeight - 2*radius) + radius;
