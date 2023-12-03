@@ -177,35 +177,50 @@ function animate() {
         point(p.x, p.y, lightColors[i+1]);
     });
 
+    let startP = new Plot(15, 25); // Starting location of text
+    let gap = 25; // Gap between two lines
+    c.font = 'normal 25px verdana';
+    c.fillStyle = 'aqua';
+    c.fillText(`\u2022 Translation Vector = V(${V.x}, ${V.y})`, startP.x, startP.y);
+
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
-    c.fillText(`Initial Points`, 15, 25);
-    c.fillStyle = lightColors[1];
-    c.fillText(`\u2022 A(${Math.round(toX(initialPoints[0].x)*1000)/1000}, ${Math.round(toY(initialPoints[0].y)*1000)/1000})`, 15, 50);
-    c.fillText('A', initialPoints[0].x + 2, initialPoints[0].y - 2); // labelling initial A
-    c.fillText('A', points[0].x + 2, points[0].y - 2); // labelling moving A
+    c.fillText(`Initial Points`, startP.x, startP.y+gap);
+    for(let i = 0; i<3; i++) {
+        let Pname = String.fromCharCode(65+i);
+        c.fillStyle = lightColors[i+1];
+        c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+2));
+        c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
+        c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
+    }
+    // c.fillStyle = lightColors[1];
+    // c.fillText(`\u2022 A(${Math.round(toX(initialPoints[0].x)*1000)/1000}, ${Math.round(toY(initialPoints[0].y)*1000)/1000})`, 15, 50);
+    // c.fillText('A', initialPoints[0].x + 2, initialPoints[0].y - 2); // labelling initial A
+    // c.fillText('A', points[0].x + 2, points[0].y - 2); // labelling moving A
 
-    c.fillStyle = lightColors[2];
-    c.fillText(`\u2022 B(${Math.round(toX(initialPoints[1].x)*1000)/1000}, ${Math.round(toY(initialPoints[1].y)*1000)/1000})`, 15, 75);
-    c.fillText('B', initialPoints[1].x + 2, initialPoints[1].y - 2); // labelling initial B
-    c.fillText('B', points[1].x + 2, points[1].y - 2); // labelling moving B
+    // c.fillStyle = lightColors[2];
+    // c.fillText(`\u2022 B(${Math.round(toX(initialPoints[1].x)*1000)/1000}, ${Math.round(toY(initialPoints[1].y)*1000)/1000})`, 15, 75);
+    // c.fillText('B', initialPoints[1].x + 2, initialPoints[1].y - 2); // labelling initial B
+    // c.fillText('B', points[1].x + 2, points[1].y - 2); // labelling moving B
 
-    c.fillStyle = lightColors[3];
-    c.fillText(`\u2022 C(${Math.round(toX(initialPoints[2].x)*1000)/1000}, ${Math.round(toY(initialPoints[2].y)*1000)/1000})`, 15, 100);
-    c.fillText('C', initialPoints[2].x + 2, initialPoints[2].y - 2); // labelling initial C
-    c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
-
-    c.fillStyle = 'aqua';
-    c.fillText(`\u2022 Translation Vector = V(${V.x}, ${V.y})`, 15, 125)
+    // c.fillStyle = lightColors[3];
+    // c.fillText(`\u2022 C(${Math.round(toX(initialPoints[2].x)*1000)/1000}, ${Math.round(toY(initialPoints[2].y)*1000)/1000})`, 15, 100);
+    // c.fillText('C', initialPoints[2].x + 2, initialPoints[2].y - 2); // labelling initial C
+    // c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
 
     c.fillStyle = 'yellow';
-    c.fillText(`Translated Points`, 15, 155);
-    c.fillStyle = lightColors[1];
-    c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 180);
-    c.fillStyle = lightColors[2];
-    c.fillText(`\u2022 B(${Math.round(toX(points[1].x)*1000)/1000}, ${Math.round(toY(points[1].y)*1000)/1000})`, 15, 205);
-    c.fillStyle = lightColors[3];
-    c.fillText(`\u2022 C(${Math.round(toX(points[2].x)*1000)/1000}, ${Math.round(toY(points[2].y)*1000)/1000})`, 15, 230);
+    c.fillText(`Translated Points`, startP.x, startP.y + gap*5);
+    for(let i = 0; i<3; i++) {
+        let Pname = String.fromCharCode(65+i);
+        c.fillStyle = lightColors[i+1];
+        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+6));
+    }
+    // c.fillStyle = lightColors[1];
+    // c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 180);
+    // c.fillStyle = lightColors[2];
+    // c.fillText(`\u2022 B(${Math.round(toX(points[1].x)*1000)/1000}, ${Math.round(toY(points[1].y)*1000)/1000})`, 15, 205);
+    // c.fillStyle = lightColors[3];
+    // c.fillText(`\u2022 C(${Math.round(toX(points[2].x)*1000)/1000}, ${Math.round(toY(points[2].y)*1000)/1000})`, 15, 230);
 }
 
 init();
