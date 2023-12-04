@@ -13,11 +13,12 @@
         <form>
             <h2>Enter your own values:</h2>
             <div class="point" id = 'A'>
-                <label for="x1">A</label>
-                (<input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>,
-                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>)
+                <label for="x"  id = "lbl">A</label>
+                (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
             </div>
-            <div class="point" id = 'B'>
+            <button type="button" id = "Add">Add</button>
+            <!-- <div class="point" id = 'B'>
                 <label for="x2">B</label>
                 (<input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>,
                 <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>)
@@ -26,15 +27,15 @@
                 <label for="x3">C</label>
                 (<input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>,
                 <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>)
-            </div>
+            </div> -->
             <div class="point" id = 'R'>
                 <label for="Rx">R</label>
-                (<input id = "Rx" type = "number" inputmode = "numeric" placeholder="x" required>,
-                <input id = "Ry" type = "number" inputmode = "numeric" placeholder="y" required>)
+                (<input id = "Rx" class = "rotation" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "Ry" class = "rotation" type = "number" inputmode = "numeric" placeholder="y" required>)
             </div>
             <div class="point">
                 <label for="rotAngle">Angle =</label>
-                <input id = "rotAngle" type = "number" inputmode = "numeric" placeholder="&theta;&deg;" required>
+                <input id = "rotAngle" class = "rotation" type = "number" inputmode = "numeric" placeholder="&theta;&deg;" required>
             </div>
             <button type = "button" id = "MyBtn">Rotate</button>
             <button type = "reset" id = "clear">Reset</button>

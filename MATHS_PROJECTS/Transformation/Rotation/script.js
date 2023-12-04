@@ -6,6 +6,9 @@ const c = canvas.getContext('2d');
 let initialPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
+let charV = 0; // Changing char value
+let rotation = false;
+// let stablePoints, mobilesPoints;
 
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
@@ -38,26 +41,16 @@ let nPoints; // number of points
 
 getCoeff = () => {
     rotPoint = new Plot(Number(document.getElementById("Rx").value), Number(document.getElementById("Ry").value));
-    // points[0].x = PlotX(Number(document.getElementById("x1").value));
-    // points[0].y = PlotY(Number(document.getElementById("y1").value));
-    // points[1].x = PlotX(Number(document.getElementById("x2").value));
-    // points[1].y = PlotY(Number(document.getElementById("y2").value));
-    // points[2].x = PlotX(Number(document.getElementById("x3").value));
-    // points[2].y = PlotY(Number(document.getElementById("y3").value));
-    // for(let i = 0; i<points.length; i++) {
-    //     initialPoints[i].x = points[i].x;
-    //     initialPoints[i].y = points[i].y;
-    // }
     rotAngle = Number(document.getElementById("rotAngle").value);
-    for(let i = 0; i< nPoints; i++) {
-        initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
-        points.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-    }
+    // for(let i = 0; i< nPoints; i++) {
+    //     initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
+    //     points.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+    // }
 }
 
 emptyCheck = () => {
     let result = 1;
-    document.querySelectorAll("input").forEach(element => {
+    document.querySelectorAll(".rotation").forEach(element => {
         if(element.value == '' || element.value == 'null') {
             result *= 0;
         }else{
@@ -69,9 +62,10 @@ emptyCheck = () => {
 
 solve = () => {
     if(emptyCheck()){
+        rotation = true;
         init();
     }else{
-        alert('Enter all the inputs!');
+        alert('Enter Rotation Point and Angle properly!');
     }
 };
 
@@ -81,12 +75,13 @@ function init(){
     graphColor = 'white';
     drawGraph();
 
-    initialPoints = [];
-    points = [];
-    nPoints = 3;
-    if(!emptyCheck()) {
-        rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
-        rotAngle = randomInt(-360,360);
+    // Declaring the transformation points and values based on different conditions
+    if(charV == 0) {
+        // if(!emptyCheck()) {
+        document.querySelector("#lbl").innerText = "A";
+        initialPoints = [];
+        points = [];
+        nPoints = 3;
         for(let i = 0; i<nPoints; i++) {
             points.push(new Complex(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
             if(i>0) {
@@ -96,34 +91,24 @@ function init(){
             }
             initialPoints.push(new Plot(points[i].x, points[i].y));
         }
+        // }else{
+        //     getCoeff();
+        // }
+    }
+    if(!emptyCheck()){
+        rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
+        rotAngle = randomInt(-360,360);
     }else{
         getCoeff();
+    }
+    for(let i = 0; i<initialPoints.length; i++) {
+        points[i].x = initialPoints[i].x;
+        points[i].y = initialPoints[i].y;
     }
     totAngle = 0;
     angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
 
     c.lineJoin = "bevel"; // makes the corners smoother
-
-    // points.forEach(p => {
-    //     p.scale(2, 0, 0);
-    //     p.translate(0,0);
-    //     p.rotate(270, 0, 0);
-    // });
-    // c.beginPath();
-    // c.lineWidth = 1.5;
-    // c.strokeStyle = 'darkblue';
-    // c.fillStyle = 'rgba(150,200,250, 0.6)';
-    // c.moveTo(points[0].x, points[0].y);
-    // for(let i = 0; i < points.length;i++){
-    //     c.lineTo(points[i].x, points[i].y);
-    // }
-    // c.closePath();
-    // c.fill();
-    // c.stroke();
-    
-    // points.forEach((p,i) => {
-    //     point(p.x, p.y, lightColors[i+1]);
-    // });
 }
 
 function animate() {
@@ -131,8 +116,8 @@ function animate() {
     c.clearRect(0,0,canvas.width, canvas.height);
     
     c.lineWidth = 1.5;
-    c.strokeStyle = 'lime'; // Colors of the sides of the polygon
-    c.fillStyle = 'rgba(150,200,255, 0.4)'; // Shading color of the polygon
+    c.strokeStyle = 'lime'; // Colors of the sides of the stable polygon
+    c.fillStyle = 'rgba(150,200,255, 0.4)'; // Shading color of the stable polygon
 
     c.beginPath();
     c.moveTo(initialPoints[0].x, initialPoints[0].y);
@@ -143,8 +128,8 @@ function animate() {
     c.fill();
     c.stroke();
 
-    c.strokeStyle = 'gold'; // Colors of the sides of the polygon
-    c.fillStyle = 'rgba(207,255,238, 0.4)'; // Shading color of the polygon
+    c.strokeStyle = 'gold'; // Colors of the sides of the mobile polygon
+    c.fillStyle = 'rgba(207,255,238, 0.4)'; // Shading color of the mobile polygon
     c.beginPath();
     c.moveTo(points[0].x, points[0].y);
     for(let i = 0; i < points.length;i++){
@@ -152,7 +137,9 @@ function animate() {
     }
     c.closePath();
     c.fill();
-    c.stroke();
+    c.stroke();    
+
+
 
     for(let n = 0; n<points.length; n++) {
         connectColorFade(PlotX(rotPoint.x), PlotY(rotPoint.y), initialPoints[n].x, initialPoints[n].y, 0.4);
@@ -189,7 +176,7 @@ function animate() {
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
     c.fillText(`Initial Points`, startP.x, startP.y + gap*2);
-    for(let i = 0; i<3; i++) {
+    for(let i = 0; i<points.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
         c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+3));
@@ -212,11 +199,11 @@ function animate() {
     // c.fillText('C\'', points[2].x + 2, points[2].y - 2); // labelling moving C
 
     c.fillStyle = 'yellow';
-    c.fillText(`Rotated Points`, startP.x, startP.y + gap * 6);
-    for(let i = 0; i<3; i++) {
+    c.fillText(`Rotated Points`, startP.x, startP.y + gap * (points.length + 3));
+    for(let i = 0; i<points.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
-        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+7));
+        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+(points.length+4)));
     }
 
     // Old code
@@ -238,11 +225,48 @@ init();
 animate();
 
 
-// document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
-//     if(event.key === "Enter") {
-//         solve();
-//     }
-// }));
-document.getElementById('MyBtn').onclick = solve;
+document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        addPoint();
+    }
+}));
 
-document.getElementById("clear").onclick = init;
+function addPoint() {
+    if(charV == 0) {
+        initialPoints = [];
+        points = [];
+    }
+    if(charV<9) {
+        let x = document.querySelector('#x').value;
+        let y = document.querySelector('#y').value;
+        if(x == '' || x == 'null' || y == '' || y == 'null') {
+            alert("Enter both values!");
+            init();
+        }else{
+            charV++;
+            document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
+            initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
+            points.push(new Complex(initialPoints[charV-1].x, initialPoints[charV-1].y));
+            document.querySelector('#x').value = "";
+            document.querySelector('#y').value = "";
+            document.querySelector("#x").focus();
+            init();
+        }
+    }else{
+        alert('Polygon sides limit reached');
+    }
+}
+
+document.getElementById('MyBtn').onclick = function() {
+    solve();
+};
+
+document.getElementById("clear").onclick = function() {
+    charV = 0;
+    rotation = false;
+    init();
+};
+
+document.querySelector('#Add').onclick = function() {
+    addPoint();
+}
