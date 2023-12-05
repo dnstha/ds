@@ -7,7 +7,6 @@ let initialPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 let charV = 0; // Changing char value
-let rotation = false;
 
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
@@ -41,10 +40,6 @@ let nPoints; // number of points
 getCoeff = () => {
     rotPoint = new Plot(Number(document.getElementById("Rx").value), Number(document.getElementById("Ry").value));
     rotAngle = Number(document.getElementById("rotAngle").value);
-    // for(let i = 0; i< nPoints; i++) {
-    //     initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
-    //     points.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-    // }
 }
 
 emptyCheck = () => {
@@ -61,7 +56,6 @@ emptyCheck = () => {
 
 solve = () => {
     if(emptyCheck()){
-        rotation = true;
         init();
     }else{
         alert('Enter Rotation Point and Angle properly!');
@@ -76,7 +70,6 @@ function init(){
 
     // Declaring the transformation points and values based on different conditions
     if(charV == 0) {
-        // if(!emptyCheck()) {
         document.querySelector("#lbl").innerText = "A";
         initialPoints = [];
         points = [];
@@ -90,9 +83,6 @@ function init(){
             }
             initialPoints.push(new Plot(points[i].x, points[i].y));
         }
-        // }else{
-        //     getCoeff();
-        // }
     }
     if(!emptyCheck()){
         rotPoint = new Plot(randomInt(-10,10), randomInt(-10,10));
@@ -138,8 +128,7 @@ function animate() {
     c.fill();
     c.stroke();    
 
-
-
+    
     for(let n = 0; n<points.length; n++) {
         connectColorFade(PlotX(rotPoint.x), PlotY(rotPoint.y), initialPoints[n].x, initialPoints[n].y, 0.4);
     }
@@ -182,20 +171,7 @@ function animate() {
         c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
         c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
     }
-    // c.fillStyle = lightColors[1];
-    // c.fillText(`\u2022 A(${Math.round(toX(initialPoints[0].x)*1000)/1000}, ${Math.round(toY(initialPoints[0].y)*1000)/1000})`, startP.x, startP.y + gap*3);
-    // c.fillText('A', initialPoints[0].x + 2, initialPoints[0].y - 2); // labelling initial point
-    // c.fillText('A\'', points[0].x + 2, points[0].y - 2); // labelling moving point
-
-    // c.fillStyle = lightColors[2];
-    // c.fillText(`\u2022 B(${Math.round(toX(initialPoints[1].x)*1000)/1000}, ${Math.round(toY(initialPoints[1].y)*1000)/1000})`, startP.x, startP.y + gap * 4);
-    // c.fillText('B', initialPoints[1].x + 2, initialPoints[1].y - 2); // labelling initial B
-    // c.fillText('B\'', points[1].x + 2, points[1].y - 2); // labelling moving B
-
-    // c.fillStyle = lightColors[3];
-    // c.fillText(`\u2022 C(${Math.round(toX(initialPoints[2].x)*1000)/1000}, ${Math.round(toY(initialPoints[2].y)*1000)/1000})`, startP.x, startP.y + gap * 5);
-    // c.fillText('C', initialPoints[2].x + 2, initialPoints[2].y - 2); // labelling initial C
-    // c.fillText('C\'', points[2].x + 2, points[2].y - 2); // labelling moving C
+    
 
     c.fillStyle = 'yellow';
     c.fillText(`Rotated Points`, startP.x, startP.y + gap * (points.length + 3));
@@ -205,14 +181,6 @@ function animate() {
         c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+(points.length+4)));
     }
 
-    // Old code
-    // c.fillStyle = lightColors[1];
-    // c.fillText(`\u2022 A\'(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, startP.x, startP.y + gap * 7);
-    // c.fillStyle = lightColors[2];
-    // c.fillText(`\u2022 B\'(${Math.round(toX(points[1].x)*1000)/1000}, ${Math.round(toY(points[1].y)*1000)/1000})`, startP.x, startP.y + gap * 8);
-    // c.fillStyle = lightColors[3];
-    // c.fillText(`\u2022 C\'(${Math.round(toX(points[2].x)*1000)/1000}, ${Math.round(toY(points[2].y)*1000)/1000})`, startP.x, startP.y + gap * 9);
-    
     // Connects to the centroid of the triangle
     // connectColor(PlotX(rotPoint.x), PlotY(rotPoint.y), average(points[0].x, points[1].x, points[2].x), average(points[0].y, points[1].y, points[2].y), 'magenta');
     
@@ -268,7 +236,6 @@ document.getElementById('MyBtn').onclick = function() {
 
 document.getElementById("clear").onclick = function() {
     charV = 0;
-    rotation = false;
     init();
 };
 
