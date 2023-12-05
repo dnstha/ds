@@ -12,7 +12,6 @@ let factor;
 let P;
 let nPoints; // number of points
 let charV = 0; // Changing char value
-let scl = false;
 
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
@@ -62,13 +61,6 @@ getCoeff = () => {
     P.x = Number(document.getElementById("Px").value);
     P.y = Number(document.getElementById("Py").value);
     factor = Number(document.getElementById("k").value);
-    // finalPoints = [];
-    // points = [];
-    // for(let i = 0; i< initialPoints.length; i++) {
-    //     finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-    //     finalPoints[i].scale(factor, P.x, P.y);
-    //     points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
-    // }
 }
 
 emptyCheck = () => {
@@ -123,10 +115,6 @@ function init(){
             points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
         }
     }
-    // for(let i = 0; i<initialPoints.length; i++) {
-    //     points[i].x = initialPoints[i].x;
-    //     points[i].y = initialPoints[i].y;
-    // }
 
     c.lineJoin = "bevel"; // makes the corners smoother
 }
@@ -168,24 +156,8 @@ function addPoint() {
         }else{
             charV++;
             init();
-            // if(!emptyCheck()){
-            //     P = new Plot(randomInt(-10,10), randomInt(-10,10)); // Center of scaling
-            //     factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
-            // }else{
-            //     getCoeff();
-            // }
             initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
-            // finalPoints.push(new Complex(initialPoints[charV-1].x, initialPoints[charV-1].y));
-            // finalPoints = [];
-            // points = [];
-            // for(let i = 0; i<initialPoints.length; i++) {
-            //     finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-            //     finalPoints[i].scale(factor, P.x, P.y);
-            //     points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
-            // }
-            // finalPoints[charV-1].scale(factor, P.x, P.y);
-            // points.push(new Vertex(initialPoints[charV-1].x, initialPoints[charV-1].y, finalPoints[charV-1].x, finalPoints[charV-1].y));
-
+            
             scle();
 
             document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
@@ -258,21 +230,7 @@ function animate() {
         c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
         c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
     }
-    // c.fillStyle = lightColors[1];
-    // c.fillText(`\u2022 A(${Math.round(toX(initialPoints[0].x)*1000)/1000}, ${Math.round(toY(initialPoints[0].y)*1000)/1000})`, 15, 50);
-    // c.fillText('A', initialPoints[0].x + 2, initialPoints[0].y - 2); // labelling initial A
-    // c.fillText('A', points[0].x + 2, points[0].y - 2); // labelling moving A
-
-    // c.fillStyle = lightColors[2];
-    // c.fillText(`\u2022 B(${Math.round(toX(initialPoints[1].x)*1000)/1000}, ${Math.round(toY(initialPoints[1].y)*1000)/1000})`, 15, 75);
-    // c.fillText('B', initialPoints[1].x + 2, initialPoints[1].y - 2); // labelling initial B
-    // c.fillText('B', points[1].x + 2, points[1].y - 2); // labelling moving B
-
-    // c.fillStyle = lightColors[3];
-    // c.fillText(`\u2022 C(${Math.round(toX(initialPoints[2].x)*1000)/1000}, ${Math.round(toY(initialPoints[2].y)*1000)/1000})`, 15, 100);
-    // c.fillText('C', initialPoints[2].x + 2, initialPoints[2].y - 2); // labelling initial C
-    // c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
-
+    
     c.fillStyle = 'yellow';
     c.fillText(`Scaled Points`, startP.x, startP.y + gap*(initialPoints.length + 3));
     for(let i = 0; i<initialPoints.length; i++) {
@@ -280,13 +238,6 @@ function animate() {
         c.fillStyle = lightColors[i+1];
         c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+initialPoints.length + 4));
     }
-    // c.fillStyle = lightColors[1];
-    // c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 200);
-    // c.fillStyle = lightColors[2];
-    // c.fillText(`\u2022 B(${Math.round(toX(points[1].x)*1000)/1000}, ${Math.round(toY(points[1].y)*1000)/1000})`, 15, 225);
-    // c.fillStyle = lightColors[3];
-    // c.fillText(`\u2022 C(${Math.round(toX(points[2].x)*1000)/1000}, ${Math.round(toY(points[2].y)*1000)/1000})`, 15, 250);
-    
     
     point(PlotX(P.x), PlotY(P.y), 'aqua');
     c.fillText('P', PlotX(P.x) + 5, PlotY(P.y) + 7); // labelling rotating Point
@@ -301,7 +252,6 @@ document.getElementById('MyBtn').onclick = function() {
 
 document.getElementById("clear").onclick = function() {
     charV = 0;
-    scl = false;
     init();
 };
 
