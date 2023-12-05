@@ -8,6 +8,12 @@ let finalPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
+let factor;
+let P;
+let nPoints; // number of points
+let charV = 0; // Changing char value
+let scl = false;
+
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
     const widthChange = Math.abs(canvas.width - window.innerWidth);
@@ -52,32 +58,22 @@ function Vertex(x, y, final_X, final_Y) {
     }
 }
 
-let factor;
-let P;
-let nPoints; // number of points
-
 getCoeff = () => {
-    initialPoints[0].x = PlotX(Number(document.getElementById("x1").value));
-    initialPoints[0].y = PlotY(Number(document.getElementById("y1").value));
-    initialPoints[1].x = PlotX(Number(document.getElementById("x2").value));
-    initialPoints[1].y = PlotY(Number(document.getElementById("y2").value));
-    initialPoints[2].x = PlotX(Number(document.getElementById("x3").value));
-    initialPoints[2].y = PlotY(Number(document.getElementById("y3").value));
     P.x = Number(document.getElementById("Px").value);
     P.y = Number(document.getElementById("Py").value);
     factor = Number(document.getElementById("k").value);
-    finalPoints = [];
-    points = [];
-    for(let i = 0; i< initialPoints.length; i++) {
-        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-        finalPoints[i].scale(factor, P.x, P.y);
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
-    }
+    // finalPoints = [];
+    // points = [];
+    // for(let i = 0; i< initialPoints.length; i++) {
+    //     finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+    //     finalPoints[i].scale(factor, P.x, P.y);
+    //     points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+    // }
 }
 
 emptyCheck = () => {
     let result = 1;
-    document.querySelectorAll("input").forEach(element => {
+    document.querySelectorAll(".scale").forEach(element => {
         if(element.value == '' || element.value == 'null') {
             result *= 0;
         }else{
@@ -90,10 +86,9 @@ emptyCheck = () => {
 solve = () => {
     if(emptyCheck()){
         init();
-        getCoeff();
-        //c.clearRect(0,0,canvas.width, canvas.height);
+        scle();
     }else{
-        alert('Enter all the inputs!');
+        alert('Enter Center and Scale Factor!');
     }
 };
 
@@ -103,26 +98,104 @@ function init(){
     graphColor = 'white';
     drawGraph();
 
-    initialPoints = [];
+    if(!emptyCheck()){
+        P = new Plot(randomInt(-10,10), randomInt(-10,10)); // Center of scaling
+        factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
+    }else{
+        getCoeff();
+    }
+
+    if(charV == 0) {
+        document.querySelector("#lbl").innerText = "A";
+        initialPoints = [];
+        finalPoints = [];
+        points = [];
+        nPoints = 3;
+        for(let i = 0; i<nPoints; i++) {
+            initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+            if(i>0) {
+                while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
+                    initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+                }
+            }
+            finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+            finalPoints[i].scale(factor, P.x, P.y);
+            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+        }
+    }
+    // for(let i = 0; i<initialPoints.length; i++) {
+    //     points[i].x = initialPoints[i].x;
+    //     points[i].y = initialPoints[i].y;
+    // }
+
+    c.lineJoin = "bevel"; // makes the corners smoother
+}
+
+document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        addPoint();
+    }
+}));
+
+document.querySelectorAll(".scale").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
+
+function scle() {
     finalPoints = [];
     points = [];
-    nPoints = 3;
-    // if(!emptyCheck()) {
-    P = new Plot(randomInt(-10,10), randomInt(-10,10)); // Center of scaling
-    factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
-    // angle = rotAngle/(Math.ceil(modulus(rotAngle)/100)*100);
-    for(let i = 0; i<nPoints; i++) {
-        initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
-        if(i>0) {
-            while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
-                initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
-            }
-        }
+    for(let i = 0; i<initialPoints.length; i++) {
         finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
         finalPoints[i].scale(factor, P.x, P.y);
         points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
     }
-    c.lineJoin = "bevel"; // makes the corners smoother
+}
+
+function addPoint() {
+    if(charV == 0) {
+        initialPoints = [];
+        finalPoints = [];
+        points = [];
+    }
+    if(charV<=9) {
+        let x = document.querySelector('#x').value;
+        let y = document.querySelector('#y').value;
+        if(x == '' || x == 'null' || y == '' || y == 'null') {
+            alert("Enter both values!");
+            init();
+        }else{
+            charV++;
+            init();
+            // if(!emptyCheck()){
+            //     P = new Plot(randomInt(-10,10), randomInt(-10,10)); // Center of scaling
+            //     factor = Math.round((Math.random()-0.5) * 200)/20//randomInt(1,3);
+            // }else{
+            //     getCoeff();
+            // }
+            initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
+            // finalPoints.push(new Complex(initialPoints[charV-1].x, initialPoints[charV-1].y));
+            // finalPoints = [];
+            // points = [];
+            // for(let i = 0; i<initialPoints.length; i++) {
+            //     finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+            //     finalPoints[i].scale(factor, P.x, P.y);
+            //     points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+            // }
+            // finalPoints[charV-1].scale(factor, P.x, P.y);
+            // points.push(new Vertex(initialPoints[charV-1].x, initialPoints[charV-1].y, finalPoints[charV-1].x, finalPoints[charV-1].y));
+
+            scle();
+
+            document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
+            document.querySelector('#x').value = "";
+            document.querySelector('#y').value = "";
+            document.querySelector("#x").focus();
+        }
+    }else{
+        alert('Polygon sides limit reached');
+    }
 }
 
 function animate() {
@@ -166,11 +239,6 @@ function animate() {
     points.forEach((p,i) => {
         point(p.x, p.y, lightColors[i+1]);
         p.update();
-        // if(Math.round(totAngle*1000)/1000 != Math.round(rotAngle*1000)/1000) {
-        //     p.rotate(angle, P.x, P.y);
-        // }else{
-        //     angle = 0;
-        // }
     });
 
     let startP = new Plot(15, 25); // Starting location of text
@@ -183,7 +251,7 @@ function animate() {
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
     c.fillText(`Initial Points`, startP.x, startP.y + gap*2);
-    for(let i = 0; i<3; i++) {
+    for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
         c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+3));
@@ -206,11 +274,11 @@ function animate() {
     // c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
 
     c.fillStyle = 'yellow';
-    c.fillText(`Scaled Points`, startP.x, startP.y + gap*6);
-    for(let i = 0; i<3; i++) {
+    c.fillText(`Scaled Points`, startP.x, startP.y + gap*(initialPoints.length + 3));
+    for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
-        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+7));
+        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+initialPoints.length + 4));
     }
     // c.fillStyle = lightColors[1];
     // c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 200);
@@ -227,6 +295,16 @@ function animate() {
 init();
 animate();
 
-document.getElementById('MyBtn').onclick = solve;
+document.getElementById('MyBtn').onclick = function() {
+    solve();
+};
 
-document.getElementById("clear").onclick = init;
+document.getElementById("clear").onclick = function() {
+    charV = 0;
+    scl = false;
+    init();
+};
+
+document.querySelector('#Add').onclick = function() {
+    addPoint();
+}

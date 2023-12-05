@@ -8,7 +8,6 @@ let points = []; // Moving point
 let scale = graphScale;
 let charV = 0; // Changing char value
 let rotation = false;
-// let stablePoints, mobilesPoints;
 
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
@@ -231,12 +230,18 @@ document.querySelectorAll(".P").forEach(element => element.addEventListener("key
     }
 }));
 
+document.querySelectorAll(".rotation").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
+
 function addPoint() {
     if(charV == 0) {
         initialPoints = [];
         points = [];
     }
-    if(charV<9) {
+    if(charV<=9) {
         let x = document.querySelector('#x').value;
         let y = document.querySelector('#y').value;
         if(x == '' || x == 'null' || y == '' || y == 'null') {

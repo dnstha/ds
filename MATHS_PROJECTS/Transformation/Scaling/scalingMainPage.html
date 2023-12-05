@@ -13,28 +13,19 @@
         <form>
             <h2>Enter your own values:</h2>
             <div class="point" id = 'A'>
-                <label for="x1">A</label>
-                (<input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>,
-                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>)
+                <label for="x" id = "lbl">A</label>
+                (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
             </div>
-            <div class="point" id = 'B'>
-                <label for="x2">B</label>
-                (<input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>,
-                <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>)
-            </div>
-            <div class="point" id = 'C'>
-                <label for="x3">C</label>
-                (<input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>,
-                <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>)
-            </div>
+            <button type="button" id = "Add">Add</button>
             <div class="point" id = 'R'>
                 <label for="Px">Center = P</label>
-                (<input id = "Px" type = "number" inputmode = "numeric" placeholder="x" required>,
-                <input id = "Py" type = "number" inputmode = "numeric" placeholder="y" required>)
+                (<input id = "Px" class = "scale" type = "number" inputmode = "numeric" placeholder="Px" required>,
+                <input id = "Py" class = "scale" type = "number" inputmode = "numeric" placeholder="Py" required>)
             </div>
             <div class="point">
                 <label for="k">Scale Factor =</label>
-                <input id = "k" type = "number" inputmode = "numeric" placeholder="k" required>
+                <input id = "k" class = "scale" type = "number" inputmode = "numeric" placeholder="k" required>
             </div>
             <button type = "button" id = "MyBtn">Scale</button>
             <button type = "reset" id = "clear">Reset</button>
