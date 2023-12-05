@@ -8,6 +8,10 @@ let finalPoints = [];
 let points = []; // Moving point
 let scale = graphScale;
 
+let charV = 0;
+let V;
+let nPoints; // number of points
+
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
     const widthChange = Math.abs(canvas.width - window.innerWidth);
@@ -56,23 +60,19 @@ function Vertex(x, y, final_X, final_Y) {
     }
 }
 
-let factor;
-let V;
-let nPoints; // number of points
-
 getCoeff = () => {
     V = new Plot(Number(document.getElementById("Vx").value), Number(document.getElementById("Vy").value));
-    for(let i = 0; i< nPoints; i++) {
-        initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
-        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-        finalPoints[i].translate(V.x, V.y);
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
-    }
+    // for(let i = 0; i< nPoints; i++) {
+    //     initialPoints.push(new Plot(PlotX(Number(document.getElementById(`x${i+1}`).value)), PlotY(Number(document.getElementById(`y${i+1}`).value))));
+    //     finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+    //     finalPoints[i].translate(V.x, V.y);
+    //     points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+    // }
 }
 
 emptyCheck = () => {
     let result = 1;
-    document.querySelectorAll("input").forEach(element => {
+    document.querySelectorAll(".translate").forEach(element => {
         if(element.value == '' || element.value == 'null') {
             result *= 0;
         }else{
@@ -85,10 +85,50 @@ emptyCheck = () => {
 solve = () => {
     if(emptyCheck()){
         init();
+        trnslte();
     }else{
-        alert('Enter all the inputs!');
+        alert('Enter both the translation vector values!');
     }
 };
+
+function trnslte(){
+    points = [];
+    finalPoints = [];
+    for(let i = 0; i<initialPoints.length; i++) {
+        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+        finalPoints[i].translate(V.x, V.y);
+        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+    }
+}
+
+function addPoint() {
+    if(charV == 0) {
+        initialPoints = [];
+        points = [];
+    }
+    if(charV<=9) {
+        let x = document.querySelector('#x').value;
+        let y = document.querySelector('#y').value;
+        if(x == '' || x == 'null' || y == '' || y == 'null') {
+            alert("Enter both values!");
+            init();
+        }else{
+            charV++;
+            init();
+
+            initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
+
+            trnslte();
+
+            document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
+            document.querySelector('#x').value = "";
+            document.querySelector('#y').value = "";
+            document.querySelector("#x").focus();
+        }
+    }else{
+        alert('Polygon sides limit reached');
+    }
+}
 
 function init(){
     // const inputs = document.querySelectorAll('input');
@@ -102,12 +142,18 @@ function init(){
     graphColor = 'white';
     drawGraph();
 
-    initialPoints = [];
-    finalPoints = [];
-    points = [];
-    nPoints = 3;
     if(!emptyCheck()) {
         V = new Plot(randomInt(-10,10), randomInt(-10,10)); // Translation Vector
+    }else{
+        getCoeff();
+    }
+    if(charV == 0) {
+        document.querySelector("#lbl").innerText = "A";
+        initialPoints = [];
+        finalPoints = [];
+        points = [];
+        nPoints = 3;
+
         for(let i = 0; i<nPoints; i++) {
             initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
             if(i>0) {
@@ -119,11 +165,22 @@ function init(){
             finalPoints[i].translate(V.x, V.y);
             points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
         }
-    }else{
-        getCoeff();
     }
+
     c.lineJoin = "bevel"; // makes the corners smoother
 }
+
+document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        addPoint();
+    }
+}));
+
+document.querySelectorAll(".translate").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
 
 function animate() {
     requestAnimationFrame(animate);
@@ -186,7 +243,7 @@ function animate() {
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
     c.fillText(`Initial Points`, startP.x, startP.y+gap);
-    for(let i = 0; i<3; i++) {
+    for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
         c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+2));
@@ -209,11 +266,11 @@ function animate() {
     // c.fillText('C', points[2].x + 2, points[2].y - 2); // labelling moving C
 
     c.fillStyle = 'yellow';
-    c.fillText(`Translated Points`, startP.x, startP.y + gap*5);
-    for(let i = 0; i<3; i++) {
+    c.fillText(`Translated Points`, startP.x, startP.y + gap*(initialPoints.length+2));
+    for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
-        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+6));
+        c.fillText(`\u2022 ${Pname}\'(${Math.round(toX(points[i].x)*1000)/1000}, ${Math.round(toY(points[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+initialPoints.length+3));
     }
     // c.fillStyle = lightColors[1];
     // c.fillText(`\u2022 A(${Math.round(toX(points[0].x)*1000)/1000}, ${Math.round(toY(points[0].y)*1000)/1000})`, 15, 180);
@@ -226,9 +283,18 @@ function animate() {
 init();
 animate();
 
-document.getElementById('MyBtn').onclick = solve;
+document.getElementById('MyBtn').onclick = function() {
+    solve();
+};
 
-document.getElementById("clear").onclick = init;
+document.getElementById("clear").onclick = function() {
+    charV = 0;
+    init();
+};
+
+document.querySelector('#Add').onclick = function() {
+    addPoint();
+}
 
 /*
 The root cause of the bug is resize eventListener. Each time the input box is called, the resize event is fired and as a result the graph goes crazy

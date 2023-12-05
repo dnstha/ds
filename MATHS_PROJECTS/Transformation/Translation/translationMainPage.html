@@ -18,24 +18,15 @@
         <form>
             <h2>Enter your own values:</h2>
             <div class="point" id = 'A'>
-                <label for="x1">A</label>
-                (<input id = "x1" type = "number" inputmode = "numeric" placeholder="x1" required>,
-                <input id = "y1" type = "number" inputmode = "numeric" placeholder="y1" required>)
+                <label for="x" id = "lbl">A</label>
+                (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
             </div>
-            <div class="point" id = 'B'>
-                <label for="x2">B</label>
-                (<input id = "x2" type = "number" inputmode = "numeric" placeholder="x2" required>,
-                <input id = "y2" type = "number" inputmode = "numeric" placeholder="y2" required>)
-            </div>
-            <div class="point" id = 'C'>
-                <label for="x3">C</label>
-                (<input id = "x3" type = "number" inputmode = "numeric" placeholder="x3" required>,
-                <input id = "y3" type = "number" inputmode = "numeric" placeholder="y3" required>)
-            </div>
+            <button type = "button" id = "Add">Add</button>
             <div class="point" id = 'V'>
                 <label for="Vx">Translation Vector = V</label>
-                (<input id = "Vx" type = "number" inputmode = "numeric" placeholder="x" required>,
-                <input id = "Vy" type = "number" inputmode = "numeric" placeholder="y" required>)
+                (<input id = "Vx" class="translate" type = "number" inputmode = "numeric" placeholder="Vx" required>,
+                <input id = "Vy" class="translate" type = "number" inputmode = "numeric" placeholder="Vy" required>)
             </div>
 
             <button type = "button" id = "MyBtn">Translate</button>
