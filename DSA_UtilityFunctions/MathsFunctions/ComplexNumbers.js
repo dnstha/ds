@@ -79,11 +79,11 @@ rotatePoint = (x, y, angle) => {
 
 // Reflecting a point (x1, y1) along the line a1x + b1y = c1
 reflectPoint = (x1, y1, a1, b1, c1) => {
-    if(a!=0 || b!=0) {
+    if(a1!=0 || b1!=0) {
         let D = a1*a1 + b1*b1;
         let c2 = det2(x1, y1, a1, b1);
-        let Dx = a1*c1 + b*c2;
-        let Dy = b1*c1 - a*c2;
+        let Dx = a1*c1 + b1*c2;
+        let Dy = b1*c1 - a1*c2;
         let reflectedPoint = {
             x: 2*(Dx/D)-x1,
             y: 2*(Dy/D)-y1

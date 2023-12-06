@@ -9,7 +9,6 @@ let points = []; // Moving point
 let scale = graphScale;
 
 let charV = 0;
-let V;
 let nPoints; // number of points
 let ln = { // line ax+bx=c
     a:1,
@@ -55,7 +54,7 @@ function Vertex(x, y, final_X, final_Y) {
         if(Math.round(this.x*1000)/1000 != Math.round(this.final_X*1000)/1000) {
             this.x += this.dx;
         }
-        if((Math.round(this.x*1000)/1000 == Math.round(this.final_X*1000)/1000) && Math.round(this.y*1000)/1000 != Math.round(this.final_Y*1000)/1000) {
+        if(Math.round(this.y*1000)/1000 != Math.round(this.final_Y*1000)/1000) {
             this.y += this.dy;
         }
     }
@@ -66,12 +65,14 @@ function Vertex(x, y, final_X, final_Y) {
 }
 
 getCoeff = () => {
-    a1 = new Plot(Number(document.getElementById("Vx").value), Number(document.getElementById("Vy").value));
+    ln.a = Number(document.querySelector("#a1").value);
+    ln.b = Number(document.querySelector("#b1").value);
+    ln.c = Number(document.querySelector("#c1").value);
 }
 
 emptyCheck = () => {
     let result = 1;
-    document.querySelectorAll(".translate").forEach(element => {
+    document.querySelectorAll(".reflect").forEach(element => {
         if(element.value == '' || element.value == 'null') {
             result *= 0;
         }else{
@@ -86,7 +87,7 @@ solve = () => {
         init();
         reflect();
     }else{
-        alert('Enter both the translation vector values!');
+        alert('Enter all coefficients in the equation!');
     }
 };
 
@@ -94,9 +95,8 @@ function reflect(){
     points = [];
     finalPoints = [];
     for(let i = 0; i<initialPoints.length; i++) {
-        finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-        finalPoints[i].translate(V.x, V.y);
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+        finalPoints.push(reflectPoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, ln.a, ln.b, ln.c));
+        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
     }
 }
 
@@ -136,7 +136,14 @@ function init(){
     drawGraph();
 
     if(!emptyCheck()) {
-        V = new Plot(randomInt(-10,10), randomInt(-10,10)); // Translation Vector
+        // Line of reflection
+        ln.a = randomInt(-15,15);
+        ln.b = randomInt(-15,15);
+        ln.c = randomInt(-15,15);
+        while(ln.a == 0 && ln.b == 0 ) {
+            ln.a = randomInt(-10,10);
+            ln.b = randomInt(-10,10);
+        }
     }else{
         getCoeff();
     }
@@ -146,10 +153,8 @@ function init(){
         finalPoints = [];
         points = [];
         nPoints = 3;
-        line.a = randomInt(-10,10);
-        line.b = randomInt(-10,10)
-        line.c = randomInt(-10,10)
 
+        console.log(finalPoints.length)
         for(let i = 0; i<nPoints; i++) {
             initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
             if(i>0) {
@@ -157,12 +162,11 @@ function init(){
                     initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
                 }
             }
-            finalPoints.push(reflectPoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000), line.a, line.b, line.c);
-            finalPoints[i].translate(V.x, V.y);
-            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+            finalPoints.push(reflectPoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, ln.a, ln.b, ln.c));
+            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
         }
     }
-
+    
     c.lineJoin = "bevel"; // makes the corners smoother
 }
 
@@ -181,11 +185,17 @@ document.querySelectorAll(".reflect").forEach(element => element.addEventListene
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,canvas.width, canvas.height);
-    
-    points.forEach((p,i) => {
-        point(p.x, p.y, lightColors[i+1]);
-        p.update();
-    });
+
+    if(ln.b!=0) {
+        line(c, -ln.a/ln.b, ln.c/ln.b, 'aqua');
+    }else{
+        c.strokeStyle = 'aqua';
+        c.beginPath();
+        for(let i = 0; i<canvas.height; i++) {
+            c.lineTo(PlotX(ln.c/ln.a), i);
+        }
+        c.stroke();
+    }
 
     c.lineWidth = 1.5;
     c.strokeStyle = 'lime'; // Colors of the sides of the polygon
@@ -211,31 +221,31 @@ function animate() {
     c.fill();
     c.stroke();
 
-    // x translation
-    for(let n = 0; n<points.length; n++) {
-        connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, initialPoints[n].y, 0.4);
-    }
-
-    // y translation
-    for(let n = 0; n<points.length; n++) {
-        connectColorFade(points[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.4);
-    }
-
     // total translation
     for(let n = 0; n<points.length; n++) {
         connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.7);
     }
 
+    points.forEach((p,i) => {
+        point(p.x, p.y, lightColors[i+1]);
+        p.update();
+    });
+
     initialPoints.forEach((p,i) => {
         point(p.x, p.y, lightColors[i+1]);
     });
 
+
+    // Text portion
     let startP = new Plot(15, 25); // Starting location of text
     let gap = 25; // Gap between two lines
     c.font = 'normal 25px verdana';
     c.fillStyle = 'aqua';
-    c.fillText(`\u2022 Translation Vector = V(${V.x}, ${V.y})`, startP.x, startP.y);
-
+    if(ln.b>=0){
+        c.fillText(`\u2022 Line of reflection: ${ln.a}x + ${ln.b}y = ${ln.c}`, startP.x, startP.y);
+    }else{
+        c.fillText(`\u2022 Line of reflection: ${ln.a}x - ${modulus(ln.b)}y = ${ln.c}`, startP.x, startP.y);
+    }
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
     c.fillText(`Initial Points`, startP.x, startP.y+gap);
@@ -248,7 +258,7 @@ function animate() {
     }
 
     c.fillStyle = 'yellow';
-    c.fillText(`Translated Points`, startP.x, startP.y + gap*(initialPoints.length+2));
+    c.fillText(`Reflected Points`, startP.x, startP.y + gap*(initialPoints.length+2));
     for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
