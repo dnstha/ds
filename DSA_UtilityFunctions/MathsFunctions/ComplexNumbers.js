@@ -32,6 +32,12 @@ function Complex(x, y) {
         this.x = (this.x - a) * k + a;
         this.y = (this.y - b) * k + b;
     }
+
+    // this.refect = function(a, b, c) {
+    //     let distP = (a*this.x + b*this.y + c)/Math.sqrt(a*a + b*b);
+    //     this.x = a;
+    //     this.y = b;
+    // }
 }
 
 
@@ -69,4 +75,19 @@ rotatePoint = (x, y, angle) => {
     let C = new Complex(x, y);
     let D = new Complex(Math.cos(rad(angle)), Math.sin(rad(angle)));
     return cmplxMul(C, D);
+}
+
+// Reflecting a point (x1, y1) along the line a1x + b1y = c1
+reflectPoint = (x1, y1, a1, b1, c1) => {
+    if(a!=0 || b!=0) {
+        let D = a1*a1 + b1*b1;
+        let c2 = det2(x1, y1, a1, b1);
+        let Dx = a1*c1 + b*c2;
+        let Dy = b1*c1 - a*c2;
+        let reflectedPoint = {
+            x: 2*(Dx/D)-x1,
+            y: 2*(Dy/D)-y1
+        };
+        return reflectedPoint;
+    }
 }

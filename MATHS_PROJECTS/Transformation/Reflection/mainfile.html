@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>REFLECTION</title>
+        <meta charset="utf-8">
+        <link rel = "icon" href = "../../../Logo.svg">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type = "text/css" href="../../../stylesForMathAnimations/tranformationStyles.css">
+        <style>
+            #R{
+                height: fit-content;
+            }
+            #R input{
+                border: 1px solid #cfefee;
+                padding-left: 4px;
+            }
+            .btm{
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id = "GraphPage"></canvas>
+        <canvas id = "shape"></canvas>
+        <form>
+            <h2>Enter your own values:</h2>
+            <div class="point" id = 'A'>
+                <label for="x" id = "lbl">A</label>
+                (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
+            </div>
+            <button type="button" id = "Add">Add</button>
+            <div class="point" id = 'R'>
+                <label for="a1">Line of Reflection</label>
+                <br>
+                <input id = "a1" class="reflect" type = "number" inputmode = "numeric" placeholder="a" required> x + 
+                <input id = "b1" class="reflect" type = "number" inputmode = "numeric" placeholder="b" required> y =
+                <input id = "c1" class="reflect" type = "number" inputmode = "numeric" placeholder="c" required>
+            </div>
+            <button type = "button" id = "MyBtn" class = "btm">Scale</button>
+            <button type = "reset" id = "clear" class = "btm">Reflect</button>
+        </form>
+        <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
+        <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
+        <script type = "application/javascript" src="../../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+        <script type = "application/javascript" src="../../../DSA_UtilityFunctions/MathsFunctions/ComplexNumbers.js"></script>
+        <script type = "application/javascript" src="script.js"></script>
+    </body>
+</html>
