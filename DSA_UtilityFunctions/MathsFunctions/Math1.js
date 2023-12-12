@@ -133,3 +133,17 @@ invCos = (value, y) => {
         return 0;
     }
 }
+
+
+// Returns true, or 1, if all the fields are full otherwise returns false, or 0.
+filled = (text) => {
+    let result = 1;
+    document.querySelectorAll(text).forEach(element => {
+        if(element.value == '' || element.value == 'null') {
+            result *= 0;
+        }else{
+            result *= 1;
+        }
+    });
+    return result;
+}
