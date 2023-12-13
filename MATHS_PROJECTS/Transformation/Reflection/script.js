@@ -68,6 +68,9 @@ getCoeff = () => {
     ln.a = Number(document.querySelector("#a1").value);
     ln.b = Number(document.querySelector("#b1").value);
     ln.c = Number(document.querySelector("#c1").value);
+    if(ln.a == 0 && ln.b == 0){
+        alert("Coefficients of both x and y cannot be zero at once! Re-enter the values:");
+    }
 }
 
 emptyCheck = () => {
@@ -130,6 +133,16 @@ function addPoint() {
     }
 }
 
+function refLine() {
+    ln.a = randomInt(-15,15);
+    ln.b = randomInt(-15,15);
+    ln.c = randomInt(-15,15);
+    while(ln.a == 0 && ln.b == 0 ) {
+        ln.a = randomInt(-10,10);
+        ln.b = randomInt(-10,10);
+    }
+}
+
 function init(){
     Origin.x = canvas.width/2;
     Origin.y = canvas.height/2;
@@ -138,15 +151,12 @@ function init(){
 
     if(!emptyCheck()) {
         // Line of reflection
-        ln.a = randomInt(-15,15);
-        ln.b = randomInt(-15,15);
-        ln.c = randomInt(-15,15);
-        while(ln.a == 0 && ln.b == 0 ) {
-            ln.a = randomInt(-10,10);
-            ln.b = randomInt(-10,10);
-        }
+        refLine();
     }else{
         getCoeff();
+        if(ln.a == 0 && ln.b == 0) {
+            refLine();
+        }
     }
     if(charV == 0) {
         document.querySelector("#lbl").innerText = "A";
@@ -155,7 +165,6 @@ function init(){
         points = [];
         nPoints = 3;
 
-        console.log(finalPoints.length)
         for(let i = 0; i<nPoints; i++) {
             initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
             if(i>0) {
@@ -242,10 +251,17 @@ function animate() {
     let gap = 25; // Gap between two lines
     c.font = 'normal 25px verdana';
     c.fillStyle = 'aqua';
-    if(ln.b>=0){
-        c.fillText(`\u2022 Line of reflection: ${ln.a}x + ${ln.b}y = ${ln.c}`, startP.x, startP.y);
-    }else{
-        c.fillText(`\u2022 Line of reflection: ${ln.a}x - ${modulus(ln.b)}y = ${ln.c}`, startP.x, startP.y);
+
+    if(ln.a!=0 && ln.b!=0) {
+        if(ln.b>=0){
+            c.fillText(`\u2022 Line of reflection: ${ln.a}x + ${ln.b}y = ${ln.c}`, startP.x, startP.y);
+        }else{
+            c.fillText(`\u2022 Line of reflection: ${ln.a}x - ${modulus(ln.b)}y = ${ln.c}`, startP.x, startP.y);
+        }
+    }else if(ln.a == 0 && ln.b != 0){
+        c.fillText(`\u2022 Line of reflection: y = ${roundUp(ln.c/ln.b, 10000)}`, startP.x, startP.y);
+    }else if(ln.b == 0 && ln.a != 0){
+        c.fillText(`\u2022 Line of reflection: x = ${roundUp(ln.c/ln.a, 10000)}`, startP.x, startP.y);
     }
     c.font = 'normal 25px times';
     c.fillStyle = 'lime';
