@@ -1,5 +1,6 @@
-let x1, x2, A, B, C, discriminant, denominator, s, vertex, swap;
+let x1, x2, A, B, C, discriminant, denominator, vertex, swap;
 let x, y; // For complex numbers
+let s = document.getElementById("ambiguous");
 
 function Point(x, y) {
     this.x = x;
@@ -7,7 +8,6 @@ function Point(x, y) {
 }
 
 clearSpan = () => {
-    s = document.getElementById("ambiguous");
     s.innerHTML = "";
 }
 
@@ -24,8 +24,8 @@ solve = () => {
     denominator = 2*A;
     x1 = "";
     x2 = "";
-    graph();
     if(A!=0) {
+        graph();
         if(discriminant > 0) {
             x1 = (-B + Math.sqrt(discriminant)) / denominator;
             x2 = (-B - Math.sqrt(discriminant)) / denominator;
@@ -35,8 +35,8 @@ solve = () => {
                 x2 = swap;
             }
             c.font = "bold 24px times"
-            c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1) - 110, Origin.y-5);
-            c.fillText("("+ Math.round(x2*1000)/1000 +", " + "0)", PlotX(x2) + 3, Origin.y-5);
+            c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1) - 110, Origin.y-5);
+            c.fillText(`(${Math.round(x2*1000)/1000}, 0)`, PlotX(x2) + 3, Origin.y-5);
             if(vertex.y > 0 && A<0 || vertex.y < 0 && A>0) {
                 point(PlotX(x1), Origin.y, '#ff0f0f');
                 point(PlotX(x2), Origin.y, '#ff0f0f');
@@ -47,9 +47,9 @@ solve = () => {
             x2 = x1;
             c.font = "bold 24px times"
             if(A>0) {
-                c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1), Origin.y+22);
+                c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1), Origin.y+22);
             }else if (A<0){
-                c.fillText("("+ Math.round(x1*1000)/1000 +", " + "0)", PlotX(x1), Origin.y-5);
+                c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1), Origin.y-5);
             }
         }
         else if(discriminant < 0) {
@@ -69,8 +69,10 @@ solve = () => {
     }
 }
 
-document.getElementById('MyBtn').onclick = solve;
-document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", (event) => {
+document.getElementById('MyBtn').onclick = function(){
+    solve();
+};
+document.querySelectorAll(".coeff").forEach(element => element.addEventListener("keyup", function(event) {
     if(event.key === "Enter") {
         solve();
     }

@@ -27,14 +27,14 @@ curve = (a, vertex_X, vertex_Y, color) => {
 
 function init(){
     c.clearRect(0,0,canvas.width, canvas.height);
-    clearSpan();
+    Origin.x = canvas.width/2;
+    Origin.y = canvas.height/2;
 }
 
 init();
 
 graph = () => {
     init();
-    getCoeff();
     color = '#df00bb';
     vertex.x = -B/(2*A);
     vertex.y = ((A*vertex.x + B )*vertex.x) + C;
@@ -66,6 +66,12 @@ addEventListener("resize", function(){
     }
 });
 
-document.querySelectorAll("input").forEach(element => element.addEventListener("keyup", graph));
+document.querySelectorAll(".coeff").forEach(element => element.addEventListener("keyup", function(){
+    getCoeff();
+    graph();
+}));
 
-document.getElementById("clear").onclick = init;
+document.getElementById("clear").onclick = function() {
+    init();
+    clearSpan();
+};
