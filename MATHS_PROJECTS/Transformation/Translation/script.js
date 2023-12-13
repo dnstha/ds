@@ -106,6 +106,7 @@ function addPoint() {
         if(x == '' || x == 'null' || y == '' || y == 'null') {
             alert("Enter both values!");
             init();
+            trnslte();
         }else{
             charV++;
             init();
