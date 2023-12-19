@@ -11,15 +11,16 @@ vertex = new Point(Origin.x, Origin.y);
 
 curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
+    let rangeOfLocus = modulus(vertex_X-canvas.width);
     c.strokeStyle = color;
     c.lineWidth = 2;
     c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
+    for(let i=0; i<rangeOfLocus;i++){
         c.lineTo(PlotX(vertex_X)+i, PlotY(vertex_Y)-i*i*a);
     }
     c.stroke();
     c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
+    for(let i=0; i<rangeOfLocus;i++){
         c.lineTo(PlotX(vertex_X)-i, PlotY(vertex_Y)-i*i*a);
     }
     c.stroke();
