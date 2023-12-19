@@ -11,7 +11,7 @@ vertex = new Point(Origin.x, Origin.y);
 
 curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
-    let rangeOfLocus = modulus(vertex_X-canvas.width);
+    let rangeOfLocus = modulus(vertex_X*scale-canvas.width);
     c.strokeStyle = color;
     c.lineWidth = 2;
     c.beginPath();
