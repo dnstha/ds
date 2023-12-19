@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    background: transparent;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+#GraphPage {
+    position: absolute;
+    background: #cfffee;
+    z-index: -2;
+}
+#line {
+    position: absolute;
+    background: transparent;
+    z-index: -1;
+}
+input {
+    text-align: center;
+    margin: 0 2px 0 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 4rem;
+    height: 4rem;
+    border: 2px solid gold;
+    border-radius: 5px;
+    font-size: 2rem;
+}
+/* Chromium and Safari */
+input[type = "number"]::-webkit-inner-spin-button {
+    display: none;
+}
+/* Firefox
+input[type = number] {
+    -moz-appearance: textfield;
+} */
+form {
+    margin-left: 5rem;
+    font-size: 2rem;
+}
+button {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    border: 2px inset red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    width: 9rem;
+    height: 3rem;
+    border-radius: 10px;
+    transition-duration: 60ms;
+}
+button:active {
+    transform: scale(0.97);
+
+}
+div {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+p {
+    margin-top: 0.2rem;
+    height: 0.6rem;
+    text-decoration: underline;
+}
+.output input {
+    margin: 10px 2px 0 5px;
+    border: 3px solid deepskyblue;
+    background-color: cornsilk;
+    width: 15rem;
+}
+span {
+    color: red;
+    height: fit-content;
+    width: fit-content;
+}
+h1 {
+    margin-left: 1rem;
+    margin-top: 1.5rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#l1 {
+    color:#df00bb;
+}
+#l2 {
+    color:#0004ff;
+}

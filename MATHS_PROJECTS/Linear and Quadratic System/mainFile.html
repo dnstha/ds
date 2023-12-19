@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Linear Equations Solver</title>
+        <meta charset="utf-8">
+        <link rel = "icon" href = "../../Logo.svg">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <canvas id = "GraphPage"></canvas>
+        <canvas id = "line"></canvas>
+        <h1>Solve any system of quadratic and linear equations.</h1>
+        <form>
+            <div class="l">
+                <p id = "l1">Curve</p>
+                y = <input id = "a1" class = "coeff qcomp" type = "number" inputmode = "numeric" placeholder="a1" required>x<sup>2</sup> +
+                <input id = "b1" class = "coeff" type = "number" inputmode = "numeric" placeholder="b1" required>x +
+                <input id = "c1" class = "coeff" type = "number" inputmode = "numeric" placeholder="c1" required>
+            </div>
+            <div class="l">
+                <p id = "l2">Line</p>
+                <input id = "a2" class = "coeff lcomp" type = "number" inputmode = "numeric" placeholder="a2" required>x +
+                <input id = "b2" class = "coeff lcomp" type = "number" inputmode = "numeric" placeholder="b2" required>y =
+                <input id = "c2" class = "coeff" type = "number" inputmode = "numeric" placeholder="c2" required>
+            </div>
+            <button type = "button" id = "MyBtn">Solve</button>
+            <button type = "reset" id = "clear">Clear</button>
+            <div class="output">
+                <!-- &lpar; = left parantheses &rpar; = right parantheses -->
+                &lpar;x<sub>1</sub>, y<sub>1</sub>&rpar; = <input id="P1" READONLY><br/>
+                &lpar;x<sub>2</sub>, y<sub>2</sub>&rpar; = <input id="P2" READONLY><br/>
+            </div>
+            <span id = "ambiguous">
+            </span>
+        </form>    
+        <script src="../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
+        <script src="../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
+        <script src="../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
