@@ -153,24 +153,70 @@ line = (slope, yIntercept, color) => {
     c.stroke();
 }
 
-curve = (a, vertex_X, Vertex_Y, color) => {
-    vertex_X *= scale;
-    Vertex_Y *= scale;
+curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
-    let rangeOfLocus = Math.round(modulus(canvas.width-vertex_X));
+    vertex_X = PlotX(vertex_X);
+    vertex_Y = PlotY(vertex_Y);
 
     c.strokeStyle = color;
+    c.lineWidth = 2;
     c.beginPath();
-    for(let i=0; i<rangeOfLocus;i++){
-        c.lineTo(Origin.x+i+vertex_X, Origin.y-i*i*a-Vertex_Y);
+
+    if(vertex_X>=0 && vertex_X<=window.innerWidth){
+        // vertex_X lies within the window in this case
+        let lDist = vertex_X;
+        let rDist = modulus(window.innerWidth - vertex_X);
+
+        // drawing right side of the vertex
+        for(let i=0; i<=rDist;i++){
+            c.lineTo(vertex_X+i, vertex_Y-i*i*a);
+        }
+        c.stroke();
+
+        // drawing left side of the vertex
+        c.beginPath();
+        for(let i=0; i<=lDist;i++){
+            c.lineTo(vertex_X-i, vertex_Y-i*i*a);
+        }
+        c.stroke();
+    }else if(vertex_X<0 || vertex_X>window.innerWidth){
+        // vertex_X lies out of the window in this case
+        let traceLocus = vertex_X;
+        if(vertex_X<0){
+            for(traceLocus=vertex_X; (traceLocus+vertex_X)<=window.innerWidth;traceLocus++){
+                if(traceLocus+vertex_X>0){
+                    c.lineTo(vertex_X+traceLocus, vertex_Y-traceLocus*traceLocus*a);
+                }
+            }
+        }else if(vertex_X>window.innerWidth){
+            for(traceLocus=vertex_X; (traceLocus+vertex_X)>=0; traceLocus--){
+                if((traceLocus-vertex_X)<window.innerWidth){
+                    c.lineTo(vertex_X-traceLocus, vertex_Y-traceLocus*traceLocus*a);
+                }
+            }
+        }
+        c.stroke();
     }
-    c.stroke();
-    c.beginPath();
-    for(let i=0; i<rangeOfLocus;i++){
-        c.lineTo(Origin.x-i+vertex_X, Origin.y-i*i*a-Vertex_Y);
-    }
-    c.stroke();
 }
+
+// curve = (a, vertex_X, Vertex_Y, color) => {
+//     vertex_X *= scale;
+//     Vertex_Y *= scale;
+//     a /= scale;
+//     let rangeOfLocus = Math.round(modulus(canvas.width-vertex_X));
+
+//     c.strokeStyle = color;
+//     c.beginPath();
+//     for(let i=0; i<rangeOfLocus;i++){
+//         c.lineTo(Origin.x+i+vertex_X, Origin.y-i*i*a-Vertex_Y);
+//     }
+//     c.stroke();
+//     c.beginPath();
+//     for(let i=0; i<rangeOfLocus;i++){
+//         c.lineTo(Origin.x-i+vertex_X, Origin.y-i*i*a-Vertex_Y);
+//     }
+//     c.stroke();
+// }
 
 function init(){
     c.clearRect(0,0,canvas.width, canvas.height);
