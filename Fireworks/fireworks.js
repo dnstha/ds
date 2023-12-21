@@ -86,8 +86,8 @@ animate();
 addEventListener('click', (event) => {
     mouse.x = event.clientX;
     mouse.y = event.clientY;
-    const particeCount = 500;
-    const power = 10;
+    const particeCount = Math.ceil(Math.random()*400+30);
+    const power = Math.ceil(Math.random()*30+5);
     let angleIncrement = (Math.PI * 2) / particeCount;
 
     for(let i = 0; i<particeCount; i++) {
