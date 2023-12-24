@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Rock Paper Scissors Game</h1>
+    </header>
+    <div class="inpt">
+        <button id="rock" class="ipt" type="submit" value="rock"><i class="fa-solid fa-hand-back-fist"></i></button>
+        <button id="paper" class="ipt" type="submit" value="paper"><i class="fa-solid fa-hand"></i></button>
+        <button id="scissors" class="ipt" type="submit" value="scissors"><i class="fa-solid fa-hand-scissors"></i></button>
+    </div>
+    <div class="result">
+        <div>
+            YOU: <input id="human" value = 0 disabled></input>
+        </div>
+        <div>
+            COMPUTER: <input id="computer" value = 0 disabled></input>
+        </div>
+    </div>
+
+    <div id="otpt">
+        <span id=""></span>
+        <button type="button" id="initialize">Restart</button>
+        <p id="total"></p>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
