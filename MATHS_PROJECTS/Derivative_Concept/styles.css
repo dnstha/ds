@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    position: absolute;
+    background: transparent;
+}
+#GraphPage {
+    position: absolute;
+    background: black;
+    z-index: -2;
+}
+#lines {
+    position: absolute;
+    background: transparent;
+    z-index: -1;
+}

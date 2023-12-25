@@ -73,6 +73,18 @@ connectColorFade = (x1,y1,x2,y2, alpha) => {
     c.restore();
 }
 
+connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
+    context.save();
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
+    context.lineWidth = 2;
+    context.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
+    context.stroke();
+    context.restore();
+}
+
 point = (x, y, color) => {
     c.beginPath();
     c.arc(x, y, 3, 0, Math.PI * 2, true);
