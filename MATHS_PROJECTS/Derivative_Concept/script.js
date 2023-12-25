@@ -33,7 +33,7 @@ function P(x, y){
 
     this.update = function(){
         this.y = pY(this.x);
-        temp = 2*Pr.A*this.x - Pr.B;
+        temp = 2*Pr.A*this.x + Pr.B;
         m = temp;
         yInt = this.y - this.x*temp;
     }
@@ -49,7 +49,7 @@ function animate() {
     Cv.y = PlotY(movingPoint.y);
 
     connectColorDashed(c, Cv.x, 0, Cv.x, canvas.height, 0.4)
-    parabola(c, Pr.A, Pr.B, Pr.C, 'magenta');
+    parabola(c, Pr.A, V.x, V.y, 'magenta');
     line(c, m, yInt, 'aqua');
     if(Cv.x >= canvas.width || Cv.x <= 0){    
         dx *= -1;
@@ -60,9 +60,39 @@ function animate() {
     }
 
     point(Cv.x, Cv.y, 'red');
-    c.fillStyle = 'gold';
+    c.fillStyle = lightColors[1];
     c.fillText(`Equation of tangent: y = ${roundUp(m, 1000)}x + ${roundUp(yInt, 1000)}`, 20, 50);
     c.fillText(`x = ${roundUp(movingPoint.x,1000)}`, 20, 75);
+
+    // c.beginPath();
+    // for(let i =0; i<canvas.width; i++){
+    //     let x = toX(i);
+    //     c.lineTo(PlotX(x), PlotY(Math.sin(x)));
+    // }
+    // c.stroke();
+
+    // c.beginPath();
+    // for(let i =0; i<canvas.width; i++){
+    //     let x = toX(i);
+    //     c.lineTo(PlotX(x), PlotY(Math.cos(x)));
+    // }
+    // c.stroke();
+
+    // c.beginPath();
+    // for(let i =0; i<canvas.width; i++){
+    //     let x = toX(i);
+    //     c.lineTo(PlotX(x), PlotY(Math.sin(x)));
+    // }
+    // c.stroke();
+
+    // c.strokeStyle = 'red';
+    // c.beginPath();
+    // for(let i =0; i<window.innerWidth; i++){
+    //     let x = toX(i);
+    //     let y = Math.pow(Math.E, x);
+    //     c.lineTo(PlotX(x), PlotY(y));
+    // }
+    // c.stroke();
 }
 
 addEventListener('click', function(){
@@ -81,14 +111,14 @@ function init(){
     Pr.A = 0.08;
 
     // Has some problem when value of Pr.B is other than 0
-    Pr.B = 0;
-    Pr.C = -3;
+    Pr.B = -1;
+    Pr.C = -2;
     dx = 0.008;
     V.x = -Pr.B/(2*Pr.A);
     V.y = pY(V.x);
     movingPoint.x = randomInt(-5, 5);
     movingPoint.y = pY(movingPoint.x);
-    temp = 2*Pr.A*movingPoint.x - Pr.B;
+    temp = 2*Pr.A*movingPoint.x + Pr.B;
     m = temp;
     yInt = movingPoint.y - movingPoint.x*temp;
 }
