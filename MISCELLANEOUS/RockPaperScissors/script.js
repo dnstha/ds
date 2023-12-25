@@ -41,8 +41,8 @@ function result(x){
 document.querySelectorAll('.ipt').forEach(element => element.addEventListener('click', function(){
     human = element.value;
     result(human);
-    th = document.querySelector("#human").value;
-    tc = document.querySelector("#computer").value;
+    th = Number(document.querySelector("#human").value);
+    tc = Number(document.querySelector("#computer").value);
     if(th==tc){
         document.querySelector('#total').innerText = 'No one is winning!';
     }else if(th>tc){
