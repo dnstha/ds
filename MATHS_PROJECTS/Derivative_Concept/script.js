@@ -7,6 +7,14 @@ let scale = graphScale;
 graphColor = 'white';
 drawGraph();
 
+
+let play = true; // Play-pause the animation
+let dx; // Change in x
+const DX = 0.008; // Amount of change in x
+let cofs = []; // array to store the coefficients of the polynomial
+let polyColor, tangentColor, pointColor; // colors
+let nTerms; // Number of terms in the polynomial
+
 class Point{
     constructor(x, y){
         this.x = x;
@@ -19,15 +27,6 @@ function Term(coeff, power) { // algebraic term in terms of x, viz. coeff*x^powe
     this.coeff = coeff;
     this.power = power;
 }
-
-let play = true; // Play pause the animation
-let m, yInt; // Slope and y-intersept of tangent line
-const Pr = {A:0, B:0, C:0}; // Coefficients of x in quadratic equation Ax^2 + Bx + C
-let V = new Point(0, 0); // Vertex of parabola
-let temp;
-let dx; // Change in x
-const DX = 0.008;
-let cofs = []; // no. of terms in the expn
 
 // polyn[String.fromCharCode(65)] = 2; // equivalent to polyn.A
 let polyn; // object that stores coefficients and powers of x in polynomial
@@ -66,12 +65,21 @@ addEventListener('keydown', (event) => {
     }
 });
 
+addEventListener('keyup', () => {
+    if(play && (PlotX(movingPoint.x) < 0 || PlotX(movingPoint.x) > window.innerWidth)){
+        // if(event.key=='ArrowLeft' || event.key=='ArrowRight' || event.key==' '){ 
+            if(PlotX(movingPoint.x) < 0) movingPoint.x = toX(1);
+            else if(PlotX(movingPoint.x) > window.innerWidth) movingPoint.x = toX(window.innerWidth-1); 
+        // }
+    }
+});
+
 function P(x, y){
     this.x = x;
     this.y = y;
 
     this.update = function(){
-        this.y = tangent(this.x)
+        this.y = calculateTangent(this.x)
     }
 }
 
@@ -136,15 +144,13 @@ function derivaivePow(x, coeff, power=0){ // derivative of a term coefficient * 
 
 let movingPoint = new P(0, 0); // Point of contact of line and curve
 let Cv = new P(0, 0); // Converted values of moving point as PlotX, PlotY
-let CuTangent = new P(0, 0);
+let tangent = {slope:0, yInt:0}; // Object to store slope and y-intercept of the tangent line
 
-
-function tangent(X){
+function calculateTangent(X){
     let Y = yfx(X, ...cofs);
-    let temp = derivaivePol(X, ...cofs);
-    m = temp;
-    yInt = Y - X*temp;
-    return Y;
+    tangent.slope = derivaivePol(X, ...cofs);
+    tangent.yInt = Y - X*tangent.slope;
+    return Y; // returning Y value to keep track of y coordinate of the moving point
 }
 
 // A function that takes an array of coefficients and returns a string
@@ -153,38 +159,25 @@ function generatePolynomial(...coefficientArray) {
     let result = "";
     let n = coefficientArray.length - 1;
 
-    // Loop through the array from the end to the beginning
     for (let i = n; i >= 0; i--) {
         // Get the current coefficient and the corresponding power of x
         let coef = coefficientArray[n-i];
         let power = i;
-        // If the coefficient is zero, skip it
+        // If the coefficient is zero, skipping it
         if (coef === 0) continue;
-        // If the coefficient is negative, add a minus sign
+        // If the coefficient is negative, adding a minus sign
         if (coef < 0) result += " - ";
         // If the coefficient is positive and not the first term, add a plus sign
         if (coef > 0 && result !== "") result += " + ";
-        // If the coefficient is not one or negative one, add it to the result
+        // If the coefficient is not zero, add it to the result.
+        //  We are using absolute value of coefficient because, we have already assigned sign to it
         if (Math.abs(coef) !== 0) result += Math.abs(coef);
         // If the power is not zero, add x and the power to the result
         if (power !== 0) result += `*x**${power}`;
     }
-    // Return the result string
+    
     return result;
 }
-
-
-
-// polyn = createPoly(1, 4, 0, 2);
-// // console.log(polyn)
-// cofs = polyn.map(item => item.coeff);
-// console.log(generatePolynomial(...cofs));
-
-
-// console.log(generatePolynomial(...[1, 2, 3])); // 3*x**2 + 2*x + 1
-// console.log(generatePolynomial(...[-1, 0, 4, -3])); // -3*x**3 + 4*x**2 - 1
-// console.log(generatePolynomial(...[0, 0, 0])); // ""
-
   
 
 function animate() {
@@ -195,9 +188,9 @@ function animate() {
 
     connectColorDashed(c, Cv.x, 0, Cv.x, canvas.height, 0.4);
     // drawFunction(c, `${cofs[0]}*x*x*x + ${cofs[1]}*x*x + ${cofs[2]}*x + ${cofs[3]}`, 'magenta');
-    drawFunction(c, generatePolynomial(...cofs), 'red');
+    drawFunction(c, generatePolynomial(...cofs), polyColor);
     // drawFunction(c, `${Pr.A}*x*x+${Pr.B}*x+${Pr.C}`, 'magenta');
-    line(c, m, yInt, 'aqua');
+    line(c, tangent.slope, tangent.yInt, tangentColor);
     // drawFunction(c, `(x-2)*(x-3)*(x-6)*(x-4)*(x-1)*(x+1)`, 'yellow')
     if(Cv.x >= canvas.width || Cv.x <= 0){    
         dx *= -1;
@@ -207,11 +200,12 @@ function animate() {
         movingPoint.update();
     }
 
-    point(Cv.x, Cv.y, 'red');
-    c.fillStyle = lightColors[1];
-    c.fillText(`Equation of tangent: y = ${roundUp(m, 1000)}x + ${roundUp(yInt, 1000)}`, 20, 50);
-    c.fillText(`x = ${roundUp(movingPoint.x,1000)}`, 20, 75);
-
+    point(Cv.x, Cv.y, pointColor);
+    writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x + ${roundUp(tangent.yInt, 1000)}`, 20, 50, tangentColor);
+    writeText(c, `x = ${roundUp(movingPoint.x,1000)}`, 20, 75, lightColors[1]);
+   
+    let Pexpn = (generatePolynomial(...cofs).replaceAll('**', '^')).replaceAll('1*', '').replace('^1', '');
+    writeText(c, `y = ${Pexpn}`, 20, 100, polyColor);
     // c.beginPath();
     // for(let i =0; i<canvas.width; i++){
     //     let x = toX(i);
@@ -271,24 +265,26 @@ function yfx(x, ...P){ // for regular polygons only
 // }
 
 function init(){
-    c.font = '24px normal times'
+    c.font = '24px normal verdana'
     play = true;
 
-
-    // Pr.A = -0.8;
-    // Pr.B = 1;
-    // Pr.C = 3;
-    // V.x = -Pr.B/(2*Pr.A);
-    // V.y = pY(V.x);
+    nTerms = randomInt(3, 7);
+    let polyCoeff = [];
+    for(let i = 0; i<nTerms; i++){
+        polyCoeff.push(randomInt(-5, 5));
+    }
     
-    polyn = createPoly(11, 4, 3, 2);
-    console.log(polyn)
+    polyColor = 'magenta';
+    tangentColor = 'aqua';
+    pointColor = 'red';
+    
+    polyn = createPoly(...polyCoeff);
 
     dx = DX;
     cofs = polyn.map(item => item.coeff);
-    console.log(generatePolynomial(...cofs));
+    // console.log(generatePolynomial(...cofs));
     movingPoint.x = randomInt(-5, 5);
-    movingPoint.y = tangent(movingPoint.x);
+    movingPoint.y = calculateTangent(movingPoint.x);
 }
 
 init();

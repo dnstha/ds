@@ -93,7 +93,7 @@ point = (x, y, color) => {
     c.closePath();
 }
 
-writeText = (c, text, x, y, color) => {
-    c.fillStyle = color;
-    c.fillText(text, x, y);
+writeText = (context, text, x, y, color) => {
+    context.fillStyle = color;
+    context.fillText(text, x, y);
 }
