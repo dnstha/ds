@@ -217,6 +217,39 @@ line = (context, slope, yIntercept, color) => {
     context.stroke();
 }
 
+drawFunction = (context, fx, color) => {
+    let x;
+    let dynamicFunction = new Function('x', 'return ' + fx);
+    // Dynamic Function to convert given type of expression of x in terms of
+    // the above declared variable 'x';
+
+    context.strokeStyle = color;
+    context.lineWidth = 2;
+    context.beginPath();
+    for(let i = 0; i<window.innerWidth; i++){
+        x = toX(i);
+        let y = dynamicFunction(x);
+        c.lineTo(PlotX(x), PlotY(y))
+    }
+    context.stroke();
+}
+
+
+// Example of a dynamic function that takes any expression of x and operates accordingly
+// function operate(input) {
+//     let x = 2;
+
+//     let dynamicF = new Function('x', 'return ' + input);
+
+//     let result = dynamicF(x);
+
+//     return result;
+// }
+
+// console.log(operate('x*Math.PI'))
+
+
+
 drawGraph = () => {
     G.clearRect(0,0,GRAPH.width, GRAPH.height);
     Origin.x = GRAPH.width/2;
