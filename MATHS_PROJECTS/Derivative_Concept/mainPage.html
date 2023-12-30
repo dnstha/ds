@@ -4,10 +4,37 @@
     <meta charset="UTF-8">
     <title>Derivative Concept</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
     <canvas id="GraphPage"></canvas>
     <canvas id="lines"></canvas>
+    <form id="userInput">
+        <div>
+            <label id = "xLbl" for="x">x = </label>
+            <input id = "x" type = "number" inputmode = "numeric" placeholder="Value" required>
+        </div>
+        <div class="controls">
+            <button type="button" id="set">Set</button>
+            <button type="button" id="plps">| |</button> <!-- Play/Pause the animation with this button-->
+        </div>
+        <div class="eqnType">
+            <label id="eqnlbl" for="equation">Equation type:</label>
+            <select id="equation">
+                <option value="0">Constant</option>
+                <option value="1">Linear</option>
+                <option value="2">Quadratic</option>
+                <option value="3">Cubic</option>
+                <option value="4">Quartic</option>
+                <option value="5">Quintic</option>
+            </select>
+        </div>
+        <div class="eqn">
+            <input id = "a" type = "number" inputmode = "numeric" placeholder="a" required>x<sup>2</sup>
+        </div>
+        <button type="button" id="drawCurve">Draw</button>
+        <button type="reset" id="reset">Reset</button>
+    </form>
 </body>
 <script src="../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
 <script src="../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>

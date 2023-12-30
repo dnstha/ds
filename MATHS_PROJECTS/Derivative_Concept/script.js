@@ -31,6 +31,9 @@ function Term(coeff, power) { // algebraic term in terms of x, viz. coeff*x^powe
 // polyn[String.fromCharCode(65)] = 2; // equivalent to polyn.A
 let polyn; // object that stores coefficients and powers of x in polynomial
 
+let changeX, M = true;
+
+
 function createPoly(...cof){ // highest power of the polynomial
     // arguments must be given in the form a, b, c, d, e to create polynomial ax^4 + bx^3 + cx^2 + dx + e
     let expn = [];
@@ -65,13 +68,8 @@ addEventListener('keydown', (event) => {
     }
 });
 
-addEventListener('keyup', () => {
-    if(play && (PlotX(movingPoint.x) < 0 || PlotX(movingPoint.x) > window.innerWidth)){
-        // if(event.key=='ArrowLeft' || event.key=='ArrowRight' || event.key==' '){ 
-            if(PlotX(movingPoint.x) < 0) movingPoint.x = toX(1);
-            else if(PlotX(movingPoint.x) > window.innerWidth) movingPoint.x = toX(window.innerWidth-1); 
-        // }
-    }
+addEventListener('keyup', (event) => {
+    adjustX();
 });
 
 function P(x, y){
@@ -186,10 +184,8 @@ function animate() {
     Cv.x = PlotX(movingPoint.x);
     Cv.y = PlotY(movingPoint.y);
 
-    connectColorDashed(c, Cv.x, 0, Cv.x, canvas.height, 0.4);
-    // drawFunction(c, `${cofs[0]}*x*x*x + ${cofs[1]}*x*x + ${cofs[2]}*x + ${cofs[3]}`, 'magenta');
+    connectColorDashed(c, Cv.x, 0, Cv.x, canvas.height, 0.4); // Trace the position of x in the graph
     drawFunction(c, generatePolynomial(...cofs), polyColor);
-    // drawFunction(c, `${Pr.A}*x*x+${Pr.B}*x+${Pr.C}`, 'magenta');
     line(c, tangent.slope, tangent.yInt, tangentColor);
     // drawFunction(c, `(x-2)*(x-3)*(x-6)*(x-4)*(x-1)*(x+1)`, 'yellow')
     if(Cv.x >= canvas.width || Cv.x <= 0){    
@@ -201,11 +197,19 @@ function animate() {
     }
 
     point(Cv.x, Cv.y, pointColor);
-    writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x + ${roundUp(tangent.yInt, 1000)}`, 20, 50, tangentColor);
+    if(tangent.yInt >= 0) {
+        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x + ${roundUp(tangent.yInt, 1000)}`, 20, 50, tangentColor);
+    }else{
+        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x - ${roundUp(modulus(tangent.yInt), 1000)}`, 20, 50, tangentColor);
+    }
     writeText(c, `x = ${roundUp(movingPoint.x,1000)}`, 20, 75, lightColors[1]);
    
     let Pexpn = (generatePolynomial(...cofs).replaceAll('**', '^')).replaceAll('1*', '').replace('^1', '');
-    writeText(c, `y = ${Pexpn}`, 20, 100, polyColor);
+    if(Pexpn == ''){
+        writeText(c, `y = 0`, 20, 100, polyColor);
+    }else{
+        writeText(c, `y = ${Pexpn}`, 20, 100, polyColor);
+    }
     // c.beginPath();
     // for(let i =0; i<canvas.width; i++){
     //     let x = toX(i);
@@ -239,11 +243,15 @@ function animate() {
     // drawFunction(c, '3*(x**2) + x + 1', 'red');
 }
 
-addEventListener('click', function(event){
-    play = false;
-    movingPoint.x = toX(event.clientX);
-    movingPoint.update();
-});
+
+// Removed this feature as it seemed redundant and caused complexities
+// addEventListener('click', function(event){
+//     if(changeX){
+//         play = false;
+//         movingPoint.x = toX(event.clientX);
+//         movingPoint.update();
+//     }
+// });
 
 // function pY(x){ // Y-coordinate of parabola at x
 //     let y = Pr.A*x*x + Pr.B*x + Pr.C;
@@ -268,7 +276,7 @@ function init(){
     c.font = '24px normal verdana'
     play = true;
 
-    nTerms = randomInt(3, 6);
+    nTerms = randomInt(1, 6);
     let polyCoeff = [];
     for(let i = 0; i<nTerms; i++){
         polyCoeff.push(randomInt(-5, 5));
@@ -286,22 +294,56 @@ function init(){
     // console.log(generatePolynomial(...cofs));
     movingPoint.x = randomInt(-5, 5);
     movingPoint.y = calculateTangent(movingPoint.x);
+    document.querySelector('#plps').innerHTML = '| |';
 }
 
-init();
-animate();
+// init();
+// animate();
 
+function adjustX(){
+    if(play && (PlotX(movingPoint.x) < 0 || PlotX(movingPoint.x) > window.innerWidth)){
+        // if(event.key=='ArrowLeft' || event.key=='ArrowRight' || event.key==' '){ 
+            if(PlotX(movingPoint.x) < 0) movingPoint.x = toX(1);
+            else if(PlotX(movingPoint.x) > window.innerWidth) movingPoint.x = toX(window.innerWidth-1); 
+        // }
+    }
+}
 
-// Example of a dynamic function
-// function operate(input) {
-//     let x = 2;
+document.querySelector('#plps').addEventListener('click', function(){
+    play = !play;
+    if(play === true){
+        document.querySelector('#plps').innerText = '| |';
+    }else if(play === false){
+        document.querySelector('#plps').innerHTML = `<i class="fa-solid fa-play">`;
+    }
+    adjustX();
+});
 
-//     let dynamicF = new Function('x', 'return ' + input);
+function insertX(){
+    play = false;
+    movingPoint.x = Number(document.querySelector('#x').value);
+    movingPoint.update();
+}
 
-//     let result = dynamicF(x);
+document.querySelector('#set').addEventListener('click', function(){
+    if(filled('#x')){
+        insertX();
+    }
+});
 
-//     return result;
-// }
+document.querySelector('#x').addEventListener('keyup', function(event){
+    if(event.key == 'Enter' && filled('#x')){
+        insertX();
+    }
+});
 
-// console.log(operate('x*Math.PI'))
+// document.querySelector('form').addEventListener('click', function(event){
+//     // if(check){
+//     //     M = false;
+//     // }
+//     console.log(event)
+// });
 
+document.querySelector('#reset').addEventListener('click', function(){
+    init();
+});
