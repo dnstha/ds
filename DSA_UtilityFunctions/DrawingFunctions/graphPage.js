@@ -229,10 +229,41 @@ drawFunction = (context, fx, color) => {
     for(let i = 0; i<window.innerWidth; i++){
         x = toX(i);
         let y = dynamicFunction(x);
-        c.lineTo(PlotX(x), PlotY(y))
+        x = PlotX(x);
+        y = PlotY(y);
+        context.lineTo(x, y);
     }
     context.stroke();
 }
+
+/* 
+Another version of drawFunction which tries to skip drawing the parts of curve that are less than or greater than
+the height of the window to skip unnecessary calculations of those points
+
+drawFunction2 = (context, fx, color) => {
+    let x;
+    let dynamicFunction = new Function('x', 'return ' + fx);
+    // Dynamic Function to convert given type of expression of x in terms of
+    // the above declared variable 'x';
+
+    context.strokeStyle = color;
+    context.lineWidth = 2;
+    context.beginPath();
+    for(let i = 0; i<window.innerWidth; i++){
+        x = toX(i);
+        let y = dynamicFunction(x);
+        x = PlotX(x);
+        y = PlotY(y);
+        if(y >= -100 && y<=window.innerHeight){
+            context.lineTo(x, y);
+        }
+    }
+    context.stroke();
+}
+
+
+*/
+
 
 
 // Example of a dynamic function that takes any expression of x and operates accordingly

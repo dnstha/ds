@@ -268,7 +268,7 @@ function init(){
     c.font = '24px normal verdana'
     play = true;
 
-    nTerms = randomInt(3, 7);
+    nTerms = randomInt(3, 6);
     let polyCoeff = [];
     for(let i = 0; i<nTerms; i++){
         polyCoeff.push(randomInt(-5, 5));
@@ -279,6 +279,7 @@ function init(){
     pointColor = 'red';
     
     polyn = createPoly(...polyCoeff);
+    // polyn = createPoly(5, -2, 2, 1, -5, 3, 2);
 
     dx = DX;
     cofs = polyn.map(item => item.coeff);
