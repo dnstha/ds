@@ -226,7 +226,7 @@ function insertX(){
 }
 
 function init(){
-    c.font = 'normal 24px times'
+    c.font = 'bold 24px cambria'
     play = true;
     polyColor = 'magenta';
     tangentColor = 'aqua';
@@ -259,18 +259,19 @@ function animate() {
     }
 
     point(Cv.x, Cv.y, pointColor);
+    let position = {x:20, y:canvas.height, gap: 25}; // positions of the equations
     if(tangent.yInt >= 0) {
-        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x + ${roundUp(tangent.yInt, 1000)}`, 20, 50, tangentColor);
+        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x + ${roundUp(tangent.yInt, 1000)}`, position.x, position.y - position.gap, tangentColor);
     }else{
-        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x - ${roundUp(modulus(tangent.yInt), 1000)}`, 20, 50, tangentColor);
+        writeText(c, `Equation of tangent: y = ${roundUp(tangent.slope, 1000)}x - ${roundUp(modulus(tangent.yInt), 1000)}`, position.x, position.y - position.gap, tangentColor);
     }
-    writeText(c, `x = ${roundUp(movingPoint.x,1000)}`, 20, 75, lightColors[1]);
+    writeText(c, `x = ${roundUp(movingPoint.x,1000)}`, position.x, position.y - position.gap*2, lightColors[1]);
    
     let Pexpn = (generatePolynomial(...cofs).replaceAll('**', '^')).replaceAll('1*', '').replace('^1', '');
     if(Pexpn == ''){
-        writeText(c, `y = 0`, 20, 100, polyColor);
+        writeText(c, `y = 0`, position.x, position.y - position.gap*3, polyColor);
     }else{
-        writeText(c, `y = ${Pexpn}`, 20, 100, polyColor);
+        writeText(c, `y = ${Pexpn}`, position.x, position.y - position.gap*3, polyColor);
     }
 }
 
