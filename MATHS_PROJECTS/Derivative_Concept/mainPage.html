@@ -17,6 +17,7 @@
         <div class="controls">
             <button type="button" id="set">Set</button>
             <button type="button" id="plps">| |</button> <!-- Play/Pause the animation with this button-->
+            <button type="button" id="reverse"><i class="fa-solid fa-left-right"></i></button>
         </div>
         <div class="eqnType">
             <label id="eqnlbl" for="equation">Equation type:</label>
@@ -30,10 +31,15 @@
             </select>
         </div>
         <div class="eqn">
-            <input id = "a" type = "number" inputmode = "numeric" placeholder="a" required>x<sup>2</sup>
+            y=<i>f&lpar;x&rpar;</i> =&nbsp;
+            <div id = 'polynomial'>
+                <input id = 'a' class = 'polyTerm' type = "number" inputmode = "numeric" placeholder="a" required>
+            </div>
         </div>
-        <button type="button" id="drawCurve">Draw</button>
-        <button type="reset" id="reset">Reset</button>
+        <div class="end">
+            <button type="button" id="drawCurve">Draw</button>
+            <button type="reset" id="reset">Reset</button>
+        </div>
     </form>
 </body>
 <script src="../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>

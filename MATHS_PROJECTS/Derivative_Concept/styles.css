@@ -22,6 +22,10 @@ body{
 }
 form{
     border: 1px cyan solid;
+    border-radius: 1rem;
+    backdrop-filter: blur(1px);
+    padding-left: 4px;
+    padding-right: 4px;
     position: absolute;
     top: 1rem;
     right: 2rem;
@@ -68,8 +72,7 @@ select{
 select:hover{
     box-shadow: 0 0 7px #cfffee;
 }
-
-#plps{
+#plps, #reverse{
     border-radius: 50%;
     text-align: center;
     font-weight: bolder;
@@ -79,7 +82,7 @@ select:hover{
 input{
     width: 4rem;
     height: 1.5rem;
-    border: none;
+    border: 1px solid cyan;
     border-radius: 0.5rem;
     background: transparent;
     color: aquamarine;
@@ -87,6 +90,16 @@ input{
 }
 input[type = "number"]::-webkit-inner-spin-button {
     display: none;
+}
+.end{
+    margin-bottom: 0.4rem;
+}
+.eqn{
+    display: flex;
+}
+.eqn input{
+    width: 3rem;
+    padding-left: 4px;
 }
 ::placeholder{
     color: #cfffee;

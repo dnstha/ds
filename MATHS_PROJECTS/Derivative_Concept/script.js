@@ -7,14 +7,43 @@ let scale = graphScale;
 graphColor = 'white';
 drawGraph();
 
+addEventListener("resize", () => {
+    // Checking if the window size has significantly changed
+    const widthChange = Math.abs(canvas.width - window.innerWidth);
+    const heightChange = Math.abs(canvas.height - window.innerHeight);
+
+    // a threshold for changes
+    const threshold = 0.01;
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Calling the init function here
+        init();
+    }else{
+        graphColor = 'white';
+        drawGraph();
+    }
+});
+
 
 let play = true; // Play-pause the animation
 let dx; // Change in x
 const DX = 0.008; // Amount of change in x
+
 let cofs = []; // array to store the coefficients of the polynomial
+// redundacy in cofs and polyCoeff will be solved later as soon as possible
+let polyCoeff = [];
+
 let polyColor, tangentColor, pointColor; // colors
 let nTerms; // Number of terms in the polynomial
 
+// polyn[String.fromCharCode(65)] = 2; // equivalent to polyn.A
+let polyn; // object that stores coefficients and powers of x in polynomial
+
+// Different objects and classes
 class Point{
     constructor(x, y){
         this.x = x;
@@ -22,18 +51,26 @@ class Point{
     }
 }
 
-
 function Term(coeff, power) { // algebraic term in terms of x, viz. coeff*x^power
     this.coeff = coeff;
     this.power = power;
 }
 
-// polyn[String.fromCharCode(65)] = 2; // equivalent to polyn.A
-let polyn; // object that stores coefficients and powers of x in polynomial
+function P(x, y){
+    this.x = x;
+    this.y = y;
 
-let changeX, M = true;
+    this.update = function(){
+        this.y = calculateTangent(this.x)
+    }
+}
+
+let movingPoint = new P(0, 0); // Point of contact of line and curve
+let Cv = new P(0, 0); // Converted values of moving point as PlotX, PlotY
+let tangent = {slope:0, yInt:0}; // Object to store slope and y-intercept of the tangent line
 
 
+// Utility functions
 function createPoly(...cof){ // highest power of the polynomial
     // arguments must be given in the form a, b, c, d, e to create polynomial ax^4 + bx^3 + cx^2 + dx + e
     let expn = [];
@@ -45,39 +82,33 @@ function createPoly(...cof){ // highest power of the polynomial
 }
 
 
-addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
-});
-
-addEventListener('keydown', (event) => {
-    if(event.key == "ArrowLeft" && dx >= 0 || event.key == "ArrowRight" && dx <= 0){
-        dx = dx < 0 ? -DX: DX;
-        dx *= -1;
-    }else if(event.key == " "){
-        play = !play
-    }
-    if((event.key == 'ArrowLeft' || event.key == 'ArrowRight')){
-        let change = 0.1;
-        if(event.key == "ArrowLeft"){
-            change = -change;
+function derivaivePow(x, coeff, power=0){ // derivative of a term coefficient * x^power, using power rule
+    let d;
+    if(typeof x == 'number' && typeof coeff == 'number' && typeof power == 'number'){
+        if(power === 0){ // derivative of constant for any value of x is 0
+            d = 0;
+        }else if(power == 1){
+            d = coeff;
+        }else if(x == 0){
+            if(power<1){
+                d = undefined;
+            }else{
+                d = 0;
+            }
+        }else if((x<0 && roundUp(power%1, 1000) == 0) || x>0){    
+            d = power * coeff * (x**(power-1));
+        }else{
+            d = undefined;
         }
-        movingPoint.x += change;
-        movingPoint.update();
+        return d;
     }
-});
+}
 
-addEventListener('keyup', (event) => {
-    adjustX();
-});
-
-function P(x, y){
-    this.x = x;
-    this.y = y;
-
-    this.update = function(){
-        this.y = calculateTangent(this.x)
+function changeBtn(){
+    if(play === true){
+        document.querySelector('#plps').innerText = '| |';
+    }else if(play === false){
+        document.querySelector('#plps').innerHTML = `<i class="fa-solid fa-play">`;
     }
 }
 
@@ -118,32 +149,6 @@ function derivaivePol(x, ...A){
     return d;
 }
 
-function derivaivePow(x, coeff, power=0){ // derivative of a term coefficient * x^power, using power rule
-    let d;
-    if(typeof x == 'number' && typeof coeff == 'number' && typeof power == 'number'){
-        if(power === 0){ // derivative of constant for any value of x is 0
-            d = 0;
-        }else if(power == 1){
-            d = coeff;
-        }else if(x == 0){
-            if(power<1){
-                d = undefined;
-            }else{
-                d = 0;
-            }
-        }else if((x<0 && roundUp(power%1, 1000) == 0) || x>0){    
-            d = power * coeff * (x**(power-1));
-        }else{
-            d = undefined;
-        }
-        return d;
-    }
-}
-
-let movingPoint = new P(0, 0); // Point of contact of line and curve
-let Cv = new P(0, 0); // Converted values of moving point as PlotX, PlotY
-let tangent = {slope:0, yInt:0}; // Object to store slope and y-intercept of the tangent line
-
 function calculateTangent(X){
     let Y = yfx(X, ...cofs);
     tangent.slope = derivaivePol(X, ...cofs);
@@ -176,7 +181,64 @@ function generatePolynomial(...coefficientArray) {
     
     return result;
 }
-  
+
+function yfx(x, ...P){ // for regular polygons only
+    let y = 0;
+    const n = P.length-1;
+    for(let i = n; i>=0; i--){
+        y += P[n-i] * x**i;
+    }
+    return y;
+}
+
+function adjustX(){
+    if(play && (PlotX(movingPoint.x) < 0 || PlotX(movingPoint.x) > window.innerWidth)){
+        // if(event.key=='ArrowLeft' || event.key=='ArrowRight' || event.key==' '){ 
+            if(PlotX(movingPoint.x) < 0) movingPoint.x = toX(1);
+            else if(PlotX(movingPoint.x) > window.innerWidth) movingPoint.x = toX(window.innerWidth-1); 
+        // }
+    }
+}
+
+function Draw(){
+    polyCoeff = [];
+    if(!filled('#a')){
+        nTerms = randomInt(1, 6);
+        for(let i = 0; i<nTerms; i++){
+            polyCoeff.push(randomInt(-5, 5));
+        }
+        polyn = createPoly(...polyCoeff);
+        cofs = polyn.map(item => item.coeff);
+    }else{
+        cofs = [];
+        nTerms = Number(document.querySelector('#equation').value);
+        for(let i = 0; i<=nTerms; i++){
+            cofs[i] = Number(document.querySelector(`#${String.fromCharCode(97+i)}`).value);
+        }
+        // cofs = polyCoeff.map(item => Number(item.value));
+    }
+}
+
+function insertX(){
+    play = false;
+    movingPoint.x = Number(document.querySelector('#x').value);
+    movingPoint.update();
+}
+
+function init(){
+    c.font = 'normal 24px times'
+    play = true;
+    polyColor = 'magenta';
+    tangentColor = 'aqua';
+    pointColor = 'red';
+    dx = ((-1)**randomInt(1, 2))*DX;
+
+    Draw();
+
+    movingPoint.x = randomInt(-5, 5);
+    movingPoint.y = calculateTangent(movingPoint.x);
+    document.querySelector('#plps').innerHTML = '| |';
+}
 
 function animate() {
     requestAnimationFrame(animate);
@@ -210,39 +272,32 @@ function animate() {
     }else{
         writeText(c, `y = ${Pexpn}`, 20, 100, polyColor);
     }
-    // c.beginPath();
-    // for(let i =0; i<canvas.width; i++){
-    //     let x = toX(i);
-    //     c.lineTo(PlotX(x), PlotY(Math.sin(x)));
-    // }
-    // c.stroke();
-
-    // c.beginPath();
-    // for(let i =0; i<canvas.width; i++){
-    //     let x = toX(i);
-    //     c.lineTo(PlotX(x), PlotY(Math.cos(x)));
-    // }
-    // c.stroke();
-
-    // c.beginPath();
-    // for(let i =0; i<canvas.width; i++){
-    //     let x = toX(i);
-    //     c.lineTo(PlotX(x), PlotY(Math.sin(x)));
-    // }
-    // c.stroke();
-
-    // c.strokeStyle = 'red';
-    // c.beginPath();
-    // for(let i =0; i<window.innerWidth; i++){
-    //     let x = toX(i);
-    //     let y = x*x*x;
-    //     c.lineTo(PlotX(x), PlotY(y));
-    // }
-    // c.stroke();
-
-    // drawFunction(c, '3*(x**2) + x + 1', 'red');
 }
 
+
+
+// Event Listeners
+addEventListener('keydown', (event) => {
+    if(event.key == "ArrowLeft" && dx >= 0 || event.key == "ArrowRight" && dx <= 0){
+        dx = dx < 0 ? -DX: DX;
+        dx *= -1;
+    }else if(event.key == " "){
+        play = !play
+        changeBtn();
+    }
+    if((event.key == 'ArrowLeft' || event.key == 'ArrowRight')){
+        let change = 0.1;
+        if(event.key == "ArrowLeft"){
+            change = -change;
+        }
+        movingPoint.x += change;
+        movingPoint.update();
+    }
+});
+
+addEventListener('keyup', () => {
+    adjustX();
+});
 
 // Removed this feature as it seemed redundant and caused complexities
 // addEventListener('click', function(event){
@@ -253,87 +308,62 @@ function animate() {
 //     }
 // });
 
-// function pY(x){ // Y-coordinate of parabola at x
-//     let y = Pr.A*x*x + Pr.B*x + Pr.C;
-//     return y;
-// }
-
-function yfx(x, ...P){ // for regular polygons only
-    let y = 0;
-    const n = P.length-1;
-    for(let i = n; i>=0; i--){
-        y += P[n-i] * x**i;
-    }
-    return y;
-}
-
-// function cY(x){
-//     let y = Cu.a*x*x*x + Cu.b*x*x + Cu.c*x + Cu.d;
-//     return y;
-// }
-
-function init(){
-    c.font = '24px normal verdana'
-    play = true;
-
-    nTerms = randomInt(1, 6);
-    let polyCoeff = [];
-    for(let i = 0; i<nTerms; i++){
-        polyCoeff.push(randomInt(-5, 5));
-    }
-    
-    polyColor = 'magenta';
-    tangentColor = 'aqua';
-    pointColor = 'red';
-    
-    polyn = createPoly(...polyCoeff);
-    // polyn = createPoly(5, -2, 2, 1, -5, 3, 2);
-
-    dx = DX;
-    cofs = polyn.map(item => item.coeff);
-    // console.log(generatePolynomial(...cofs));
-    movingPoint.x = randomInt(-5, 5);
-    movingPoint.y = calculateTangent(movingPoint.x);
-    document.querySelector('#plps').innerHTML = '| |';
-}
-
-// init();
-// animate();
-
-function adjustX(){
-    if(play && (PlotX(movingPoint.x) < 0 || PlotX(movingPoint.x) > window.innerWidth)){
-        // if(event.key=='ArrowLeft' || event.key=='ArrowRight' || event.key==' '){ 
-            if(PlotX(movingPoint.x) < 0) movingPoint.x = toX(1);
-            else if(PlotX(movingPoint.x) > window.innerWidth) movingPoint.x = toX(window.innerWidth-1); 
-        // }
-    }
-}
-
 document.querySelector('#plps').addEventListener('click', function(){
     play = !play;
-    if(play === true){
-        document.querySelector('#plps').innerText = '| |';
-    }else if(play === false){
-        document.querySelector('#plps').innerHTML = `<i class="fa-solid fa-play">`;
-    }
+    changeBtn();
     adjustX();
 });
 
-function insertX(){
-    play = false;
-    movingPoint.x = Number(document.querySelector('#x').value);
-    movingPoint.update();
-}
+document.querySelector('#equation').addEventListener('change', function(){
+    let elem = [];
+    let degree = document.querySelector('#equation').value;
+
+    for(let i = degree;  i>=0; i--){
+        if(i == 0){
+            elem[degree - i] =`
+            <input id=${String.fromCharCode(97+(degree-i))} class='polyTerm' type = "number" inputmode = "numeric" placeholder=${String.fromCharCode(97+(degree-i))} required>
+            `;
+        }else if(i == 1){
+            elem[degree - i] =`
+            <input id=${String.fromCharCode(97+(degree-i))} class='polyTerm' type = "number" inputmode = "numeric" placeholder=${String.fromCharCode(97+(degree-i))} required>
+            x + 
+            `;
+        }else{
+            elem[degree - i] =`
+            <input id=${String.fromCharCode(97+(degree-i))} class='polyTerm' type = "number" inputmode = "numeric" placeholder=${String.fromCharCode(97+(degree-i))} required>
+            x<sup>${i}</sup> + 
+            `;
+        }
+    }
+    document.querySelector('#polynomial').innerHTML = '';
+    for(let i = 0; i<=degree; i++){
+        document.querySelector('#polynomial').innerHTML += elem[i];
+    }
+});
+
+document.querySelector('#drawCurve').addEventListener('click', function(){
+    if(filled('#a')){
+        init();
+    }
+});
+
+document.querySelectorAll('#polynomial').forEach(element => element.addEventListener('keyup', function(event){
+    if(event.key === "Enter"){
+        init();
+    }
+}));
 
 document.querySelector('#set').addEventListener('click', function(){
     if(filled('#x')){
         insertX();
+        changeBtn();
     }
 });
 
 document.querySelector('#x').addEventListener('keyup', function(event){
     if(event.key == 'Enter' && filled('#x')){
         insertX();
+        changeBtn();
     }
 });
 
@@ -345,5 +375,16 @@ document.querySelector('#x').addEventListener('keyup', function(event){
 // });
 
 document.querySelector('#reset').addEventListener('click', function(){
+    document.querySelector('#polynomial').innerHTML = `
+    <input id = 'a' class = 'polyTerm' type = "number" inputmode = "numeric" placeholder="a" required>
+    `;
     init();
 });
+
+document.querySelector('#reverse').addEventListener('click', function(){
+    dx *= -1;
+});
+
+// Calling two main functions
+init();
+animate();
