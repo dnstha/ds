@@ -27,7 +27,7 @@ form{
     padding-left: 4px;
     padding-right: 4px;
     position: absolute;
-    top: 1rem;
+    bottom: 1rem;
     right: 2rem;
     color: red;
     font-weight: bolder;
