@@ -53,3 +53,8 @@ writeTriples = () => {
 
 
 document.getElementById('myBtn').addEventListener('click', writeTriples);
+document.querySelector('#n').addEventListener('keyup', function(e){
+    if(e.key == 'Enter'){
+        writeTriples();
+    }
+});
