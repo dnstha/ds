@@ -10,6 +10,11 @@ function init(){
     });
 }
 
+const symbol = {
+    rock: '<i class="fa-solid fa-hand-back-fist"></i>',
+    paper: '<i class="fa-solid fa-hand"></i>',
+    scissors: '<i class="fa-solid fa-hand-scissors"></i>'
+}
 
 function result(x){
     init();
@@ -17,6 +22,7 @@ function result(x){
     if(computer == x){
         document.querySelector('span').innerText = 'The game was draw!';
         document.querySelector('span').style.background = 'skyblue';
+        document.querySelector('.statement').innerHTML = `Both chose&nbsp;${symbol[x]}`;
     }else{
         if(x == 'rock'){
             win = (computer == 'scissors')? true : false;
@@ -26,10 +32,12 @@ function result(x){
             win = (computer == 'rock')? true : false;
         }
         if(win){
+            document.querySelector('.statement').innerHTML = `${symbol[x]}&nbsp;beats&nbsp;${symbol[computer]}`;
             document.querySelector('span').innerText = 'You won!';
             document.querySelector('span').style.background = 'limegreen';
             document.querySelector('#human').value++;
         }else{
+            document.querySelector('.statement').innerHTML = `${symbol[computer]}&nbsp;beats&nbsp;${symbol[x]}`;
             document.querySelector('span').innerText = 'You lost!';
             document.querySelector('span').style.background = 'red';
             document.querySelector('#computer').value++;
@@ -56,5 +64,6 @@ document.querySelector('#initialize').addEventListener('click', function(){
     document.querySelector('#human').value = 0;
     document.querySelector('#computer').value = 0;
     document.querySelector('#total').innerText = '';
+    document.querySelector('.statement').innerText = '';
     init();
 })
