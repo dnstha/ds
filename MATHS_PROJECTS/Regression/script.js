@@ -26,7 +26,6 @@ document.querySelector("#plot").style.textDecoration = "none";
 document.querySelector("#plot").style.color = 'aqua';
 
 
-
 function init() {
     X = [];
     Y = [];
@@ -47,6 +46,10 @@ function init() {
 }
 
 init();
+L.font = 'bold 17px arial'
+writeText(L, 'Click on specific point on the graph to add those data to the table.', 10, 100, '#cfffee');
+writeText(L, 'You can manually add the values by clicking on the Plot button on the bottom-right corner.', 10, 120, '#cfffee');
+
 
 emptyCheck = () => {
     let result = 1;
