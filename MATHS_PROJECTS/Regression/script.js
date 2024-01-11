@@ -93,16 +93,32 @@ function output() {
     table.append(newListItem);
     if(modulus(corrCoeff) <= 1) {
         if(yInt < 0) {
-            results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
-        <br>y = ${roundUp(Byx, 1000)}x - ${modulus(roundUp(yInt, 1000))}
-        `;
+            results.innerHTML = `
+                &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
+                &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+                &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
+                &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
+                r = ${Math.round(corrCoeff*10000)/10000}<br>
+                y = ${roundUp(Byx, 1000)}x - ${modulus(roundUp(yInt, 1000))}
+            `;
         }else{
-            results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= ${Math.round(corrCoeff*10000)/10000}
-        <br>y = ${roundUp(Byx, 1000)}x + ${roundUp(yInt, 1000)}
-        `;
+            results.innerHTML = `
+                &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
+                &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+                &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
+                &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
+                r = ${Math.round(corrCoeff*10000)/10000}<br>
+                y = ${roundUp(Byx, 1000)}x + ${roundUp(yInt, 1000)}
+            `;
         }
     }else{
-        results.innerHTML = `&#x035E;x= ${Math.round(avgX*1000)/1000}<br>&#x035E;y= ${Math.round(avgY*1000)/1000}<br>r= `;
+        results.innerHTML = `
+            &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
+            &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+            &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
+            &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
+            r = 
+        `;
     }
     if(typeof Byx == "number") {
         L.clearRect(0,0, canvas.width, canvas.height);
