@@ -18,9 +18,9 @@ let invC = { // line ax+bx=c
     r:1
 };
 
-clor = (I) =>{
-    if(typeof I === 'number'){
-        return `hsl(${(20*I)%360}, 80%, 60%)`; // Color for the points
+clor = (h, s=80, l=60) =>{
+    if(typeof h === 'number'){
+        return `hsl(${(20*h)%360}, ${s}%, ${l}%)`; // Color for the points
     }
 }
 

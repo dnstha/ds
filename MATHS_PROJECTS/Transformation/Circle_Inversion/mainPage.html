@@ -22,13 +22,12 @@
                 font-size: 1.8rem;
                 color: skyblue;
                 font-weight: bold;
-                --width: 3rem;
+                width: fit-content;
+                --width: 4rem;
                 --height: calc(var(--width)/2);
                 --brdr-radius: calc(var(--width)/4);
-
                 display: flex;
                 align-items: center;
-                cursor: pointer;
             }
             .toggle input{
                 display: none;
@@ -40,6 +39,7 @@
                 border-radius: var(--brdr-radius);
                 background: #cfffee;
                 transition-duration: 0.2s;
+                cursor: pointer;
             }
 
             .toggle input:checked ~ #tgl{
@@ -55,8 +55,8 @@
                 width: var(--height);
                 border-radius: var(--height);
                 background: red;
-                box-shadow: 0 0 10px red;
                 transition-duration: 0.15s;
+                box-shadow: 0 0 10px red;
             }
 
             .toggle input:checked ~ #tgl::after{
@@ -84,11 +84,14 @@
             </div>
             <button type = "button" id = "MyBtn" class = "btm">Invert</button>
             <button type = "reset" id = "clear" class = "btm">Reset</button><br>
-            <label for="showPoints" class="toggle">
-                Hide Points:&nbsp;&nbsp;&nbsp;
-                <input id="showPoints" type="checkbox">
-                <div id="tgl"></div>
-            </label>
+            
+            <div class="toggle">
+                Hide Points:&nbsp;&nbsp;
+                <label for="showPoints">
+                    <input id="showPoints" type="checkbox">
+                    <div id="tgl"></div>
+                </label>
+            </div>
         </form>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
