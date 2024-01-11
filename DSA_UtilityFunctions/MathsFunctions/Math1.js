@@ -34,11 +34,11 @@ vctr = (x1, x2) => {
     return x2-x1;
 }
 
-function average() {
+function average(...arg) {
     let avg = 0;
-    let n = arguments.length;
+    let n = arg.length;
     for(let i = 0; i<n; i++) {
-        avg += arguments[i];
+        avg += arg[i];
     }
     return avg/n;
 }

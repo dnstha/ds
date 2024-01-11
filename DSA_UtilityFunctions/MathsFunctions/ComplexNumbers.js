@@ -91,3 +91,13 @@ reflectPoint = (x1, y1, a1, b1, c1) => {
         return reflectedPoint;
     }
 }
+
+
+invertCirclePoint = (pntX, pntY, centerX, centerY, radius) => {
+    let m = pntX - centerX;
+    let n = pntY - centerY;
+    let invertedP = {x:0, y:0};
+    invertedP.x =  centerX + (radius*radius*m)/(m*m + n*n);
+    invertedP.y =  centerY + (radius*radius*n)/(m*m + n*n);
+    return invertedP;
+}

@@ -52,13 +52,13 @@ connectColor = (x1, y1, x2, y2, color) => {
     c.stroke();
 }
 
-connectColorCtx = (c, x1, y1, x2, y2, color) => {
-    c.beginPath();
-    c.moveTo(x1, y1);
-    c.lineTo(x2, y2);
-    c.strokeStyle = color;
-    c.lineWidth = 2;
-    c.stroke();
+connectColorCtx = (context, x1, y1, x2, y2, color) => {
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.strokeStyle = color;
+    context.lineWidth = 2;
+    context.stroke();
 }
 
 connectColorFade = (x1,y1,x2,y2, alpha) => {
@@ -73,6 +73,13 @@ connectColorFade = (x1,y1,x2,y2, alpha) => {
     c.restore();
 }
 
+drawCircle = (context, x, y, radius, color) => {
+    context.beginPath();
+    context.strokeStyle = color;
+    context.arc(x, y, radius, 0, Math.PI*2);
+    context.stroke();
+}
+
 connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
     context.save();
     context.beginPath();
@@ -85,12 +92,12 @@ connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
     context.restore();
 }
 
-point = (x, y, color) => {
-    c.beginPath();
-    c.arc(x, y, 3, 0, Math.PI * 2, true);
-    c.fillStyle = color;
-    c.fill();
-    c.closePath();
+point = (x, y, color, context=c) => {
+    context.beginPath();
+    context.arc(x, y, 3, 0, Math.PI * 2, true);
+    context.fillStyle = color;
+    context.fill();
+    context.closePath();
 }
 
 writeText = (context, text, x, y, color) => {
