@@ -267,12 +267,17 @@ function animate() {
     }
     writeText(c, `Slope of tangent = ${roundUp(tangent.slope, 1000)}`, position.x, position.y - position.gap*2, tangentColor);
     writeText(c, `x = ${roundUp(movingPoint.x,1000)}`, position.x, position.y - position.gap*3, lightColors[1]);
-   
+    
+
     let Pexpn = (generatePolynomial(...cofs).replaceAll('**', '^')).replaceAll(' 1*', ' ').replace('^1', '');
     if(Pexpn == ''){
         writeText(c, `y = 0`, position.x, position.y - position.gap*4, polyColor);
     }else{
-        writeText(c, `y = ${Pexpn}`, position.x, position.y - position.gap*4, polyColor);
+        if(cofs[0] == 1 && cofs.length>1){
+            writeText(c, `y = ${Pexpn.replace('1*', '')}`, position.x, position.y - position.gap*4, polyColor);
+        }else{
+            writeText(c, `y = ${Pexpn}`, position.x, position.y - position.gap*4, polyColor);
+        }
     }
 }
 
