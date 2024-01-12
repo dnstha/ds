@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    color: #cfffee;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#GraphPage {
+    position: absolute;
+    background: #000000;
+    z-index: -2;
+}
+#shape {
+    position: absolute;
+    background: transparent;
+    z-index: -1;
+}
+#animate {
+    position: absolute;
+    background: transparent;
+    z-index: 0;
+}
+.inputs {
+    position: absolute;
+    top: 1rem;
+    right: 0.5rem;
+}
+.btns {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: end;
+    align-items: center;
+    top: 5%;
+    z-index: 1;
+}
+button {
+    color: cyan;
+    background-color: black;
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+    border: 2px solid #cfffee;
+    font-size: 2rem;
+    width: 7rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    transition-duration: 50ms;
+}
+button:active {
+    transform: scale(0.96);
+    border-color: black;
+    background-color: #cfffee;
+    color: black;
+    box-shadow: 0 0 25px cyan;
+}
+.point {
+    width: max-content;
+    margin-right: 0.2rem;
+    height: 2rem;
+    font-size: 1.8rem;
+}
+input{
+    width: 4rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: aquamarine;
+    font-size: 1.5rem;
+}
+input[type = "number"]::-webkit-inner-spin-button {
+    display: none;
+}
+::placeholder{
+    color: #cfffee;
+    opacity: 0.55;
+}
+
+#R{
+    height: fit-content;
+}
+#R input{
+    border: 1px solid #cfefee;
+    padding-left: 4px;
+}
+.btm{
+    margin-top: 1rem;
+}
+.toggle{
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    color: skyblue;
+    font-weight: bold;
+    width: fit-content;
+    --width: 4rem;
+    --height: calc(var(--width)/2);
+    --brdr-radius: calc(var(--width)/4);
+    display: flex;
+    align-items: center;
+}
+.toggle input{
+    display: none;
+}
+#tgl{
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--brdr-radius);
+    background: #cfffee;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.toggle input:checked ~ #tgl{
+    background: cyan;
+}
+
+#tgl::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    border-radius: var(--height);
+    background: red;
+    transition-duration: 0.15s;
+    box-shadow: 0 0 10px red;
+}
+
+.toggle input:checked ~ #tgl::after{
+    transform: translateX(var(--height));
+}

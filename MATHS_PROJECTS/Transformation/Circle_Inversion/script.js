@@ -18,6 +18,15 @@ let invC = { // line ax+bx=c
     r:1
 };
 
+
+/* 
+Previously, I had given the real coordinates of the initial points in other transformation programs according to the graph by converting them
+accordingly with PlotX and PlotY functions. However, this caused bugs while resizing the page.
+In order to solve this, the real values of points are given to intial points array and later converted according to the graph size.
+This approach has solved the problem. I need to implement the same in other transformation programs as well.
+*/
+
+
 clor = (h, s=80, l=60) =>{
     if(typeof h === 'number'){
         return `hsl(${(20*h)%360}, ${s}%, ${l}%)`; // Color for the points
@@ -78,9 +87,6 @@ getCoeff = () => {
     invC.h = Number(document.querySelector("#h").value);
     invC.k = Number(document.querySelector("#k").value);
     invC.r = Number(document.querySelector("#r").value);
-    // if(ln.a == 0 && ln.b == 0){
-    //     alert("Coefficients of both x and y cannot be zero at once! Re-enter the values:");
-    // }
 }
 
 emptyCheck = () => {
@@ -108,8 +114,8 @@ function invert(){
     points = [];
     finalPoints = [];
     for(let i = 0; i<initialPoints.length; i++) {
-        finalPoints.push(invertCirclePoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, invC.h, invC.k, invC.r));
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
+        finalPoints.push(invertCirclePoint(initialPoints[i].x, initialPoints[i].y, invC.h, invC.k, invC.r));
+        points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
     }
 }
 
@@ -128,7 +134,7 @@ function addPoint() {
         charV++;
         init();
 
-        initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
+        initialPoints.push(new Plot(Number(x), Number(y)));
 
         invert();
 
@@ -151,6 +157,9 @@ function init(){
     graphColor = 'white';
     drawGraph();
 
+    
+    c.font = 'normal 25px times';
+
 
     if(!emptyCheck()) {
         // Inversion Circle
@@ -169,15 +178,18 @@ function init(){
         points = [];
         nPoints = 2;
         for(let i = 0; i<nPoints; i++) {
-            initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+            initialPoints.push(new Plot(randomInt(-12,12), randomInt(-12,12)));
             if(i>0) {
                 while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
-                    initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+                    initialPoints[i] = new Plot(randomInt(-12,12), randomInt(-12,12));
                 }
             }
-            finalPoints.push(invertCirclePoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, invC.h, invC.k, invC.r));
-            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
+            finalPoints.push(invertCirclePoint(initialPoints[i].x, initialPoints[i].y, invC.h, invC.k, invC.r));
+            points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
         }
+    }
+    else{
+        invert();
     }
     
     c.lineJoin = "bevel"; // makes the corners smoother
@@ -205,7 +217,7 @@ function animate() {
     writeText(c, `C`, PlotX(invC.h)+1, PlotY(invC.k)-1, 'aqua');
     
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.7);
+        connectColorFade(PlotX(initialPoints[n].x), PlotY(initialPoints[n].y), points[n].x, points[n].y, 0.7);
     }
 
     points.forEach((p,i) => {
@@ -214,7 +226,8 @@ function animate() {
     });
 
     initialPoints.forEach((p,i) => {
-        point(p.x, p.y, clor(i));
+        // Initial Points need to be converted in order to plot them in the graph
+        point(PlotX(p.x), PlotY(p.y), clor(i));
     });
 
 
@@ -233,14 +246,13 @@ function animate() {
     }
     
     if(!hidePnts){
-        c.font = 'normal 25px times';
         c.fillStyle = 'lime';
         c.fillText(`Initial Points`, startP.x, startP.y+gap);
         for(let i = 0; i<initialPoints.length; i++) {
             let Pname = `P${i+1}`;
             c.fillStyle = clor(i);
-            c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+2));
-            c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
+            c.fillText(`\u2022 ${Pname}(${initialPoints[i].x}, ${initialPoints[i].y})`, startP.x, startP.y + gap*(i+2));
+            c.fillText(`${Pname}`, PlotX(initialPoints[i].x) + 2, PlotY(initialPoints[i].y) - 2); // labelling initial point
             c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
         }
 
@@ -268,7 +280,6 @@ document.getElementById('MyBtn').onclick = function() {
 
 document.getElementById("clear").onclick = function() {
     charV = 0;
-    hidePnts = false;
     init();
 };
 

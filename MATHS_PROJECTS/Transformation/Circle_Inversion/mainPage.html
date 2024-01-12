@@ -5,86 +5,30 @@
         <meta charset="utf-8">
         <link rel = "icon" href = "../../../Logo.svg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" type = "text/css" href="../../../stylesForMathAnimations/tranformationStyles.css">
-        <style>
-            #R{
-                height: fit-content;
-            }
-            #R input{
-                border: 1px solid #cfefee;
-                padding-left: 4px;
-            }
-            .btm{
-                margin-top: 1rem;
-            }
-            .toggle{
-                margin-top: 1rem;
-                font-size: 1.8rem;
-                color: skyblue;
-                font-weight: bold;
-                width: fit-content;
-                --width: 4rem;
-                --height: calc(var(--width)/2);
-                --brdr-radius: calc(var(--width)/4);
-                display: flex;
-                align-items: center;
-            }
-            .toggle input{
-                display: none;
-            }
-            #tgl{
-                position: relative;
-                width: var(--width);
-                height: var(--height);
-                border-radius: var(--brdr-radius);
-                background: #cfffee;
-                transition-duration: 0.2s;
-                cursor: pointer;
-            }
-
-            .toggle input:checked ~ #tgl{
-                background: cyan;
-            }
-
-            #tgl::after{
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: var(--height);
-                width: var(--height);
-                border-radius: var(--height);
-                background: red;
-                transition-duration: 0.15s;
-                box-shadow: 0 0 10px red;
-            }
-
-            .toggle input:checked ~ #tgl::after{
-                transform: translateX(var(--height));
-            }
-        </style>
+        <link rel="stylesheet" type = "text/css" href="style.css">
     </head>
     <body>
         <canvas id = "GraphPage"></canvas>
         <canvas id = "shape"></canvas>
-        <form>
-            <h2>Enter your own values:</h2>
-            <div class="point" id = 'A'>
-                <label for="x" id = "lbl">P</label>
-                (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
-                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
-            </div>
-            <button type="button" id = "Add">Add</button>
-            <div class="point" id = 'R'>
-                <label for="h">Inversion Circle</label>
-                <br>
-                &lpar;x - <input id = "h" class="invert" type = "number" inputmode = "numeric" placeholder="h" required>&rpar;<sup>2</sup> + 
-                &lpar;y - <input id = "k" class="invert" type = "number" inputmode = "numeric" placeholder="k" required>&rpar;<sup>2</sup>  =
-                <input id = "r" class="invert" type = "number" inputmode = "numeric" placeholder="r" required> <sup>2</sup>
-            </div>
-            <button type = "button" id = "MyBtn" class = "btm">Invert</button>
-            <button type = "reset" id = "clear" class = "btm">Reset</button><br>
-            
+        <div class="inputs">
+            <form>
+                <h2>Enter your own values:</h2>
+                <div class="point" id = 'A'>
+                    <label for="x" id = "lbl">P</label>
+                    (<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                    <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>)
+                </div>
+                <button type="button" id = "Add">Add</button>
+                <div class="point" id = 'R'>
+                    <label for="h">Inversion Circle</label>
+                    <br>
+                    &lpar;x - <input id = "h" class="invert" type = "number" inputmode = "numeric" placeholder="h" required>&rpar;<sup>2</sup> + 
+                    &lpar;y - <input id = "k" class="invert" type = "number" inputmode = "numeric" placeholder="k" required>&rpar;<sup>2</sup>  =
+                    <input id = "r" class="invert" type = "number" inputmode = "numeric" placeholder="r" required> <sup>2</sup>
+                </div>
+                <button type = "button" id = "MyBtn" class = "btm">Invert</button>
+                <button type = "reset" id = "clear" class = "btm">Reset</button><br>
+            </form>
             <div class="toggle">
                 Hide Points:&nbsp;&nbsp;
                 <label for="showPoints">
@@ -92,7 +36,7 @@
                     <div id="tgl"></div>
                 </label>
             </div>
-        </form>
+        </div>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
         <script type = "application/javascript" src="../../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
