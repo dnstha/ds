@@ -1,0 +1,158 @@
+:root{
+    --primaryColor: #CFFFEE;
+    --secColor: #121826;
+    --width: 20rem;
+    --transitionTime: 0.2s;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    background: black;
+}
+header{
+    position: sticky;
+    top: 0;
+    font-family: Courier, Georgia, Cambria;
+    color: lavender;
+    background: var(--secColor);
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
+    z-index: 2;
+}
+main{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 1.3rem;
+    font-weight: bold;
+    row-gap: 1.5rem;
+}
+.card{
+    width: 30%;
+    height: var(--width);
+    display: flex;
+    flex-direction: column;
+    height: var(--width);
+    align-items: flex-end;
+    transition: all var(--transitionTime);
+}
+.anchor{
+    position: relative;
+    border: 2px solid cyan;
+    border-top: none;
+    width: 100%;
+    display: flex;
+    transition: all var(--transitionTime);
+}
+a{
+    position: relative;
+    width: 100%;
+    height: calc(var(--width)/6);
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: lavender;
+    background-color: var(--secColor);
+    transition: all var(--transitionTime);
+}
+.thumbnail{
+    width: 100%;
+    height: calc(var(--width)*5/6);
+    background: #CFFFEE;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-size: cover;
+    border: 2px solid magenta;
+    border-bottom: 2px solid cyan;
+}
+a:visited{
+    color: cyan;
+}
+a:hover{
+    background: cyan;
+    color: var(--secColor);
+}
+.anchor:hover{
+    border-color: var(--secColor);
+}
+.card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 0 15px aqua;
+}
+
+#rtTriangle{
+    background-image: url(../Images/MATHS/RightTriangle.jpg);
+}
+#circleAnim{
+    background-image: url(../Images/MATHS/CircleCentralAngle.jpg);
+}
+#linearEqn{
+    background-image: url(../Images/MATHS/LinearEqnSolver.jpg);
+}
+#quadEqn{
+    background-image: url(../Images/MATHS/QuadEqn.jpg);
+}
+#linEqnXyz{
+    background-image: url(../Images/MATHS/LinearEqnThree.jpg);
+}
+#determinant{
+    background-image: url(../Images/MATHS/Determinant.jpg);
+}
+#unitCir{
+    background-image: url(../Images/MATHS/UnitCircle.jpg);
+}
+#ellipse{
+    background-image: url(../Images/MATHS/Ellipse.jpg);
+}
+#complexPlane{
+    background-image: url(../Images/MATHS/ComplexPlane.jpg);
+}
+#rotation{
+    background-image: url(../Images/MATHS/Rotation.jpg);
+}
+#scaling{
+    background-image: url(../Images/MATHS/Scaling.jpg);
+}
+#translation{
+    background-image: url(../Images/MATHS/Translation.jpg);
+}
+#pyTri{
+    background-image: url(../Images/MATHS/PyTri.jpg);
+}
+#regression{
+    background-image: url(../Images/MATHS/Regression.jpg);
+}
+#reflection{
+    background-image: url(../Images/MATHS/Reflection.jpg);
+}
+#linQuad{
+    background-image: url(../Images/MATHS/LinQuad.jpg);
+}
+#derivative{
+    background-image: url(../Images/MATHS/Derivative.jpg);
+}
+#cirInv{
+    background-image: url(../Images/MATHS/CirInversion.jpg);
+}
+
+@media (750px<=width<=950px){
+    .card{
+        width: 40%;
+    }
+}
+@media (width<750px){
+    .card{
+        width: 80%;
+    }
+}
+@media (width<500px){
+    header{
+        font-size: 2rem;
+    }
+}
