@@ -59,4 +59,3 @@ addEventListener('resize', function() {
     ellipsePage.height = window.innerHeight;
     drawEllipse();
 });
-drawEllipse();
