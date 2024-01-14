@@ -98,8 +98,8 @@ function reflect(){
     points = [];
     finalPoints = [];
     for(let i = 0; i<initialPoints.length; i++) {
-        finalPoints.push(reflectPoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, ln.a, ln.b, ln.c));
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
+        finalPoints.push(reflectPoint(initialPoints[i].x, initialPoints[i].y, ln.a, ln.b, ln.c));
+        points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
     }
 }
 
@@ -114,14 +114,14 @@ function addPoint() {
         if(x == '' || x == 'null' || y == '' || y == 'null') {
             alert("Enter both values!");
             init();
-            reflect();
+            // reflect();
         }else{
             charV++;
+            initialPoints.push(new Plot(Number(x), Number(y)));
             init();
 
-            initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
 
-            reflect();
+            // reflect();
 
             document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
             document.querySelector('#x').value = "";
@@ -166,15 +166,17 @@ function init(){
         nPoints = 3;
 
         for(let i = 0; i<nPoints; i++) {
-            initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+            initialPoints.push(new Plot(randomInt(-12,12), randomInt(-12,12)));
             if(i>0) {
                 while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
-                    initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+                    initialPoints[i] = new Plot(randomInt(-12,12), randomInt(-12,12));
                 }
             }
-            finalPoints.push(reflectPoint(Math.round(toX(initialPoints[i].x)*1000)/1000, Math.round(toY(initialPoints[i].y)*1000)/1000, ln.a, ln.b, ln.c));
-            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
+            finalPoints.push(reflectPoint(initialPoints[i].x, initialPoints[i].y, ln.a, ln.b, ln.c));
+            points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
         }
+    }else{
+        reflect();
     }
     
     c.lineJoin = "bevel"; // makes the corners smoother
@@ -212,9 +214,9 @@ function animate() {
     c.fillStyle = 'rgba(150,200,255, 0.4)'; // Shading color of the polygon
 
     c.beginPath();
-    c.moveTo(initialPoints[0].x, initialPoints[0].y);
+    c.moveTo(PlotX(initialPoints[0].x), PlotY(initialPoints[0].y));
     for(let i = 0; i < initialPoints.length;i++){
-        c.lineTo(initialPoints[i].x, initialPoints[i].y);
+        c.lineTo(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y));
     }
     c.closePath();
     c.fill();
@@ -233,7 +235,7 @@ function animate() {
 
     // total translation
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.7);
+        connectColorFade(PlotX(initialPoints[n].x), PlotY(initialPoints[n].y), points[n].x, points[n].y, 0.7);
     }
 
     points.forEach((p,i) => {
@@ -242,7 +244,7 @@ function animate() {
     });
 
     initialPoints.forEach((p,i) => {
-        point(p.x, p.y, lightColors[i+1]);
+        point(PlotX(p.x), PlotY(p.y), lightColors[i+1]);
     });
 
 
@@ -269,8 +271,8 @@ function animate() {
     for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
-        c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+2));
-        c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
+        c.fillText(`\u2022 ${Pname}(${initialPoints[i].x}, ${initialPoints[i].y})`, startP.x, startP.y + gap*(i+2));
+        c.fillText(`${Pname}`, PlotX(initialPoints[i].x) + 2, PlotY(initialPoints[i].y) - 2); // labelling initial point
         c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
     }
 
