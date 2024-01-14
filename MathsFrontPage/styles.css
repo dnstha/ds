@@ -35,10 +35,9 @@ main{
 }
 .card{
     width: 30%;
-    height: var(--width);
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    height: var(--width);
     align-items: flex-end;
     transition: all var(--transitionTime);
 }
@@ -47,13 +46,14 @@ main{
     border: 2px solid cyan;
     border-top: none;
     width: 100%;
+    height: calc(var(--width)/6);
     display: flex;
     transition: all var(--transitionTime);
 }
-a{
+.anchor a{
     position: relative;
     width: 100%;
-    height: calc(var(--width)/6);
+    height: 100%;
     text-decoration: none;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
@@ -62,8 +62,9 @@ a{
     transition: all var(--transitionTime);
 }
 .thumbnail{
+    aspect-ratio: 3/2;
     width: 100%;
-    height: calc(var(--width)*5/6);
+    /* height: calc(var(--width)*5/6); */
     background: #CFFFEE;
     background-repeat: no-repeat;
     /* background-position: center; */
@@ -71,10 +72,18 @@ a{
     border: 2px solid magenta;
     border-bottom: 2px solid cyan;
 }
-a:visited{
+.thumbnail a{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: default;
+}
+.anchor a:visited{
     color: cyan;
 }
-a:hover{
+.anchor a:hover{
     background: cyan;
     color: var(--secColor);
 }
@@ -83,7 +92,7 @@ a:hover{
 }
 .card:hover{
     transform: scale(1.03);
-    box-shadow: 0 0 15px aqua;
+    box-shadow: 0 0 17px aqua;
 }
 
 #rtTriangle{
