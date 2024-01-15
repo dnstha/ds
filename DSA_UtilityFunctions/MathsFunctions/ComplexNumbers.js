@@ -7,8 +7,6 @@ function Complex(x, y) {
     this.arg = invCos(this.x/this.r, this.y);
 
     this.translate = function(a, b) { // translating vector Vx and Vy
-        // this.x += scalePoint(a);
-        // this.y -= scalePoint(b);
         this.x += a;
         this.y += b;
     }
@@ -29,17 +27,9 @@ function Complex(x, y) {
     }
 
     this.scale = function(k, a, b) { // scaling factor, scaling point x and y
-        // a = PlotX(a);
-        // b = PlotY(b);
         this.x = (this.x - a) * k + a;
         this.y = (this.y - b) * k + b;
     }
-
-    // this.refect = function(a, b, c) {
-    //     let distP = (a*this.x + b*this.y + c)/Math.sqrt(a*a + b*b);
-    //     this.x = a;
-    //     this.y = b;
-    // }
 }
 
 

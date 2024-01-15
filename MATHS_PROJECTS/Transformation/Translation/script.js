@@ -100,9 +100,7 @@ function trnslte(){
     finalPoints = [];
     for(let i = 0; i<initialPoints.length; i++) {
         finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
-        console.log(finalPoints)
         finalPoints[i].translate(V.x, V.y);
-        console.log(finalPoints)
         points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
     }
 }
