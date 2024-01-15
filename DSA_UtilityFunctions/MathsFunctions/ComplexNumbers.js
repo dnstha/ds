@@ -10,7 +10,7 @@ function Complex(x, y) {
         // this.x += scalePoint(a);
         // this.y -= scalePoint(b);
         this.x += a;
-        this.y -= b;
+        this.y += b;
     }
 
     this.rotate = function(angle, a, b) { // Rotating angle, rotating point x, rotating point y

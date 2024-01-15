@@ -11,6 +11,8 @@ let scale = graphScale;
 let charV = 0;
 let V;
 let nPoints; // number of points
+let track = []; // to track the converted values of the points according to the graph
+
 
 addEventListener("resize", () => {
     // Check if the window size has significantly changed
@@ -60,6 +62,14 @@ function Vertex(x, y, final_X, final_Y) {
     }
 }
 
+const convert = () => {
+    track = [];
+    let n = initialPoints.length;
+    for(let i = 0; i<n; i++){
+        track.push(new Plot(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y)));
+    }
+}
+
 getCoeff = () => {
     V = new Plot(Number(document.getElementById("Vx").value), Number(document.getElementById("Vy").value));
 }
@@ -90,8 +100,10 @@ function trnslte(){
     finalPoints = [];
     for(let i = 0; i<initialPoints.length; i++) {
         finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
+        console.log(finalPoints)
         finalPoints[i].translate(V.x, V.y);
-        points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+        console.log(finalPoints)
+        points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
     }
 }
 
@@ -106,14 +118,14 @@ function addPoint() {
         if(x == '' || x == 'null' || y == '' || y == 'null') {
             alert("Enter both values!");
             init();
-            trnslte();
+            // trnslte();
         }else{
             charV++;
+
+            initialPoints.push(new Plot(Number(x), Number(y)));
+
             init();
-
-            initialPoints.push(new Plot(PlotX(Number(x)), PlotY(Number(y))));
-
-            trnslte();
+            // trnslte();
 
             document.querySelector("#lbl").innerText = String.fromCharCode(65 + charV);
             document.querySelector('#x').value = "";
@@ -144,32 +156,23 @@ function init(){
         nPoints = 3;
 
         for(let i = 0; i<nPoints; i++) {
-            initialPoints.push(new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12))));
+            initialPoints.push(new Plot(randomInt(-12,12), randomInt(-12,12)));
             if(i>0) {
                 while(initialPoints[i-1].x == initialPoints[i].x && initialPoints[i-1].y == initialPoints[i].y) {
-                    initialPoints[i] = new Plot(PlotX(randomInt(-12,12)), PlotY(randomInt(-12,12)));
+                    initialPoints[i] = new Plot(randomInt(-12,12), randomInt(-12,12));
                 }
             }
             finalPoints.push(new Complex(initialPoints[i].x, initialPoints[i].y));
             finalPoints[i].translate(V.x, V.y);
-            points.push(new Vertex(initialPoints[i].x, initialPoints[i].y, finalPoints[i].x, finalPoints[i].y));
+            points.push(new Vertex(PlotX(initialPoints[i].x), PlotY(initialPoints[i].y), PlotX(finalPoints[i].x), PlotY(finalPoints[i].y)));
         }
+    }else{
+        trnslte();
     }
 
     c.lineJoin = "bevel"; // makes the corners smoother
+    convert();
 }
-
-document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
-    if(event.key === "Enter") {
-        addPoint();
-    }
-}));
-
-document.querySelectorAll(".translate").forEach(element => element.addEventListener("keyup", (event) => {
-    if(event.key === "Enter") {
-        solve();
-    }
-}));
 
 function animate() {
     requestAnimationFrame(animate);
@@ -185,9 +188,9 @@ function animate() {
     c.fillStyle = 'rgba(150,200,255, 0.4)'; // Shading color of the polygon
 
     c.beginPath();
-    c.moveTo(initialPoints[0].x, initialPoints[0].y);
+    c.moveTo(track[0].x, track[0].y);
     for(let i = 0; i < initialPoints.length;i++){
-        c.lineTo(initialPoints[i].x, initialPoints[i].y);
+        c.lineTo(track[i].x, track[i].y);
     }
     c.closePath();
     c.fill();
@@ -206,20 +209,20 @@ function animate() {
 
     // x translation
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, initialPoints[n].y, 0.4);
+        connectColorFade(track[n].x, track[n].y, points[n].x, track[n].y, 0.4);
     }
 
     // y translation
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(points[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.4);
+        connectColorFade(points[n].x, track[n].y, points[n].x, points[n].y, 0.4);
     }
 
     // total translation
     for(let n = 0; n<points.length; n++) {
-        connectColorFade(initialPoints[n].x, initialPoints[n].y, points[n].x, points[n].y, 0.7);
+        connectColorFade(track[n].x, track[n].y, points[n].x, points[n].y, 0.7);
     }
 
-    initialPoints.forEach((p,i) => {
+    track.forEach((p, i) => {
         point(p.x, p.y, lightColors[i+1]);
     });
 
@@ -235,8 +238,8 @@ function animate() {
     for(let i = 0; i<initialPoints.length; i++) {
         let Pname = String.fromCharCode(65+i);
         c.fillStyle = lightColors[i+1];
-        c.fillText(`\u2022 ${Pname}(${Math.round(toX(initialPoints[i].x)*1000)/1000}, ${Math.round(toY(initialPoints[i].y)*1000)/1000})`, startP.x, startP.y + gap*(i+2));
-        c.fillText(`${Pname}`, initialPoints[i].x + 2, initialPoints[i].y - 2); // labelling initial point
+        c.fillText(`\u2022 ${Pname}(${initialPoints[i].x}, ${initialPoints[i].y})`, startP.x, startP.y + gap*(i+2));
+        c.fillText(`${Pname}`, track[i].x + 2, track[i].y - 2); // labelling initial point
         c.fillText(`${Pname}\'`, points[i].x + 2, points[i].y - 2); // labelling moving point
     }
 
@@ -251,6 +254,20 @@ function animate() {
 
 init();
 animate();
+
+
+
+document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        addPoint();
+    }
+}));
+
+document.querySelectorAll(".translate").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        solve();
+    }
+}));
 
 document.getElementById('MyBtn').onclick = function() {
     solve();
