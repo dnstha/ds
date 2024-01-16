@@ -12,3 +12,18 @@
     <path d="M152.189 199.293C 161.575 181.1 175.874 165.902 193.462 155.426C 211.049 144.949 231.222 139.613 251.689 140.022C 272.157 140.431 292.1 146.57 309.255 157.741C 326.409 168.913 340.089 184.67 348.741 203.223" stroke="#CFFFEE" stroke-width="6" fill="none" />
 </g>
 </svg>
+
+
+
+<!-- 
+New version of SVG
+
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" fill="#1E1E1E"/>
+<rect width="100" height="100" fill="#121826"/>
+<path d="M9.2968 85.5L50 15L90.7032 85.5H9.2968Z" stroke="#CFFFEE" stroke-width="3"/>
+<path d="M50 15.2V85.8" stroke="#CFFFEE" stroke-width="1.2"/>
+<path d="M29.5186 49.4982L50.1186 84.8982" stroke="#CFFFEE" stroke-width="1.2"/>
+<path d="M70.5166 50.1052L50.3166 84.3052" stroke="#CFFFEE" stroke-width="1.2"/>
+<path d="M30.4378 51.8586C32.315 48.22 35.1748 45.1804 38.6924 43.0852C42.2098 40.9898 46.2444 39.9226 50.3378 40.0044C54.4314 40.0862 58.42 41.314 61.851 43.5482C65.2818 45.7826 68.0178 48.934 69.7482 52.6446" stroke="#CFFFEE" stroke-width="1.2"/>
+</svg> -->
