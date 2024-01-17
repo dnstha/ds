@@ -1,208 +1,270 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif; 
-    border: border-box; /* This helps in including the border in the content width and height. */
+    box-sizing: border-box;
 }
-
+html{
+    scroll-behavior: smooth;
+}
 :root {
     --primaryColor: #CFFFEE;
     --secColor: #121826;
+    --nav-height: 20rem;
+    --ht: 5rem;
+    /* nav-height for responsive navigation */
 }
 
-body {
-    background: transparent;
+.set-margin-left{
+    margin-left: 2rem;
 }
 
-canvas {
-    position: absolute;
-    z-index: -1;
-    background: var(--primaryColor);
-}
+/* p{
+    
+} */
 
-.navbar {
-    height: 100px;
-    background-color: var(--secColor);
-    color: lavenderblush;
+header{
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 8rem;
+    background: var(--secColor);
     display: flex;
-    font-size: 1.8rem;
-}
-.nav-logo {
-    width: 100px;
-    height: 80px;
+    align-items: center;
 }
 
-.brdr {
-    border: 1.5px solid transparent;
-    transition-duration: 0.05s;
+#music-section div{
+    position: relative;
+    top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
-.hdt {
-    transition-duration: 0.15s;
-    border: none;
+iframe{
+    aspect-ratio: 16/9;
+    width: 80%;
+    max-width: 450px;
+    margin-bottom: 2rem;
 }
 
-.brdr:hover{
+/* .navbar{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+
+    <!-- link="lavender" vlink="cyan" alink="salmon" -->
+
+} */
+a{
+    color: inherit;
+}
+
+a:visited{
+    color: blue;
+}
+
+a:active{
+    color: red;
+}
+
+
+#navigation{
+    width: 70%;
+    position: absolute;
+    right: 0.4rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#pageLogo{
+    aspect-ratio: 1/1;
+    position: absolute;
+    left: 10px;
+}
+
+#pageLogo a{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#logo{
+    transition: all 0.15s;
+}
+
+
+#logo:hover{
+    transform: scale(1.05);
     border: 1.5px solid white;
-    transform: scale(1.06);
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
-.hdt:hover {
-    transform: scale(1.1);
-    text-shadow: 10px 8px 8px rgba(255, 255, 255, 0.8);
-}
-.mainTxt {
-    position: absolute;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 550;
-    font-size: 3rem;
-    top: 18rem;
-    left: 2rem;
-}
-.watch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 45%;
-}
-
-.projects{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 17%;
-}
-
-.plist {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-}
-
-.pitem {
-    width: 8em;
-    border: 1px solid black;
-    border-radius: 3px;
-    height: max-content;
-    background-color: rgba(33, 1, 43, 0.9);
-    transition-duration: 0.1s;
-    font-size: 1.5rem;
-    text-shadow: none;
-}
-
-.pitem:hover {
-    transform: scale(1.2);
-    box-shadow: 0px 2px 2px 2px #00D2EE;
-}
-
-a {
+a{
     text-decoration: none;
 }
 
+#navigation a{
+    position: relative;
+    font-size: 1.8rem;
+    color: lavender;
+}
+
+#projects-title{
+    position: relative;
+    font-size: 1.8rem;
+    color: lavender;
+}
+
+
+.nav-title:hover{
+    transition-duration: 0.2s;
+    transform: scale(1.05);
+}
+
+#projects{
+    position: relative;
+    cursor: pointer;
+}
+
+#projects ul{
+    list-style: none;
+}
+
+.project-list{
+    display: none;
+}
+
+#projects li{
+    padding: 0 12px;
+    background: lavender;
+    border: 1px solid black;
+}
+
+#projects li a{
+    color: var(--secColor);
+}
+
+#projects:hover .project-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 2rem;
+    font-size: 2rem;
+}
+
+#projects li:hover{
+    background: var(--primaryColor);
+    border-width: 2px;
+}
+
+#navMenu{
+    display: none;
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+}
+
+.hamburger{
+    position: relative;
+    background: white;
+    width: 2rem;
+    height: 3px;
+}
+
+#navBtn{
+    display: none;
+}
+
+
+#intro-section{
+    background: #CFDFEF;
+    height: 20rem;
+}
+
+#about-section{
+    height: fit-content;
+    background: salmon;
+}
+
+#project-section{
+    height: fit-content;
+    background: skyblue;
+}
+
+#music-section{
+    height: fit-content;
+    background: pink;
+}
+
 footer{
-    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    background-color:  var(--secColor);
-    position: absolute;
+    height: 3rem;
+    font-size: 1.5rem;
+    background: var(--secColor);
     bottom: 0;
-    text-align: center;
-    color: lavenderblush;
-}
-
-footer a{
-    height:fit-content;
-    width: fit-content;
-    position: absolute;
-    left: 46%;
-    font-size: 1.6rem;
-    transition-duration: 0.06s;
-}
-
-footer a:hover {
-    transform: scale(1.2);
     color: var(--primaryColor);
 }
 
-.checkbtn {
-    font-size: 30px;
-    color: white;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
 
-
-.resp {
-    display: none;
-}
-
-@media (max-width: 952px) {
-    .nav-logo {
-        transform: scale(0.8);
-    }
-
-    .hdi {
-        font-size: 1.1rem;
-        position: fixed;
-        margin-top: 1.5rem;
-        left: 12rem;
+@keyframes navAnimation {
+    from{
+        height: 0;
+    }to{
+        height: var(--nav-height);
     }
 }
 
-@media (max-width: 480px) {
-    /* .hdi {
+@media (width < 650px) {
+    header{
+        height: var(--ht);
+    }
+    #logo{
+        width: 70px;
+    }
+    #navMenu{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        position: absolute;
+        width: 2.5rem;
+        height: 2.5rem;
+        right: 2rem;
+        z-index: 3;
+        cursor: pointer;
+    }
+    #navigation{
         display: none;
     }
-    .resp {
-        display: block;
-        text-align: center;
-        width: fit-content;
-        height: fit-content;
-    }
-    .resp .hdt {
-        background-color: #060a1a;
-        color: #CFFFEE;
-        width:10rem;
-        height: 5rem;
+    
+    #navBtn:checked ~ #navigation{
+        animation: navAnimation;
+        animation-duration: 0.4s;
+        height: var(--nav-height);
+        width: 100%;
         position: absolute;
+        top: var(--ht);
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
         right: 0;
+        background: rgba(5, 5, 5, 0.5);
+        z-index: 2;
     }
-    .checkbtn {
-        height: fit-content;
-        margin: 0;
-        width: 60px;
-        display: block;
-        text-align: center;
-        position: absolute;
-        top: 0.5rem;
-        right: 0.8rem;
-    } */
-    .hdi {
-        font-size: 1.1rem;
-        position: fixed;
-        margin-top: 1.5rem;
-        left: 1.1rem;
-    }
-    footer a {
-        left: 40%;
+    .nav-title{
+        height: 2.5rem;
+        width: 10rem;
     }
 }
 
-@media (max-width: 280px) {
-    .hdi {
-        font-size: 1.1rem;
-        position: fixed;
-        margin-top: 1.5rem;
-        left: 2.5rem;
-    }
-    footer a {
-        left: 35%;
-    }
-}
 
 /* This is the comment in CSS. */
 /*
