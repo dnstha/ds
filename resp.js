@@ -3,7 +3,7 @@ const icon = document.querySelector('#navMenu');
 
 btn.addEventListener('click', ()=>{
     if(btn.checked == true){
-        icon.innerHTML = `&#128938`;
+        icon.innerHTML = `&#x2715`;
     }else{
         icon.innerHTML = `
             <div class="hamburger"></div>

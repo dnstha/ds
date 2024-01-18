@@ -9,6 +9,7 @@ html{
 :root {
     --primaryColor: #CFFFEE;
     --secColor: #121826;
+    --clor: #cffff4;
     --nav-height: 20rem;
     --ht: 5rem;
     /* nav-height for responsive navigation */
