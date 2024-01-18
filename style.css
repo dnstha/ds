@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 html{
     scroll-behavior: smooth;
@@ -12,6 +13,7 @@ html{
     --clor: #cffff4;
     --nav-height: 20rem;
     --ht: 5rem;
+    --navRadius: 4px
     /* nav-height for responsive navigation */
 }
 
@@ -168,13 +170,15 @@ a{
     position: absolute;
     color: white;
     font-size: 2rem;
+    font-weight: bolder;
 }
 
 .hamburger{
     position: relative;
     background: white;
+    border-radius: var(--navRadius);
     width: 2rem;
-    height: 3px;
+    height: var(--navRadius);
 }
 
 #navBtn{
@@ -245,7 +249,7 @@ footer{
     #navigation{
         display: none;
     }
-    
+
     #navBtn:checked ~ #navigation{
         animation: navAnimation;
         animation-duration: 0.4s;
@@ -263,6 +267,10 @@ footer{
     .nav-title{
         height: 2.5rem;
         width: 10rem;
+    }
+
+    footer{
+        font-size: 1rem;
     }
 }
 
