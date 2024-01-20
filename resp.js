@@ -2,8 +2,8 @@ const btn = document.querySelector('#navBtn');
 const icon = document.querySelector('#navMenu');
 
 btn.addEventListener('click', ()=>{
-    if(btn.checked == true){
-        icon.innerHTML = `&#x2715`;
+    if(btn.checked){
+        icon.innerHTML = `&#x2715;` || `✕` || `&#x2573;`;
     }else{
         icon.innerHTML = `
             <div class="hamburger"></div>
@@ -14,14 +14,12 @@ btn.addEventListener('click', ()=>{
 });
 
 
-// addEventListener('load', function(){
-//     if(btn.checked == true){
-//         icon.innerHTML = `&#x2715`;
-//     }else{
-//         icon.innerHTML = `
-//             <div class="hamburger"></div>
-//             <div class="hamburger"></div>
-//             <div class="hamburger"></div>        
-//         `;
-//     }
-// });
+if(btn.checked){
+    icon.innerHTML = `&#x2715;` || `✕` || `&#x2573;`;
+}else{
+    icon.innerHTML = `
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>        
+    `;
+}
