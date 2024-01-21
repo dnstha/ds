@@ -1,8 +1,10 @@
 :root {
     --primaryColor: #CFFFEE;
     --secColor: #121826;
-    --clor: skyblue; /* aqua is another option */
-    --clor2: #E65A5A;
+    --clor: #d7b4f3; /* aqua is another option */
+    /* --clor2: #E65A5A; */
+    --clor2: skyblue;
+    
     --ht: 5rem;
     --nav-height: 20rem;
     --navRadius: 4px;
@@ -20,7 +22,49 @@ html{
 
 body{
     background: var(--clor);
+    /* rgb(164, 164, 235) */
 }
+
+.preloader{
+    --time: 0.7s;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--secColor);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity var(--time) ease, visibility var(--time) ease; 
+}
+
+.preloader::after{
+    --width: 6rem;
+    content: "";
+    width: var(--width);
+    height: var(--width);
+    border: 1rem solid var(--secColor);
+    border-top-color: var(--primaryColor);
+    border-right-color: var(--primaryColor);
+    border-radius: 50%;
+    animation: loading var(--time) linear infinite;
+}
+
+.preloader-hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes loading{
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}
+
+
 
 #reflection{
     background-image: url(./Images/MATHS/Reflection.jpg);
@@ -37,13 +81,6 @@ body{
 
 .set-margin-left{
     margin-left: 0.5rem;
-}
-
-main p{
-    text-align: justify;
-    text-justify: inter-word;
-    padding: 1rem;
-    font-size: 1.2rem;
 }
 
 header{
@@ -107,8 +144,6 @@ a:active{
 #logo{
     transition: all 0.15s;
 }
-
-
 #logo:hover{
     transform: scale(1.05);
     border: 1.5px solid white;
@@ -140,25 +175,20 @@ a{
     position: relative;
     cursor: pointer;
 }
-
 #projects ul{
     list-style: none;
 }
-
 .project-list{
     display: none;
 }
-
 #projects li{
     padding: 0 12px;
     background: lavender;
     border: 1px solid black;
 }
-
 #projects li a{
     color: var(--secColor);
 }
-
 #projects:hover .project-list{
     display: flex;
     flex-direction: column;
@@ -167,7 +197,6 @@ a{
     left: 2rem;
     font-size: 2rem;
 }
-
 #projects li:hover{
     background: var(--primaryColor);
     border-width: 2px;
@@ -194,15 +223,29 @@ a{
 }
 
 
+main{
+    --angle: 1.5deg;
+}
+main p{
+    text-align: justify;
+    text-justify: inter-word;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
 
+
+#intro-section{
+    height: 85vh;
+    --f1-size: 2.5rem;
+    --f2-size: 1.5rem;
+}
 
 @keyframes intro{
     0%{
         font-size: 0;
     }
     100%{
-        font-size: 2rem;
-        /* text-shadow: 0 0 2rem red; */
+        font-size: var(--f2-size);
     }
 }
 
@@ -210,18 +253,15 @@ a{
     0%{
         font-size: 0.4rem;
     }100%{
-        font-size: 3rem;
+        font-size: var(--f1-size);
     }
 }
 
-
-
-main{
-    --angle: 2deg;
+.h-animation{
+    animation: introH 0.7s ease-in-out;
 }
-
-#intro-section{
-    height: 85vh;
+.intro-animation{
+    animation: intro 1s ease-in-out;
 }
 
 
@@ -229,15 +269,13 @@ main{
     margin: 0;
     padding-top: 5rem;
     text-align: center;
-    font-size: 3rem;
-    animation: introH 0.7s ease-in-out;
+    font-size: var(--f1-size);
 }
 
 #intro-section p{
     margin: 0;
     text-align: center;
-    animation: intro 1s ease-in-out;
-    font-size: 2rem;
+    font-size: var(--f2-size);
     text-shadow: 0 0 0.3rem var(--clor2);
 }
 
@@ -252,7 +290,7 @@ main{
 }
 
 #project-section p{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 #demoProjects{
@@ -272,7 +310,7 @@ main{
     z-index: -1;
     background: linear-gradient(
         var(--angle),
-        var(--clor2),
+        skyblue,
         var(--secColor),
         var(--secColor),
         var(--secColor),
@@ -373,7 +411,7 @@ main{
     content: '';
     position: absolute;
     left: 0;
-    background: var(--clor2);
+    background: skyblue;
     transform: skewY(var(--angle));
     z-index: -1;
     border-radius: 0 var(--w) 0 0;
