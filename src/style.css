@@ -9,6 +9,8 @@
     --nav-height: 20rem;
     --navRadius: 4px;
     /* nav-height for responsive navigation */
+
+    --em-font: 1.3rem;
 }
 *{
     margin: 0;
@@ -21,8 +23,16 @@ html{
 }
 
 body{
-    background: var(--clor);
+    background: var(--primaryColor);
     /* rgb(164, 164, 235) */
+}
+
+.center{
+    text-align: center;
+}
+
+.underline{
+    text-decoration: underline;
 }
 
 .preloader{
@@ -67,16 +77,16 @@ body{
 
 
 #reflection{
-    background-image: url(./Images/MATHS/Reflection.jpg);
+    background-image: url(../Images/MATHS/Reflection.jpg);
 }
 #derivative{
-    background-image: url(./Images/MATHS/Derivative.jpg);
+    background-image: url(../Images/MATHS/Derivative.jpg);
 }
 #ellipse{
-    background-image: url(./Images/MATHS/Ellipse.jpg);
+    background-image: url(../Images/MATHS/Ellipse.jpg);
 }
 #scaling{
-    background-image: url(./Images/MATHS/Scaling.jpg);
+    background-image: url(../Images/MATHS/Scaling.jpg);
 }
 
 .set-margin-left{
@@ -224,7 +234,7 @@ a{
 
 
 main{
-    --angle: 1.5deg;
+    --angle: 2deg;
 }
 main p{
     text-align: justify;
@@ -258,7 +268,7 @@ main p{
 }
 
 .h-animation{
-    animation: introH 0.7s ease-in-out;
+    animation: introH 0.5s ease-in-out;
 }
 .intro-animation{
     animation: intro 1s ease-in-out;
@@ -269,52 +279,49 @@ main p{
     margin: 0;
     padding-top: 5rem;
     text-align: center;
-    font-size: var(--f1-size);
 }
 
 #intro-section p{
     margin: 0;
     text-align: center;
-    font-size: var(--f2-size);
-    text-shadow: 0 0 0.3rem var(--clor2);
+    font-weight: bold;
+    text-shadow: 0 0 1rem var(--clor2);
 }
 
 #about-section{
     height: fit-content;
 }
 
+#about-section p{
+    font-size: var(--em-font);
+    margin: 0;
+}
+
 #project-section{
     position: relative;
     height: fit-content;
     color: var(--primaryColor);
+    margin-top: 1rem;
 }
-
 #project-section p{
-    font-size: 1.3rem;
+    font-size: var(--em-font);
 }
-
 #demoProjects{
     position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    row-gap: 1rem;
+    row-gap: 2rem;
     margin-bottom: 5rem;
 }
 #project-section::before{
     content: "";
     position: absolute;
     width: 100%;
-    height: 105%;
+    height: 125%;
     transform: skewY(var(--angle));
     z-index: -1;
-    background: linear-gradient(
-        var(--angle),
-        skyblue,
-        var(--secColor),
-        var(--secColor),
-        var(--secColor),
-        var(--secColor));
+    background:var(--secColor);
 }
 .card{
     --transitionTime: 0.2s;
@@ -386,35 +393,34 @@ main p{
     position: relative;
     height: fit-content;
     padding-bottom: 1rem;
-    margin-bottom: -1.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
 #music-section p{
     position: relative;
     display: flex;
     font-size: 1.2rem;
     align-items: center;
-    height: 15vh;
+    min-height: 10vh;
     padding-bottom: 1rem;
 }
-
-
 #music-section div{
     margin-top: 1rem;
 }
-
 #music-section::before{
     --w: 3rem;
     content: '';
     position: absolute;
     left: 0;
-    background: skyblue;
-    transform: skewY(var(--angle));
+    background: linear-gradient(
+        to bottom,
+        var(--clor),
+        var(--primaryColor)
+    );
+    transform: skewY(calc(var(--angle)*-1));
     z-index: -1;
-    border-radius: 0 var(--w) 0 0;
+    border-radius: var(--w) 0 0 0;
     width: 100%;
     height: 100%;
 }

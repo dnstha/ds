@@ -11,9 +11,12 @@ window.addEventListener('load', function(){
     loader.addEventListener('transitionend', function(){
         document.body.removeChild(loader);
         document.querySelector('h1').classList.add('h-animation');
-        document.querySelector('p').classList.add('intro-animation');
         header.style.fontSize = '2.5rem';
-        intro.style.fontSize = '1.5rem';
+        document.querySelector('h1').addEventListener('animationend', ()=>{
+            document.querySelector('p').classList.add('intro-animation');
+            intro.style.fontSize = '1.5rem';
+
+        });
     });
 
     btn.addEventListener('click', ()=>{

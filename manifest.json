@@ -1,0 +1,25 @@
+{
+    "name": "DSA",
+    "short_name": "DSA",
+    "start_url": ".",
+    "background_color": "#121826",
+    "theme_color": "#CFFFEE",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "Images/Icon/LogoBG.png",
+            "sizes": "200x200",
+            "type": "image/png"
+        },
+        {
+            "src": "Images/Icon/LogoTr.png",
+            "sizes": "200x200",
+            "type": "image/png"
+        },
+        {
+            "src": "Images/Icon/Logo520.png",
+            "sizes": "520x520",
+            "type": "image/png"
+        }
+    ]
+}
