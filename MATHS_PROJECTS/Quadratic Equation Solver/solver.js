@@ -34,9 +34,17 @@ solve = () => {
                 x1 = x2;
                 x2 = swap;
             }
-            c.font = "bold 24px times"
-            c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1) - 110, Origin.y-5);
-            c.fillText(`(${Math.round(x2*1000)/1000}, 0)`, PlotX(x2) + 3, Origin.y-5);
+            c.font = "bold 24px times";
+            if(String(modulus(roundUp(x1, 1000))).length <= 3){
+                if(x1<0){    
+                    c.fillText(`(${roundUp(x1, 1000)}, 0)`, PlotX(x1) - String(roundUp(x1, 1000)).length * 25 - 10, Origin.y-5);
+                }else{
+                    c.fillText(`(${roundUp(x1, 1000)}, 0)`, PlotX(x1) - String(roundUp(x1, 1000)).length * 25 - 30, Origin.y-5);
+                }
+            }else{            
+                c.fillText(`(${roundUp(x1, 1000)}, 0)`, PlotX(x1) - 105, Origin.y-5);
+            }
+            c.fillText(`(${roundUp(x2, 1000)}, 0)`, PlotX(x2) + 3, Origin.y-5);
             if(vertex.y > 0 && A<0 || vertex.y < 0 && A>0) {
                 point(PlotX(x1), Origin.y, '#ff0f0f');
                 point(PlotX(x2), Origin.y, '#ff0f0f');
@@ -47,9 +55,9 @@ solve = () => {
             x2 = x1;
             c.font = "bold 24px times"
             if(A>0) {
-                c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1), Origin.y+22);
+                c.fillText(`(${roundUp(x1, 1000)}, 0)`, PlotX(x1), Origin.y+22);
             }else if (A<0){
-                c.fillText(`(${Math.round(x1*1000)/1000}, 0)`, PlotX(x1), Origin.y-5);
+                c.fillText(`(${roundUp(x1, 1000)}, 0)`, PlotX(x1), Origin.y-5);
             }
         }
         else if(discriminant < 0) {
