@@ -31,7 +31,7 @@ document.getElementById("reset").addEventListener('click', function(){ // instea
 getDist = (x1, y1, x2, y2) => {
     let x = x2 - x1;
     let y = y2 - y1;
-    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    return Math.sqrt(x*x + y*y);
 }
 
 deg = (x) =>{
@@ -63,11 +63,11 @@ function average() {
     return avg/n;
 }
 
-connect = (x1, y1, x2, y2) => {
+connect = (x1, y1, x2, y2, color='lavender') => {
     c.beginPath();
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
-    c.strokeStyle = 'lavender';
+    c.strokeStyle = color;
     c.lineWidth = 2;
     c.stroke();
 }
@@ -144,8 +144,6 @@ function Circle (centre, radius){
         c.stroke();
         c.closePath();
 
-        point(this.centre.x, this.centre.y, 'blue');
-
         c.fillStyle = 'limegreen';
         c.font = 'bold 20px times';
         c.fillText("O", this.centre.x - 8, this.centre.y - 7);
@@ -161,20 +159,22 @@ function Circle (centre, radius){
         c.arc(centre.x, centre.y, this.centralAngleR, fixed[1].angle, fixed[0].angle);
         c.stroke();
         
+        
         c.beginPath();
         c.arc(p.x, p.y, this.angleR, slope(VPB), slope(VPB) + rad(APB));
         c.stroke();
     }
 
     this.drawPoint = () =>{
-        point(fixed[0].x, fixed[0].y, colors[2]);
-        point(fixed[1].x, fixed[1].y, colors[2]);
-        point(p.x, p.y, 'yellow');
-
         connect(fixed[0].x, fixed[0].y, this.centre.x, this.centre.y);
         connect(fixed[1].x, fixed[1].y, this.centre.x, this.centre.y);
         connect(p.x, p.y, fixed[0].x, fixed[0].y);
         connect(p.x, p.y, fixed[1].x, fixed[1].y);
+
+        point(fixed[0].x, fixed[0].y, colors[2]);
+        point(fixed[1].x, fixed[1].y, colors[2]);
+        point(p.x, p.y, 'yellow');
+        point(this.centre.x, this.centre.y, 'blue');
     }
 }
 
@@ -267,5 +267,7 @@ document.querySelector('select').addEventListener('change', () => {
     optAngle = Number(document.getElementById("Angles").value);
     init();
 });
+
+
 init();
 animate();
