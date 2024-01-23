@@ -1,7 +1,7 @@
 self.addEventListener("install", e => {
     e.waitUntil(
         caches.open("static").then(cache => {
-            return cache.addAll(["/", "/src", "/MISCELLANEOUS", "/MATHS_PROJECTS", "/DSA_UtilityFunctions", "/Images", "/Others.html", "/MathsFrontPage", "/stylesForMathAnimations", "/buttons.css"]);
+            return cache.addAll(["./", "./src", "./MISCELLANEOUS", "./MATHS_PROJECTS", "./DSA_UtilityFunctions", "./Images", "./Others.html", "./MathsFrontPage", "./stylesForMathAnimations", "./buttons.css"]);
         })
     );
 });
