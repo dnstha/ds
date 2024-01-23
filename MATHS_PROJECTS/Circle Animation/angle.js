@@ -28,25 +28,25 @@ document.getElementById("reset").addEventListener('click', function(){ // instea
     init();
 });
 
-getDist = (x1, y1, x2, y2) => {
+const getDist = (x1, y1, x2, y2) => {
     let x = x2 - x1;
     let y = y2 - y1;
     return Math.sqrt(x*x + y*y);
 }
 
-deg = (x) =>{
+const deg = (x) =>{
     return x*180/Math.PI;
 }
 
-rad = (x) => {
+const rad = (x) => {
     return x*Math.PI/180;
 }
 
-dotProduct = (a1,b1, a2,b2) => {
+const dotProduct = (a1,b1, a2,b2) => {
     return a1*a2 + b1*b2;
 }
 
-vctr = (x1, x2) => {
+const vctr = (x1, x2) => {
     return x2-x1;
 }
 
@@ -63,7 +63,7 @@ function average() {
     return avg/n;
 }
 
-connect = (x1, y1, x2, y2, color='lavender') => {
+const connect = (x1, y1, x2, y2, color='lavender') => {
     c.beginPath();
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
@@ -86,7 +86,7 @@ function randomColor(colors) {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-point = (x, y, col) => {
+const point = (x, y, col) => {
     c.beginPath();
     c.arc(x, y, 3, 0, Math.PI * 2, true);
     c.fillStyle = col;
@@ -94,7 +94,18 @@ point = (x, y, col) => {
     c.closePath();
 }
 
-slope = (V1) => {
+const slope = (x, y, a=0, b=0) => {
+    // slope is calculated with respect to the point (a, b)
+    let A = Math.acos((x-a)/getDist(x,y, a,b));
+    if(b>y){
+        A = 2 * Math.PI - A;
+    }
+    
+    return A;
+}
+
+const slopeP = (V1) => {
+    // slope is calculated with respect to the moving point
     let A = Math.acos(dotProduct(V1.x, V1.y, 1, 0)/getDist(p.x, p.y, fixed[1].x, fixed[1].y));
     if(V1.y <= 0) {
         A = Math.PI * 2 - A;
@@ -108,7 +119,7 @@ function Circle (centre, radius){
     this.radian = p.angle;
     this.centralAngleR = 50; // Radius of central angle symbol
     this.inscribedAngleR = 40; // Radius of inscribed angle symbol
-    this.angleR = this.inscribedAngleR;
+    this.angleR = this.inscribedAngleR; // Temprorary variable to change angle's radius when point P is too close to either of the fixed points
     this.velocity = Math.pow(-1, randomInt(2,3)) * (Math.random() + 0.006) * 0.02;
 
     this.update = () =>{
@@ -161,7 +172,7 @@ function Circle (centre, radius){
         
         
         c.beginPath();
-        c.arc(p.x, p.y, this.angleR, slope(VPB), slope(VPB) + rad(APB));
+        c.arc(p.x, p.y, this.angleR, slopeP(VPB), slopeP(VPB) + rad(APB));
         c.stroke();
     }
 
@@ -199,7 +210,7 @@ let varAngle;
 
 init = () =>{
     circleArray = [];
-    fixed = [];
+    fixed = []; // to store fixed points on the circle
     centre = {
         x: canvas.width/2,
         y: canvas.height/2
@@ -236,7 +247,7 @@ init = () =>{
             }
         }
     }
-    p = new locus(2 * Math.PI * Math.random());
+    p = new locus(2 * Math.PI * Math.random()); // Moving point on the circle
     if(((p.x > fixed[0].x && p.x < fixed[1].x) && (p.y > fixed[0].y || p.y > fixed[1].y)) || (getDist(p.x, p.y, fixed[0].x, fixed[0].y) < 5 || getDist(p.x, p.y, fixed[1].x, fixed[1].y) < 5)) {
         for(let i = 0; i<1; i++) {
             p = new locus(2 * Math.PI * Math.random());
@@ -260,6 +271,12 @@ function animate(){
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight);
     circleArray[0].update();
+
+    // if(pp){
+    //     // Just to check the accuracy of the newly created slope function
+    //     console.log("A", deg(slope(fixed[0].x, fixed[0].y, circleArray[0].centre.x, circleArray[0].centre.y)));
+    //     console.log("B", deg(slope(fixed[1].x, fixed[1].y, circleArray[0].centre.x, circleArray[0].centre.y)));
+    // }
 }
 
 
