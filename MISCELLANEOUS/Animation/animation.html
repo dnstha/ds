@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ANIMATION</title>
+		<link rel = "icon" href = "../../Logo.svg">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 100%;
+				height: 100%;
+				background-repeat:no-repeat;
+				background-size:100% 100%;
+				background-attachment:fixed;
+				z-index: 0;
+			}
+			.container {
+				position: absolute;
+				z-index: 1;
+				bottom:15%;
+				height: max-content;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body background="bg.jpg" id="image">
+		<div class = 'container'>
+			<marquee direction="right" scrollamount="28">
+				<img src="a.gif" width="22%">&emsp;&emsp;&emsp;
+				<img src="b.gif" width="11%">&emsp;&emsp;
+				<img src="mouse.gif" width="8%">&nbsp;
+			</marquee>
+		</div>
+	</body>
+
+</html>
