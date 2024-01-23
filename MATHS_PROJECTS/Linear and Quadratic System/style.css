@@ -2,8 +2,6 @@ body{
     margin: 0;
     background: transparent;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
 }
 #GraphPage {
     position: absolute;
