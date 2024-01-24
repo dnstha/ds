@@ -18,6 +18,7 @@ header{
     font-family: Courier, Georgia, Cambria;
     color: lavender;
     background: var(--secColor);
+    box-shadow: 0 0 0.6rem inset #d7b4f3;
     font-size: 3rem;
     text-align: center;
     font-weight: bold;
