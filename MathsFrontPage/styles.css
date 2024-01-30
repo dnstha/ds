@@ -150,6 +150,9 @@ main{
 #cirInv{
     background-image: url(../Images/MATHS/CirInversion.jpg);
 }
+#cirEqn{
+    background-image: url(../Images/MATHS/CircleEqn.jpg);
+}
 
 @media (750px<=width<=950px){
     .card{
