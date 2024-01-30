@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CIRCLE EQUATION FINDER</title>
+		<link rel = "icon" href = "../../Logo.svg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <canvas id="GraphPage"></canvas>
+    <canvas id="circlePage"></canvas>
+    <div id="htmlField">
+        <form id="userInput">
+            <div class="point" id = 'A'>
+                <label for="x" id = "lbl">A</label>
+                &lpar;<input id = "x" class = "P" type = "number" inputmode = "numeric" placeholder="x" required>,
+                <input id = "y" class = "P" type = "number" inputmode = "numeric" placeholder="y" required>&rpar;
+            </div>
+            <div class="end">
+                <button type="button" id = "Add">Add</button>
+                <button type="button" id="get">Get</button>
+                <button type="reset" id="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div id="eqn">
+    </div>
+</body>
+<script src="../../DSA_UtilityFunctions/DrawingFunctions/graphPage.js"></script>
+<script src="../../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
+<script src="../../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
+<script src="script.js"></script>
+</html>
