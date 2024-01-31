@@ -16,7 +16,8 @@ let coeffC = { // coefficients of the circle
     r:1
 };
 let repeated = false;
-
+let convertedPoints = [];
+const convertedC = {x:0, y:0};
 let Rsq; // Square of radius, which is always a rational number
 
 clor = (h, s=80, l=60) =>{
@@ -43,6 +44,7 @@ addEventListener("resize", () => {
         init();
         getEqn();
         writeEqn();
+        cPoints();
     }else{
         graphColor = 'white';
         drawGraph();
@@ -58,36 +60,62 @@ function Plot(x, y) {
 const rangeX = (Scale = graphScale) => Math.floor(0.5 * canvas.width/Scale);
 const rangeY = (Scale = graphScale) => Math.floor(0.5 * canvas.height/Scale);
 
-
 function getEqn(){
     let n = Points.length;
+    let invalidRadius = false;
+    if(filled('#radius') && n === 2){
+        invalidRadius = Number(document.querySelector('#radius').value) < getDist(Points[0].x, Points[0].y, Points[1].x, Points[1].y)/2;
+    }
     if(n == 1){
-        coeffC.h = randomInt(-rangeX(), rangeX());
-        coeffC.k = randomInt(-rangeY(), rangeY());
+        if(!filled('#radius') || invalidRadius){            
+            coeffC.h = randomInt(-rangeX(), rangeX());
+            coeffC.k = randomInt(-rangeY(), rangeY());
+        }else{
+            let radius = Number(document.querySelector('#radius').value);
+            coeffC.h = randomNum(Points[0].x - radius, Points[0].x + radius);
+            coeffC.k = (-1)**randomInt(1,2) * Math.sqrt(radius**2 - (Points[0].x - coeffC.h)**2) + Points[0].y;
+        }
     }else if(n == 2){
         //  Difference and addition of points' individual x and y values
         let dx = Points[0].x - Points[1].x;
         let ax = Points[0].x + Points[1].x;
         let dy = Points[0].y - Points[1].y;
         let ay = Points[0].y + Points[1].y;
-        if(dx === 0){
-            coeffC.h = randomInt(-rangeX(), rangeX());
-            coeffC.k = (dx*ax+dy*ay-2*dx*coeffC.h)/(2*dy);
-        }else if(dy === 0){
-            coeffC.k = randomInt(-rangeY(), rangeY());
-            coeffC.h = (dx*ax+dy*ay-2*dy*coeffC.k)/(2*dx);
-        }else{
-            let e = randomInt(1,2);
-            if(e===1){
+
+        if(!filled('#radius') || invalidRadius){
+            if(dx === 0){
                 coeffC.h = randomInt(-rangeX(), rangeX());
-                coeffC.k = (dx*ax+dy*ay-2*dx*coeffC.h)/(2*dy);
-            }else{
+                coeffC.k = ay/2;
+            }else if(dy === 0){
                 coeffC.k = randomInt(-rangeY(), rangeY());
-                coeffC.h = (dx*ax+dy*ay-2*dy*coeffC.k)/(2*dx);
+                coeffC.h = ax/2;
+            }else{
+                let e = randomInt(1,2);
+                if(e===1){
+                    coeffC.h = randomInt(-rangeX(), rangeX());
+                    coeffC.k = (dx*ax+dy*ay-2*dx*coeffC.h)/(2*dy);
+                }else{
+                    coeffC.k = randomInt(-rangeY(), rangeY());
+                    coeffC.h = (dx*ax+dy*ay-2*dy*coeffC.k)/(2*dx);
+                }
+            }
+        }else{
+            let radius = Number(document.querySelector('#radius').value);
+            if(dy !== 0){
+                let m, temp, a, b, c;
+                m = -dx/dy;
+                a = 1 + m**2;
+                temp = -dy - m*ax;
+                b = m*temp - 2*Points[0].x;
+                c = Points[0].x**2 + (temp**2)/4 - radius**2;
+                coeffC.h = (-b + (-1)**randomInt(1,2) * Math.sqrt(b**2 - 4*a*c))/(2*a);
+                coeffC.k = (m*(2*coeffC.h - ax) + ay)/2;
+            }else{
+                coeffC.h = ax/2;
+                coeffC.k = Points[0].y + (-1)**randomInt(1,10) * Math.sqrt(radius**2  - (dx/2)**2);
             }
         }
-    }
-    else if(n == 3){
+    }else if(n == 3){
         let dx12, dx13, ax12, ax13, dy12, dy13, ay12, ay13;
         // Differences of the points
         dx12 = Points[0].x - Points[1].x;
@@ -110,10 +138,14 @@ function getEqn(){
             Points.pop();
         }
     }
-    Rsq = (Points[0].x - coeffC.h)**2 + (Points[0].y - coeffC.k)**2;
-    coeffC.r = Math.sqrt(Rsq);
 
-    // console.log(Rsq);
+    if(n === 3 || !filled('#radius') || invalidRadius){
+        Rsq = (Points[0].x - coeffC.h)**2 + (Points[0].y - coeffC.k)**2;
+        coeffC.r = Math.sqrt(Rsq);
+    }else{
+        coeffC.r = Number(document.querySelector('#radius').value);
+        Rsq = coeffC.r**2;
+    }
 }
 
 function addPoint() {
@@ -128,6 +160,7 @@ function addPoint() {
             init();
             getEqn();
             writeEqn();
+            cPoints();
         }else{
             if(Points.length === 0){
                 charV++;
@@ -163,6 +196,7 @@ function addPoint() {
             document.querySelector("#x").focus();
             getEqn();
             writeEqn();
+            cPoints();
         }
     }else{
         alert('Points limit reached!');
@@ -183,6 +217,43 @@ function writeEqn(){
         <br/>
         General: x<sup>2</sup> + y<sup>2</sup> ${sign.x} ${2 * modulus(roundUp(coeffC.h, 1000))}x ${sign.y} ${2 * modulus(roundUp(coeffC.k, 1000))}y + ${roundUp((coeffC.h**2 + coeffC.k**2), 1000)} = 0
     `;
+}
+
+
+function checkRadius(){
+    if(Points.length !== 2){
+        getEqn();
+        writeEqn();
+        // if(Points.length === 3 && filled('#radius')){
+        //     alert('Radius can be set for less than 3 points only!')
+        // }
+    }else{
+        if(filled('#radius')){
+            let d = getDist(Points[0].x, Points[0].y, Points[1].x, Points[1].y)/2;
+            let validRadius = d <= Number(document.querySelector('#radius').value);
+            if(validRadius){
+                getEqn();
+                writeEqn();
+            }else{
+                alert(`Radius cannot be smaller than half the distance between the two points! Enter a value greater than or equal to ${roundUp(d, 1000)}`);
+            }
+        }else{
+            getEqn();
+            writeEqn();
+        }
+    }
+    cPoints();
+
+}
+
+function cPoints(){
+    // Converting the points
+    convertedPoints = [];
+    for(let i=0; i<Points.length; i++){
+        convertedPoints.push(new Plot(PlotX(Points[i].x), PlotY(Points[i].y)));
+    }
+    convertedC.x = PlotX(coeffC.h);
+    convertedC.y = PlotY(coeffC.k)
 }
 
 
@@ -228,21 +299,21 @@ function init(){
         }
         getEqn();
         writeEqn();
+        cPoints();
     }
 
     c.lineJoin = "bevel"; // makes the corners smoother
+    
 }
-
-document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
-    if(event.key === "Enter") {
-        addPoint();
-    }
-}));
 
 
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,canvas.width, canvas.height);
+
+    for(let n = 0; n<convertedPoints.length; n++) {
+        connectColorFade(convertedPoints[n].x, convertedPoints[n].y, convertedC.x, convertedC.y, 0.7);
+    }
     
     point(PlotX(coeffC.h), PlotY(coeffC.k), 'aqua');
     drawCircle(c, PlotX(coeffC.h), PlotY(coeffC.k), coeffC.r*scale, 'aqua');
@@ -276,6 +347,13 @@ function animate() {
 init();
 animate();
 
+
+document.querySelectorAll(".P").forEach(element => element.addEventListener("keyup", (event) => {
+    if(event.key === "Enter") {
+        addPoint();
+    }
+}));
+
 document.getElementById("reset").onclick = function() {
     charV = 0;
     document.querySelector("#lbl").innerText = `A`;
@@ -286,7 +364,12 @@ document.querySelector('#Add').onclick = function() {
     addPoint();
 }
 
+document.querySelector('#radius').addEventListener('keyup', e => {
+    if(e.key === "Enter"){
+        checkRadius();
+    }
+});
+
 document.querySelector('#get').addEventListener('click', ()=>{
-    getEqn();
-    writeEqn();
+    checkRadius();
 });

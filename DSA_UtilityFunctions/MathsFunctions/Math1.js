@@ -26,6 +26,9 @@ randomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// Generates any random number in given range including decimal numbers
+const randomNum = (min, max) => Math.random() * (max - min) + min;
+
 dotProduct = (a1,b1, a2,b2) => {
     return a1*a2 + b1*b2;
 }

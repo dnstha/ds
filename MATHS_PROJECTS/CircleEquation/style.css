@@ -47,22 +47,17 @@ form{
     margin-left: 0.5rem;
     font-size: 1.8rem;
 }
-#reset{
-    width: 60%;
-}
 button {
     color: cyan;
     background-color: black;
-    margin-left: 1rem;
-    margin-top: 0.4rem;
     border: 2px solid #cfffee;
     font-size: 1.8rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    min-width: fit-content;
+    width: fit-content;
     height: 2.5rem;
     border-radius: 10px;
-    transition-duration: 50ms;
+    transition-duration: 150ms;
 }
 button:active {
     transform: scale(0.96);
@@ -83,6 +78,9 @@ input{
 input[type = "number"]::-webkit-inner-spin-button {
     display: none;
 }
+.R{
+    text-align: center;
+}
 ::placeholder{
     color: #cfffee;
     opacity: 0.55;
@@ -90,7 +88,7 @@ input[type = "number"]::-webkit-inner-spin-button {
 .end{
     width: 13rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     row-gap: 0.5rem;
     margin: 1rem 0;
@@ -99,12 +97,13 @@ input[type = "number"]::-webkit-inner-spin-button {
 #eqn{
     position: absolute;
     width: fit-content;
-    left: 0;
-    bottom: 10%;
+    left: 2px;
+    bottom: 8%;
     margin-top: 1rem;
-    /* backdrop-filter: blur(1px); */
+    backdrop-filter: blur(1px);
     padding: 0 1rem;
     color: aqua;
     font-size: 2rem;
-    /* font-style: italic; */
+    border: 2px solid aqua;
+    border-radius: 1.5rem 0;
 }
