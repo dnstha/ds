@@ -1,36 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Circle Inside Circle</title>
-        <meta charset="utf-8">
-        <link rel = "icon" href = "../Logo.svg">
-        <link rel="stylesheet" type="text/css" href="../buttons.css">
-    	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <style>
-            body{
-                margin: 0;
-            }
-            canvas{
-                background: linear-gradient(60deg, black, black, #9e0e9e);
-                position: absolute;
-                z-index: -1;
-            }
-            button {
-                top: 2%;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="btns">
-            <button id = "reset"><i class="fa-solid fa-rotate-right"></i></button>
-            <button id = "plps"><i class="fa-solid fa-play"></i></button>
+<head>
+    <meta charset="UTF-8">
+    <title>Circle Inside Circle</title>
+    <link rel="icon" href="../../Logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: transparent;
+        }
+        canvas{
+            background: #000;
+            z-index: -1;
+            position: absolute;
+        }
+        
+        #ipt{
+            padding: 1rem;
+            background-color: rgba(20, 10, 200, 0.08);
+            border: 1px solid cyan;
+            border-radius: 1rem 0;
+            backdrop-filter: blur(1px);
+            position: fixed;
+            right: 1rem;
+            top: 2rem;
+            width: 21rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            row-gap: 1rem;
+            color: #cfffee;
+            font-size: 2rem;
+        }
+        button{
+            --r: 4rem;
+            border: 3px solid #cfffee;
+            margin: 0 1rem;
+            background: #121826;
+            color: #cfffee;
+            font-weight: bolder;
+            font-size: 1.5rem;
+            width: var(--r);
+            height: var(--r);
+            border-radius: 1rem;
+            transition-duration: 50ms;
+        }
+        .btns button:active{
+            box-shadow: 0px 0px 15px #cfffee;
+            transform: scale(0.95);
+            border-color: black;
+            color: black;
+            background: aqua;
+        }
+        .vertical-center{
+            display: flex;
+            align-items: center;
+        }
+        .btns{
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        #reset{
+            width: 5rem;
+            border-radius: 1rem;
+        }
+        input{
+            text-align: center;
+            background: transparent;
+            border: 1px solid cyan;
+            border-radius: 0.5rem;
+            height: 2rem;
+            width: fit-content;
+            font-size: 1.3rem;
+            color: #cfffee;
+        }
+        input[type = "number"]::-webkit-inner-spin-button {
+            display: none;
+        }
+        ::placeholder{
+            color: #cfffee;
+            opacity: 0.55;
+        }
+
+        #PlayPause{
+            border-radius: 50%;
+        }
+
+        /* Slider input customization */
+        #speed {
+            --size: 1.2rem;
+            border: none;
+            appearance: initial;
+            -webkit-appearance: none;
+            width: 10rem;
+            height: 0.4rem;
+            margin-left: 1rem;
+            border-radius: 0.5rem;
+            background: #121826;
+            transition: all 0.2s;
+        }
+        #speed:hover{
+            box-shadow: 0 0 1rem cyan;
+            background: #cfffee;
+        }
+        #speed::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            background: cyan;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+        #speed::-moz-range-thumb {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #cfffee;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>   
+    <canvas></canvas>
+    <form id="ipt">
+        <div class="vertical-center">                    
+            <label for="n">N:&nbsp;</label>
+            <input id="n" type="number" placeholder="Number of particles">
+            <input type="number" style="display: none;">
         </div>
-        <script src="../DSA_UtilityFunctions/DrawingFunctions/drawing.js"></script>
-        <script src="../DSA_UtilityFunctions/MathsFunctions/Math1.js"></script>
-        <canvas>
-            The browser does not support HTML5 canvas!
-            <script src="script.js">
-            </script>
-        </canvas>
-    </body>
+        <div class="vertical-center">
+            <label for="speed">Speed:</label>
+            <input id="speed" type="range" min="1" max="100">
+        </div>
+        <div class="btns">
+            <button id="set" type="button">Set</button>
+            <button id="PlayPause" type="button">| |</button>
+            <button id="reset" type="reset">Reset</button>
+        </div>
+    </form>
+    
+    <script src="script.js"></script>
+</body>
 </html>

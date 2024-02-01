@@ -1,129 +1,160 @@
-const canvas = document.querySelector("canvas");
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-let c = canvas.getContext("2d");
-console.log(canvas);
+const canvas = document.querySelector('canvas');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-let rect = canvas.getBoundingClientRect();
-canvas.width = rect.width * devicePixelRatio;
-canvas.height = rect.height * devicePixelRatio;
-c.scale(devicePixelRatio, devicePixelRatio);
-canvas.style.width = rect.width + "px";
-canvas.style.height = rect.height + "px";
+const c = canvas.getContext('2d');
+c.translate(canvas.width/2, canvas.height/2);
 
 
-addEventListener('resize', function() {
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+const increment = 0.03;
+let speed = increment;
 
-    rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
-    c.scale(devicePixelRatio, devicePixelRatio);
-    canvas.style.width = rect.width + "px";
-    canvas.style.height = rect.height + "px";
+
+addEventListener('resize', function(){
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    c.translate(canvas.width/2, canvas.height/2);
+    init();
+    drawPoint();
 });
 
-document.getElementById("plps").addEventListener('click', function(){ // instead you can write window.eventListener
-    pp = !(pp);
-    if(pp == false) {
-        document.getElementById("plps").style.color = lightColors[1];
-    }else{
-        document.getElementById("plps").style.color = '#cfffee';
+document.querySelector('#n').addEventListener('keyup', (e)=>{
+    if(e.key === "Enter"){
+        drawPoint();
     }
 });
 
-document.getElementById("reset").addEventListener('click', function(){ // instead you can write window.eventListener
+document.querySelector('#set').addEventListener('click', ()=>{
+    drawPoint();
+});
+
+document.querySelector('#reset').addEventListener('click', ()=>{
     init();
 });
 
-function Circle (centre, radius){
-    this.centre = centre;
+document.querySelector('#PlayPause').addEventListener('click', function(){
+    play = !play;
+    changeBtn();
+});
+
+document.querySelector('#speed').addEventListener('change', ()=>{
+    speed = Number(document.querySelector('#speed').value)/50 * increment;
+});
+
+function Circle(x, y, radius, phase, angle, color = 'red'){
+    this.x = x;
+    this.y = y;
     this.radius = radius;
-    this.radian = Math.PI/2;
-    this.angleR = this.inscribedAngleR;
-    this.velocity = Math.pow(-1, randomInt(2,3)) * 0.05;
+    this.phase = phase; // Initial phase of particle
+    this.angle = angle; // Changing angle for the motion
+    this.color = color;
 
-    this.update = () =>{
-        if(pp) {
-            this.radian += this.velocity;
-            particleArray[0].x = this.centre.x + this.radius * Math.cos(this.radian);
-        }
-        this.draw();
-    }
-
-    this.draw = function() {
+    this.drawLine = function(){
+        c.save();
+        c.rotate(this.phase);
+        c.strokeStyle = this.color;
+        c.globalAlpha = 0.5;
+        c.lineWidth = 0.7;
         c.beginPath();
-        c.arc(this.centre.x, this.centre.y, this.radius, 0, Math.PI * 2, true);
-        c.strokeStyle = lightColors[1];
+        c.lineTo(x-R, y);
+        c.lineTo(x+R, y);
         c.stroke();
-        c.closePath();
+        c.restore();
     }
 
-}
+    this.draw = function(){
+        c.fillStyle = this.color;
+        c.beginPath();
+        c.arc(this.x ,this.y, this.radius, 0, Math.PI * 2);
+        c.fill();
+    }
 
-function Particle (x, y, angle){
-    this.x = x;
-    this.y = y;
-    this.angle = angle;
-    this.velocity = 0.05;
-
-    this.updateSin = () =>{
-        if(pp) {
-            this.angle += this.velocity;
-            this.y = circleArray[0].centre.y + circleArray[0].radius * Math.sin(this.angle);
+    this.update = function(){
+        this.x = x + R * Math.sin(this.angle);
+        // this.y = y + 200 * Math.cos(this.phase);
+        if(play){
+            this.angle += speed;
         }
+        c.save();
+        c.lineWidth = 1;
+        c.rotate(this.phase);
         this.draw();
+        c.restore();
     }
-    this.updateCos = () =>{
-        if(pp) {
-            this.angle += this.velocity;
-            this.x = circleArray[0].centre.x + circleArray[0].radius * Math.cos(this.angle);
+}
+
+let cArr;
+let x, y, radius, R, num;
+let play = true;
+
+function isInt(x){
+    if(typeof x === 'number'){
+        return x%1 === 0;
+    }
+}
+
+function insertParticles(){
+    cArr = [];
+    for(let i = 0; i<num; i++){
+        let phase = Math.PI/(num)*i;
+        let color = `hsl(${(15*i)%360}, 90%, 50%)`;
+        cArr.push(new Circle(x, y, radius, phase, phase, color));
+    }
+}
+
+function changeBtn(){
+    if(play){
+        document.querySelector('#PlayPause').innerText = `| |`;
+    }else{
+        document.querySelector('#PlayPause').innerHTML = `<i class="fa-solid fa-play">`;
+    }
+}
+
+function drawPoint(){
+    if(document.querySelector('#n').value !== ''){
+        num = Number(document.querySelector('#n').value); 
+        if(isInt(num) && num > 0){
+            if(num <= 180){
+                insertParticles();
+            }else{
+                alert('Number is too big!');
+            }
+        }else{
+            alert('Enter a positive integer!');
         }
-        this.draw();
     }
-
-    this.draw = function() {
-        point(this.x, this.y, lightColors[0]);
-    }
-
 }
 
-function P(x, y) {
-    this.x = x;
-    this.y = y;
-}
-
-let particleArray = [];
-let circleArray = [];
-let centre, radius;
-let fixed = [];
-let varAngle;
-
-init = () =>{
-    particleArray = [];
-    circleArray = [];
-    fixed = [];
-    centre = new P(canvas.width/2, canvas.height/2);
-    radius = 200;
-    circleArray.push(new Circle(centre, radius));
-    for(let i = 0; i<4; i++) {
-        particleArray.push(new Particle(centre.x, centre.y, i*Math.PI/2));
+function init(){
+    if(canvas.width >= canvas.height){
+        R = 250;
+    }else{
+        R = canvas.width*0.4;
     }
-    pp = true;
-    document.getElementById("plps").style.color = "#cfffee";
+
+    c.strokeStyle = 'skyblue';
+    c.lineWidth = 1.5;
+    x = 0;
+    y = 0;
+    radius = 4;
+    num = 12; // Better if multiples of 18 as it is a factor of 180 with 10 as quotient
+    insertParticles();
+    speed = increment;
 }
 
 function animate(){
     requestAnimationFrame(animate);
-    c.clearRect(0, 0, innerWidth, innerHeight);
-    circleArray[0].update();
-    particleArray.forEach((p, i) => {
-        if(i%2 == 0) {
-            p.updateCos();
-        }        else{
-            p.updateSin();
-        }
+    c.clearRect(-canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+    
+    c.beginPath();
+    c.arc(x, y, R, 0, Math.PI*2);
+    c.stroke();
+
+    cArr.forEach(elem => {
+        elem.drawLine();
+    });
+    cArr.forEach(elem => {
+        elem.update();
     });
 }
 
