@@ -11,11 +11,22 @@ let speed = increment;
 
 
 addEventListener('resize', function(){
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    c.translate(canvas.width/2, canvas.height/2);
-    init();
-    drawPoint();
+    // Checking if the window size has significantly changed
+    const widthChange = Math.abs(canvas.width - window.innerWidth);
+    const heightChange = Math.abs(canvas.height - window.innerHeight);
+
+    // a threshold for changes
+    const threshold = 0.01;
+
+    if (widthChange > threshold || heightChange > threshold) {
+        // Update the previous dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        c.translate(canvas.width/2, canvas.height/2);
+        init();     
+        drawPoint();
+    }
 });
 
 document.querySelector('#n').addEventListener('keyup', (e)=>{
@@ -30,6 +41,7 @@ document.querySelector('#set').addEventListener('click', ()=>{
 
 document.querySelector('#reset').addEventListener('click', ()=>{
     init();
+    speed = increment;
 });
 
 document.querySelector('#PlayPause').addEventListener('click', function(){
@@ -116,6 +128,7 @@ function drawPoint(){
         if(isInt(num) && num > 0){
             if(num <= 180){
                 insertParticles();
+                speed = Number(document.querySelector('#speed').value)/50 * increment;
             }else{
                 alert('Number is too big!');
             }
@@ -139,7 +152,6 @@ function init(){
     radius = 4;
     num = 12; // Better if multiples of 18 as it is a factor of 180 with 10 as quotient
     insertParticles();
-    speed = increment;
 }
 
 function animate(){
