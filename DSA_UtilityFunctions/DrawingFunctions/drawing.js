@@ -18,6 +18,12 @@ const darkColors = [
     '#400036'
 ];
 
+const colorGenerator = (h, s=80, l=60, gap=20, initialValue = 0) =>{
+    if(typeof h === 'number'){
+        return `hsl(${(gap*h + initialValue)%360}, ${s}%, ${l}%)`; // Color for the points
+    }
+}
+
 /*
 Removed from the drawing.js file to avoid bugs like in transformation files
 addEventListener('resize', function() {

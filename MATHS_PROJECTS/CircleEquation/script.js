@@ -67,7 +67,7 @@ function getEqn(){
         invalidRadius = Number(document.querySelector('#radius').value) < getDist(Points[0].x, Points[0].y, Points[1].x, Points[1].y)/2;
     }
     if(n == 1){
-        if(!filled('#radius') || invalidRadius){            
+        if(!filled('#radius') || invalidRadius || Number(document.querySelector('#radius').value)<=0){            
             coeffC.h = randomInt(-rangeX(), rangeX());
             coeffC.k = randomInt(-rangeY(), rangeY());
         }else{
@@ -82,7 +82,7 @@ function getEqn(){
         let dy = Points[0].y - Points[1].y;
         let ay = Points[0].y + Points[1].y;
 
-        if(!filled('#radius') || invalidRadius){
+        if(!filled('#radius') || invalidRadius || Number(document.querySelector('#radius').value)<=0){
             if(dx === 0){
                 coeffC.h = randomInt(-rangeX(), rangeX());
                 coeffC.k = ay/2;
@@ -139,7 +139,7 @@ function getEqn(){
         }
     }
 
-    if(n === 3 || !filled('#radius') || invalidRadius){
+    if(n === 3 || !filled('#radius') || invalidRadius || Number(document.querySelector('#radius').value)<=0){
         Rsq = (Points[0].x - coeffC.h)**2 + (Points[0].y - coeffC.k)**2;
         coeffC.r = Math.sqrt(Rsq);
     }else{
