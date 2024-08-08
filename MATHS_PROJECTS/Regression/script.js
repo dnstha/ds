@@ -64,8 +64,8 @@ emptyCheck = () => {
 }
 
 function output() {
-    avgX = averageArr(X);
-    avgY = averageArr(Y);
+    avgX = average(...X);
+    avgY = average(...Y);
     const newListItem = document.createElement('tr');
     let numerator = 0;
     const denominator = {
