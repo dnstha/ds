@@ -19,6 +19,7 @@ const darkColors = [
 ];
 
 const colorGenerator = (h, s=80, l=60, gap=20, initialValue = 0) =>{
+    // Generates color for given hsl value
     if(typeof h === 'number'){
         return `hsl(${(gap*h + initialValue)%360}, ${s}%, ${l}%)`; // Color for the points
     }
@@ -36,20 +37,13 @@ addEventListener('resize', function() {
 
 
 function randomColor(colors) {
+    // Returns random color from given array of colors
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-connect = (x1, y1, x2, y2) => {
-    c.beginPath();
-    c.moveTo(x1, y1);
-    c.lineTo(x2, y2);
-    c.strokeStyle = 'lavender';
-    c.lineWidth = 2;
-    c.stroke();
-}
 
-// Connect given pionts with the given color
-connectColor = (x1, y1, x2, y2, color) => {
+const connectColor = (x1, y1, x2, y2, color = "lavender") => {
+    // Connect given pionts with the given color
     c.beginPath();
     c.moveTo(x1, y1);
     c.lineTo(x2, y2);
@@ -58,7 +52,8 @@ connectColor = (x1, y1, x2, y2, color) => {
     c.stroke();
 }
 
-connectColorCtx = (context, x1, y1, x2, y2, color) => {
+const connectColorCtx = (x1, y1, x2, y2, context = c, color = 'cyan') => {
+    // Connects given two points within the given context
     context.beginPath();
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
@@ -67,7 +62,8 @@ connectColorCtx = (context, x1, y1, x2, y2, color) => {
     context.stroke();
 }
 
-connectColorFade = (x1,y1,x2,y2, alpha) => {
+const connectColorFade = (x1,y1,x2,y2, alpha) => {
+    // Connects given points (x1, y1) and (x2, y2) with given alpha value
     c.save();
     c.beginPath();
     c.moveTo(x1, y1);
@@ -79,14 +75,16 @@ connectColorFade = (x1,y1,x2,y2, alpha) => {
     c.restore();
 }
 
-drawCircle = (context, x, y, radius, color) => {
+const drawCircle = (context, x, y, radius, color) => {
+    // Draws a circle in given context canvas and color with center (x, y) and given radius
     context.beginPath();
     context.strokeStyle = color;
     context.arc(x, y, radius, 0, Math.PI*2);
     context.stroke();
 }
 
-connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
+const connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
+    // Connects two points with dashed line and given transparency
     context.save();
     context.beginPath();
     context.moveTo(x1, y1);
@@ -98,7 +96,8 @@ connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
     context.restore();
 }
 
-point = (x, y, color, context=c) => {
+const point = (x, y, color, context=c) => {
+    // Draws a point in given context
     context.beginPath();
     context.arc(x, y, 3, 0, Math.PI * 2, true);
     context.fillStyle = color;
@@ -106,7 +105,7 @@ point = (x, y, color, context=c) => {
     context.closePath();
 }
 
-writeText = (context, text, x, y, color) => {
+const writeText = (context, text, x, y, color) => {
     context.fillStyle = color;
     context.fillText(text, x, y);
 }
