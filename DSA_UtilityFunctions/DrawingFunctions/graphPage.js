@@ -14,33 +14,34 @@ let graphColor ='black';
 let xAxisName = "X";
 let yAxisName = "Y";
 
-scalePoint = (x) => {
+const scalePoint = (x) => {
+    // Scales given point to graphScale
     return x*graphScale;
 }
 
 // These two functions plot the given coordinates with reference to the scale and position of the graph
-PlotX = (x) => {
+const PlotX = (x) => {
     return Origin.x + scalePoint(x);
 }
-PlotY = (y) => {
+const PlotY = (y) => {
     return Origin.y - scalePoint(y);
 }
 
 // These two functions change the given point of the page in terms of x-y plane coordinate
-toX = (x) => {
+const toX = (x) => {
     return (x - Origin.x)/graphScale;
 }
-
-toY = (y) => {
+const toY = (y) => {
     return (Origin.y - y)/graphScale;
 }
 
-axesNames = (X, Y) => {
+const axesNames = (X, Y) => {
+    // Writes axes names as given values of X and Y
     G.fillText(X, GRAPH.width - 20 - 10*X.length, Origin.y + 20);
     G.fillText(Y, Origin.x + 5, 20);
 }
 
-xAxis = (color) => {
+const xAxis = (color) => {
     G.lineWidth = 2;
     G.beginPath();
     for (let i = 0; i < GRAPH.width; i++) {
@@ -50,7 +51,7 @@ xAxis = (color) => {
     G.stroke();
 }
 
-yAxis = (color) => {
+const yAxis = (color) => {
     G.beginPath();
     for (let i = 0; i < GRAPH.height; i++) {
         G.lineTo(GRAPH.width/2, i);  
@@ -59,19 +60,21 @@ yAxis = (color) => {
     G.stroke();
 }
 
-drawGrids = (O, range, j) => {
+const drawGrids = (ORIGIN, range, j) => {
+    // Draws horizontal/vertial grid(s)
     G.beginPath();
     for (let i = 0; i < range; i++) {
-        if(O == Origin.x) {
-            G.lineTo(O + graphScale*j, i);
-        }else if(O == Origin.y){
-            G.lineTo(i, O + graphScale*j);
+        if(ORIGIN == Origin.x) {
+            G.lineTo(ORIGIN + graphScale*j, i);
+        }else if(ORIGIN == Origin.y){
+            G.lineTo(i, ORIGIN + graphScale*j);
         }
     }
     G.stroke();
 }
 
-xGrids = (color) => {
+const xGrids = (color) => {
+    // Draws grids parallel to x-axis
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.2)';
     }else{
@@ -83,7 +86,8 @@ xGrids = (color) => {
     }
 }
 
-yGrids = (color) => {
+const yGrids = (color) => {
+    // Draws grids parallel to y-axis
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.2)';
     }else{
@@ -95,7 +99,8 @@ yGrids = (color) => {
     }
 }
 
-xUnitGrids = (color) => {
+const xUnitGrids = (color) => {
+    // Function to create bolder X-grids when scaled up or scaled down x-axis
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.5)';
     }else{
@@ -117,7 +122,8 @@ xUnitGrids = (color) => {
     }
 }
 
-yUnitGrids = (color) => {
+const yUnitGrids = (color) => {
+    // Function to create bolder Y-grids when scaled up or scaled down y-axis
     if(color == 'black') {
         G.strokeStyle = 'rgba(0,0,0, 0.5)';
     }else{
@@ -139,7 +145,7 @@ yUnitGrids = (color) => {
     }
 }
 
-parabola = (context, a, vertex_X, vertex_Y, color) => {
+const parabola = (context, a, vertex_X, vertex_Y, color) => {
     a /= scale;
     vertex_X = PlotX(vertex_X);
     vertex_Y = PlotY(vertex_Y);
@@ -201,7 +207,8 @@ parabola = (context, a, vertex_X, vertex_Y, color) => {
     }
 }
 
-line = (context, slope, yIntercept, color) => {
+const line = (context, slope, yIntercept, color) => {
+    // Draws line with given slope, y-intercept, and color
     yIntercept = scalePoint(yIntercept);
     context.lineWidth = 2;
     context.strokeStyle = color;
@@ -217,7 +224,8 @@ line = (context, slope, yIntercept, color) => {
     context.stroke();
 }
 
-drawFunction = (context, fx, color) => {
+const drawFunction = (context, fx, color) => {
+    // Draws any function from given expression in terms of x
     let x;
     let dynamicFunction = new Function('x', 'return ' + fx);
     // Dynamic Function to convert given type of expression of x in terms of
@@ -281,7 +289,7 @@ drawFunction2 = (context, fx, color) => {
 
 
 
-drawGraph = () => {
+const drawGraph = () => {
     G.clearRect(0,0,GRAPH.width, GRAPH.height);
     Origin.x = GRAPH.width/2;
     Origin.y = GRAPH.height/2;
