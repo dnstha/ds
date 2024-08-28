@@ -224,7 +224,7 @@ const line = (context, slope, yIntercept, color) => {
     context.stroke();
 }
 
-const drawFunction = (context, fx, color) => {
+const drawFunction = (fx, color, context = c) => {
     // Draws any function from given expression in terms of x
     let x;
     let dynamicFunction = new Function('x', 'return ' + fx);
