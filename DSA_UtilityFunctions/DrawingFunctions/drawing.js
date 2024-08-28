@@ -62,17 +62,17 @@ const connectColorCtx = (x1, y1, x2, y2, context = c, color = 'cyan') => {
     context.stroke();
 }
 
-const connectColorFade = (x1,y1,x2,y2, alpha) => {
-    // Connects given points (x1, y1) and (x2, y2) with given alpha value
-    c.save();
-    c.beginPath();
-    c.moveTo(x1, y1);
-    c.lineTo(x2, y2);
-    c.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
-    c.lineWidth = 2;
-    c.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
-    c.stroke();
-    c.restore();
+const connectColorFade = (x1,y1,x2,y2, alpha, context = c) => {
+    // Connects given points (x1, y1) and (x2, y2) with dashed line and with given alpha value
+    context.save();
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
+    context.lineWidth = 2;
+    context.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
+    context.stroke();
+    context.restore();
 }
 
 const drawCircle = (context, x, y, radius, color) => {
