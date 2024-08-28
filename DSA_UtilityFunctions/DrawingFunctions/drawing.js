@@ -75,25 +75,26 @@ const connectColorFade = (x1,y1,x2,y2, alpha, context = c) => {
     context.restore();
 }
 
+// This function is commented out after adding context parameter to the connectColorFade function
+// const connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
+//     // Connects two points with dashed line and given transparency
+//     context.save();
+//     context.beginPath();
+//     context.moveTo(x1, y1);
+//     context.lineTo(x2, y2);
+//     context.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
+//     context.lineWidth = 2;
+//     context.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
+//     context.stroke();
+//     context.restore();
+// }
+
 const drawCircle = (context, x, y, radius, color) => {
     // Draws a circle in given context canvas and color with center (x, y) and given radius
     context.beginPath();
     context.strokeStyle = color;
     context.arc(x, y, radius, 0, Math.PI*2);
     context.stroke();
-}
-
-const connectColorDashed = (context,x1,y1,x2,y2, alpha) => {
-    // Connects two points with dashed line and given transparency
-    context.save();
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.strokeStyle = `rgba(255, 250, 250, ${alpha})`;
-    context.lineWidth = 2;
-    context.setLineDash([5,5]); // Creates dashed lines [length_of_Dash, Spacing_between_dashes]
-    context.stroke();
-    context.restore();
 }
 
 const point = (x, y, color, context=c) => {
