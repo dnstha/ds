@@ -31,22 +31,6 @@ addEventListener('resize', function() {
     }
 });
 
-line = (slope, yIntercept, color) => {
-    yIntercept *= scale;
-    c.lineWidth = 2;
-    c.strokeStyle = color;
-    c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x+i, Origin.y-i*slope-yIntercept);
-    }
-    c.stroke();
-    c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x-i, Origin.y+i*slope-yIntercept);        
-    }
-    c.stroke();
-}
-
 function init(){
     c.clearRect(0,0,canvas.width, canvas.height);
     Origin.x = canvas.width/2;

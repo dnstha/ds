@@ -28,7 +28,7 @@ function Circle(x, y, radius) {
     }
 }
 
-function drawCircle(){
+function draw_circle(){
     graphColor = 'white';
     drawGraph();
     xUnitGrids(ctx, 'white');
@@ -44,6 +44,6 @@ function drawCircle(){
 addEventListener('resize', function() {
     circlePage.width = window.innerWidth;
     circlePage.height = window.innerHeight;
-    drawCircle();
+    draw_circle();
 });
-drawCircle();
+draw_circle();

@@ -137,23 +137,7 @@ addEventListener('resize', function() {
     }
 });
 
-line = (slope, yIntercept, color) => {
-    yIntercept *= scale;
-    c.lineWidth = 2;
-    c.strokeStyle = color;
-    c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x+i, Origin.y-i*slope-yIntercept);
-    }
-    c.stroke();
-    c.beginPath();
-    for(let i=0; i<canvas.width/2;i++){
-        c.lineTo(Origin.x-i, Origin.y+i*slope-yIntercept);        
-    }
-    c.stroke();
-}
-
-curve = (a, vertex_X, vertex_Y, color) => {
+const curve = (a, vertex_X, vertex_Y, color) => {
     a /= scale;
     vertex_X = PlotX(vertex_X);
     vertex_Y = PlotY(vertex_Y);
