@@ -207,7 +207,7 @@ const parabola = (context, a, vertex_X, vertex_Y, color) => {
     }
 }
 
-const line = (context, slope, yIntercept, color) => {
+const line = (slope, yIntercept, color, context=c) => {
     // Draws line with given slope, y-intercept, and color
     yIntercept = scalePoint(yIntercept);
     context.lineWidth = 2;
