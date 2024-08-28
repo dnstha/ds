@@ -122,7 +122,7 @@ function output() {
     }
     if(typeof Byx == "number") {
         L.clearRect(0,0, canvas.width, canvas.height);
-        line(L, Byx, yInt, lineColor);
+        line(Byx, yInt, lineColor, L);
     }
 }
 

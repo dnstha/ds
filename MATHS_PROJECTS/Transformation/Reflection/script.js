@@ -199,7 +199,7 @@ function animate() {
     c.clearRect(0,0,canvas.width, canvas.height);
 
     if(ln.b!=0) {
-        line(c, -ln.a/ln.b, ln.c/ln.b, 'aqua');
+        line(-ln.a/ln.b, ln.c/ln.b, 'aqua');
     }else{
         c.strokeStyle = 'aqua';
         c.beginPath();
