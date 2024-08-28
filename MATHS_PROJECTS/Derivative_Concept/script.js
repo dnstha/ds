@@ -247,7 +247,7 @@ function animate() {
     Cv.y = PlotY(movingPoint.y);
 
     connectColorFade(Cv.x, 0, Cv.x, canvas.height, 0.4); // Trace the position of x in the graph
-    drawFunction(c, generatePolynomial(...cofs), polyColor);
+    drawFunction(generatePolynomial(...cofs), polyColor);
     line(c, tangent.slope, tangent.yInt, tangentColor);
     // drawFunction(c, `(x-2)*(x-3)*(x-6)*(x-4)*(x-1)*(x+1)`, 'yellow')
     if(Cv.x >= canvas.width || Cv.x <= 0){    
