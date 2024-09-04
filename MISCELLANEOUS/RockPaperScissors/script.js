@@ -1,7 +1,8 @@
 const options = ['rock', 'paper', 'scissors'];
 let human, computer, win = undefined;
 let th, tc; // Total score of human and computer
-
+const WonAudio = new Audio("audio_won.mp3");
+const LostAudio = new Audio("audio_lost.mp3");
 
 function init(){
     document.querySelector('span').innerText = '';
@@ -36,11 +37,13 @@ function result(x){
             document.querySelector('span').innerText = 'You won!';
             document.querySelector('span').style.background = 'limegreen';
             document.querySelector('#human').value++;
+            WonAudio.play();
         }else{
             document.querySelector('.statement').innerHTML = `${symbol[computer]}&nbsp;beats&nbsp;${symbol[x]}`;
             document.querySelector('span').innerText = 'You lost!';
             document.querySelector('span').style.background = 'red';
             document.querySelector('#computer').value++;
+            LostAudio.play();
         }
     }
     document.querySelector(`#${computer}`).style.background = 'yellow';
