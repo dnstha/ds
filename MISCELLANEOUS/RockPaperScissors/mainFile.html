@@ -12,11 +12,7 @@
     <header>
         <h1>Rock Paper Scissors Game</h1>
     </header>
-    <div class="inpt">
-        <button id="rock" class="ipt" type="submit" value="rock"><i class="fa-solid fa-hand-back-fist"></i></button>
-        <button id="paper" class="ipt" type="submit" value="paper"><i class="fa-solid fa-hand"></i></button>
-        <button id="scissors" class="ipt" type="submit" value="scissors"><i class="fa-solid fa-hand-scissors"></i></button>
-    </div>
+
     <div class="result">
         <div>
             YOU: <input id="human" value = 0 disabled></input>
@@ -25,10 +21,23 @@
             COMPUTER: <input id="computer" value = 0 disabled></input>
         </div>
     </div>
+    
+    <div class="inpt">
+        <button id="rock" class="ipt" type="submit" value="rock"><i class="fa-solid fa-hand-back-fist"></i></button>
+        <button id="paper" class="ipt" type="submit" value="paper"><i class="fa-solid fa-hand"></i></button>
+        <button id="scissors" class="ipt" type="submit" value="scissors"><i class="fa-solid fa-hand-scissors"></i></button>
+    </div>
 
     <div id="otpt">
         <div class="statement"></div>
         <span id=""></span>
+        <div id="toggle">
+            Sound:&nbsp;&nbsp;
+            <label for="sound">
+                <input id="sound" type="checkbox">
+                <div id="tgl"></div>
+            </label>
+        </div>
         <button type="button" id="initialize">Restart</button>
         <p id="total"></p>
     </div>

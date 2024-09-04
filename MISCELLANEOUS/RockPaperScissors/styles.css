@@ -29,7 +29,7 @@ body{
     height: fit-content;
 }
 .result{
-    margin-top: 3rem;
+    margin-top: 1rem;
     font-size: 1.5rem;
     gap: 1rem;
 }
@@ -45,7 +45,7 @@ body{
 }
 button{
     margin-left: 1rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
     height: var(--radius);
     width: var(--radius);
     font-size: calc(var(--radius) - 1.8rem);
@@ -87,9 +87,9 @@ button:active, #initialize:active{
 }
 
 span{
-    height: 3rem;
+    height: 2rem;
     margin-top: 1rem;
-    font-size: 2rem;
+    font-size: 1.7rem;
     width: max-content;
     border-radius: 0.5rem;
 }
@@ -98,4 +98,53 @@ span{
     font-size: 2rem;
     margin-top: 1rem;
     text-align: center;
+}
+
+
+/* Toggle settings */
+#toggle{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: fit-content;
+    --width: 3rem;
+    --height: calc(var(--width)/2);
+    --brdr-radius: calc(var(--width)/4);
+    display: flex;
+    align-items: center;
+}
+#toggle input{
+    display: none;
+}
+#tgl{
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--brdr-radius);
+    background: black;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+#toggle input:checked ~ #tgl{
+    background: cyan;
+}
+
+#tgl::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    border-radius: var(--height);
+    background: cyan;
+    transition-duration: 0.15s;
+    box-shadow: 0 0 10px cyan;
+}
+
+#toggle input:checked ~ #tgl::after{
+    transform: translateX(var(--height));
+    background: black;
+    box-shadow: 0 0 10px black;
 }

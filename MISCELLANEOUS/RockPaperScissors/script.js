@@ -3,6 +3,8 @@ let human, computer, win = undefined;
 let th, tc; // Total score of human and computer
 const WonAudio = new Audio("audio_won.mp3");
 const LostAudio = new Audio("audio_lost.mp3");
+const Sound = document.querySelector("#sound");
+let mute = Sound.checked ? false : true;
 
 function init(){
     document.querySelector('span').innerText = '';
@@ -37,13 +39,17 @@ function result(x){
             document.querySelector('span').innerText = 'You won!';
             document.querySelector('span').style.background = 'limegreen';
             document.querySelector('#human').value++;
-            WonAudio.play();
+            if (!mute){
+                WonAudio.play();
+            }
         }else{
             document.querySelector('.statement').innerHTML = `${symbol[computer]}&nbsp;beats&nbsp;${symbol[x]}`;
             document.querySelector('span').innerText = 'You lost!';
             document.querySelector('span').style.background = 'red';
             document.querySelector('#computer').value++;
-            LostAudio.play();
+            if (!mute){            
+                LostAudio.play();
+            }
         }
     }
     document.querySelector(`#${computer}`).style.background = 'yellow';
@@ -70,3 +76,7 @@ document.querySelector('#initialize').addEventListener('click', function(){
     document.querySelector('.statement').innerText = '';
     init();
 })
+
+Sound.addEventListener('click', function(){
+    mute = Sound.checked ? false: true;
+});
