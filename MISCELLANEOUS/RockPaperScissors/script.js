@@ -1,13 +1,15 @@
 const options = ['rock', 'paper', 'scissors'];
 let human, computer, win = undefined;
 let th, tc; // Total score of human and computer
+const Span = document.querySelector('span');
+const Statement = document.querySelector('.statement');
 const WonAudio = new Audio("audio_won.mp3");
 const LostAudio = new Audio("audio_lost.mp3");
 const Sound = document.querySelector("#sound");
 let mute = Sound.checked ? false : true;
 
 function init(){
-    document.querySelector('span').innerText = '';
+    Span.innerText = '';
     document.querySelectorAll('.ipt').forEach((element)=>{
         element.style.background = 'aqua';
     });
@@ -23,9 +25,9 @@ function result(x){
     init();
     computer = options[Math.floor(Math.random() * 3)];
     if(computer == x){
-        document.querySelector('span').innerText = 'The game was draw!';
-        document.querySelector('span').style.background = 'skyblue';
-        document.querySelector('.statement').innerHTML = `Both chose&nbsp;${symbol[x]}`;
+        Span.innerText = 'The game was draw!';
+        Span.style.background = 'skyblue';
+        Statement.innerHTML = `Both chose&nbsp;${symbol[x]}`;
     }else{
         if(x == 'rock'){
             win = (computer == 'scissors')? true : false;
@@ -35,17 +37,17 @@ function result(x){
             win = (computer == 'rock')? true : false;
         }
         if(win){
-            document.querySelector('.statement').innerHTML = `${symbol[x]}&nbsp;beats&nbsp;${symbol[computer]}`;
-            document.querySelector('span').innerText = 'You won!';
-            document.querySelector('span').style.background = 'limegreen';
+            Statement.innerHTML = `${symbol[x]}&nbsp;beats&nbsp;${symbol[computer]}`;
+            Span.innerText = 'You won!';
+            Span.style.background = 'limegreen';
             document.querySelector('#human').value++;
             if (!mute){
                 WonAudio.play();
             }
         }else{
-            document.querySelector('.statement').innerHTML = `${symbol[computer]}&nbsp;beats&nbsp;${symbol[x]}`;
-            document.querySelector('span').innerText = 'You lost!';
-            document.querySelector('span').style.background = 'red';
+            Statement.innerHTML = `${symbol[computer]}&nbsp;beats&nbsp;${symbol[x]}`;
+            Span.innerText = 'You lost!';
+            Span.style.background = 'red';
             document.querySelector('#computer').value++;
             if (!mute){            
                 LostAudio.play();
@@ -73,7 +75,7 @@ document.querySelector('#initialize').addEventListener('click', function(){
     document.querySelector('#human').value = 0;
     document.querySelector('#computer').value = 0;
     document.querySelector('#total').innerText = '';
-    document.querySelector('.statement').innerText = '';
+    Statement.innerText = '';
     init();
 })
 
