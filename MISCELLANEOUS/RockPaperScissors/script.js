@@ -1,11 +1,11 @@
 const options = ['rock', 'paper', 'scissors'];
 let human, computer, win = undefined;
-let th, tc; // Total score of human and computer
 const Span = document.querySelector('span');
 const Statement = document.querySelector('.statement');
 const WonAudio = new Audio("audio_won.mp3");
 const LostAudio = new Audio("audio_lost.mp3");
 const Sound = document.querySelector("#sound");
+let totalGames = 0;
 let mute = Sound.checked ? false : true;
 
 function init(){
@@ -60,21 +60,15 @@ function result(x){
 document.querySelectorAll('.ipt').forEach(element => element.addEventListener('click', function(){
     human = element.value;
     result(human);
-    th = Number(document.querySelector("#human").value);
-    tc = Number(document.querySelector("#computer").value);
-    if(th==tc){
-        document.querySelector('#total').innerText = 'No one is winning!';
-    }else if(th>tc){
-        document.querySelector('#total').innerText = `You are winning by ${th-tc} points!`;
-    }else if(th<tc){
-        document.querySelector('#total').innerText = `Computer is winning by ${tc-th} points!`;
-    }
+    totalGames++;
+    document.querySelector('#total').innerText = `Total Games: ${totalGames}`;
 }));
 
 document.querySelector('#initialize').addEventListener('click', function(){
     document.querySelector('#human').value = 0;
     document.querySelector('#computer').value = 0;
-    document.querySelector('#total').innerText = '';
+    totalGames = 0
+    document.querySelector('#total').innerText = `Total Games: ${totalGames}`;
     Statement.innerText = '';
     init();
 })

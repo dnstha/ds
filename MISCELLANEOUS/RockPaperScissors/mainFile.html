@@ -21,16 +21,14 @@
             COMPUTER: <input id="computer" value = 0 disabled></input>
         </div>
     </div>
-    
-    <div class="inpt">
-        <button id="rock" class="ipt" type="submit" value="rock"><i class="fa-solid fa-hand-back-fist"></i></button>
-        <button id="paper" class="ipt" type="submit" value="paper"><i class="fa-solid fa-hand"></i></button>
-        <button id="scissors" class="ipt" type="submit" value="scissors"><i class="fa-solid fa-hand-scissors"></i></button>
-    </div>
 
     <div id="otpt">
+        <p id="total">Total Games: 0</p>
         <div class="statement"></div>
         <span id=""></span>
+    </div>
+
+    <div class="bottom">
         <div id="toggle">
             Sound:&nbsp;&nbsp;
             <label for="sound">
@@ -39,7 +37,11 @@
             </label>
         </div>
         <button type="button" id="initialize">Restart</button>
-        <p id="total"></p>
+        <div class="inpt">
+            <button id="rock" class="ipt" type="submit" value="rock"><i class="fa-solid fa-hand-back-fist"></i></button>
+            <button id="paper" class="ipt" type="submit" value="paper"><i class="fa-solid fa-hand"></i></button>
+            <button id="scissors" class="ipt" type="submit" value="scissors"><i class="fa-solid fa-hand-scissors"></i></button>
+        </div> 
     </div>
 </body>
 <script src="script.js"></script>
