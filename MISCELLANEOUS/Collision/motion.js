@@ -1,16 +1,11 @@
-let canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 console.log(canvas);
 
-let c = canvas.getContext('2d');
+const c = canvas.getContext('2d');
 
-var mouse = {
-    x: innerWidth/2,
-    y: innerHeight/2
-};
-
-var colors = [
+const colors = [
     '#a28089',
     '#ff1d58',
     '#400036',
@@ -19,10 +14,9 @@ var colors = [
     '#F2C6C2'
 ];
 
-addEventListener('mousemove', function(event){
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-});
+
+let particles = [];
+const numberOfParticles = 30;
 
 addEventListener('resize', function() {
     canvas.width = innerWidth;
@@ -117,22 +111,23 @@ function Particle(x, y, radius, color){
             if(this === particles[i]) continue;
             if (distance(this.x, this.y, particles[i].x, particles[i].y) - this.radius * 2 < 0){
                 resolveCollision(this, particles[i]);
+                this.opacity = 0.8
             }
         }
         if(this.x - this.radius <= 0 || this.x + this.radius >= innerWidth){
             this.velocity.x = -this.velocity.x;
+            this.opacity = 0.8
         }
 
         if(this.y - this.radius <= 0 || this.y + this.radius >= innerHeight){
             this.velocity.y = -this.velocity.y;
+            this.opacity = 0.8
         }
-
-        // Mouse collision detection
-        if (distance(mouse.x, mouse.y, this.x, this.y) < 120 && this.opacity < 0.3 ) {
-            this.opacity += 0.02;
-        } else if (this.opacity > 0) {
+        
+        if (this.opacity > 0) {
             this.opacity -= 0.2;
 
+            // If the opacity goes below 0, setting it to 0
             this.opacity = Math.max(0, this.opacity);
         }
 
@@ -155,11 +150,9 @@ function Particle(x, y, radius, color){
     };
 }
 
-let particles;
 function init(){
     particles = [];
-
-    for (let i = 0; i < 300; i++){
+    for (let i = 0; i < numberOfParticles; i++){
         const radius = 15;
         let x = randomInt(radius, canvas.width - radius);
         let y = randomInt(radius, canvas.height - radius);        
