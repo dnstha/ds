@@ -5,18 +5,17 @@ console.log(canvas);
 
 const c = canvas.getContext('2d');
 
+// Light colors for dark background
 const colors = [
-    '#a28089',
     '#ff1d58',
-    '#400036',
-    '#015958',
-    '#7A577A',
-    '#F2C6C2'
+    '#cfffee',
+    'white',
+    'lavender',
+    'cyan',
+    'skyblue',
+    'lightgreen'
 ];
 
-
-let particles = [];
-const numberOfParticles = 30;
 
 addEventListener('resize', function() {
     canvas.width = innerWidth;
@@ -40,99 +39,108 @@ function distance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
-function rotate(velocity, angle) {
-    const rotatedVelocities = {
-        x: velocity.x * Math.cos(angle) - velocity.y * Math.sin(angle),
-        y: velocity.x * Math.sin(angle) + velocity.y * Math.cos(angle)
+// Function to rotate the velocities for collision calculation
+function rotate(dx, dy, angle) {
+    return {
+        x: dx * Math.cos(angle) - dy * Math.sin(angle),
+        y: dx * Math.sin(angle) + dy * Math.cos(angle)
     };
-
-    return rotatedVelocities;
 }
 
-function resolveCollision(particle, otherParticle) {
-    const xVelDiff = particle.velocity.x - otherParticle.velocity.x;
-    const yVelDiff = particle.velocity.y - otherParticle.velocity.y;
+function resolveCollision(p1, p2) {
+    const xVelocityDiff = p1.dx - p2.dx;
+    const yVelocityDiff = p1.dy - p2.dy;
 
-    const xDist = otherParticle.x - particle.x;
-    const yDist = otherParticle.y - particle.y;
+    const xDist = p2.x - p1.x;
+    const yDist = p2.y - p1.y;
 
-    // Prevent accidental overlap of particles
-    if (xVelDiff * xDist + yVelDiff + yDist >= 0) {
+    // Prevent accidental overlap
+    if (xVelocityDiff * xDist + yVelocityDiff * yDist >= 0) {
+        const angle = -Math.atan2(p2.y - p1.y, p2.x - p1.x);
 
-        // Grab angle between the two colliding particles
-        const angle = -Math.atan2(otherParticle.y - particle.y, otherParticle.x - particle.x);
+        const u1 = rotate(p1.dx, p1.dy, angle);
+        const u2 = rotate(p2.dx, p2.dy, angle);
 
-        // Store mass in var for better readability in collision equation
-        const m1 = particle.mass;
-        const m2 = otherParticle.mass;
-
-        // Velocity before equation
-        const u1 = rotate(particle.velocity, angle);
-        const u2 = rotate(otherParticle.velocity, angle);
-
-        // Velocity after 1d collision equation
-        const v1 = { 
-            x: u1.x * (m1 - m2) / (m1 + m2) + u2.x * 2 * m2 / (m1 + m2),
+        // Apply 1D elastic collision equations
+        const v1 = {
+            x: u1.x * (p1.mass - p2.mass) / (p1.mass + p2.mass) + u2.x * 2 * p2.mass / (p1.mass + p2.mass),
             y: u1.y
         };
         const v2 = {
-            x: u2.x * (m1 - m2) / (m1 + m2) + u1.x * 2 * m2 / (m1 + m2),
+            x: u2.x * (p2.mass - p1.mass) / (p1.mass + p2.mass) + u1.x * 2 * p1.mass / (p1.mass + p2.mass),
             y: u2.y
         };
 
-        // Final velocity after rotating axis back to original location
-        const V1 = rotate(v1, -angle);
-        const V2 = rotate(v2, -angle);
+        // Rotate velocities back to the original coordinate system
+        const vFinal1 = rotate(v1.x, v1.y, -angle);
+        const vFinal2 = rotate(v2.x, v2.y, -angle);
 
-        // Swap particle velocities for relisitic bounce effect
-        particle.velocity.x = V1.x;
-        particle.velocity.y = V1.y;
+        // Assign new velocities
+        p1.dx = vFinal1.x;
+        p1.dy = vFinal1.y;
 
-        otherParticle.velocity.x = V2.x;
-        otherParticle.velocity.y = V2.y;
+        p2.dx = vFinal2.x;
+        p2.dy = vFinal2.y;
     }
+}
+
+
+function showParticles(){
+    for(let i = 0; i<numOfParticles; i++){
+        console.log(particles[i]);
+    }
+}
+
+function showKE(){
+    let KE = 0;
+    for(let i = 0; i<numOfParticles; i++){
+        KE += 1/2 * particles[i].mass * Math.hypot(particles[i].dx, particles[i].dy) ** 2;
+    }
+    // Total Kinetic Energy of the system should be conserved after each collision
+    console.log(`Total Kinetic Energy: ${Math.round(KE * 10000) / 10000}`);
 }
 
 function Particle(x, y, radius, color){
     this.x = x;
     this.y = y;
-    this.velocity = {
-        x: (Math.random() - 0.5) * 8,
-        y: (Math.random() - 0.5) * 8
-    };
+    this.dx = (Math.random() - 0.5) * 8;
+    this.dy = (Math.random() - 0.5) * 8;
     this.radius = radius;
     this.color = color;
     this.opacity = 0;
-    this.mass = 1;
+    this.area = Math.PI * this.radius**2;
+    this.mass = Standard.density * this.area;
 
     this.update = (particles) => { //modern method of writing a function
-        this.draw();
-        for ( let i = 0; i<particles.length; i++) {
+        for ( let i = 0; i<numOfParticles; i++) {
             if(this === particles[i]) continue;
-            if (distance(this.x, this.y, particles[i].x, particles[i].y) - this.radius * 2 < 0){
+            if (distance(this.x, this.y, particles[i].x, particles[i].y) - this.radius - particles[i].radius < 0){
                 resolveCollision(this, particles[i]);
-                this.opacity = 0.8
+                this.opacity = maxOpacity;
+                particles[i].opacity = maxOpacity;
             }
         }
         if(this.x - this.radius <= 0 || this.x + this.radius >= innerWidth){
-            this.velocity.x = -this.velocity.x;
-            this.opacity = 0.8
+            this.dx = -this.dx;
+            this.opacity = maxOpacity;
         }
 
         if(this.y - this.radius <= 0 || this.y + this.radius >= innerHeight){
-            this.velocity.y = -this.velocity.y;
-            this.opacity = 0.8
+            this.dy = -this.dy;
+            this.opacity = maxOpacity;
         }
         
         if (this.opacity > 0) {
-            this.opacity -= 0.2;
+            this.opacity -= 0.025;
 
             // If the opacity goes below 0, setting it to 0
             this.opacity = Math.max(0, this.opacity);
         }
 
-        this.x += this.velocity.x;
-        this.y += this.velocity.y;
+        this.x += this.dx;
+        this.y += this.dy;
+
+        this.draw();
 
     };
 
@@ -142,25 +150,38 @@ function Particle(x, y, radius, color){
         c.save();
         c.globalAlpha = this.opacity; // opacity 
         c.fillStyle = this.color;
+        c.shadowColor = 'white';
+        c.shadowBlur = this.radius;
         c.fill();
         c.restore();
-        c.strokeStyle = 'black';
+        c.strokeStyle = '#CFFFEE';
+        c.lineWidth = 3;
         c.stroke();
         c.closePath();
     };
 }
 
+
+let particles = [];
+const numOfParticles = randomInt(2,10);
+const Standard = {
+    radius: 15,
+    mass: 1
+};
+Standard.density = Standard.mass / (Math.PI * Standard.radius**2)
+const maxOpacity = 1;
+
 function init(){
     particles = [];
-    for (let i = 0; i < numberOfParticles; i++){
-        const radius = 15;
+    for (let i = 0; i < numOfParticles; i++){
+        const radius = Standard.radius * randomInt(1, 6);
         let x = randomInt(radius, canvas.width - radius);
         let y = randomInt(radius, canvas.height - radius);        
         const color = randomColor(colors);
 
         if (i !== 0){
             for (let j = 0; j < particles.length; j++){
-                if (distance(x, y, particles[j].x, particles[j].y) - radius * 2 < 0){
+                if (distance(x, y, particles[j].x, particles[j].y) - radius - particles[j].radius < 0){
                     x = randomInt(radius, canvas.width-radius);
                     y = randomInt(radius, canvas.height-radius);
 
@@ -170,6 +191,8 @@ function init(){
         }
         particles.push(new Particle(x, y, radius, color));
     }
+    showParticles();
+    showKE();
 }
 
 function animate(){
@@ -181,5 +204,7 @@ function animate(){
         p.update(particles);
     });
 }
+
+
 init();
 animate();
