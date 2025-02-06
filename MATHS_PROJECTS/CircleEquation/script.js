@@ -215,7 +215,7 @@ function writeEqn(){
         <u>Equation of Circle:</u><br/>
         Standard: &lpar;x ${sign.x} ${modulus(roundUp(coeffC.h, 1000))}&rpar;<sup>2</sup> + &lpar;y ${sign.y} ${modulus(roundUp(coeffC.k, 1000))}&rpar;<sup>2</sup> = ${roundUp(Rsq, 1000)}
         <br/>
-        General: x<sup>2</sup> + y<sup>2</sup> ${sign.x} ${2 * modulus(roundUp(coeffC.h, 1000))}x ${sign.y} ${2 * modulus(roundUp(coeffC.k, 1000))}y + ${roundUp((coeffC.h**2 + coeffC.k**2), 1000)} = 0
+        General: x<sup>2</sup> + y<sup>2</sup> ${sign.x} ${2 * modulus(roundUp(coeffC.h, 1000))}x ${sign.y} ${2 * modulus(roundUp(coeffC.k, 1000))}y + ${roundUp((coeffC.h**2 + coeffC.k**2 - Rsq), 1000)} = 0
     `;
 }
 
