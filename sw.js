@@ -4,7 +4,7 @@ const CACHE_NAME = "static-v4"; // The cache name will auto-update when files ch
 self.addEventListener("install", (e) => {
     e.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(["./", "./src/style.css", "./assets/image1.jpg", "./assets/script.js"]);
+            return cache.addAll(["./", "./src/style.css"]);
         })
     );
     self.skipWaiting(); // Forces activation of the new service worker
