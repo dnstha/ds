@@ -1,4 +1,4 @@
-const CACHE_NAME = "static-v2"; // Change this to force an update
+const CACHE_NAME = "static-v3"; // Change this to force an update
 const ASSETS_TO_CACHE = [
     "./",
     "./index.html",
