@@ -134,7 +134,7 @@ const invCos = (value, y) => {
     if(y>=0) {
         return Math.acos(value);
     }else if(y<0){
-        return Math.acos(value) + Math.PI;
+        return 2*Math.PI - Math.acos(value);
     }else{
         return 0;
     }
