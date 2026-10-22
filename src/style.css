@@ -152,6 +152,9 @@ a:active{
     height: 100%;
 }
 #logo{
+    width: 90px;
+    height: 90px;
+    display: block;
     transition: all 0.15s;
 }
 #logo:hover{
