@@ -63,7 +63,7 @@ solve = () => {
         else if(discriminant < 0) {
             x = -B / denominator;
             discriminant = -discriminant;
-            y = Math.sqrt(discriminant) / denominator;
+            y = Math.sqrt(discriminant) / Math.abs(denominator);
             y += "i";
             x1 = x.toString() + " + " + y;
             x2 = x.toString() + " - " + y;

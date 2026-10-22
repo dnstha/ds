@@ -78,15 +78,6 @@ const randomSign = () => {
     return Math.pow(-1, randomInt(2,3));
 }
 
-// Returns slope of given vector with respect to the positive x-axis
-const slope = (V1) => {
-    let A = Math.acos(dotProduct(V1.x, V1.y, 1, 0)/getDist(p.x, p.y, fixed[1].x, fixed[1].y));
-    if(V1.y <= 0) {
-        A = Math.PI * 2 - A;
-    }
-    return A;
-}
-
 // Equal Ratio to check if two given ratios are equal a1/b1 and a2/b2
 const eqRto = (a1,b1, a2,b2) => {
     if(a1*b2 == a2*b1) {

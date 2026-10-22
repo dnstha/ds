@@ -53,10 +53,10 @@ solve = () => {
         else if (y1 == 0 && y2 == 0 && x1 != 0 && x2 != 0) {
             lpta(x1, c1, x2, c2);
         }
-        else if(x1/x2 == y1/y2 && y1/y2 == c1/c2) {
+        else if(x1*y2 == y1*x2 && y1/y2 == c1/c2) {
             s.innerText = "*The lines coincide and the system has infinitely many solutions!";
         }
-        else if(x1/x2 == y1/y2 && y1/y2 != c1/c2) {
+        else if(x1*y2 == y1*x2 && y1/y2 != c1/c2) {
             s.innerText = "*The lines are parallel to each other and the system has no solution!";
         }
         else{
