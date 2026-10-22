@@ -111,28 +111,23 @@ eqRto = (a1,b1, a2,b2) => {
 
 // To check given set of numbers is all zero
 function isAllZero() {
-    let sum = 0;
+    let result = true;
     for(let i=0; i<arguments.length; i++) {
-        if(Number(arguments[i]) < 0) {
-            Number(arguments[i]) *= -1;
+        if (Number(arguments[i]) != 0) {
+            result = false;
+            break;
         }
-        sum += Number(arguments[i]);
     }
-    if(sum == 0) {
-        return true;
-    }else{
-        return false;
-    }
+    return result
 }
 
 //To check if there is any zero in the set
 function isAnyZero() {
-    let result = 1;
+    let result = false;
     for(let i=0; i<arguments.length; i++) {
-        if(arguments[i] == 0) {
-            result *= 1;
-        }else{
-            result *= 0;
+        if(arguments[i] === 0) {
+            result = true;
+            break;
         }
     }
     return result;
