@@ -83,7 +83,7 @@ function output() {
 
     corrCoeff = numerator / Math.sqrt(denominator.x * denominator.y)
     Byx = corrCoeff * Math.sqrt(denominator.y / denominator.x);
-    let yInt = avgY - Byx*avgX;
+    let yInt = avgY - Byx*avgX; // Y intercept of the line
 
     if(plotPoints == true) {
         newListItem.innerHTML = `<td>${toX(x)}</td><td>${toY(y)}</td>`
@@ -94,30 +94,30 @@ function output() {
     if(modulus(corrCoeff) <= 1) {
         if(yInt < 0) {
             results.innerHTML = `
-                &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
-                &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+                &#x035E;x= ${roundUp(avgX, 1000)}<br>
+                &#x035E;y= ${roundUp(avgY,1000)}<br>
                 &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
                 &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
-                r = ${Math.round(corrCoeff*10000)/10000}<br>
+                r = ${roundUp(corrCoeff, 10000)}<br>
                 y = ${roundUp(Byx, 1000)}x - ${modulus(roundUp(yInt, 1000))}
             `;
         }else{
             results.innerHTML = `
-                &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
-                &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+                &#x035E;x= ${roundUp(avgX, 1000)}<br>
+                &#x035E;y= ${roundUp(avgY, 1000)}<br>
                 &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
                 &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
-                r = ${Math.round(corrCoeff*10000)/10000}<br>
+                r = ${roundUp(corrCoeff, 10000)}<br>
                 y = ${roundUp(Byx, 1000)}x + ${roundUp(yInt, 1000)}
             `;
         }
     }else{
         results.innerHTML = `
-            &#x035E;x= ${Math.round(avgX*1000)/1000}<br>
-            &#x035E;y= ${Math.round(avgY*1000)/1000}<br>
+            &#x035E;x= ${roundUp(avgX, 1000)}<br>
+            &#x035E;y= ${roundUp(avgY, 1000)}<br>
             &sigma;<sub>x</sub> = ${roundUp(Math.sqrt(denominator.x/X.length), 1000)}<br>
             &sigma;<sub>y</sub> = ${roundUp(Math.sqrt(denominator.y/X.length), 1000)}<br>
-            r = 
+            r = undefined
         `;
     }
     if(typeof Byx == "number") {
