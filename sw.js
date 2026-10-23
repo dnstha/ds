@@ -1,4 +1,4 @@
-const CACHE_NAME = "dsa-v0.0.1"; // Increment this version to force-update cached files
+const CACHE_NAME = "dsa-v0.0.2"; // Increment this version to force-update cached files
 
 // Complete list of all pages, tools, scripts, styles, and assets to cache for 100% offline access
 const ASSETS_TO_CACHE = [
